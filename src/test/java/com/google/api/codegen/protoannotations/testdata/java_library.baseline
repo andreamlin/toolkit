@@ -8168,10 +8168,12 @@ public class LibraryClientTest {
     ShelfName name = ShelfName.of("[BOOK_SHELF]");
     String theme = "theme110327241";
     String internalTheme = "internalTheme792518087";
+    ProjectName project = ProjectName.of("[PROJECT]");
     Shelf expectedResponse = Shelf.newBuilder()
       .setName(name.toString())
       .setTheme(theme)
       .setInternalTheme(internalTheme)
+      .setProject(project.toString())
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
@@ -8214,10 +8216,12 @@ public class LibraryClientTest {
     ShelfName name2 = ShelfName.of("[BOOK_SHELF]");
     String theme = "theme110327241";
     String internalTheme = "internalTheme792518087";
+    ProjectName project = ProjectName.of("[PROJECT]");
     Shelf expectedResponse = Shelf.newBuilder()
       .setName(name2.toString())
       .setTheme(theme)
       .setInternalTheme(internalTheme)
+      .setProject(project.toString())
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
@@ -8260,10 +8264,12 @@ public class LibraryClientTest {
     ShelfName name2 = ShelfName.of("[BOOK_SHELF]");
     String theme = "theme110327241";
     String internalTheme = "internalTheme792518087";
+    String project = "project-309310695";
     Shelf expectedResponse = Shelf.newBuilder()
       .setName(name2.toString())
       .setTheme(theme)
       .setInternalTheme(internalTheme)
+      .setProject(project)
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
@@ -8309,10 +8315,12 @@ public class LibraryClientTest {
     ShelfName name2 = ShelfName.of("[BOOK_SHELF]");
     String theme = "theme110327241";
     String internalTheme = "internalTheme792518087";
+    String project = "project-309310695";
     Shelf expectedResponse = Shelf.newBuilder()
       .setName(name2.toString())
       .setTheme(theme)
       .setInternalTheme(internalTheme)
+      .setProject(project)
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
@@ -8444,10 +8452,12 @@ public class LibraryClientTest {
     ShelfName name2 = ShelfName.of("[BOOK_SHELF]");
     String theme = "theme110327241";
     String internalTheme = "internalTheme792518087";
+    String project = "project-309310695";
     Shelf expectedResponse = Shelf.newBuilder()
       .setName(name2.toString())
       .setTheme(theme)
       .setInternalTheme(internalTheme)
+      .setProject(project)
       .build();
     mockLibraryService.addResponse(expectedResponse);
 

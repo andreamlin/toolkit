@@ -418,6 +418,13 @@ message Shelf {
 
   // Internal theme that is visible to trusted testers only.
   string internal_theme = 3;
+
+  // Project ID in form "projects/{project}"
+  string project = 4 [
+    (google.api.required) = true,
+    (google.api.resource).path = "projects/*",
+    (google.api.resource_type) = "google.api.Project",
+    (google.api.resource).base_name = "project"];
 }
 
 // Request message for LibraryService.CreateShelf.

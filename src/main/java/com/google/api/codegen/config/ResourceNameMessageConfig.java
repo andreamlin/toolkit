@@ -15,6 +15,7 @@
 package com.google.api.codegen.config;
 
 import com.google.api.codegen.ResourceNameMessageConfigProto;
+import com.google.api.codegen.util.ProtoParser;
 import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.Field;
 import com.google.auto.value.AutoValue;
@@ -44,9 +45,9 @@ public abstract class ResourceNameMessageConfig {
   }
 
   public static ResourceNameMessageConfig createResourceNameMessageConfig(Field field) {
-    String messageName = field.getParent().getFullName();
+    String messageName = ProtoParser.getResourceMessage(field);
     ImmutableMap<String, String> fieldEntityMap =
-        ImmutableMap.of(field.getSimpleName(), field.getParent().getSimpleName().toLowerCase());
+        ImmutableMap.of(field.getSimpleName(), ProtoParser.getResourceEntityName(field));
 
     return new AutoValue_ResourceNameMessageConfig(messageName, fieldEntityMap);
   }

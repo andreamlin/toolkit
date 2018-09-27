@@ -60,20 +60,27 @@ public class ProtoParser {
   }
 
   /** Return the entity name, e.g. "shelf" for a resource field. */
+  public static String getResourceMessage(Field field) {
+    String resourceMessage = (String) field.getOptionFields().get(AnnotationsProto.resourceType.getDescriptor());
+    if (!Strings.isNullOrEmpty(resourceMessage)) {
+      return resourceMessage;
+    }
+    return field.getParent().getFullName();
+  }
+
+  /** Return the entity name, e.g. "shelf" for a resource field. */
   public static String getResourceEntityName(Field field) {
+    Resource resource =
+        (Resource) field.getOptionFields().get(AnnotationsProto.resource.getDescriptor());
+    if (!Strings.isNullOrEmpty(resource.getBaseName())) {
+      return resource.getBaseName();
+    }
     return field.getParent().getSimpleName().toLowerCase();
   }
 
   /** Get long running settings. */
   public OperationTypes getLongRunningOperation(Method method) {
     return method.getDescriptor().getMethodAnnotation(OperationsProto.operationTypes);
-  }
-
-  @Nullable
-  public static String getFormattedPackageName(String language, String basePackageName) {
-    LanguageTransformer.LanguageFormatter formatter =
-        LanguageTransformer.LANGUAGE_FORMATTERS.get(language.toLowerCase());
-    return formatter.getFormattedPackageName(basePackageName);
   }
 
   /** Return the extra retry codes for the given method. */
