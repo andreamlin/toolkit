@@ -95,7 +95,6 @@ public class CSharpGapicClientPackageTransformer implements ModelToViewTransform
     view.fileHeader(fileHeaderTransformer.generateFileHeader(context));
     view.serviceTitle(model.getServiceConfig().getTitle());
     view.serviceDescription(model.getServiceConfig().getDocumentation().getSummary().trim());
-    view.domainLayerLocation(productConfig.getDomainLayerLocation());
     view.authScopes(new ArrayList<>()); // Unused in C#
     view.releaseLevel(productConfig.getReleaseLevel());
     String versionSuffix;

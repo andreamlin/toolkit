@@ -693,7 +693,6 @@ public class JavaSurfaceTransformer {
 
     packageInfo.serviceTitle(model.getTitle());
     packageInfo.serviceDocs(serviceDocs);
-    packageInfo.domainLayerLocation(productConfig.getDomainLayerLocation());
     packageInfo.authScopes(model.getAuthScopes(productConfig));
 
     packageInfo.fileHeader(

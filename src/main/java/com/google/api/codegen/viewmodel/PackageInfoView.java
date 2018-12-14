@@ -49,6 +49,7 @@ public abstract class PackageInfoView implements ViewModel {
 
   public abstract List<String> authScopes();
 
+  @Nullable // Used in Go.
   public abstract String domainLayerLocation();
 
   public abstract ReleaseLevel releaseLevel();
