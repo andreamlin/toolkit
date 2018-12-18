@@ -1022,7 +1022,6 @@ from google.oauth2 import service_account
 import google.api_core.gapic_v1.client_info
 import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
-import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
 import google.api_core.operation
 import google.api_core.operations_v1
@@ -1604,17 +1603,6 @@ class LibraryServiceClient(object):
             name=name,
             book=book,
         )
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [('name', name), ('book.read', book.read)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
-            metadata.append(routing_metadata)
-
         return self._inner_api_calls['create_book'](request, retry=retry, timeout=timeout, metadata=metadata)
 
     def publish_series(

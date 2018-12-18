@@ -3011,10 +3011,7 @@ module Library
         @create_book = Google::Gax.create_api_call(
           @library_service_stub.method(:create_book),
           defaults["create_book"],
-          exception_transformer: exception_transformer,
-          params_extractor: proc do |request|
-            {'name' => request.name, 'book.read' => request.book.read}
-          end
+          exception_transformer: exception_transformer
         )
         @publish_series = Google::Gax.create_api_call(
           @library_service_stub.method(:publish_series),
