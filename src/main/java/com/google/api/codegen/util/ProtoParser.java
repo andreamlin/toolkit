@@ -17,6 +17,7 @@ package com.google.api.codegen.util;
 import static com.google.api.FieldBehavior.REQUIRED;
 
 import com.google.api.AnnotationsProto;
+import com.google.api.Metadata;
 import com.google.api.MethodSignature;
 import com.google.api.OAuth;
 import com.google.api.OperationData;
@@ -77,7 +78,6 @@ public class ProtoParser {
 
   @SuppressWarnings("unchecked")
   @Nullable
-  // GeneratedMessage.GeneratedExtension<DescriptorProtos.FieldOptions, List<FieldBehavior>>
   private <T extends ProtocolMessageEnum, O extends Message, E extends ProtoElement>
       List<EnumValueDescriptor> getProtoExtensionForEnumValue(
           E element, GeneratedExtension<O, List<T>> extension) {
@@ -342,6 +342,19 @@ public class ProtoParser {
 
   public String getProtoPackage(ProtoFile file) {
     return file.getProto().getPackage();
+  }
+
+  @Nullable
+  public Metadata getMetadata(ProtoFile element) {
+    return getProtoExtension(element, AnnotationsProto.metadata);
+  }
+
+  public String getProductName(ProtoFile file) {
+    Metadata metadata = getMetadata(file);
+    if (metadata == null) return null;
+
+    String productName = metadata.getProductName();
+    return productName;
   }
 
   private String getResourceFullName(Resource resource, ProtoFile file) {

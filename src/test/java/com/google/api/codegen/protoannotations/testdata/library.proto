@@ -25,7 +25,7 @@ option java_package = "com.google.example.library.v1";
 option go_package = "google.golang.org/genproto/googleapis/example/library/v1;library";
 
 option (google.api.metadata) = {
-  product_name: "Library Service"
+  product_name: "Library"
   product_uri: "https://cloud.google.com/library/"
   package_name: "Library"
   package_namespace: ["Google", "Example"]

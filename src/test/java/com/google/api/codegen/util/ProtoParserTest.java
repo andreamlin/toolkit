@@ -339,4 +339,9 @@ public class ProtoParserTest {
             "https://www.googleapis.com/auth/library",
             "https://www.googleapis.com/auth/cloud-platform");
   }
+
+  @Test
+  public void testGetMetadata() {
+    assertThat(protoParser.getProductName(libraryProtoFile)).isEqualTo("Library");
+  }
 }
