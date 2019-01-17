@@ -42,7 +42,9 @@ import javax.annotation.Nullable;
 public abstract class FlatteningConfig {
 
   // Maps the name of the parameter in this flattening to its FieldConfig.
-  public abstract ImmutableMap<String, FieldConfig> getFlattenedFieldConfigs();
+  // Each key value's List<FieldConfig> represents the chain of fields that must be followed
+  // to reach the final nested field.
+  public abstract ImmutableMap<String, List<FieldConfig>> getFlattenedFieldConfigs();
 
   @Nullable
   public abstract String getFlatteningName();
