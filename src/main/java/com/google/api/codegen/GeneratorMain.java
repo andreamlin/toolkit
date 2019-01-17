@@ -47,6 +47,7 @@ public class GeneratorMain {
           .hasArg()
           .argName("DESCRIPTOR-SET")
           .required(true)
+          .argName("descriptor")
           .build();
   private static final Option TARGET_API_PROTO_PACKAGE =
       Option.builder()

@@ -15,7 +15,7 @@ def _gapic_srcjar_impl(ctx):
     else:
         if not ctx.attr.service_yaml:
             fail("Missing mandatory attribute `service_yaml`")
-        optional_arguments.append("--descriptor_set=%s" % ctx.file.src.path)
+        optional_arguments.append("--descriptor=%s" % ctx.file.src.path)
 
     arguments = [
         ctx.attr.artifact_type,
@@ -156,7 +156,7 @@ def proto_library_with_info(name, deps):
             "--include_imports",
             "--include_source_info",
         ],
-        output_type = "descriptor_set",
+        output_type = "descriptor",
         output_suffix = "-set.proto.bin",
     )
 
