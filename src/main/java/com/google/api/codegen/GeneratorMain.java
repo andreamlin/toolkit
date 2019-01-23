@@ -20,6 +20,7 @@ import com.google.api.codegen.discogapic.DiscoGapicGeneratorApp;
 import com.google.api.codegen.gapic.GapicGeneratorApp;
 import com.google.api.codegen.packagegen.PackageGeneratorApp;
 import com.google.api.codegen.packagegen.PackagingArtifactType;
+import com.google.api.codegen.util.InputFileUtil;
 import com.google.api.tools.framework.tools.ToolOptions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -275,22 +276,22 @@ public class GeneratorMain {
         GapicGeneratorApp.PACKAGE_CONFIG2_FILE,
         cl.getOptionValue(PACKAGE_YAML2_OPTION.getLongOpt()));
 
-    checkFile(toolOptions.get(ToolOptions.DESCRIPTOR_SET));
+    InputFileUtil.checkFile(toolOptions.get(ToolOptions.DESCRIPTOR_SET));
 
     if (cl.getOptionValues(SERVICE_YAML_NONREQUIRED_OPTION.getLongOpt()) != null) {
       toolOptions.set(
           ToolOptions.CONFIG_FILES,
           Lists.newArrayList(cl.getOptionValues(SERVICE_YAML_NONREQUIRED_OPTION.getLongOpt())));
-      checkFiles(toolOptions.get(ToolOptions.CONFIG_FILES));
+      InputFileUtil.checkFiles(toolOptions.get(ToolOptions.CONFIG_FILES));
     }
     if (cl.getOptionValues(GAPIC_YAML_NONREQUIRED_OPTION.getLongOpt()) != null) {
       toolOptions.set(
           GapicGeneratorApp.GENERATOR_CONFIG_FILES,
           Lists.newArrayList(cl.getOptionValues(GAPIC_YAML_NONREQUIRED_OPTION.getLongOpt())));
-      checkFiles(toolOptions.get(GapicGeneratorApp.GENERATOR_CONFIG_FILES));
+      InputFileUtil.checkFiles(toolOptions.get(GapicGeneratorApp.GENERATOR_CONFIG_FILES));
     }
     if (!Strings.isNullOrEmpty(toolOptions.get(GapicGeneratorApp.PACKAGE_CONFIG2_FILE))) {
-      checkFile(toolOptions.get(GapicGeneratorApp.PACKAGE_CONFIG2_FILE));
+      InputFileUtil.checkFile(toolOptions.get(GapicGeneratorApp.PACKAGE_CONFIG2_FILE));
     }
 
     if (cl.getOptionValues(enabledArtifactsOption.getLongOpt()) != null) {
@@ -447,18 +448,6 @@ public class GeneratorMain {
     DiscoGapicGeneratorApp codeGen = new DiscoGapicGeneratorApp(toolOptions, artifactType);
     int exitCode = codeGen.run();
     System.exit(exitCode);
-  }
-
-  private static void checkFiles(List<String> files) {
-    for (String filePath : files) {
-      checkFile(filePath);
-    }
-  }
-
-  private static void checkFile(String filePath) {
-    if (!new File(filePath).exists()) {
-      throw new IllegalArgumentException("File not found: " + filePath);
-    }
   }
 
   // Throws an exception if neither option was given.
