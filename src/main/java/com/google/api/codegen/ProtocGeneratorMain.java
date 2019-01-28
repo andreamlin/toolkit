@@ -1,130 +1,110 @@
+/* Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.google.api.codegen;
 
+import static com.google.api.codegen.ArtifactType.GAPIC_CODE;
+import static com.google.api.codegen.GeneratorMain.createCodeGeneratorOptions;
 
-import com.google.api.codegen.common.CodeGenerator;
-import com.google.api.codegen.gapic.GapicGenerator;
 import com.google.api.codegen.gapic.GapicGeneratorApp;
-import com.google.api.codegen.util.InputFileUtil;
+import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.tools.ToolOptions;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.ExtensionRegistry;
+import com.google.api.tools.framework.tools.ToolUtil;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.protobuf.DescriptorProtos.FileDescriptorProto;
+import com.google.protobuf.DescriptorProtos.FileDescriptorSet;
 import com.google.protobuf.compiler.PluginProtos;
-import java.io.IOException;
+import com.google.protobuf.compiler.PluginProtos.CodeGeneratorRequest;
+import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse;
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
+import java.util.LinkedList;
+import java.util.List;
 
 /** Entrypoint for protoc-invoked generation. */
 public class ProtocGeneratorMain {
-  public static void main(String[] args) throws IOException {
 
-    PluginProtos.CodeGeneratorRequest request = PluginProtos.CodeGeneratorRequest.
-        parseFrom(System.in);
-    PluginProtos.CodeGeneratorResponse response;
+  private static final ArtifactType DEFAULT_ARTIFACT_TYPE = GAPIC_CODE;
+
+  public static void main(String[] args) throws Exception {
+
+    CodeGeneratorRequest request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+    CodeGeneratorResponse response;
+    int exitCode;
     try {
-      Descriptor descriptor = request.getDescriptorForType();
-      // Parse options.
-      Options options = new Options();
-      options.addOption("h", "help", false, "show usage");
 
-      options.addOption(SERVICE_YAML_NONREQUIRED_OPTION);
-      // TODO make required after artman passes this in
-      options.addOption(LANGUAGE_NONREQUIRED_OPTION);
-      options.addOption(GAPIC_YAML_NONREQUIRED_OPTION);
-      options.addOption(PACKAGE_YAML2_OPTION);
-      options.addOption(TARGET_API_PROTO_PACKAGE);
-      options.addOption(OUTPUT_OPTION);
-      Option enabledArtifactsOption =
-          Option.builder()
-              .longOpt("enabled_artifacts")
-              .desc(
-                  "Optional. Artifacts enabled for the generator. "
-                      + "Currently supports 'surface' and 'test'.")
-              .hasArg()
-              .argName("ENABLED_ARTIFACTS")
-              .required(false)
-              .build();
-      options.addOption(enabledArtifactsOption);
+      ToolOptions toolOptions = parseOptions(request);
 
-      Option devSamplesOption =
-          Option.builder()
-              .longOpt("dev_samples")
-              .desc("Whether to generate samples in non-production-ready languages.")
-              .argName("DEV_SAMPLES")
-              .required(false)
-              .build();
-      options.addOption(devSamplesOption);
+      GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, true);
 
-      CommandLine cl = (new DefaultParser()).parse(options, args);
-      if (cl.hasOption("help")) {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("GapicGeneratorTool", options);
+      exitCode = codeGen.run();
+      response = codeGen.getCodeGeneratorProtoResponse();
+      if (response == null) {
+        throw new RuntimeException(collectDiags(codeGen));
       }
-
-      ToolOptions toolOptions = ToolOptions.create();
-
-
-      // TODO(andrealin): Write system tests to ensure at least one option given.
-      checkAtLeastOneOption(cl, SERVICE_YAML_NONREQUIRED_OPTION, TARGET_API_PROTO_PACKAGE);
-      checkAtLeastOneOption(cl, GAPIC_YAML_NONREQUIRED_OPTION, TARGET_API_PROTO_PACKAGE);
-
-      toolOptions.set(
-          GapicGeneratorApp.PROTO_PACKAGE, cl.getOptionValue(TARGET_API_PROTO_PACKAGE.getLongOpt()));
-      toolOptions.set(
-          GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_NONREQUIRED_OPTION.getLongOpt()));
-      toolOptions.set(
-          GapicGeneratorApp.OUTPUT_FILE, cl.getOptionValue(OUTPUT_OPTION.getLongOpt(), ""));
-      toolOptions.set(
-          GapicGeneratorApp.PACKAGE_CONFIG2_FILE,
-          cl.getOptionValue(PACKAGE_YAML2_OPTION.getLongOpt()));
-
-
-      if (cl.getOptionValues(SERVICE_YAML_NONREQUIRED_OPTION.getLongOpt()) != null) {
-        toolOptions.set(
-            ToolOptions.CONFIG_FILES,
-            Lists.newArrayList(cl.getOptionValues(SERVICE_YAML_NONREQUIRED_OPTION.getLongOpt())));
-        InputFileUtil.checkFiles(toolOptions.get(ToolOptions.CONFIG_FILES));
-      }
-      if (cl.getOptionValues(GAPIC_YAML_NONREQUIRED_OPTION.getLongOpt()) != null) {
-        toolOptions.set(
-            GapicGeneratorApp.GENERATOR_CONFIG_FILES,
-            Lists.newArrayList(cl.getOptionValues(GAPIC_YAML_NONREQUIRED_OPTION.getLongOpt())));
-        InputFileUtil.checkFiles(toolOptions.get(GapicGeneratorApp.GENERATOR_CONFIG_FILES));
-      }
-      if (!Strings.isNullOrEmpty(toolOptions.get(GapicGeneratorApp.PACKAGE_CONFIG2_FILE))) {
-        InputFileUtil.checkFile(toolOptions.get(GapicGeneratorApp.PACKAGE_CONFIG2_FILE));
-      }
-
-      if (cl.getOptionValues(enabledArtifactsOption.getLongOpt()) != null) {
-        toolOptions.set(
-            GapicGeneratorApp.ENABLED_ARTIFACTS,
-            Lists.newArrayList(cl.getOptionValues(enabledArtifactsOption.getLongOpt())));
-      }
-
-      toolOptions.set(GapicGeneratorApp.DEV_SAMPLES, cl.hasOption(devSamplesOption.getLongOpt()));
-
-      GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, artifactType);
-      int exitCode = codeGen.run();
       System.exit(exitCode);
-      response =
     } catch (Exception e) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter(sw);
       e.printStackTrace(pw);
       pw.flush();
-      PluginProtos.CodeGeneratorResponse.newBuilder().setError(sw.toString()).
-          build().writeTo(System.out);
-      System.out.flush();
-      return;
+      response = PluginProtos.CodeGeneratorResponse.newBuilder().setError(sw.toString()).build();
+      exitCode = 1;
     }
     response.writeTo(System.out);
     System.out.flush();
+    System.exit(exitCode);
   }
 
+  @VisibleForTesting
+  static ToolOptions parseOptions(CodeGeneratorRequest request) throws Exception {
+    List<FileDescriptorProto> fileDescriptorProtoList = request.getProtoFileList();
+    FileDescriptorSet descriptorSet =
+        FileDescriptorSet.newBuilder().addAllFile(fileDescriptorProtoList).build();
+
+    // Write out DescriptorSet to temp file.
+    File descriptorSetFile = File.createTempFile("api", ".desc");
+
+    List<String> parsedArgs = new LinkedList<>();
+
+    // Parse plugin params, ignoring unknown params.
+    String[] requestArgs = request.getParameter().split(",");
+    for (String arg : requestArgs) {
+      if (arg.startsWith("descriptor=")) {
+        arg = String.format("descriptor=%s", descriptorSetFile.getAbsolutePath());
+      }
+      parsedArgs.add("--" + arg);
+      // String[] keyValues = arg.split("=");
+      // parsedArgs.add("--" + keyValues[0]);
+      // if (keyValues.length > 1) {
+      //   parsedArgs.add();
+      // }
+    }
+
+    String[] argsArray = parsedArgs.toArray(new String[] {});
+
+    return createCodeGeneratorOptions(argsArray);
+  }
+
+  private static String collectDiags(GapicGeneratorApp app) {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (Diag diag : app.getDiags()) {
+      stringBuilder.append(ToolUtil.diagToString(diag, true));
+      stringBuilder.append("\n");
+    }
+
+    return stringBuilder.toString();
+  }
 }

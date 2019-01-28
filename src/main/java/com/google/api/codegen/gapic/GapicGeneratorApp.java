@@ -116,10 +116,15 @@ public class GapicGeneratorApp extends ToolDriverBase {
     this.writeAsProtoResponse = false;
   }
 
-  /** Constructs a code generator api based on given options.
+  /**
+   * Constructs a code generator api based on given options.
+   *
    * @param writeAsProtoResponse : If the output should be returned as a CodeGeneratorResponse,
-*            instead of being written to file. The response object will be populated in getCodeGeneratorProtoResponse(). */
-  public GapicGeneratorApp(ToolOptions options, ArtifactType artifactType, boolean writeAsProtoResponse) {
+   *     instead of being written to file. The response object will be populated in
+   *     getCodeGeneratorProtoResponse().
+   */
+  public GapicGeneratorApp(
+      ToolOptions options, ArtifactType artifactType, boolean writeAsProtoResponse) {
     super(options);
     this.artifactType = artifactType;
     this.writeAsProtoResponse = writeAsProtoResponse;
@@ -244,7 +249,8 @@ public class GapicGeneratorApp extends ToolDriverBase {
     return protocResponse.build();
   }
 
-  private void writeCodeGenOutputToFiles(Map<String, ?> outputFiles, Set<String> executables, String outputPath) throws IOException {
+  private void writeCodeGenOutputToFiles(
+      Map<String, ?> outputFiles, Set<String> executables, String outputPath) throws IOException {
     writeCodeGenOutput(outputFiles, outputPath);
     setOutputFilesPermissions(executables, outputPath);
   }
