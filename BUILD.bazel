@@ -91,6 +91,21 @@ java_binary(
     ] + _COMPILE_DEPS,
 )
 
+java_binary(
+    name = "gapic_generator_plugin",
+    srcs = _SRCS,
+    create_executable = True,
+    javacopts = _JAVA_COPTS,
+    jvm_flags = ["-Xmx512m"],
+    main_class = "com.google.api.codegen.ProtocGeneratorMain",
+    resources = glob(["src/main/resources/**/*"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":auto_value",
+        ":config_java_proto",
+    ] + _COMPILE_DEPS,
+)
+
 # This is probably not the right way of doing it, but good enough for now.
 # api-compiler module expects "protoc" binary to be accessible during tests execution, this genrule
 # "puts" the "binary" in a proper location (the tests are still hermetic, even with this hack).
