@@ -27,13 +27,6 @@ import com.google.api.codegen.ReleaseLevel;
 import com.google.api.codegen.ResourceNameTreatment;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.codegen.configgen.mergers.LanguageSettingsMerger;
-import com.google.api.codegen.transformer.DefaultFeatureConfig;
-import com.google.api.codegen.transformer.FeatureConfig;
-import com.google.api.codegen.transformer.csharp.CSharpFeatureConfig;
-import com.google.api.codegen.transformer.java.JavaFeatureConfig;
-import com.google.api.codegen.transformer.nodejs.NodeJSFeatureConfig;
-import com.google.api.codegen.transformer.php.PhpFeatureConfig;
-import com.google.api.codegen.transformer.ruby.RubyFeatureConfig;
 import com.google.api.codegen.util.LicenseHeaderUtil;
 import com.google.api.codegen.util.ProtoParser;
 import com.google.api.tools.framework.model.Diag;
@@ -135,7 +128,7 @@ public abstract class GapicProductConfig implements ProductConfig {
   @Nullable
   public static GapicProductConfig create(
       Model model, ConfigProto configProto, TargetLanguage language) {
-    return create(model, configProto, null, language);
+    return create(model, configProto, null, null, language);
   }
 
   /**
@@ -147,6 +140,7 @@ public abstract class GapicProductConfig implements ProductConfig {
    * @param configProto The parsed set of config files from input
    * @param protoPackage The source proto package, as opposed to imported protos, that we will
    *     generate clients for.
+   * @param clientPackage The desired package name for the generated client.
    * @param language The language that this config will be used to generate a client in.
    */
   @Nullable
@@ -154,6 +148,7 @@ public abstract class GapicProductConfig implements ProductConfig {
       Model model,
       @Nullable ConfigProto configProto,
       @Nullable String protoPackage,
+      @Nullable String clientPackage,
       TargetLanguage language) {
 
     final String defaultPackage;
@@ -195,9 +190,14 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
 
     // Toggle on/off proto annotations parsing.
-    ProtoParser protoParser = new ProtoParser(getDefaultLanguageFeatureConfig(language, null));
+    ProtoParser protoParser;
+    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
     if (configProto == null) {
+      // By default, enable proto annotations parsing when no GAPIC config is given.
+      protoParser = new ProtoParser(true);
       configProto = ConfigProto.getDefaultInstance();
+    } else {
+      protoParser = new ProtoParser(false);
     }
 
     DiagCollector diagCollector = model.getDiagReporter().getDiagCollector();
@@ -211,9 +211,6 @@ public abstract class GapicProductConfig implements ProductConfig {
     ResourceNameMessageConfigs messageConfigs =
         ResourceNameMessageConfigs.createMessageResourceTypesConfig(
             sourceProtos, configProto, defaultPackage, resourceDefs, resourceSetDefs, protoParser);
-
-    // Update the protoParser with new info.
-    protoParser = new ProtoParser(getDefaultLanguageFeatureConfig(language, messageConfigs));
 
     ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
         createResourceNameConfigs(
@@ -236,8 +233,14 @@ public abstract class GapicProductConfig implements ProductConfig {
         configProto.getLanguageSettingsMap().get(language.toString().toLowerCase());
     if (settings == null) {
       settings = LanguageSettingsProto.getDefaultInstance();
-      String basePackageName = Optional.ofNullable(protoPackage).orElse(getPackageName(model));
-      clientPackageName = LanguageSettingsMerger.getFormattedPackageName(language, basePackageName);
+
+      if (!Strings.isNullOrEmpty(clientPackage)) {
+        clientPackageName = clientPackage;
+      } else {
+        String basePackageName = Optional.ofNullable(protoPackage).orElse(getPackageName(model));
+        clientPackageName =
+            LanguageSettingsMerger.getFormattedPackageName(language, basePackageName);
+      }
     } else {
       clientPackageName = settings.getPackageName();
     }
@@ -960,13 +963,19 @@ public abstract class GapicProductConfig implements ProductConfig {
     return (GapicInterfaceConfig) getInterfaceConfigMap().get(apiInterface.getFullName());
   }
 
-  /** Returns the GapicInterfaceConfig for the given API interface. */
+  /** Returns the InterfaceConfig for the given API interface. */
   @Override
   public InterfaceConfig getInterfaceConfig(InterfaceModel apiInterface) {
     return getInterfaceConfigMap().get(apiInterface.getFullName());
   }
 
-  /** Returns the GapicInterfaceConfig for the given API method. */
+  /** True if contains an InterfaceConfig for the specified API interface */
+  @Override
+  public boolean hasInterfaceConfig(InterfaceModel apiInterface) {
+    return getInterfaceConfigMap().containsKey(apiInterface.getFullName());
+  }
+
+  /** Returns the InterfaceConfig for the given API interface. */
   public InterfaceConfig getInterfaceConfig(String fullName) {
     return getInterfaceConfigMap().get(fullName);
   }
@@ -1007,26 +1016,5 @@ public abstract class GapicProductConfig implements ProductConfig {
       }
     }
     return null;
-  }
-
-  private static FeatureConfig getDefaultLanguageFeatureConfig(
-      TargetLanguage targetLanguage, ResourceNameMessageConfigs resourceNameMessageConfigs) {
-    switch (targetLanguage) {
-      case JAVA:
-        return JavaFeatureConfig.newBuilder()
-            .enableStringFormatFunctions(
-                resourceNameMessageConfigs == null || resourceNameMessageConfigs.isEmpty())
-            .build();
-      case CSHARP:
-        return new CSharpFeatureConfig();
-      case NODEJS:
-        return new NodeJSFeatureConfig();
-      case PHP:
-        return new PhpFeatureConfig();
-      case RUBY:
-        return new RubyFeatureConfig();
-      default:
-        return new DefaultFeatureConfig();
-    }
   }
 }

@@ -32,6 +32,7 @@ import com.google.api.tools.framework.model.stages.Merged;
 import com.google.api.tools.framework.model.testing.ConfigBaselineTestCase;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +55,7 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
   protected PackageMetadataConfig packageConfig;
   private final String baselineFile;
   private final String protoPackage;
+  private final String clientPackage;
 
   public GapicTestBase2(
       TargetLanguage language,
@@ -61,12 +63,14 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
       String packageConfigFileName,
       List<String> snippetNames,
       String baselineFile,
-      String protoPackage) {
+      String protoPackage,
+      String clientPackage) {
     this.language = language;
     this.gapicConfigFileNames = gapicConfigFileNames;
     this.packageConfigFileName = packageConfigFileName;
     this.snippetNames = ImmutableList.copyOf(snippetNames);
     this.baselineFile = baselineFile;
+    this.clientPackage = clientPackage;
 
     // Represents the test value for the --package flag.
     this.protoPackage = protoPackage;
@@ -127,9 +131,26 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
 
   /**
    * Creates the constructor arguments to be passed onto this class (GapicTestBase2) to create test
-   * methods. The idForFactory String is passed to GapicGeneratorFactory to get the GapicGenerators
-   * provided by that id, and then the snippet file names are scraped from those generators, and a
-   * set of arguments is created for each combination of CodeGenerator x snippet that
+   * methods. The language is passed to GapicGeneratorFactory to get the GapicGenerators provided by
+   * that language, and then the snippet file names are scraped from those generators, and a set of
+   * arguments is created for each combination of CodeGenerator x snippet that GapicGeneratorFactory
+   * returns.
+   */
+  static Object[] createTestConfig(
+      TargetLanguage language,
+      String[] gapicConfigFileNames,
+      String packageConfigFileName,
+      String apiName,
+      String... baseNames) {
+    return createTestConfig(
+        language, gapicConfigFileNames, packageConfigFileName, apiName, null, null, baseNames);
+  }
+
+  /**
+   * Creates the constructor arguments to be passed onto this class (GapicTestBase2) to create test
+   * methods. The langauge String is passed to GapicGeneratorFactory to get the GapicGenerators
+   * provided by that language, and then the snippet file names are scraped from those generators,
+   * and a set of arguments is created for each combination of CodeGenerator x snippet that
    * GapicGeneratorFactory returns.
    */
   public static Object[] createTestConfig(
@@ -137,7 +158,9 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
       String[] gapicConfigFileNames,
       String packageConfigFileName,
       String apiName,
-      String protoPackage) {
+      String protoPackage,
+      String clientPackage,
+      String... baseNames) {
     Model model = Model.create(Service.getDefaultInstance());
     GapicProductConfig productConfig = GapicProductConfig.createDummyInstance();
     PackageMetadataConfig packageConfig = PackageMetadataConfig.createDummyPackageMetadataConfig();
@@ -161,15 +184,17 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
 
     String baseline =
         language.toString().toLowerCase() + "_" + apiName + gapic_config_missing + ".baseline";
+    baseNames = Lists.asList(apiName, baseNames).toArray(new String[0]);
 
     return new Object[] {
       language,
       gapicConfigFileNames,
       packageConfigFileName,
       snippetNames,
-      apiName,
       baseline,
-      protoPackage
+      protoPackage,
+      clientPackage,
+      baseNames
     };
   }
 
@@ -189,7 +214,7 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
     }
 
     GapicProductConfig productConfig =
-        GapicProductConfig.create(model, gapicConfig, protoPackage, language);
+        GapicProductConfig.create(model, gapicConfig, protoPackage, clientPackage, language);
     if (productConfig == null) {
       for (Diag diag : model.getDiagReporter().getDiagCollector().getDiags()) {
         System.err.println(diag.toString());

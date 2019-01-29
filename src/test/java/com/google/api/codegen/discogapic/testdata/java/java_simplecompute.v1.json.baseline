@@ -1,6 +1,6 @@
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectDummyObjectName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,9 @@ public final class ProjectDummyObjectName implements ResourceName {
   private final String dummyObject;
   private final String project;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}/dummyObjects/{dummyObject}");
+        PathTemplate.createWithoutUrlEncoding("{project}/dummyObjects/{dummyObject}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -111,8 +113,12 @@ public final class ProjectDummyObjectName implements ResourceName {
   }
 
   public static ProjectDummyObjectName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectDummyObjectName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectDummyObjectName.parse: formattedString not in valid format");
     return of(
       matchMap.get("dummyObject"),
       matchMap.get("project")
@@ -120,7 +126,11 @@ public final class ProjectDummyObjectName implements ResourceName {
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -189,7 +199,7 @@ public final class ProjectDummyObjectName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectDummyObjectResourceName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -226,7 +236,9 @@ public final class ProjectDummyObjectResourceName implements ResourceName {
   private final String project;
   private final String resource;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}/dummyObjects/{resource}");
+        PathTemplate.createWithoutUrlEncoding("{project}/dummyObjects/{resource}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -300,8 +312,12 @@ public final class ProjectDummyObjectResourceName implements ResourceName {
   }
 
   public static ProjectDummyObjectResourceName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectDummyObjectResourceName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectDummyObjectResourceName.parse: formattedString not in valid format");
     return of(
       matchMap.get("project"),
       matchMap.get("resource")
@@ -309,7 +325,11 @@ public final class ProjectDummyObjectResourceName implements ResourceName {
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -378,7 +398,7 @@ public final class ProjectDummyObjectResourceName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectGlobalAddressName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -415,7 +435,9 @@ public final class ProjectGlobalAddressName implements ResourceName {
   private final String address;
   private final String project;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}/global/addresses/{address}");
+        PathTemplate.createWithoutUrlEncoding("{project}/global/addresses/{address}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -489,8 +511,12 @@ public final class ProjectGlobalAddressName implements ResourceName {
   }
 
   public static ProjectGlobalAddressName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectGlobalAddressName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectGlobalAddressName.parse: formattedString not in valid format");
     return of(
       matchMap.get("address"),
       matchMap.get("project")
@@ -498,7 +524,11 @@ public final class ProjectGlobalAddressName implements ResourceName {
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -567,7 +597,7 @@ public final class ProjectGlobalAddressName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -603,7 +633,9 @@ import javax.annotation.Generated;
 public final class ProjectName implements ResourceName {
   private final String project;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}");
+        PathTemplate.createWithoutUrlEncoding("{project}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -667,15 +699,23 @@ public final class ProjectName implements ResourceName {
   }
 
   public static ProjectName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectName.parse: formattedString not in valid format");
     return of(
       matchMap.get("project")
     );
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -732,7 +772,7 @@ public final class ProjectName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectRegionAddressName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -770,7 +810,9 @@ public final class ProjectRegionAddressName implements ResourceName {
   private final String project;
   private final String region;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}/regions/{region}/addresses/{address}");
+        PathTemplate.createWithoutUrlEncoding("{project}/regions/{region}/addresses/{address}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -854,8 +896,12 @@ public final class ProjectRegionAddressName implements ResourceName {
   }
 
   public static ProjectRegionAddressName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectRegionAddressName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectRegionAddressName.parse: formattedString not in valid format");
     return of(
       matchMap.get("address"),
       matchMap.get("project"),
@@ -864,7 +910,11 @@ public final class ProjectRegionAddressName implements ResourceName {
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -945,7 +995,7 @@ public final class ProjectRegionAddressName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectRegionName.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -982,7 +1032,9 @@ public final class ProjectRegionName implements ResourceName {
   private final String project;
   private final String region;
   private static final PathTemplate PATH_TEMPLATE =
-        PathTemplate.createWithoutUrlEncoding("projects/{project}/regions/{region}");
+        PathTemplate.createWithoutUrlEncoding("{project}/regions/{region}");
+
+  public static final String SERVICE_ADDRESS = "https://www.googleapis.com/compute/v1/projects/";
 
   private volatile Map<String, String> fieldValuesMap;
 
@@ -1056,8 +1108,12 @@ public final class ProjectRegionName implements ResourceName {
   }
 
   public static ProjectRegionName parse(String formattedString) {
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
     Map<String, String> matchMap =
-        PATH_TEMPLATE.validatedMatch(formattedString, "ProjectRegionName.parse: formattedString not in valid format");
+        PATH_TEMPLATE.validatedMatch(resourcePath, "ProjectRegionName.parse: formattedString not in valid format");
     return of(
       matchMap.get("project"),
       matchMap.get("region")
@@ -1065,7 +1121,11 @@ public final class ProjectRegionName implements ResourceName {
   }
 
   public static boolean isParsableFrom(String formattedString) {
-    return PATH_TEMPLATE.matches(formattedString);
+    String resourcePath = formattedString;
+    if (formattedString.startsWith(SERVICE_ADDRESS)) {
+      resourcePath = formattedString.substring(SERVICE_ADDRESS.length());
+    }
+    return PATH_TEMPLATE.matches(resourcePath);
   }
 
   public static class Builder {
@@ -1134,7 +1194,7 @@ public final class ProjectRegionName implements ResourceName {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Address.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1154,6 +1214,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -1218,34 +1279,34 @@ public final class Address implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("address")) {
+    if ("address".equals(fieldName)) {
       return address;
     }
-    if (fieldName.equals("creationTimestamp")) {
+    if ("creationTimestamp".equals(fieldName)) {
       return creationTimestamp;
     }
-    if (fieldName.equals("description")) {
+    if ("description".equals(fieldName)) {
       return description;
     }
-    if (fieldName.equals("id")) {
+    if ("id".equals(fieldName)) {
       return id;
     }
-    if (fieldName.equals("kind")) {
+    if ("kind".equals(fieldName)) {
       return kind;
     }
-    if (fieldName.equals("name")) {
+    if ("name".equals(fieldName)) {
       return name;
     }
-    if (fieldName.equals("region")) {
+    if ("region".equals(fieldName)) {
       return region;
     }
-    if (fieldName.equals("selfLink")) {
+    if ("selfLink".equals(fieldName)) {
       return selfLink;
     }
-    if (fieldName.equals("status")) {
+    if ("status".equals(fieldName)) {
       return status;
     }
-    if (fieldName.equals("users")) {
+    if ("users".equals(fieldName)) {
       return users;
     }
     return null;
@@ -1585,7 +1646,7 @@ public final class Address implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AddressAggregatedList.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1605,6 +1666,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -1653,22 +1715,22 @@ public final class AddressAggregatedList implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("id")) {
+    if ("id".equals(fieldName)) {
       return id;
     }
-    if (fieldName.equals("items")) {
+    if ("items".equals(fieldName)) {
       return items;
     }
-    if (fieldName.equals("kind")) {
+    if ("kind".equals(fieldName)) {
       return kind;
     }
-    if (fieldName.equals("nextPageToken")) {
+    if ("nextPageToken".equals(fieldName)) {
       return nextPageToken;
     }
-    if (fieldName.equals("selfLink")) {
+    if ("selfLink".equals(fieldName)) {
       return selfLink;
     }
-    if (fieldName.equals("warning")) {
+    if ("warning".equals(fieldName)) {
       return warning;
     }
     return null;
@@ -1901,7 +1963,7 @@ public final class AddressAggregatedList implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AddressesScopedList.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1921,6 +1983,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -1953,10 +2016,10 @@ public final class AddressesScopedList implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("addresses")) {
+    if ("addresses".equals(fieldName)) {
       return addresses;
     }
-    if (fieldName.equals("warning")) {
+    if ("warning".equals(fieldName)) {
       return warning;
     }
     return null;
@@ -2104,7 +2167,7 @@ public final class AddressesScopedList implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AddressList.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2124,6 +2187,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -2168,19 +2232,19 @@ public final class AddressList implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("id")) {
+    if ("id".equals(fieldName)) {
       return id;
     }
-    if (fieldName.equals("items")) {
+    if ("items".equals(fieldName)) {
       return items;
     }
-    if (fieldName.equals("kind")) {
+    if ("kind".equals(fieldName)) {
       return kind;
     }
-    if (fieldName.equals("nextPageToken")) {
+    if ("nextPageToken".equals(fieldName)) {
       return nextPageToken;
     }
-    if (fieldName.equals("selfLink")) {
+    if ("selfLink".equals(fieldName)) {
       return selfLink;
     }
     return null;
@@ -2400,7 +2464,7 @@ public final class AddressList implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Data.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2420,6 +2484,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -2452,10 +2517,10 @@ public final class Data implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("value")) {
+    if ("value".equals(fieldName)) {
       return value;
     }
     return null;
@@ -2592,7 +2657,7 @@ public final class Data implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DUMMYObject.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2612,6 +2677,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -2640,7 +2706,7 @@ public final class DUMMYObject implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("name")) {
+    if ("name".equals(fieldName)) {
       return name;
     }
     return null;
@@ -2753,7 +2819,7 @@ public final class DUMMYObject implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DummyObject2.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2773,6 +2839,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -2787,6 +2854,8 @@ import javax.annotation.Nullable;
 @BetaApi
 public final class DummyObject2 implements ApiMessage {
   private final Float floatie;
+  @SerializedName("IPProtocol")
+  private final String iPProtocol;
   private final String name;
   private final Double precisionFloatie;
   private final Address primaryAddress;
@@ -2794,6 +2863,7 @@ public final class DummyObject2 implements ApiMessage {
 
   private DummyObject2() {
     this.floatie = null;
+    this.iPProtocol = null;
     this.name = null;
     this.precisionFloatie = null;
     this.primaryAddress = null;
@@ -2803,12 +2873,14 @@ public final class DummyObject2 implements ApiMessage {
 
   private DummyObject2(
       Float floatie,
+      String iPProtocol,
       String name,
       Double precisionFloatie,
       Address primaryAddress,
       Address secondaryAddress
       ) {
     this.floatie = floatie;
+    this.iPProtocol = iPProtocol;
     this.name = name;
     this.precisionFloatie = precisionFloatie;
     this.primaryAddress = primaryAddress;
@@ -2817,19 +2889,22 @@ public final class DummyObject2 implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("floatie")) {
+    if ("floatie".equals(fieldName)) {
       return floatie;
     }
-    if (fieldName.equals("name")) {
+    if ("iPProtocol".equals(fieldName)) {
+      return iPProtocol;
+    }
+    if ("name".equals(fieldName)) {
       return name;
     }
-    if (fieldName.equals("precisionFloatie")) {
+    if ("precisionFloatie".equals(fieldName)) {
       return precisionFloatie;
     }
-    if (fieldName.equals("primaryAddress")) {
+    if ("primaryAddress".equals(fieldName)) {
       return primaryAddress;
     }
-    if (fieldName.equals("secondaryAddress")) {
+    if ("secondaryAddress".equals(fieldName)) {
       return secondaryAddress;
     }
     return null;
@@ -2849,6 +2924,10 @@ public final class DummyObject2 implements ApiMessage {
 
   public Float getFloatie() {
     return floatie;
+  }
+
+  public String getIPProtocol() {
+    return iPProtocol;
   }
 
   public String getName() {
@@ -2889,6 +2968,7 @@ public final class DummyObject2 implements ApiMessage {
 
   public static class Builder {
     private Float floatie;
+    private String iPProtocol;
     private String name;
     private Double precisionFloatie;
     private Address primaryAddress;
@@ -2900,6 +2980,9 @@ public final class DummyObject2 implements ApiMessage {
       if (other == DummyObject2.getDefaultInstance()) return this;
       if (other.getFloatie() != null) {
         this.floatie = other.floatie;
+      }
+      if (other.getIPProtocol() != null) {
+        this.iPProtocol = other.iPProtocol;
       }
       if (other.getName() != null) {
         this.name = other.name;
@@ -2918,6 +3001,7 @@ public final class DummyObject2 implements ApiMessage {
 
     Builder(DummyObject2 source) {
       this.floatie = source.floatie;
+      this.iPProtocol = source.iPProtocol;
       this.name = source.name;
       this.precisionFloatie = source.precisionFloatie;
       this.primaryAddress = source.primaryAddress;
@@ -2930,6 +3014,15 @@ public final class DummyObject2 implements ApiMessage {
 
     public Builder setFloatie(Float floatie) {
       this.floatie = floatie;
+      return this;
+    }
+
+    public String getIPProtocol() {
+      return iPProtocol;
+    }
+
+    public Builder setIPProtocol(String iPProtocol) {
+      this.iPProtocol = iPProtocol;
       return this;
     }
 
@@ -2975,8 +3068,10 @@ public final class DummyObject2 implements ApiMessage {
 
 
 
+
       return new DummyObject2(
         floatie,
+        iPProtocol,
         name,
         precisionFloatie,
         primaryAddress,
@@ -2987,6 +3082,7 @@ public final class DummyObject2 implements ApiMessage {
     public Builder clone() {
       Builder newBuilder = new Builder();
       newBuilder.setFloatie(this.floatie);
+      newBuilder.setIPProtocol(this.iPProtocol);
       newBuilder.setName(this.name);
       newBuilder.setPrecisionFloatie(this.precisionFloatie);
       newBuilder.setPrimaryAddress(this.primaryAddress);
@@ -2999,6 +3095,7 @@ public final class DummyObject2 implements ApiMessage {
   public String toString() {
     return "DummyObject2{"
         + "floatie=" + floatie + ", "
+        + "iPProtocol=" + iPProtocol + ", "
         + "name=" + name + ", "
         + "precisionFloatie=" + precisionFloatie + ", "
         + "primaryAddress=" + primaryAddress + ", "
@@ -3015,6 +3112,7 @@ public final class DummyObject2 implements ApiMessage {
       DummyObject2 that = (DummyObject2) o;
       return
           Objects.equals(this.floatie, that.getFloatie()) &&
+          Objects.equals(this.iPProtocol, that.getIPProtocol()) &&
           Objects.equals(this.name, that.getName()) &&
           Objects.equals(this.precisionFloatie, that.getPrecisionFloatie()) &&
           Objects.equals(this.primaryAddress, that.getPrimaryAddress()) &&
@@ -3028,6 +3126,7 @@ public final class DummyObject2 implements ApiMessage {
   public int hashCode() {
     return Objects.hash(
       floatie,
+      iPProtocol,
       name,
       precisionFloatie,
       primaryAddress,
@@ -3038,7 +3137,7 @@ public final class DummyObject2 implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Error.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -3058,6 +3157,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -3086,7 +3186,7 @@ public final class Error implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("errors")) {
+    if ("errors".equals(fieldName)) {
       return errors;
     }
     return null;
@@ -3210,7 +3310,7 @@ public final class Error implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Errors.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -3230,6 +3330,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -3266,13 +3367,13 @@ public final class Errors implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("code")) {
+    if ("code".equals(fieldName)) {
       return code;
     }
-    if (fieldName.equals("location")) {
+    if ("location".equals(fieldName)) {
       return location;
     }
-    if (fieldName.equals("message")) {
+    if ("message".equals(fieldName)) {
       return message;
     }
     return null;
@@ -3433,7 +3534,7 @@ public final class Errors implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Operation.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -3453,6 +3554,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -3569,73 +3671,73 @@ public final class Operation implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("clientOperationId")) {
+    if ("clientOperationId".equals(fieldName)) {
       return clientOperationId;
     }
-    if (fieldName.equals("creationTimestamp")) {
+    if ("creationTimestamp".equals(fieldName)) {
       return creationTimestamp;
     }
-    if (fieldName.equals("description")) {
+    if ("description".equals(fieldName)) {
       return description;
     }
-    if (fieldName.equals("endTime")) {
+    if ("endTime".equals(fieldName)) {
       return endTime;
     }
-    if (fieldName.equals("error")) {
+    if ("error".equals(fieldName)) {
       return error;
     }
-    if (fieldName.equals("httpErrorMessage")) {
+    if ("httpErrorMessage".equals(fieldName)) {
       return httpErrorMessage;
     }
-    if (fieldName.equals("httpErrorStatusCode")) {
+    if ("httpErrorStatusCode".equals(fieldName)) {
       return httpErrorStatusCode;
     }
-    if (fieldName.equals("id")) {
+    if ("id".equals(fieldName)) {
       return id;
     }
-    if (fieldName.equals("insertTime")) {
+    if ("insertTime".equals(fieldName)) {
       return insertTime;
     }
-    if (fieldName.equals("kind")) {
+    if ("kind".equals(fieldName)) {
       return kind;
     }
-    if (fieldName.equals("name")) {
+    if ("name".equals(fieldName)) {
       return name;
     }
-    if (fieldName.equals("operationType")) {
+    if ("operationType".equals(fieldName)) {
       return operationType;
     }
-    if (fieldName.equals("progress")) {
+    if ("progress".equals(fieldName)) {
       return progress;
     }
-    if (fieldName.equals("region")) {
+    if ("region".equals(fieldName)) {
       return region;
     }
-    if (fieldName.equals("selfLink")) {
+    if ("selfLink".equals(fieldName)) {
       return selfLink;
     }
-    if (fieldName.equals("startTime")) {
+    if ("startTime".equals(fieldName)) {
       return startTime;
     }
-    if (fieldName.equals("status")) {
+    if ("status".equals(fieldName)) {
       return status;
     }
-    if (fieldName.equals("statusMessage")) {
+    if ("statusMessage".equals(fieldName)) {
       return statusMessage;
     }
-    if (fieldName.equals("targetId")) {
+    if ("targetId".equals(fieldName)) {
       return targetId;
     }
-    if (fieldName.equals("targetLink")) {
+    if ("targetLink".equals(fieldName)) {
       return targetLink;
     }
-    if (fieldName.equals("user")) {
+    if ("user".equals(fieldName)) {
       return user;
     }
-    if (fieldName.equals("warnings")) {
+    if ("warnings".equals(fieldName)) {
       return warnings;
     }
-    if (fieldName.equals("zone")) {
+    if ("zone".equals(fieldName)) {
       return zone;
     }
     return null;
@@ -4287,7 +4389,7 @@ public final class Operation implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ProjectsGetDummyObjectResources.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4307,6 +4409,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -4343,13 +4446,13 @@ public final class ProjectsGetDummyObjectResources implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("kind")) {
+    if ("kind".equals(fieldName)) {
       return kind;
     }
-    if (fieldName.equals("nextPageToken")) {
+    if ("nextPageToken".equals(fieldName)) {
       return nextPageToken;
     }
-    if (fieldName.equals("resources")) {
+    if ("resources".equals(fieldName)) {
       return resources;
     }
     return null;
@@ -4521,7 +4624,7 @@ public final class ProjectsGetDummyObjectResources implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Warning.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4541,6 +4644,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -4577,13 +4681,13 @@ public final class Warning implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("code")) {
+    if ("code".equals(fieldName)) {
       return code;
     }
-    if (fieldName.equals("data")) {
+    if ("data".equals(fieldName)) {
       return data;
     }
-    if (fieldName.equals("message")) {
+    if ("message".equals(fieldName)) {
       return message;
     }
     return null;
@@ -4755,7 +4859,7 @@ public final class Warning implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/Warnings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4775,6 +4879,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -4811,13 +4916,13 @@ public final class Warnings implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("code")) {
+    if ("code".equals(fieldName)) {
       return code;
     }
-    if (fieldName.equals("data")) {
+    if ("data".equals(fieldName)) {
       return data;
     }
-    if (fieldName.equals("message")) {
+    if ("message".equals(fieldName)) {
       return message;
     }
     return null;
@@ -4989,7 +5094,7 @@ public final class Warnings implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AggregatedListAddressesHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -5009,6 +5114,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -5081,40 +5187,40 @@ public final class AggregatedListAddressesHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("filter")) {
+    if ("filter".equals(fieldName)) {
       return filter;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("maxResults")) {
+    if ("maxResults".equals(fieldName)) {
       return maxResults;
     }
-    if (fieldName.equals("orderBy")) {
+    if ("orderBy".equals(fieldName)) {
       return orderBy;
     }
-    if (fieldName.equals("pageToken")) {
+    if ("pageToken".equals(fieldName)) {
       return pageToken;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("project")) {
+    if ("project".equals(fieldName)) {
       return project;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -5498,7 +5604,7 @@ public final class AggregatedListAddressesHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DeleteAddressHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -5518,6 +5624,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -5574,28 +5681,28 @@ public final class DeleteAddressHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("address")) {
+    if ("address".equals(fieldName)) {
       return address;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -5883,7 +5990,7 @@ public final class DeleteAddressHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DeleteDummyObjectHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -5903,6 +6010,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -5959,28 +6067,28 @@ public final class DeleteDummyObjectHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("dummyObject")) {
+    if ("dummyObject".equals(fieldName)) {
       return dummyObject;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -6268,7 +6376,7 @@ public final class DeleteDummyObjectHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/GetAddressHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -6288,6 +6396,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -6344,28 +6453,28 @@ public final class GetAddressHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("address")) {
+    if ("address".equals(fieldName)) {
       return address;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -6653,7 +6762,7 @@ public final class GetAddressHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/GetResourceDummyObjectHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -6673,6 +6782,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -6729,28 +6839,28 @@ public final class GetResourceDummyObjectHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("resource")) {
+    if ("resource".equals(fieldName)) {
       return resource;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -7038,7 +7148,7 @@ public final class GetResourceDummyObjectHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/InsertAddressHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7058,6 +7168,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7118,31 +7229,31 @@ public final class InsertAddressHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("addressResource")) {
+    if ("addressResource".equals(fieldName)) {
       return addressResource;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("region")) {
+    if ("region".equals(fieldName)) {
       return region;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -7454,7 +7565,7 @@ public final class InsertAddressHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ListAddressesHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7474,6 +7585,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7546,40 +7658,40 @@ public final class ListAddressesHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("filter")) {
+    if ("filter".equals(fieldName)) {
       return filter;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("maxResults")) {
+    if ("maxResults".equals(fieldName)) {
       return maxResults;
     }
-    if (fieldName.equals("orderBy")) {
+    if ("orderBy".equals(fieldName)) {
       return orderBy;
     }
-    if (fieldName.equals("pageToken")) {
+    if ("pageToken".equals(fieldName)) {
       return pageToken;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("region")) {
+    if ("region".equals(fieldName)) {
       return region;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -7963,7 +8075,7 @@ public final class ListAddressesHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/ListResourcesDummyObjectsHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7983,6 +8095,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8051,37 +8164,37 @@ public final class ListResourcesDummyObjectsHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("maxResults")) {
+    if ("maxResults".equals(fieldName)) {
       return maxResults;
     }
-    if (fieldName.equals("orderBy")) {
+    if ("orderBy".equals(fieldName)) {
       return orderBy;
     }
-    if (fieldName.equals("pageToken")) {
+    if ("pageToken".equals(fieldName)) {
       return pageToken;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("project")) {
+    if ("project".equals(fieldName)) {
       return project;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -8441,7 +8554,7 @@ public final class ListResourcesDummyObjectsHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/PatchAddressHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8461,6 +8574,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8533,40 +8647,40 @@ public final class PatchAddressHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("address")) {
+    if ("address".equals(fieldName)) {
       return address;
     }
-    if (fieldName.equals("addressResource")) {
+    if ("addressResource".equals(fieldName)) {
       return addressResource;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fieldMask")) {
+    if ("fieldMask".equals(fieldName)) {
       return fieldMask;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("region")) {
+    if ("region".equals(fieldName)) {
       return region;
     }
-    if (fieldName.equals("requestId")) {
+    if ("requestId".equals(fieldName)) {
       return requestId;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -8958,7 +9072,7 @@ public final class PatchAddressHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/UpdateAddressHttpRequest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8978,6 +9092,7 @@ import com.google.api.core.BetaApi;
 import com.google.api.gax.httpjson.ApiMessage;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9046,37 +9161,37 @@ public final class UpdateAddressHttpRequest implements ApiMessage {
 
   @Override
   public Object getFieldValue(String fieldName) {
-    if (fieldName.equals("access_token")) {
+    if ("access_token".equals(fieldName)) {
       return access_token;
     }
-    if (fieldName.equals("address")) {
+    if ("address".equals(fieldName)) {
       return address;
     }
-    if (fieldName.equals("addressResource")) {
+    if ("addressResource".equals(fieldName)) {
       return addressResource;
     }
-    if (fieldName.equals("callback")) {
+    if ("callback".equals(fieldName)) {
       return callback;
     }
-    if (fieldName.equals("fieldMask")) {
+    if ("fieldMask".equals(fieldName)) {
       return fieldMask;
     }
-    if (fieldName.equals("fields")) {
+    if ("fields".equals(fieldName)) {
       return fields;
     }
-    if (fieldName.equals("key")) {
+    if ("key".equals(fieldName)) {
       return key;
     }
-    if (fieldName.equals("prettyPrint")) {
+    if ("prettyPrint".equals(fieldName)) {
       return prettyPrint;
     }
-    if (fieldName.equals("quotaUser")) {
+    if ("quotaUser".equals(fieldName)) {
       return quotaUser;
     }
-    if (fieldName.equals("requestId")) {
+    if ("requestId".equals(fieldName)) {
       return requestId;
     }
-    if (fieldName.equals("userIp")) {
+    if ("userIp".equals(fieldName)) {
       return userIp;
     }
     return null;
@@ -9444,7 +9559,7 @@ public final class UpdateAddressHttpRequest implements ApiMessage {
 
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AddressClient.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10621,7 +10736,7 @@ public class AddressClient implements BackgroundResource {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/AddressSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10934,7 +11049,7 @@ public class AddressSettings extends ClientSettings<AddressSettings> {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/AddressStubSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11518,7 +11633,7 @@ public class AddressStubSettings extends StubSettings<AddressStubSettings> {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/AddressStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11619,7 +11734,7 @@ public abstract class AddressStub implements BackgroundResource {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/HttpJsonAddressStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11978,7 +12093,7 @@ public class HttpJsonAddressStub extends AddressStub {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/HttpJsonAddressCallableFactory.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12083,7 +12198,7 @@ public class HttpJsonAddressCallableFactory implements HttpJsonStubCallableFacto
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DummyObjectClient.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12695,7 +12810,7 @@ public class DummyObjectClient implements BackgroundResource {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/DummyObjectSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12951,7 +13066,7 @@ public class DummyObjectSettings extends ClientSettings<DummyObjectSettings> {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/DummyObjectStubSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13373,7 +13488,7 @@ public class DummyObjectStubSettings extends StubSettings<DummyObjectStubSetting
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/DummyObjectStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13439,7 +13554,7 @@ public abstract class DummyObjectStub implements BackgroundResource {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/HttpJsonDummyObjectStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13655,7 +13770,7 @@ public class HttpJsonDummyObjectStub extends DummyObjectStub {
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/stub/HttpJsonDummyObjectCallableFactory.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13751,7 +13866,7 @@ public class HttpJsonDummyObjectCallableFactory implements HttpJsonStubCallableF
 }
 ============== file: src/main/java/com/google/cloud/simplecompute/v1/package-info.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13868,7 +13983,7 @@ task allJars(type: Copy) {
 }
 ============== file: src/test/java/com/google/cloud/simplecompute/v1/AddressClientTest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13963,17 +14078,17 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void aggregatedListAddressesTest() {
+    String id = "id3355";
     String kind = "kind3292052";
     String nextPageToken = "";
-    String id = "id3355";
     String selfLink = "selfLink-1691268851";
     AddressesScopedList itemsItem = AddressesScopedList.newBuilder().build();
     Map<String, AddressesScopedList> items = new HashMap<>();
     items.put("items", itemsItem);
     AddressAggregatedList expectedResponse = AddressAggregatedList.newBuilder()
+      .setId(id)
       .setKind(kind)
       .setNextPageToken(nextPageToken)
-      .setId(id)
       .setSelfLink(selfLink)
       .putAllItems(items)
       .build();
@@ -14016,49 +14131,49 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void deleteAddressTest() {
-    String httpErrorMessage = "httpErrorMessage1276263769";
-    String targetId = "targetId-815576439";
-    String kind = "kind3292052";
-    String description = "description-1724546052";
-    String statusMessage = "statusMessage-239442758";
-    String selfLink = "selfLink-1691268851";
-    String insertTime = "insertTime-103148397";
-    Integer httpErrorStatusCode = 1386087020;
-    String zone = "zone3744684";
-    String targetLink = "targetLink-2084812312";
-    String creationTimestamp = "creationTimestamp567396278";
-    String name = "name3373707";
-    Integer progress = 1001078227;
-    String operationType = "operationType-1432962286";
-    String startTime = "startTime-1573145462";
-    String endTime = "endTime1725551537";
-    String id = "id3355";
-    ProjectRegionName region = ProjectRegionName.of("[PROJECT]", "[REGION]");
     String clientOperationId = "clientOperationId-239630617";
-    String user = "user3599307";
+    String creationTimestamp = "creationTimestamp567396278";
+    String description = "description-1724546052";
+    String endTime = "endTime1725551537";
+    String httpErrorMessage = "httpErrorMessage1276263769";
+    Integer httpErrorStatusCode = 1386087020;
+    String id = "id3355";
+    String insertTime = "insertTime-103148397";
+    String kind = "kind3292052";
+    String name = "name3373707";
+    String operationType = "operationType-1432962286";
+    Integer progress = 1001078227;
+    ProjectRegionName region = ProjectRegionName.of("[PROJECT]", "[REGION]");
+    String selfLink = "selfLink-1691268851";
+    String startTime = "startTime-1573145462";
     String status = "status-892481550";
+    String statusMessage = "statusMessage-239442758";
+    String targetId = "targetId-815576439";
+    String targetLink = "targetLink-2084812312";
+    String user = "user3599307";
+    String zone = "zone3744684";
     Operation expectedResponse = Operation.newBuilder()
-      .setHttpErrorMessage(httpErrorMessage)
-      .setTargetId(targetId)
-      .setKind(kind)
-      .setDescription(description)
-      .setStatusMessage(statusMessage)
-      .setSelfLink(selfLink)
-      .setInsertTime(insertTime)
-      .setHttpErrorStatusCode(httpErrorStatusCode)
-      .setZone(zone)
-      .setTargetLink(targetLink)
-      .setCreationTimestamp(creationTimestamp)
-      .setName(name)
-      .setProgress(progress)
-      .setOperationType(operationType)
-      .setStartTime(startTime)
-      .setEndTime(endTime)
-      .setId(id)
-      .setRegion(region.toString())
       .setClientOperationId(clientOperationId)
-      .setUser(user)
+      .setCreationTimestamp(creationTimestamp)
+      .setDescription(description)
+      .setEndTime(endTime)
+      .setHttpErrorMessage(httpErrorMessage)
+      .setHttpErrorStatusCode(httpErrorStatusCode)
+      .setId(id)
+      .setInsertTime(insertTime)
+      .setKind(kind)
+      .setName(name)
+      .setOperationType(operationType)
+      .setProgress(progress)
+      .setRegion(region.toString())
+      .setSelfLink(selfLink)
+      .setStartTime(startTime)
       .setStatus(status)
+      .setStatusMessage(statusMessage)
+      .setTargetId(targetId)
+      .setTargetLink(targetLink)
+      .setUser(user)
+      .setZone(zone)
       .build();
     mockService.addResponse(expectedResponse);
 
@@ -14097,21 +14212,21 @@ public class AddressClientTest {
   @SuppressWarnings("all")
   public void getAddressTest() {
     ProjectRegionAddressName address2 = ProjectRegionAddressName.of("[PROJECT]", "[REGION]", "[ADDRESS]");
-    String kind = "kind3292052";
     String creationTimestamp = "creationTimestamp567396278";
-    String name = "name3373707";
     String description = "description-1724546052";
     String id = "id3355";
+    String kind = "kind3292052";
+    String name = "name3373707";
     ProjectRegionName region = ProjectRegionName.of("[PROJECT]", "[REGION]");
     String selfLink = "selfLink-1691268851";
     String status = "status-892481550";
     Address expectedResponse = Address.newBuilder()
       .setAddress(address2.toString())
-      .setKind(kind)
       .setCreationTimestamp(creationTimestamp)
-      .setName(name)
       .setDescription(description)
       .setId(id)
+      .setKind(kind)
+      .setName(name)
       .setRegion(region.toString())
       .setSelfLink(selfLink)
       .setStatus(status)
@@ -14152,49 +14267,49 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void insertAddressTest() {
-    String httpErrorMessage = "httpErrorMessage1276263769";
-    String targetId = "targetId-815576439";
-    String kind = "kind3292052";
-    String description = "description-1724546052";
-    String statusMessage = "statusMessage-239442758";
-    String selfLink = "selfLink-1691268851";
-    String insertTime = "insertTime-103148397";
-    Integer httpErrorStatusCode = 1386087020;
-    String zone = "zone3744684";
-    String targetLink = "targetLink-2084812312";
-    String creationTimestamp = "creationTimestamp567396278";
-    String name = "name3373707";
-    Integer progress = 1001078227;
-    String operationType = "operationType-1432962286";
-    String startTime = "startTime-1573145462";
-    String endTime = "endTime1725551537";
-    String id = "id3355";
-    ProjectRegionName region2 = ProjectRegionName.of("[PROJECT]", "[REGION]");
     String clientOperationId = "clientOperationId-239630617";
-    String user = "user3599307";
+    String creationTimestamp = "creationTimestamp567396278";
+    String description = "description-1724546052";
+    String endTime = "endTime1725551537";
+    String httpErrorMessage = "httpErrorMessage1276263769";
+    Integer httpErrorStatusCode = 1386087020;
+    String id = "id3355";
+    String insertTime = "insertTime-103148397";
+    String kind = "kind3292052";
+    String name = "name3373707";
+    String operationType = "operationType-1432962286";
+    Integer progress = 1001078227;
+    ProjectRegionName region2 = ProjectRegionName.of("[PROJECT]", "[REGION]");
+    String selfLink = "selfLink-1691268851";
+    String startTime = "startTime-1573145462";
     String status = "status-892481550";
+    String statusMessage = "statusMessage-239442758";
+    String targetId = "targetId-815576439";
+    String targetLink = "targetLink-2084812312";
+    String user = "user3599307";
+    String zone = "zone3744684";
     Operation expectedResponse = Operation.newBuilder()
-      .setHttpErrorMessage(httpErrorMessage)
-      .setTargetId(targetId)
-      .setKind(kind)
-      .setDescription(description)
-      .setStatusMessage(statusMessage)
-      .setSelfLink(selfLink)
-      .setInsertTime(insertTime)
-      .setHttpErrorStatusCode(httpErrorStatusCode)
-      .setZone(zone)
-      .setTargetLink(targetLink)
-      .setCreationTimestamp(creationTimestamp)
-      .setName(name)
-      .setProgress(progress)
-      .setOperationType(operationType)
-      .setStartTime(startTime)
-      .setEndTime(endTime)
-      .setId(id)
-      .setRegion(region2.toString())
       .setClientOperationId(clientOperationId)
-      .setUser(user)
+      .setCreationTimestamp(creationTimestamp)
+      .setDescription(description)
+      .setEndTime(endTime)
+      .setHttpErrorMessage(httpErrorMessage)
+      .setHttpErrorStatusCode(httpErrorStatusCode)
+      .setId(id)
+      .setInsertTime(insertTime)
+      .setKind(kind)
+      .setName(name)
+      .setOperationType(operationType)
+      .setProgress(progress)
+      .setRegion(region2.toString())
+      .setSelfLink(selfLink)
+      .setStartTime(startTime)
       .setStatus(status)
+      .setStatusMessage(statusMessage)
+      .setTargetId(targetId)
+      .setTargetLink(targetLink)
+      .setUser(user)
+      .setZone(zone)
       .build();
     mockService.addResponse(expectedResponse);
 
@@ -14234,16 +14349,16 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void listAddressesTest() {
+    String id = "id3355";
     String kind = "kind3292052";
     String nextPageToken = "";
-    String id = "id3355";
     String selfLink = "selfLink-1691268851";
     Address itemsElement = Address.newBuilder().build();
     List<Address> items = Arrays.asList(itemsElement);
     AddressList expectedResponse = AddressList.newBuilder()
+      .setId(id)
       .setKind(kind)
       .setNextPageToken(nextPageToken)
-      .setId(id)
       .setSelfLink(selfLink)
       .addAllItems(items)
       .build();
@@ -14286,49 +14401,49 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void patchAddressTest() {
-    String httpErrorMessage = "httpErrorMessage1276263769";
-    String targetId = "targetId-815576439";
-    String kind = "kind3292052";
-    String description = "description-1724546052";
-    String statusMessage = "statusMessage-239442758";
-    String selfLink = "selfLink-1691268851";
-    String insertTime = "insertTime-103148397";
-    Integer httpErrorStatusCode = 1386087020;
-    String zone = "zone3744684";
-    String targetLink = "targetLink-2084812312";
-    String creationTimestamp = "creationTimestamp567396278";
-    String name = "name3373707";
-    Integer progress = 1001078227;
-    String operationType = "operationType-1432962286";
-    String startTime = "startTime-1573145462";
-    String endTime = "endTime1725551537";
-    String id = "id3355";
-    ProjectRegionName region2 = ProjectRegionName.of("[PROJECT]", "[REGION]");
     String clientOperationId = "clientOperationId-239630617";
-    String user = "user3599307";
+    String creationTimestamp = "creationTimestamp567396278";
+    String description = "description-1724546052";
+    String endTime = "endTime1725551537";
+    String httpErrorMessage = "httpErrorMessage1276263769";
+    Integer httpErrorStatusCode = 1386087020;
+    String id = "id3355";
+    String insertTime = "insertTime-103148397";
+    String kind = "kind3292052";
+    String name = "name3373707";
+    String operationType = "operationType-1432962286";
+    Integer progress = 1001078227;
+    ProjectRegionName region2 = ProjectRegionName.of("[PROJECT]", "[REGION]");
+    String selfLink = "selfLink-1691268851";
+    String startTime = "startTime-1573145462";
     String status = "status-892481550";
+    String statusMessage = "statusMessage-239442758";
+    String targetId = "targetId-815576439";
+    String targetLink = "targetLink-2084812312";
+    String user = "user3599307";
+    String zone = "zone3744684";
     Operation expectedResponse = Operation.newBuilder()
-      .setHttpErrorMessage(httpErrorMessage)
-      .setTargetId(targetId)
-      .setKind(kind)
-      .setDescription(description)
-      .setStatusMessage(statusMessage)
-      .setSelfLink(selfLink)
-      .setInsertTime(insertTime)
-      .setHttpErrorStatusCode(httpErrorStatusCode)
-      .setZone(zone)
-      .setTargetLink(targetLink)
-      .setCreationTimestamp(creationTimestamp)
-      .setName(name)
-      .setProgress(progress)
-      .setOperationType(operationType)
-      .setStartTime(startTime)
-      .setEndTime(endTime)
-      .setId(id)
-      .setRegion(region2.toString())
       .setClientOperationId(clientOperationId)
-      .setUser(user)
+      .setCreationTimestamp(creationTimestamp)
+      .setDescription(description)
+      .setEndTime(endTime)
+      .setHttpErrorMessage(httpErrorMessage)
+      .setHttpErrorStatusCode(httpErrorStatusCode)
+      .setId(id)
+      .setInsertTime(insertTime)
+      .setKind(kind)
+      .setName(name)
+      .setOperationType(operationType)
+      .setProgress(progress)
+      .setRegion(region2.toString())
+      .setSelfLink(selfLink)
+      .setStartTime(startTime)
       .setStatus(status)
+      .setStatusMessage(statusMessage)
+      .setTargetId(targetId)
+      .setTargetLink(targetLink)
+      .setUser(user)
+      .setZone(zone)
       .build();
     mockService.addResponse(expectedResponse);
 
@@ -14372,49 +14487,49 @@ public class AddressClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateAddressTest() {
-    String httpErrorMessage = "httpErrorMessage1276263769";
-    String targetId = "targetId-815576439";
-    String kind = "kind3292052";
-    String description = "description-1724546052";
-    String statusMessage = "statusMessage-239442758";
-    String selfLink = "selfLink-1691268851";
-    String insertTime = "insertTime-103148397";
-    Integer httpErrorStatusCode = 1386087020;
-    String zone = "zone3744684";
-    String targetLink = "targetLink-2084812312";
-    String creationTimestamp = "creationTimestamp567396278";
-    String name = "name3373707";
-    Integer progress = 1001078227;
-    String operationType = "operationType-1432962286";
-    String startTime = "startTime-1573145462";
-    String endTime = "endTime1725551537";
-    String id = "id3355";
-    ProjectRegionName region = ProjectRegionName.of("[PROJECT]", "[REGION]");
     String clientOperationId = "clientOperationId-239630617";
-    String user = "user3599307";
+    String creationTimestamp = "creationTimestamp567396278";
+    String description = "description-1724546052";
+    String endTime = "endTime1725551537";
+    String httpErrorMessage = "httpErrorMessage1276263769";
+    Integer httpErrorStatusCode = 1386087020;
+    String id = "id3355";
+    String insertTime = "insertTime-103148397";
+    String kind = "kind3292052";
+    String name = "name3373707";
+    String operationType = "operationType-1432962286";
+    Integer progress = 1001078227;
+    ProjectRegionName region = ProjectRegionName.of("[PROJECT]", "[REGION]");
+    String selfLink = "selfLink-1691268851";
+    String startTime = "startTime-1573145462";
     String status = "status-892481550";
+    String statusMessage = "statusMessage-239442758";
+    String targetId = "targetId-815576439";
+    String targetLink = "targetLink-2084812312";
+    String user = "user3599307";
+    String zone = "zone3744684";
     Operation expectedResponse = Operation.newBuilder()
-      .setHttpErrorMessage(httpErrorMessage)
-      .setTargetId(targetId)
-      .setKind(kind)
-      .setDescription(description)
-      .setStatusMessage(statusMessage)
-      .setSelfLink(selfLink)
-      .setInsertTime(insertTime)
-      .setHttpErrorStatusCode(httpErrorStatusCode)
-      .setZone(zone)
-      .setTargetLink(targetLink)
-      .setCreationTimestamp(creationTimestamp)
-      .setName(name)
-      .setProgress(progress)
-      .setOperationType(operationType)
-      .setStartTime(startTime)
-      .setEndTime(endTime)
-      .setId(id)
-      .setRegion(region.toString())
       .setClientOperationId(clientOperationId)
-      .setUser(user)
+      .setCreationTimestamp(creationTimestamp)
+      .setDescription(description)
+      .setEndTime(endTime)
+      .setHttpErrorMessage(httpErrorMessage)
+      .setHttpErrorStatusCode(httpErrorStatusCode)
+      .setId(id)
+      .setInsertTime(insertTime)
+      .setKind(kind)
+      .setName(name)
+      .setOperationType(operationType)
+      .setProgress(progress)
+      .setRegion(region.toString())
+      .setSelfLink(selfLink)
+      .setStartTime(startTime)
       .setStatus(status)
+      .setStatusMessage(statusMessage)
+      .setTargetId(targetId)
+      .setTargetLink(targetLink)
+      .setUser(user)
+      .setZone(zone)
       .build();
     mockService.addResponse(expectedResponse);
 
@@ -14456,7 +14571,7 @@ public class AddressClientTest {
 }
 ============== file: src/test/java/com/google/cloud/simplecompute/v1/DummyObjectClientTest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

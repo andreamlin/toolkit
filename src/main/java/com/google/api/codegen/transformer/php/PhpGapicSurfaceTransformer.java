@@ -116,6 +116,10 @@ public class PhpGapicSurfaceTransformer implements ModelToViewTransformer<ProtoA
   public List<ViewModel> transform(ProtoApiModel model, GapicProductConfig productConfig) {
     List<ViewModel> surfaceDocs = new ArrayList<>();
     for (InterfaceModel apiInterface : model.getInterfaces()) {
+      if (!productConfig.hasInterfaceConfig(apiInterface)) {
+        continue;
+      }
+
       ModelTypeTable modelTypeTable =
           new ModelTypeTable(
               new PhpTypeTable(productConfig.getPackageName()),
@@ -446,13 +450,13 @@ public class PhpGapicSurfaceTransformer implements ModelToViewTransformer<ProtoA
 
     typeTable.saveNicknameFor("\\Google\\ApiCore\\ApiException");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\CredentialsWrapper");
-    typeTable.saveNicknameFor("\\Google\\ApiCore\\FetchAuthTokenInterface");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\GapicClientTrait");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\PathTemplate");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\RequestParamsHeaderDescriptor");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\RetrySettings");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\Transport\\TransportInterface");
     typeTable.saveNicknameFor("\\Google\\ApiCore\\ValidationException");
+    typeTable.saveNicknameFor("\\Google\\Auth\\FetchAuthTokenInterface");
 
     if (interfaceConfig.hasLongRunningOperations()) {
       typeTable.saveNicknameFor("\\Google\\ApiCore\\LongRunning\\OperationsClient");

@@ -76,9 +76,9 @@ task allJars(type: Copy) {
   // Replace with `from configurations.testRuntime, jar` to include test dependencies
   from configurations.runtime, jar
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/LibraryServiceClient.java ==============
+============== file: src/main/java/com/google/example/library/v1/LibraryServiceClient.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ task allJars(type: Copy) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1;
+package com.google.example.library.v1;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -113,54 +113,12 @@ import com.google.api.gax.rpc.PageContext;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.api.pathtemplate.PathTemplate;
-import com.google.cloud.example.library.v1.stub.LibraryServiceStub;
-import com.google.cloud.example.library.v1.stub.LibraryServiceStubSettings;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.example.library.v1.AddCommentsRequest;
-import com.google.example.library.v1.ArchivedBookName;
-import com.google.example.library.v1.Book;
-import com.google.example.library.v1.BookFromAnywhere;
-import com.google.example.library.v1.BookFromArchive;
-import com.google.example.library.v1.BookName;
-import com.google.example.library.v1.BookOneOfName;
-import com.google.example.library.v1.Comment;
-import com.google.example.library.v1.CreateBookRequest;
-import com.google.example.library.v1.CreateShelfRequest;
-import com.google.example.library.v1.DeleteBookRequest;
-import com.google.example.library.v1.DeleteShelfRequest;
-import com.google.example.library.v1.DiscussBookRequest;
-import com.google.example.library.v1.FindRelatedBooksRequest;
-import com.google.example.library.v1.FindRelatedBooksResponse;
-import com.google.example.library.v1.GetBigBookMetadata;
-import com.google.example.library.v1.GetBookFromAbsolutelyAnywhereRequest;
-import com.google.example.library.v1.GetBookFromAnywhereRequest;
-import com.google.example.library.v1.GetBookFromArchiveRequest;
-import com.google.example.library.v1.GetBookRequest;
-import com.google.example.library.v1.GetShelfRequest;
-import com.google.example.library.v1.ListBooksRequest;
-import com.google.example.library.v1.ListBooksResponse;
-import com.google.example.library.v1.ListShelvesRequest;
-import com.google.example.library.v1.ListShelvesResponse;
-import com.google.example.library.v1.ListStringsRequest;
-import com.google.example.library.v1.ListStringsResponse;
-import com.google.example.library.v1.MergeShelvesRequest;
-import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.PublishSeriesRequest;
-import com.google.example.library.v1.PublishSeriesResponse;
-import com.google.example.library.v1.SeriesUuid;
-import com.google.example.library.v1.Shelf;
-import com.google.example.library.v1.ShelfName;
-import com.google.example.library.v1.SomeMessage;
-import com.google.example.library.v1.StreamBooksRequest;
-import com.google.example.library.v1.StreamShelvesRequest;
-import com.google.example.library.v1.StreamShelvesResponse;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
 import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
 import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest.InnerMessage;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsResponse;
-import com.google.example.library.v1.UpdateBookIndexRequest;
-import com.google.example.library.v1.UpdateBookRequest;
+import com.google.example.library.v1.stub.LibraryServiceStub;
+import com.google.example.library.v1.stub.LibraryServiceStubSettings;
 import com.google.longrunning.Operation;
 import com.google.longrunning.OperationsClient;
 import com.google.protobuf.Any;
@@ -2655,7 +2613,7 @@ public class LibraryServiceClient implements BackgroundResource {
    *   GetBookRequest request = GetBookRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   OperationFuture&lt;Operation&gt; future = libraryServiceClient.getBigBookOperationCallable().futureCall(request);
+   *   OperationFuture&lt;Book, GetBigBookMetadata&gt; future = libraryServiceClient.getBigBookOperationCallable().futureCall(request);
    *   // Do something
    *   Book response = future.get();
    * }
@@ -2695,7 +2653,7 @@ public class LibraryServiceClient implements BackgroundResource {
    * <pre><code>
    * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
    *   BookName name = BookName.of("[SHELF_ID]", "[BOOK_ID]");
-   *   Empty response = libraryServiceClient.getBigNothingAsync(name).get();
+   *   libraryServiceClient.getBigNothingAsync(name).get();
    * }
    * </code></pre>
    *
@@ -2720,7 +2678,7 @@ public class LibraryServiceClient implements BackgroundResource {
    * <pre><code>
    * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
    *   BookName name = BookName.of("[SHELF_ID]", "[BOOK_ID]");
-   *   Empty response = libraryServiceClient.getBigNothingAsync(name.toString()).get();
+   *   libraryServiceClient.getBigNothingAsync(name.toString()).get();
    * }
    * </code></pre>
    *
@@ -2748,7 +2706,7 @@ public class LibraryServiceClient implements BackgroundResource {
    *   GetBookRequest request = GetBookRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   Empty response = libraryServiceClient.getBigNothingAsync(request).get();
+   *   libraryServiceClient.getBigNothingAsync(request).get();
    * }
    * </code></pre>
    *
@@ -2771,9 +2729,9 @@ public class LibraryServiceClient implements BackgroundResource {
    *   GetBookRequest request = GetBookRequest.newBuilder()
    *     .setName(name.toString())
    *     .build();
-   *   OperationFuture&lt;Operation&gt; future = libraryServiceClient.getBigNothingOperationCallable().futureCall(request);
+   *   OperationFuture&lt;Empty, GetBigBookMetadata&gt; future = libraryServiceClient.getBigNothingOperationCallable().futureCall(request);
    *   // Do something
-   *   Empty response = future.get();
+   *   future.get();
    * }
    * </code></pre>
    */
@@ -4016,9 +3974,9 @@ public class LibraryServiceClient implements BackgroundResource {
 
   }
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/LibraryServiceSettings.java ==============
+============== file: src/main/java/com/google/example/library/v1/LibraryServiceSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4032,7 +3990,7 @@ public class LibraryServiceClient implements BackgroundResource {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1;
+package com.google.example.library.v1;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -4068,53 +4026,16 @@ import com.google.api.gax.rpc.TransportChannelProvider;
 import com.google.api.gax.rpc.UnaryCallSettings;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.auth.Credentials;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
-import com.google.cloud.example.library.v1.stub.LibraryServiceStubSettings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.example.library.v1.AddCommentsRequest;
-import com.google.example.library.v1.Book;
-import com.google.example.library.v1.BookFromAnywhere;
-import com.google.example.library.v1.BookFromArchive;
-import com.google.example.library.v1.Comment;
-import com.google.example.library.v1.CreateBookRequest;
-import com.google.example.library.v1.CreateShelfRequest;
-import com.google.example.library.v1.DeleteBookRequest;
-import com.google.example.library.v1.DeleteShelfRequest;
-import com.google.example.library.v1.DiscussBookRequest;
-import com.google.example.library.v1.FindRelatedBooksRequest;
-import com.google.example.library.v1.FindRelatedBooksResponse;
-import com.google.example.library.v1.GetBigBookMetadata;
-import com.google.example.library.v1.GetBookFromAbsolutelyAnywhereRequest;
-import com.google.example.library.v1.GetBookFromAnywhereRequest;
-import com.google.example.library.v1.GetBookFromArchiveRequest;
-import com.google.example.library.v1.GetBookRequest;
-import com.google.example.library.v1.GetShelfRequest;
-import com.google.example.library.v1.LibraryServiceGrpc;
-import com.google.example.library.v1.ListBooksRequest;
-import com.google.example.library.v1.ListBooksResponse;
-import com.google.example.library.v1.ListShelvesRequest;
-import com.google.example.library.v1.ListShelvesResponse;
-import com.google.example.library.v1.ListStringsRequest;
-import com.google.example.library.v1.ListStringsResponse;
-import com.google.example.library.v1.MergeShelvesRequest;
-import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.PublishSeriesRequest;
-import com.google.example.library.v1.PublishSeriesResponse;
-import com.google.example.library.v1.Shelf;
-import com.google.example.library.v1.StreamBooksRequest;
-import com.google.example.library.v1.StreamShelvesRequest;
-import com.google.example.library.v1.StreamShelvesResponse;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsResponse;
-import com.google.example.library.v1.UpdateBookIndexRequest;
-import com.google.example.library.v1.UpdateBookRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
+import com.google.example.library.v1.stub.LibraryServiceStubSettings;
 import com.google.longrunning.Operation;
 import com.google.protobuf.Empty;
 import com.google.tagger.v1.TaggerProto.AddTagRequest;
@@ -4699,9 +4620,9 @@ public class LibraryServiceSettings extends ClientSettings<LibraryServiceSetting
     }
   }
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/package-info.java ==============
+============== file: src/main/java/com/google/example/library/v1/package-info.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4752,10 +4673,10 @@ public class LibraryServiceSettings extends ClientSettings<LibraryServiceSetting
  *
  */
 
-package com.google.cloud.example.library.v1;
-============== file: src/main/java/com/google/cloud/example/library/v1/stub/GrpcLibraryServiceCallableFactory.java ==============
+package com.google.example.library.v1;
+============== file: src/main/java/com/google/example/library/v1/stub/GrpcLibraryServiceCallableFactory.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4769,7 +4690,7 @@ package com.google.cloud.example.library.v1;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1.stub;
+package com.google.example.library.v1.stub;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -4792,11 +4713,6 @@ import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.StreamingCallSettings;
 import com.google.api.gax.rpc.UnaryCallSettings;
 import com.google.api.gax.rpc.UnaryCallable;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
-import com.google.cloud.example.library.v1.LibraryServiceSettings;
 import com.google.common.collect.ImmutableMap;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
@@ -4819,6 +4735,11 @@ import com.google.example.library.v1.GetBookFromAnywhereRequest;
 import com.google.example.library.v1.GetBookFromArchiveRequest;
 import com.google.example.library.v1.GetBookRequest;
 import com.google.example.library.v1.GetShelfRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
+import com.google.example.library.v1.LibraryServiceSettings;
 import com.google.example.library.v1.ListBooksRequest;
 import com.google.example.library.v1.ListBooksResponse;
 import com.google.example.library.v1.ListShelvesRequest;
@@ -4938,9 +4859,9 @@ public class GrpcLibraryServiceCallableFactory implements GrpcStubCallableFactor
     return GrpcCallableFactory.createClientStreamingCallable(grpcCallSettings, streamingCallSettings, clientContext);
   }
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/stub/GrpcLibraryServiceStub.java ==============
+============== file: src/main/java/com/google/example/library/v1/stub/GrpcLibraryServiceStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4954,7 +4875,7 @@ public class GrpcLibraryServiceCallableFactory implements GrpcStubCallableFactor
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1.stub;
+package com.google.example.library.v1.stub;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -4971,11 +4892,6 @@ import com.google.api.gax.rpc.OperationCallable;
 import com.google.api.gax.rpc.RequestParamsExtractor;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
-import com.google.cloud.example.library.v1.LibraryServiceSettings;
 import com.google.common.collect.ImmutableMap;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
@@ -4998,6 +4914,11 @@ import com.google.example.library.v1.GetBookFromAnywhereRequest;
 import com.google.example.library.v1.GetBookFromArchiveRequest;
 import com.google.example.library.v1.GetBookRequest;
 import com.google.example.library.v1.GetShelfRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
+import com.google.example.library.v1.LibraryServiceSettings;
 import com.google.example.library.v1.ListBooksRequest;
 import com.google.example.library.v1.ListBooksResponse;
 import com.google.example.library.v1.ListShelvesRequest;
@@ -5656,9 +5577,9 @@ public class GrpcLibraryServiceStub extends LibraryServiceStub {
   }
 
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/stub/LibraryServiceStub.java ==============
+============== file: src/main/java/com/google/example/library/v1/stub/LibraryServiceStub.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -5672,7 +5593,7 @@ public class GrpcLibraryServiceStub extends LibraryServiceStub {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1.stub;
+package com.google.example.library.v1.stub;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
@@ -5682,10 +5603,6 @@ import com.google.api.gax.rpc.ClientStreamingCallable;
 import com.google.api.gax.rpc.OperationCallable;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
 import com.google.example.library.v1.Book;
@@ -5707,6 +5624,10 @@ import com.google.example.library.v1.GetBookFromAnywhereRequest;
 import com.google.example.library.v1.GetBookFromArchiveRequest;
 import com.google.example.library.v1.GetBookRequest;
 import com.google.example.library.v1.GetShelfRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.example.library.v1.ListBooksRequest;
 import com.google.example.library.v1.ListBooksResponse;
 import com.google.example.library.v1.ListShelvesRequest;
@@ -5914,9 +5835,9 @@ public abstract class LibraryServiceStub implements BackgroundResource {
   @Override
   public abstract void close();
 }
-============== file: src/main/java/com/google/cloud/example/library/v1/stub/LibraryServiceStubSettings.java ==============
+============== file: src/main/java/com/google/example/library/v1/stub/LibraryServiceStubSettings.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -5930,7 +5851,7 @@ public abstract class LibraryServiceStub implements BackgroundResource {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1.stub;
+package com.google.example.library.v1.stub;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.ApiFuture;
@@ -5966,10 +5887,6 @@ import com.google.api.gax.rpc.TransportChannelProvider;
 import com.google.api.gax.rpc.UnaryCallSettings;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.auth.Credentials;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -5993,6 +5910,10 @@ import com.google.example.library.v1.GetBookFromAnywhereRequest;
 import com.google.example.library.v1.GetBookFromArchiveRequest;
 import com.google.example.library.v1.GetBookRequest;
 import com.google.example.library.v1.GetShelfRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.example.library.v1.LibraryServiceGrpc;
 import com.google.example.library.v1.ListBooksRequest;
 import com.google.example.library.v1.ListBooksResponse;
@@ -6909,13 +6830,13 @@ public class LibraryServiceStubSettings extends StubSettings<LibraryServiceStubS
           .setPollingAlgorithm(
               OperationTimedPollAlgorithm.create(
                   RetrySettings.newBuilder()
-                     .setInitialRetryDelay(Duration.ofMillis(3000L))
-                     .setRetryDelayMultiplier(1.3)
-                     .setMaxRetryDelay(Duration.ofMillis(60000L))
+                     .setInitialRetryDelay(Duration.ofMillis(500L))
+                     .setRetryDelayMultiplier(1.5)
+                     .setMaxRetryDelay(Duration.ofMillis(5000L))
                      .setInitialRpcTimeout(Duration.ZERO) // ignored
                      .setRpcTimeoutMultiplier(1.0) // ignored
                      .setMaxRpcTimeout(Duration.ZERO) // ignored
-                     .setTotalTimeout(Duration.ofMillis(600000L))
+                     .setTotalTimeout(Duration.ofMillis(300000L))
                      .build()));
       builder
           .getBigNothingOperationSettings()
@@ -6929,13 +6850,13 @@ public class LibraryServiceStubSettings extends StubSettings<LibraryServiceStubS
           .setPollingAlgorithm(
               OperationTimedPollAlgorithm.create(
                   RetrySettings.newBuilder()
-                     .setInitialRetryDelay(Duration.ofMillis(3000L))
-                     .setRetryDelayMultiplier(1.3)
-                     .setMaxRetryDelay(Duration.ofMillis(60000L))
+                     .setInitialRetryDelay(Duration.ofMillis(500L))
+                     .setRetryDelayMultiplier(1.5)
+                     .setMaxRetryDelay(Duration.ofMillis(5000L))
                      .setInitialRpcTimeout(Duration.ZERO) // ignored
                      .setRpcTimeoutMultiplier(1.0) // ignored
                      .setMaxRpcTimeout(Duration.ZERO) // ignored
-                     .setTotalTimeout(Duration.ofMillis(600000L))
+                     .setTotalTimeout(Duration.ofMillis(300000L))
                      .build()));
 
       return builder;
@@ -7236,9 +7157,9 @@ public class LibraryServiceStubSettings extends StubSettings<LibraryServiceStubS
     }
   }
 }
-============== file: src/test/java/com/google/cloud/example/library/v1/LibraryServiceClientTest.java ==============
+============== file: src/test/java/com/google/example/library/v1/LibraryServiceClientTest.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7252,7 +7173,7 @@ public class LibraryServiceStubSettings extends StubSettings<LibraryServiceStubS
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1;
+package com.google.example.library.v1;
 
 import com.google.api.gax.core.NoCredentialsProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
@@ -7267,57 +7188,13 @@ import com.google.api.gax.rpc.BidiStreamingCallable;
 import com.google.api.gax.rpc.InvalidArgumentException;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.StatusCode;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
-import static com.google.cloud.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.common.collect.Lists;
-import com.google.example.library.v1.AddCommentsRequest;
-import com.google.example.library.v1.ArchivedBookName;
-import com.google.example.library.v1.Book;
-import com.google.example.library.v1.BookFromAnywhere;
-import com.google.example.library.v1.BookFromArchive;
-import com.google.example.library.v1.BookName;
-import com.google.example.library.v1.BookOneOfName;
-import com.google.example.library.v1.BookOneOfNames;
-import com.google.example.library.v1.Comment;
-import com.google.example.library.v1.CreateBookRequest;
-import com.google.example.library.v1.CreateShelfRequest;
-import com.google.example.library.v1.DeleteBookRequest;
-import com.google.example.library.v1.DeleteShelfRequest;
-import com.google.example.library.v1.DeletedBookName;
-import com.google.example.library.v1.DiscussBookRequest;
-import com.google.example.library.v1.FindRelatedBooksRequest;
-import com.google.example.library.v1.FindRelatedBooksResponse;
-import com.google.example.library.v1.GetBookFromAbsolutelyAnywhereRequest;
-import com.google.example.library.v1.GetBookFromAnywhereRequest;
-import com.google.example.library.v1.GetBookFromArchiveRequest;
-import com.google.example.library.v1.GetBookRequest;
-import com.google.example.library.v1.GetShelfRequest;
-import com.google.example.library.v1.ListBooksRequest;
-import com.google.example.library.v1.ListBooksResponse;
-import com.google.example.library.v1.ListShelvesRequest;
-import com.google.example.library.v1.ListShelvesResponse;
-import com.google.example.library.v1.ListStringsRequest;
-import com.google.example.library.v1.ListStringsResponse;
-import com.google.example.library.v1.MergeShelvesRequest;
-import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.ProjectName;
-import com.google.example.library.v1.PublishSeriesRequest;
-import com.google.example.library.v1.PublishSeriesResponse;
-import com.google.example.library.v1.SeriesUuid;
-import com.google.example.library.v1.Shelf;
-import com.google.example.library.v1.ShelfName;
-import com.google.example.library.v1.SomeMessage;
-import com.google.example.library.v1.StreamBooksRequest;
-import com.google.example.library.v1.StreamShelvesRequest;
-import com.google.example.library.v1.StreamShelvesResponse;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
+import static com.google.example.library.v1.LibraryServiceClient.FindRelatedBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListBooksPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListShelvesPagedResponse;
+import static com.google.example.library.v1.LibraryServiceClient.ListStringsPagedResponse;
 import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
 import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest.InnerMessage;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsResponse;
-import com.google.example.library.v1.UpdateBookIndexRequest;
-import com.google.example.library.v1.UpdateBookRequest;
 import com.google.longrunning.Operation;
 import com.google.protobuf.Any;
 import com.google.protobuf.BoolValue;
@@ -9094,9 +8971,9 @@ public class LibraryServiceClientTest {
   }
 
 }
-============== file: src/test/java/com/google/cloud/example/library/v1/MockLibraryService.java ==============
+============== file: src/test/java/com/google/example/library/v1/MockLibraryService.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9110,7 +8987,7 @@ public class LibraryServiceClientTest {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1;
+package com.google.example.library.v1;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.grpc.testing.MockGrpcService;
@@ -9152,9 +9029,9 @@ public class MockLibraryService implements MockGrpcService  {
     serviceImpl.reset();
   }
 }
-============== file: src/test/java/com/google/cloud/example/library/v1/MockLibraryServiceImpl.java ==============
+============== file: src/test/java/com/google/example/library/v1/MockLibraryServiceImpl.java ==============
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -9168,46 +9045,11 @@ public class MockLibraryService implements MockGrpcService  {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.example.library.v1;
+package com.google.example.library.v1;
 
 import com.google.api.core.BetaApi;
 import com.google.common.collect.Lists;
-import com.google.example.library.v1.AddCommentsRequest;
-import com.google.example.library.v1.Book;
-import com.google.example.library.v1.BookFromAnywhere;
-import com.google.example.library.v1.BookFromArchive;
-import com.google.example.library.v1.Comment;
-import com.google.example.library.v1.CreateBookRequest;
-import com.google.example.library.v1.CreateShelfRequest;
-import com.google.example.library.v1.DeleteBookRequest;
-import com.google.example.library.v1.DeleteShelfRequest;
-import com.google.example.library.v1.DiscussBookRequest;
-import com.google.example.library.v1.FindRelatedBooksRequest;
-import com.google.example.library.v1.FindRelatedBooksResponse;
-import com.google.example.library.v1.GetBookFromAbsolutelyAnywhereRequest;
-import com.google.example.library.v1.GetBookFromAnywhereRequest;
-import com.google.example.library.v1.GetBookFromArchiveRequest;
-import com.google.example.library.v1.GetBookRequest;
-import com.google.example.library.v1.GetShelfRequest;
 import com.google.example.library.v1.LibraryServiceGrpc.LibraryServiceImplBase;
-import com.google.example.library.v1.ListBooksRequest;
-import com.google.example.library.v1.ListBooksResponse;
-import com.google.example.library.v1.ListShelvesRequest;
-import com.google.example.library.v1.ListShelvesResponse;
-import com.google.example.library.v1.ListStringsRequest;
-import com.google.example.library.v1.ListStringsResponse;
-import com.google.example.library.v1.MergeShelvesRequest;
-import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.PublishSeriesRequest;
-import com.google.example.library.v1.PublishSeriesResponse;
-import com.google.example.library.v1.Shelf;
-import com.google.example.library.v1.StreamBooksRequest;
-import com.google.example.library.v1.StreamShelvesRequest;
-import com.google.example.library.v1.StreamShelvesResponse;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsRequest;
-import com.google.example.library.v1.TestOptionalRequiredFlatteningParamsResponse;
-import com.google.example.library.v1.UpdateBookIndexRequest;
-import com.google.example.library.v1.UpdateBookRequest;
 import com.google.longrunning.Operation;
 import com.google.protobuf.Empty;
 import com.google.protobuf.GeneratedMessageV3;

@@ -14,6 +14,7 @@
  */
 package com.google.api.codegen.transformer;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.api.codegen.config.FieldConfig;
@@ -23,6 +24,7 @@ import com.google.api.codegen.config.ResourceNameOneofConfig;
 import com.google.api.codegen.config.ResourceNameType;
 import com.google.api.codegen.config.SingleResourceNameConfig;
 import com.google.api.codegen.config.TypeModel;
+import com.google.api.codegen.metacode.FieldStructureParser;
 import com.google.api.codegen.metacode.InitCodeContext;
 import com.google.api.codegen.metacode.InitCodeContext.InitCodeOutputType;
 import com.google.api.codegen.metacode.InitCodeLineType;
@@ -30,6 +32,7 @@ import com.google.api.codegen.metacode.InitCodeNode;
 import com.google.api.codegen.metacode.InitValue;
 import com.google.api.codegen.metacode.InitValueConfig;
 import com.google.api.codegen.util.Name;
+import com.google.api.codegen.util.Scanner;
 import com.google.api.codegen.util.SymbolTable;
 import com.google.api.codegen.util.testing.TestValueGenerator;
 import com.google.api.codegen.viewmodel.FieldSettingView;
@@ -52,10 +55,12 @@ import com.google.api.codegen.viewmodel.testing.ClientTestAssertView;
 import com.google.api.pathtemplate.PathTemplate;
 import com.google.api.tools.framework.model.TypeRef;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -253,7 +258,7 @@ public class InitCodeTransformer {
         context,
         orderedItems,
         ImmutableList.copyOf(root.getChildren().values()),
-        subTrees(root, initCodeContext.sampleArgStrings()));
+        sampleFuncParams(root, initCodeContext.sampleArgStrings()));
   }
 
   private InitCodeView buildInitCodeViewRequestObject(
@@ -263,11 +268,33 @@ public class InitCodeTransformer {
         context,
         root.listInInitializationOrder(),
         ImmutableList.of(root),
-        subTrees(root, initCodeContext.sampleArgStrings()));
+        sampleFuncParams(root, initCodeContext.sampleArgStrings()));
   }
 
-  private List<InitCodeNode> subTrees(InitCodeNode root, List<String> paths) {
-    return paths.stream().map(path -> root.subTree(path)).collect(ImmutableList.toImmutableList());
+  /**
+   * Returns all the nodes to be rendered as sample function parameters.
+   *
+   * <p>If path is:
+   * <li>a normal node, returns that node.
+   * <li>a ReadFile node, returns the child node of that node.
+   * <li>a resource path, returns the child node whose key equals the entity name in the path.
+   */
+  private List<InitCodeNode> sampleFuncParams(InitCodeNode root, List<String> paths) {
+    List<InitCodeNode> params = new ArrayList<>();
+    for (String path : paths) {
+      Scanner scanner = new Scanner(path);
+      InitCodeNode node = FieldStructureParser.parsePath(root, scanner);
+      int token = scanner.lastToken();
+      if (token == '%') {
+        scanner.scan();
+        params.add(node.getChildren().get(scanner.tokenStr()));
+      } else if (node.getLineType() == InitCodeLineType.ReadFileInitLine) {
+        params.add(node.getChildren().get(InitCodeNode.FILE_NAME_KEY));
+      } else {
+        params.add(node);
+      }
+    }
+    return params;
   }
 
   /**
@@ -281,6 +308,11 @@ public class InitCodeTransformer {
     // that reference the same nodes.
     HashMap<InitCodeNode, String> refFrom = new HashMap<>();
 
+    // Keep track of the resource name entities. Configuring an entity twice or configuring an
+    // entity and the parent node at the same time will cause collision. Configuring two different
+    // entities will not.
+    Multimap<InitCodeNode, String> nodeEntities = HashMultimap.create();
+
     // Below we'll perform depth-first search, keep a list of nodes we've seen but have not
     // descended into. It doesn't really matter if we search breath- or depth-first; DFS is a little
     // more efficient on average.
@@ -288,12 +320,32 @@ public class InitCodeTransformer {
 
     for (String path : paths) {
       subNodes.add(root.subTree(path));
+      String entity = FieldStructureParser.parseEntityName(path);
       while (!subNodes.isEmpty()) {
         InitCodeNode node = subNodes.pollLast();
         String oldPath = refFrom.put(node, path);
-        if (oldPath != null) {
-          throw new IllegalArgumentException(
-              String.format("SampleInitAttribute %s overlaps with %s", oldPath, path));
+        if (oldPath == null) {
+          // The node has not been specified before, thus check if entity has been specified
+          checkArgument(
+              entity == null || nodeEntities.put(node, entity),
+              "Entity %s in path %s specified multiple times",
+              entity,
+              path);
+        } else {
+          // The node has been specified before. The will be no overlap if and only if:
+          // All previous paths are configuring entities
+          // This path is configuraing an entity
+          // The same entity is never specified before
+          checkArgument(
+              entity != null && nodeEntities.containsKey(node),
+              "SampleInitAttribute %s overlaps with %s",
+              oldPath,
+              path);
+          checkArgument(
+              nodeEntities.put(node, entity),
+              "Entity %s in path %s specified multiple times",
+              entity,
+              path);
         }
         subNodes.addAll(node.getChildren().values());
       }
@@ -362,15 +414,22 @@ public class InitCodeTransformer {
 
   private List<InitCodeLineView> generateSurfaceInitCodeLines(
       MethodContext context, Iterable<InitCodeNode> specItemNode) {
+    boolean isFirstReadFileView = true;
     List<InitCodeLineView> surfaceLines = new ArrayList<>();
     for (InitCodeNode item : specItemNode) {
-      surfaceLines.add(generateSurfaceInitCodeLine(context, item, surfaceLines.isEmpty()));
+      surfaceLines.add(
+          generateSurfaceInitCodeLine(context, item, surfaceLines.isEmpty(), isFirstReadFileView));
+      isFirstReadFileView =
+          isFirstReadFileView && item.getLineType() != InitCodeLineType.ReadFileInitLine;
     }
     return surfaceLines;
   }
 
   private InitCodeLineView generateSurfaceInitCodeLine(
-      MethodContext context, InitCodeNode specItemNode, boolean isFirstItem) {
+      MethodContext context,
+      InitCodeNode specItemNode,
+      boolean isFirstItem,
+      boolean isFirstReadFileView) {
     switch (specItemNode.getLineType()) {
       case StructureInitLine:
         return generateStructureInitCodeLine(context, specItemNode);
@@ -381,7 +440,7 @@ public class InitCodeTransformer {
       case MapInitLine:
         return generateMapInitCodeLine(context, specItemNode);
       case ReadFileInitLine:
-        return generateReadFileInitCodeLine(context, specItemNode);
+        return generateReadFileInitCodeLine(context, specItemNode, isFirstReadFileView);
       default:
         throw new RuntimeException("unhandled line type: " + specItemNode.getLineType());
     }
@@ -453,7 +512,7 @@ public class InitCodeTransformer {
     List<InitCodeLineView> elements = new ArrayList<>();
     for (InitCodeNode child : item.getChildren().values()) {
       entries.add(namer.localVarName(child.getIdentifier()));
-      elements.add(generateSurfaceInitCodeLine(context, child, elements.isEmpty()));
+      elements.add(generateSurfaceInitCodeLine(context, child, elements.isEmpty(), false));
     }
     surfaceLine.elementIdentifiers(entries);
     surfaceLine.elements(elements);
@@ -477,7 +536,8 @@ public class InitCodeTransformer {
       MapEntryView.Builder mapEntry = MapEntryView.newBuilder();
       mapEntry.key(typeTable.renderPrimitiveValue(item.getType().getMapKeyType(), entry.getKey()));
       mapEntry.valueString(context.getNamer().localVarName(entry.getValue().getIdentifier()));
-      mapEntry.value(generateSurfaceInitCodeLine(context, entry.getValue(), entries.isEmpty()));
+      mapEntry.value(
+          generateSurfaceInitCodeLine(context, entry.getValue(), entries.isEmpty(), false));
       entries.add(mapEntry.build());
     }
     surfaceLine.initEntries(entries);
@@ -486,7 +546,12 @@ public class InitCodeTransformer {
   }
 
   // TODO(hzyi): generate necessary imports
-  private InitCodeLineView generateReadFileInitCodeLine(MethodContext context, InitCodeNode item) {
+  /**
+   * @param isFirstReadFileView Used in Java. We need to reuse local variables "path" and "data" if
+   *     we have rendered ReadFileViews before so that we don't declare them twice.
+   */
+  private InitCodeLineView generateReadFileInitCodeLine(
+      MethodContext context, InitCodeNode item, boolean isFirstReadFileView) {
     ReadFileInitCodeLineView.Builder surfaceLine = ReadFileInitCodeLineView.newBuilder();
     SurfaceNamer namer = context.getNamer();
     ImportTypeTable typeTable = context.getTypeTable();
@@ -515,6 +580,7 @@ public class InitCodeTransformer {
     return surfaceLine
         .identifier(namer.localVarName(item.getIdentifier()))
         .fileName(SimpleInitValueView.newBuilder().initialValue(value).build())
+        .isFirstReadFileView(isFirstReadFileView)
         .build();
   }
 
@@ -703,7 +769,12 @@ public class InitCodeTransformer {
             entityValue = context.getNamer().injectRandomStringGeneratorCode(initValue.getValue());
             break;
           case Literal:
-            entityValue = initValue.getValue();
+            entityValue =
+                context
+                    .getTypeTable()
+                    .renderPrimitiveValue(
+                        ProtoTypeRef.create(TypeRef.fromPrimitiveName("string")),
+                        initValue.getValue());
             break;
           default:
             throw new IllegalArgumentException("Unhandled init value type");
@@ -736,7 +807,8 @@ public class InitCodeTransformer {
           namer.getFieldGetFunctionName(item.getType(), Name.anyLower(item.getVarName())));
 
       fieldSetting.identifier(getVariableName(context, item));
-      fieldSetting.initCodeLine(generateSurfaceInitCodeLine(context, item, allSettings.isEmpty()));
+      fieldSetting.initCodeLine(
+          generateSurfaceInitCodeLine(context, item, allSettings.isEmpty(), false));
       fieldSetting.fieldName(context.getNamer().publicFieldName(Name.anyLower(item.getVarName())));
 
       fieldSetting.isMap(item.getType().isMap());

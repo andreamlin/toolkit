@@ -111,6 +111,11 @@ public class DiscoveryField implements FieldModel, TypeModel {
     return new DiscoveryField(schema, rootApiModel);
   }
 
+  /** @return the JSON identifier for this field, unchanged from the Discovery doc. */
+  public String getRawName() {
+    return originalSchema.getIdentifier();
+  }
+
   /** @return the underlying dereferenced Discovery Schema. */
   public Schema getDiscoveryField() {
     return schema;
@@ -188,7 +193,7 @@ public class DiscoveryField implements FieldModel, TypeModel {
 
   @Override
   public boolean isRepeated() {
-    return schema.type() == Type.ARRAY;
+    return schema.isRepeated();
   }
 
   @Override
