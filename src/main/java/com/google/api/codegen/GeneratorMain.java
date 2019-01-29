@@ -30,6 +30,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 // Example usage: (assuming environment variable BASE is the base directory of the project
 // containing the YAMLs, descriptor set, and output)
@@ -243,7 +244,8 @@ public class GeneratorMain {
     System.exit(exitCode);
   }
 
-  public static ToolOptions createCodeGeneratorOptions(String[] args) throws Exception {
+  // TODO(andrealin): catch exception instead of throwing from method signature
+  public static ToolOptions createCodeGeneratorOptions(String[] args) throws ParseException {
     Options options = new Options();
     options.addOption("h", "help", false, "show usage");
     options.addOption(DESCRIPTOR_SET_OPTION);

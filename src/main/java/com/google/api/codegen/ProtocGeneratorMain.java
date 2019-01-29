@@ -28,19 +28,39 @@ import com.google.protobuf.compiler.PluginProtos;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorRequest;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.cli.ParseException;
 
 /** Entrypoint for protoc-invoked generation. */
 public class ProtocGeneratorMain {
 
   private static final ArtifactType DEFAULT_ARTIFACT_TYPE = GAPIC_CODE;
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
 
-    CodeGeneratorRequest request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+    System.err.println("Main!");
+
+    CodeGeneratorRequest request;
+    try {
+      request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+    } catch (IOException e) {
+      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
+      System.exit(1);
+      return;
+    }
+
+    if (request != null) {
+      System.err.println(request.toString());
+      System.exit(1);
+      return;
+    } else {
+      System.err.println("request object null");
+    }
     CodeGeneratorResponse response;
     int exitCode;
     try {
@@ -63,7 +83,14 @@ public class ProtocGeneratorMain {
       response = PluginProtos.CodeGeneratorResponse.newBuilder().setError(sw.toString()).build();
       exitCode = 1;
     }
-    response.writeTo(System.out);
+
+    try {
+      response.writeTo(System.out);
+    } catch (IOException e) {
+      exitCode = 1;
+      System.err.println("Failed to write out CodeGeneratorResponse.");
+    }
+
     System.out.flush();
     System.exit(exitCode);
   }
@@ -75,7 +102,14 @@ public class ProtocGeneratorMain {
         FileDescriptorSet.newBuilder().addAllFile(fileDescriptorProtoList).build();
 
     // Write out DescriptorSet to temp file.
-    File descriptorSetFile = File.createTempFile("api", ".desc");
+    File descriptorSetFile;
+
+    descriptorSetFile = File.createTempFile("api", ".desc");
+    FileOutputStream fileoutput = new FileOutputStream(descriptorSetFile);
+    descriptorSet.writeTo(fileoutput);
+    fileoutput.close();
+    descriptorSetFile.deleteOnExit();
+
 
     List<String> parsedArgs = new LinkedList<>();
 
