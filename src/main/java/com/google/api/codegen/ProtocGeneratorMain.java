@@ -30,10 +30,12 @@ import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /** Entrypoint for protoc-invoked generation. */
 public class ProtocGeneratorMain {
@@ -42,38 +44,16 @@ public class ProtocGeneratorMain {
 
   public static void main(String[] args) {
 
-    System.err.println("Main!");
+    System.err.println("Main!!");
 
-    CodeGeneratorRequest request;
-    try {
-      request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
-    } catch (IOException e) {
-      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
-      System.exit(1);
-      return;
-    }
-
-    if (request != null) {
-      System.err.println(request.toString());
-      System.exit(1);
-      return;
-    } else {
-      System.err.println("request object null");
-    }
     CodeGeneratorResponse response;
-    int exitCode;
+    int exitCode = 0;
     try {
-
-      ToolOptions toolOptions = parseOptions(request);
-
-      GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, true);
-
-      exitCode = codeGen.run();
-      response = codeGen.getCodeGeneratorProtoResponse();
+      response = generate(System.in);
       if (response == null) {
-        throw new RuntimeException(collectDiags(codeGen));
+        System.err.println("Failed to generate code.");
+        System.exit(1);
       }
-      System.exit(exitCode);
     } catch (Exception e) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter(sw);
@@ -92,6 +72,47 @@ public class ProtocGeneratorMain {
 
     System.out.flush();
     System.exit(exitCode);
+  }
+
+  @VisibleForTesting
+  @Nullable
+  // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
+  // CodeGeneratorResponse.
+  static CodeGeneratorResponse generate(InputStream inputStream) {
+    CodeGeneratorRequest request;
+    try {
+      request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+    } catch (IOException e) {
+      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
+      System.exit(1);
+      return null;
+    }
+
+    if (request != null) {
+      System.err.println(String.format("INput foudn, # files = %s", request.getProtoFileCount()));
+      System.err.println(request.toString());
+    } else {
+      System.err.println("request object null");
+      return null;
+    }
+
+    try {
+      ToolOptions toolOptions = parseOptions(request);
+
+      GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, true);
+
+      CodeGeneratorResponse response = codeGen.getCodeGeneratorProtoResponse();
+      if (response == null) {
+        throw new RuntimeException(collectDiags(codeGen));
+      }
+      return response;
+    } catch (Exception e) {
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
+      e.printStackTrace(pw);
+      pw.flush();
+      return PluginProtos.CodeGeneratorResponse.newBuilder().setError(sw.toString()).build();
+    }
   }
 
   @VisibleForTesting
