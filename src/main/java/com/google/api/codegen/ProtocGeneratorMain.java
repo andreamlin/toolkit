@@ -22,6 +22,7 @@ import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.tools.ToolOptions;
 import com.google.api.tools.framework.tools.ToolUtil;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Strings;
 import com.google.protobuf.DescriptorProtos.FileDescriptorProto;
 import com.google.protobuf.DescriptorProtos.FileDescriptorSet;
 import com.google.protobuf.compiler.PluginProtos;
@@ -78,10 +79,10 @@ public class ProtocGeneratorMain {
   @Nullable
   // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
   // CodeGeneratorResponse.
-  static CodeGeneratorResponse generate(InputStream inputStream) {
+  public static CodeGeneratorResponse generate(InputStream inputStream) {
     CodeGeneratorRequest request;
     try {
-      request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+      request = PluginProtos.CodeGeneratorRequest.parseFrom(inputStream);
     } catch (IOException e) {
       System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
       System.exit(1);
@@ -131,13 +132,17 @@ public class ProtocGeneratorMain {
     descriptorSetFile.deleteOnExit();
 
     List<String> parsedArgs = new LinkedList<>();
+    parsedArgs.add("--descriptor_set");
+    parsedArgs.add(descriptorSetFile.getAbsolutePath());
+
+    // Can we assume there will only be one proto package?
+    parsedArgs.add("--package");
+    parsedArgs.add(request.getProtoFile(0).getPackage());
 
     // Parse plugin params, ignoring unknown params.
     String[] requestArgs = request.getParameter().split(",");
     for (String arg : requestArgs) {
-      if (arg.startsWith("descriptor=")) {
-        arg = String.format("descriptor=%s", descriptorSetFile.getAbsolutePath());
-      }
+      if (Strings.isNullOrEmpty(arg)) continue;
       parsedArgs.add("--" + arg);
       // String[] keyValues = arg.split("=");
       // parsedArgs.add("--" + keyValues[0]);

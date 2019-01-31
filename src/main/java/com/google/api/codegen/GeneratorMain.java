@@ -250,12 +250,13 @@ public class GeneratorMain {
     options.addOption("h", "help", false, "show usage");
     options.addOption(DESCRIPTOR_SET_OPTION);
     options.addOption(SERVICE_YAML_NONREQUIRED_OPTION);
-    // TODO make required after artman passes this in
-    options.addOption(LANGUAGE_NONREQUIRED_OPTION);
+    options.addOption(LANGUAGE_OPTION);
     options.addOption(GAPIC_YAML_NONREQUIRED_OPTION);
     options.addOption(PACKAGE_YAML2_OPTION);
     options.addOption(TARGET_API_PROTO_PACKAGE);
-    options.addOption(OUTPUT_OPTION);
+
+    // No output option needs to be specified.
+
     options.addOption(ENABLED_ARTIFACTS_OPTION);
     options.addOption(DEV_SAMPLES_OPTION);
 
@@ -276,7 +277,7 @@ public class GeneratorMain {
     toolOptions.set(
         GapicGeneratorApp.PROTO_PACKAGE, cl.getOptionValue(TARGET_API_PROTO_PACKAGE.getLongOpt()));
     toolOptions.set(
-        GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_NONREQUIRED_OPTION.getLongOpt()));
+        GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_OPTION.getLongOpt()));
     toolOptions.set(
         GapicGeneratorApp.OUTPUT_FILE, cl.getOptionValue(OUTPUT_OPTION.getLongOpt(), ""));
     toolOptions.set(
