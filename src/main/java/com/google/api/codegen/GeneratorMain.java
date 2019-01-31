@@ -276,8 +276,7 @@ public class GeneratorMain {
 
     toolOptions.set(
         GapicGeneratorApp.PROTO_PACKAGE, cl.getOptionValue(TARGET_API_PROTO_PACKAGE.getLongOpt()));
-    toolOptions.set(
-        GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_OPTION.getLongOpt()));
+    toolOptions.set(GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_OPTION.getLongOpt()));
     toolOptions.set(
         GapicGeneratorApp.OUTPUT_FILE, cl.getOptionValue(OUTPUT_OPTION.getLongOpt(), ""));
     toolOptions.set(

@@ -36,7 +36,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.Nullable;
 
 /** Entrypoint for protoc-invoked generation. */
 public class ProtocGeneratorMain {
@@ -76,7 +75,6 @@ public class ProtocGeneratorMain {
   }
 
   @VisibleForTesting
-  @Nullable
   // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
   // CodeGeneratorResponse.
   public static CodeGeneratorResponse generate(InputStream inputStream) {
@@ -89,20 +87,12 @@ public class ProtocGeneratorMain {
       return null;
     }
 
-    if (request != null) {
-      System.err.println(String.format("INput foudn, # files = %s", request.getProtoFileCount()));
-      System.err.println(request.toString());
-    } else {
-      System.err.println("request object null");
-      return null;
-    }
-
     try {
       ToolOptions toolOptions = parseOptions(request);
 
       GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, true);
 
-      int exitCode = codeGen.run();
+      codeGen.run();
       CodeGeneratorResponse response = codeGen.getCodeGeneratorProtoResponse();
       if (response == null) {
         throw new RuntimeException(collectDiags(codeGen));
@@ -117,8 +107,7 @@ public class ProtocGeneratorMain {
     }
   }
 
-  @VisibleForTesting
-  static ToolOptions parseOptions(CodeGeneratorRequest request) throws Exception {
+  private static ToolOptions parseOptions(CodeGeneratorRequest request) throws Exception {
     List<FileDescriptorProto> fileDescriptorProtoList = request.getProtoFileList();
     FileDescriptorSet descriptorSet =
         FileDescriptorSet.newBuilder().addAllFile(fileDescriptorProtoList).build();
@@ -136,9 +125,16 @@ public class ProtocGeneratorMain {
     parsedArgs.add("--descriptor_set");
     parsedArgs.add(descriptorSetFile.getAbsolutePath());
 
-    // Can we assume there will only be one proto package?
+    // For now, assume there will only be one proto package to be generated.
     String firstFiletoGenerate = request.getFileToGenerate(0);
-    String protoPackage = request.getProtoFileList().stream().filter(f -> f.getName().equals(firstFiletoGenerate)).findAny().get().getPackage();
+    String protoPackage =
+        request
+            .getProtoFileList()
+            .stream()
+            .filter(f -> f.getName().equals(firstFiletoGenerate))
+            .findAny()
+            .get()
+            .getPackage();
     parsedArgs.add("--package");
     parsedArgs.add(protoPackage);
 
@@ -147,18 +143,12 @@ public class ProtocGeneratorMain {
     for (String arg : requestArgs) {
       if (Strings.isNullOrEmpty(arg)) continue;
       parsedArgs.add("--" + arg);
-      // String[] keyValues = arg.split("=");
-      // parsedArgs.add("--" + keyValues[0]);
-      // if (keyValues.length > 1) {
-      //   parsedArgs.add();
-      // }
     }
 
     String[] argsArray = parsedArgs.toArray(new String[] {});
 
     return createCodeGeneratorOptions(argsArray);
   }
-
 
   private static String collectDiags(GapicGeneratorApp app) {
     StringBuilder stringBuilder = new StringBuilder();
