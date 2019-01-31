@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -31,33 +32,24 @@ public class ProtocGapicPluginGeneratorTest {
   @ClassRule
   public static TemporaryFolder tempDir = new TemporaryFolder();
 
-  private static ProtoFile libraryProtoFile;
-
   @BeforeClass
   public static void startUp() {
-    // Load and parse protofile.
-
     testDataLocator = TestDataLocator.create(GapicCodeGeneratorAnnotationsTest.class);
     testDataLocator.addTestDataSource(CodegenTestUtil.class, "testsrc/common");
 
     model =
         CodegenTestUtil.readModel(
             testDataLocator, tempDir, protoFiles, new String[]{});
-
-    libraryProtoFile =
-        model
-            .getFiles()
-            .stream()
-            .filter(f -> f.getSimpleName().equals("multiple_services.proto"))
-            .findFirst()
-            .get();
   }
 
     @Test
   public void testGenerator() throws IOException {
     CodeGeneratorRequest codeGeneratorRequest = CodeGeneratorRequest
         .newBuilder()
-        .addProtoFile(libraryProtoFile.getProto())
+        // All proto files, including dependencies
+        .addAllProtoFile(model.getFiles().stream().map(ProtoFile::getProto).collect(Collectors.toList()))
+        // Only the file to generate a client for (don't generate dependencies)
+        .addFileToGenerate("multiple_services.proto")
         .setParameter("language=java")
         .build();
 
@@ -67,7 +59,9 @@ public class ProtocGapicPluginGeneratorTest {
 
     CodeGeneratorResponse response = ProtocGeneratorMain.generate(inputStream);
 
+    // TODO(andrealin): Look into setting these up as baseline files.
     Truth.assertThat(response).isNotNull();
-    Truth.assertThat(response.getFileCount()).isGreaterThan(0);
+    Truth.assertThat(response.getFileCount()).isEqualTo(15);
+    Truth.assertThat(response.getFile(0).getContent()).contains("DecrementerServiceClient");
   }
 }

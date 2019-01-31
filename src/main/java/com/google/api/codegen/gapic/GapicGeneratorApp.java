@@ -196,7 +196,6 @@ public class GapicGeneratorApp extends ToolDriverBase {
       return;
     }
 
-    String outputPath = options.get(OUTPUT_FILE);
     ArtifactFlags artifactFlags = new ArtifactFlags(options.get(ENABLED_ARTIFACTS), artifactType);
     List<CodeGenerator<?>> generators =
         GapicGeneratorFactory.create(
@@ -216,6 +215,7 @@ public class GapicGeneratorApp extends ToolDriverBase {
     if (writeAsProtoResponse) {
       this.codeGeneratorProtoResponse = writeCodeGenOutputToProtoc(outputFiles.build());
     } else {
+      String outputPath = options.get(OUTPUT_FILE);
       writeCodeGenOutputToFiles(outputFiles.build(), executables.build(), outputPath);
     }
   }

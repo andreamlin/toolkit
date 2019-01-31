@@ -102,6 +102,7 @@ public class ProtocGeneratorMain {
 
       GapicGeneratorApp codeGen = new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, true);
 
+      int exitCode = codeGen.run();
       CodeGeneratorResponse response = codeGen.getCodeGeneratorProtoResponse();
       if (response == null) {
         throw new RuntimeException(collectDiags(codeGen));
@@ -136,8 +137,10 @@ public class ProtocGeneratorMain {
     parsedArgs.add(descriptorSetFile.getAbsolutePath());
 
     // Can we assume there will only be one proto package?
+    String firstFiletoGenerate = request.getFileToGenerate(0);
+    String protoPackage = request.getProtoFileList().stream().filter(f -> f.getName().equals(firstFiletoGenerate)).findAny().get().getPackage();
     parsedArgs.add("--package");
-    parsedArgs.add(request.getProtoFile(0).getPackage());
+    parsedArgs.add(protoPackage);
 
     // Parse plugin params, ignoring unknown params.
     String[] requestArgs = request.getParameter().split(",");
@@ -155,6 +158,7 @@ public class ProtocGeneratorMain {
 
     return createCodeGeneratorOptions(argsArray);
   }
+
 
   private static String collectDiags(GapicGeneratorApp app) {
     StringBuilder stringBuilder = new StringBuilder();
