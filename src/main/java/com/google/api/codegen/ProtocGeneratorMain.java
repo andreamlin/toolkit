@@ -37,7 +37,10 @@ import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 
-/** Entrypoint for protoc-invoked generation. */
+/**
+ * Entrypoint for protoc-plugin invoked generation. Protoc passes input via std.in as a serialized
+ * CodeGeneratorRequest, and expects to read a CodeGeneratorResponse from std.out.
+ */
 public class ProtocGeneratorMain {
 
   private static final ArtifactType DEFAULT_ARTIFACT_TYPE = GAPIC_CODE;
