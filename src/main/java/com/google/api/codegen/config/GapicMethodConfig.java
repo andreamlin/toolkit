@@ -241,7 +241,7 @@ public abstract class GapicMethodConfig extends MethodConfig {
     }
 
     List<String> headerRequestParams =
-        ImmutableList.copyOf(methodConfigProto.getHeaderRequestParamsList());
+        findHeaderRequestParams(methodConfigProto, method, protoParser);
 
     if (error) {
       return null;
@@ -267,6 +267,18 @@ public abstract class GapicMethodConfig extends MethodConfig {
           longRunningConfig,
           headerRequestParams);
     }
+  }
+
+  private static List<String> findHeaderRequestParams(
+      MethodConfigProto methodConfigProto, Method method, ProtoParser protoParser) {
+    List<String> headerRequestParams =
+        ImmutableList.copyOf(methodConfigProto.getHeaderRequestParamsList());
+
+    if (!headerRequestParams.isEmpty()) {
+      return headerRequestParams;
+    }
+    // Fetch header params from the proto annotations.
+    return protoParser.getHeaderParams(method).asList();
   }
 
   @VisibleForTesting
