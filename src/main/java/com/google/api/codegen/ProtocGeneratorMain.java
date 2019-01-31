@@ -34,7 +34,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.commons.cli.ParseException;
 
 /** Entrypoint for protoc-invoked generation. */
 public class ProtocGeneratorMain {
@@ -109,7 +108,6 @@ public class ProtocGeneratorMain {
     descriptorSet.writeTo(fileoutput);
     fileoutput.close();
     descriptorSetFile.deleteOnExit();
-
 
     List<String> parsedArgs = new LinkedList<>();
 
