@@ -90,7 +90,6 @@ public class ProtocGapicPluginGeneratorTest {
 
     CodeGeneratorResponse response = ProtocGeneratorMain.generate(inputStream);
 
-    // TODO(andrealin): Look into setting these up as baseline files.
     Truth.assertThat(response).isNotNull();
     Truth.assertThat(response.getError()).isNotEmpty();
   }

@@ -29,16 +29,15 @@ public class ProtoModels {
 
   /** Gets the interfaces for the apis in the service config. */
   public static List<Interface> getInterfaces(Model model) {
-    List<Interface> interfacesFromServiceConfig =
-        model
-            .getServiceConfig()
-            .getApisList()
-            .stream()
-            .map(api -> model.getSymbolTable().lookupInterface(api.getName()))
-            .collect(ImmutableList.toImmutableList());
-
-    if (interfacesFromServiceConfig.isEmpty()) {
+    if (model.getServiceConfig().getApisCount() == 0) {
+      // A valid service config was not given.
       return model.getSymbolTable().getInterfaces().asList();
-    } else return interfacesFromServiceConfig;
+    }
+    return model
+        .getServiceConfig()
+        .getApisList()
+        .stream()
+        .map(api -> model.getSymbolTable().lookupInterface(api.getName()))
+        .collect(ImmutableList.toImmutableList());
   }
 }

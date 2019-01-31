@@ -244,7 +244,6 @@ public class GeneratorMain {
     System.exit(exitCode);
   }
 
-  // TODO(andrealin): catch exception instead of throwing from method signature
   public static ToolOptions createCodeGeneratorOptions(String[] args) throws ParseException {
     Options options = new Options();
     options.addOption("h", "help", false, "show usage");
@@ -254,11 +253,10 @@ public class GeneratorMain {
     options.addOption(GAPIC_YAML_NONREQUIRED_OPTION);
     options.addOption(PACKAGE_YAML2_OPTION);
     options.addOption(TARGET_API_PROTO_PACKAGE);
-
-    // No output option needs to be specified.
-
     options.addOption(ENABLED_ARTIFACTS_OPTION);
     options.addOption(DEV_SAMPLES_OPTION);
+
+    // No output option needs to be specified for output file; output is a CodeGenerateResponse.
 
     CommandLine cl = (new DefaultParser()).parse(options, args);
     if (cl.hasOption("help")) {
