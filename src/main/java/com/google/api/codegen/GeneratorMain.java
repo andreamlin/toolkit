@@ -262,7 +262,6 @@ public class GeneratorMain {
         ToolOptions.DESCRIPTOR_SET, cl.getOptionValue(DESCRIPTOR_SET_OPTION.getLongOpt()));
 
     // TODO(andrealin): Write system tests to ensure at least one option given.
-    checkAtLeastOneOption(cl, SERVICE_YAML_NONREQUIRED_OPTION, TARGET_API_PROTO_PACKAGE);
     checkAtLeastOneOption(cl, GAPIC_YAML_NONREQUIRED_OPTION, TARGET_API_PROTO_PACKAGE);
 
     toolOptions.set(

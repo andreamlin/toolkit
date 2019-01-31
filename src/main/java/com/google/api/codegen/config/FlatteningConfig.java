@@ -145,15 +145,6 @@ public abstract class FlatteningConfig {
   /**
    * Returns a map of a string representing a list of the fields in a flattening, to the flattening
    * config created from a method from the proto file.
-   *
-   * <p>Two flattenings are semantically equivalent if they have the same ordered list of
-   * parameters. If there is a flattening defined in the proto-sourced method that is equivalent to
-   * a flattening defined in the GAPIC config for that method, then don't generate a
-   * FlatteningConfig from the protofile-based method. (The FlatteningConfig will be separately
-   * generated from the GAPIC config in {@link #createFlatteningsFromGapicConfig(DiagCollector,
-   * ResourceNameMessageConfigs, ImmutableMap, MethodConfigProto, MethodModel)}
-   * flatteningConfigsFromGapicConfig}). This preserves the status of GAPIC config as an
-   * unoverrideable source of truth.
    */
   @Nullable
   private static Map<String, FlatteningConfig> createFlatteningConfigsFromProtoFile(
@@ -161,32 +152,14 @@ public abstract class FlatteningConfig {
       String defaultPackageName,
       ResourceNameMessageConfigs messageConfigs,
       ImmutableMap<String, ResourceNameConfig> resourceNameConfigs,
-      MethodConfigProto methodConfigProto,
       ProtoMethodModel methodModel,
       ProtoParser protoParser) {
 
     Map<String, FlatteningConfig> flatteningConfigs = new LinkedHashMap<>();
 
-    // Pre-compute the collection of possible matching FlatteningGroupProtos from GAPIC config.
-    Map<String, FlatteningGroupProto> flatteningGroupProtos = new HashMap<>();
-    for (FlatteningGroupProto flatteningGroupProto :
-        methodConfigProto.getFlattening().getGroupsList()) {
-      flatteningGroupProtos.put(
-          paramListToString(Lists.newArrayList(flatteningGroupProto.getParametersList())),
-          flatteningGroupProto);
-    }
-
     List<MethodSignature> methodSignatures =
         protoParser.getMethodSignatures(methodModel.getProtoMethod());
     for (MethodSignature signature : methodSignatures) {
-
-      // Fetch the matching GAPIC Config flattening, if it exists. Let GAPIC config override
-      // proto annotations flattenings.
-      if (flatteningGroupProtos.get(
-              paramListToString(Lists.newArrayList(signature.getFieldsList())))
-          != null) {
-        continue;
-      }
 
       FlatteningConfig groupConfig =
           FlatteningConfig.createFlatteningFromProtoFile(
@@ -195,7 +168,6 @@ public abstract class FlatteningConfig {
               defaultPackageName,
               resourceNameConfigs,
               signature,
-              methodConfigProto,
               methodModel,
               protoParser);
       if (groupConfig != null) {
@@ -304,7 +276,6 @@ public abstract class FlatteningConfig {
       String defaultPackageName,
       ImmutableMap<String, ResourceNameConfig> resourceNameConfigs,
       MethodSignature methodSignature,
-      MethodConfigProto methodConfigProto,
       ProtoMethodModel method,
       ProtoParser protoParser) {
 
