@@ -36,6 +36,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Entrypoint for protoc-plugin invoked generation. Protoc passes input via std.in as a serialized
@@ -50,9 +51,20 @@ public class ProtocGeneratorMain {
     System.err.println("Main!!");
 
     CodeGeneratorResponse response;
+    CodeGeneratorRequest request;
     int exitCode = 0;
+
     try {
-      response = generate(System.in);
+      request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
+    } catch (IOException e) {
+      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
+      System.exit(1);
+      return;
+    }
+
+    try {
+      response = generate(request);
+
       if (response == null) {
         System.err.println("Failed to generate code.");
         System.exit(1);
@@ -80,16 +92,7 @@ public class ProtocGeneratorMain {
   @VisibleForTesting
   // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
   // CodeGeneratorResponse.
-  public static CodeGeneratorResponse generate(InputStream inputStream) {
-    CodeGeneratorRequest request;
-    try {
-      request = PluginProtos.CodeGeneratorRequest.parseFrom(inputStream);
-    } catch (IOException e) {
-      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
-      System.exit(1);
-      return null;
-    }
-
+  public static CodeGeneratorResponse generate(CodeGeneratorRequest request) {
     try {
       ToolOptions toolOptions = parseOptions(request);
 
