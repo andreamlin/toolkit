@@ -310,6 +310,29 @@ public class GeneratorMain {
     return toolOptions;
   }
 
+  public static ToolOptions createCodeGeneratorOptionsFromProtoc(String[] args)
+      throws ParseException {
+    Options options = new Options();
+    // We can add more options as they become needed.
+    options.addOption(DESCRIPTOR_SET_OPTION);
+    options.addOption(LANGUAGE_OPTION);
+    options.addOption(TARGET_API_PROTO_PACKAGE);
+
+    CommandLine cl = (new DefaultParser()).parse(options, args);
+
+    ToolOptions toolOptions = ToolOptions.create();
+    toolOptions.set(
+        ToolOptions.DESCRIPTOR_SET, cl.getOptionValue(DESCRIPTOR_SET_OPTION.getLongOpt()));
+
+    toolOptions.set(
+        GapicGeneratorApp.PROTO_PACKAGE, cl.getOptionValue(TARGET_API_PROTO_PACKAGE.getLongOpt()));
+    toolOptions.set(GapicGeneratorApp.LANGUAGE, cl.getOptionValue(LANGUAGE_OPTION.getLongOpt()));
+
+    checkFile(toolOptions.get(ToolOptions.DESCRIPTOR_SET));
+
+    return toolOptions;
+  }
+
   public static void packageGeneratorMain(String[] args) throws Exception {
     Options options = new Options();
     options.addOption("h", "help", false, "show usage");
