@@ -6,11 +6,15 @@
 
   @@Generated("by GAPIC")
   @@BetaApi
+  @if apiFile.schema.docLines
+    {@fieldMethodDoc(apiFile.schema)}
+  @else
+    what
+  @end
   {@schemaClassDef(apiFile.schema)}
 @end
 
 @private schemaClassDef(schema)
-  {@fieldMethodDoc(schema)}
   public final class {@schema.innerTypeName} implements ApiMessage {
     {@members(schema)}
 
@@ -268,14 +272,12 @@
 @end
 
 @private fieldMethodDoc(schema)
-  /**
   @if schema.docLines
+    /**
     @join commentLine : schema.docLines
       {@""} * {@commentLine}
     @end
-  @else
-    {@""} *
+    */
   @end
-  */
 @end
 

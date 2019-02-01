@@ -15,7 +15,6 @@
 package com.google.api.codegen.viewmodel;
 
 import com.google.auto.value.AutoValue;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 

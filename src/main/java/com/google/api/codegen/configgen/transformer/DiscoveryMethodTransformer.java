@@ -24,6 +24,7 @@ import com.google.api.codegen.configgen.PagingParameters;
 import com.google.api.codegen.configgen.viewmodel.PageStreamingResponseView;
 import com.google.api.codegen.discovery.Schema;
 import com.google.api.codegen.util.Name;
+import com.google.api.core.BetaApi;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import javax.annotation.Nullable;

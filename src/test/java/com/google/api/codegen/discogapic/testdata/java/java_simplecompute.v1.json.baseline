@@ -1227,6 +1227,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * A reserved address resource.
+*/
 public final class Address implements ApiMessage {
   private final String address;
   private final String creationTimestamp;
@@ -2377,6 +2380,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Contains a list of addresses.
+*/
 public final class AddressList implements ApiMessage {
   private final String id;
   private final List<Address> items;
@@ -2725,6 +2731,10 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * [Output Only] Metadata about this warning in key: value format. For example:
+ * "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+*/
 public final class Data implements ApiMessage {
   private final String key;
   private final String value;
@@ -2939,6 +2949,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * A fake object to test discogapic generation of case insensitive message types.
+*/
 public final class DUMMYObject implements ApiMessage {
   private final String name;
 
@@ -3113,6 +3126,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * A fake object to test discogapic generation.
+*/
 public final class DummyObject2 implements ApiMessage {
   private final Float floatie;
   @SerializedName("IPProtocol")
@@ -3488,6 +3504,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * [Output Only] If errors are generated during processing of the operation, this field will be populated.
+*/
 public final class Error implements ApiMessage {
   private final List<Errors> errors;
 
@@ -3676,6 +3695,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * [Output Only] The array of errors encountered while processing this operation.
+*/
 public final class Errors implements ApiMessage {
   private final String code;
   private final String location;
@@ -3930,6 +3952,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * An Operation resource, used to manage asynchronous API requests.
+*/
 public final class Operation implements ApiMessage {
   private final String clientOperationId;
   private final String creationTimestamp;
@@ -5266,6 +5291,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * [Output Only] Informational warning message.
+*/
 public final class Warning implements ApiMessage {
   private final String code;
   private final List<Data> data;
@@ -5538,6 +5566,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * [Output Only] If warning messages are generated during processing of the operation, this field will be populated.
+*/
 public final class Warnings implements ApiMessage {
   private final String code;
   private final List<Data> data;
@@ -5810,6 +5841,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Retrieves an aggregated list of addresses.
+*/
 public final class AggregatedListAddressesHttpRequest implements ApiMessage {
   private final String access_token;
   private final String callback;
@@ -6476,6 +6510,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Deletes the specified address resource.
+*/
 public final class DeleteAddressHttpRequest implements ApiMessage {
   private final String access_token;
   private final String address;
@@ -6952,6 +6989,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Method with no response object.
+*/
 public final class DeleteDummyObjectHttpRequest implements ApiMessage {
   private final String access_token;
   private final String callback;
@@ -7428,6 +7468,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Returns the specified address resource.
+*/
 public final class GetAddressHttpRequest implements ApiMessage {
   private final String access_token;
   private final String address;
@@ -7904,6 +7947,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Method on resource with ResourceName as ResourceName name
+*/
 public final class GetResourceDummyObjectHttpRequest implements ApiMessage {
   private final String access_token;
   private final String callback;
@@ -8380,6 +8426,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Creates an address resource in the specified project using the data included in the request.
+*/
 public final class InsertAddressHttpRequest implements ApiMessage {
   private final String access_token;
   private final Address addressResource;
@@ -8896,6 +8945,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Retrieves a list of addresses contained within the specified region.
+*/
 public final class ListAddressesHttpRequest implements ApiMessage {
   private final String access_token;
   private final String callback;
@@ -9568,6 +9620,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Method with parameter 'resources'
+*/
 public final class ListResourcesDummyObjectsHttpRequest implements ApiMessage {
   private final String access_token;
   private final String callback;
@@ -10176,6 +10231,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Updates an address in the specified project using the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+*/
 public final class PatchAddressHttpRequest implements ApiMessage {
   private final String access_token;
   private final String address;
@@ -10311,7 +10369,7 @@ public final class PatchAddressHttpRequest implements ApiMessage {
   }
 
   /**
-   *
+   * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
   */
   public List<String> getFieldMask() {
     return fieldMask;
@@ -10528,14 +10586,14 @@ public final class PatchAddressHttpRequest implements ApiMessage {
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public List<String> getFieldMask() {
       return fieldMask;
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public Builder addAllFieldMask(List<String> fieldMask) {
       if (this.fieldMask == null) {
@@ -10546,7 +10604,7 @@ public final class PatchAddressHttpRequest implements ApiMessage {
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public Builder addFieldMask(String fieldMask) {
       if (this.fieldMask == null) {
@@ -10832,6 +10890,9 @@ import javax.annotation.Nullable;
 
 @Generated("by GAPIC")
 @BetaApi
+/**
+ * Updates the specified Address resource with the data included in the request. There are several restrictions and guidelines to keep in mind when updating an address. Read  Restrictions and Guidelines for more information.
+*/
 public final class UpdateAddressHttpRequest implements ApiMessage {
   private final String access_token;
   private final String address;
@@ -10965,7 +11026,7 @@ public final class UpdateAddressHttpRequest implements ApiMessage {
   }
 
   /**
-   *
+   * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
   */
   public List<String> getFieldMask() {
     return fieldMask;
@@ -11175,14 +11236,14 @@ public final class UpdateAddressHttpRequest implements ApiMessage {
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public List<String> getFieldMask() {
       return fieldMask;
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public Builder addAllFieldMask(List<String> fieldMask) {
       if (this.fieldMask == null) {
@@ -11193,7 +11254,7 @@ public final class UpdateAddressHttpRequest implements ApiMessage {
     }
 
     /**
-     *
+     * The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
     */
     public Builder addFieldMask(String fieldMask) {
       if (this.fieldMask == null) {
@@ -12163,7 +12224,7 @@ public class AddressClient implements BackgroundResource {
    * @param address Name of the address to patch.
    * @param region Name of the region for this request.
    * @param addressResource A reserved address resource.
-   * @param fieldMask
+   * @param fieldMask The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   @BetaApi
@@ -12197,7 +12258,7 @@ public class AddressClient implements BackgroundResource {
    * @param address Name of the address to patch.
    * @param region Name of the region for this request.
    * @param addressResource A reserved address resource.
-   * @param fieldMask
+   * @param fieldMask The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   @BetaApi
@@ -12286,7 +12347,7 @@ public class AddressClient implements BackgroundResource {
    *
    * @param address Name of the Address resource to update.
    * @param addressResource A reserved address resource.
-   * @param fieldMask
+   * @param fieldMask The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   @BetaApi
@@ -12317,7 +12378,7 @@ public class AddressClient implements BackgroundResource {
    *
    * @param address Name of the Address resource to update.
    * @param addressResource A reserved address resource.
-   * @param fieldMask
+   * @param fieldMask The fields that should be serialized (empty values will be serialized). If the containing message object has a non-null fieldmask, then all the fields in the field mask (and only those fields in the field mask) will be serialized. If the containing object does not have a fieldmask, then only non-empty fields will be serialized.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
   @BetaApi
