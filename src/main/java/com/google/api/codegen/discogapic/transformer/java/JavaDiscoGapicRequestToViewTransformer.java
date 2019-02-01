@@ -200,7 +200,8 @@ public class JavaDiscoGapicRequestToViewTransformer
 
     requestView.rawName(requestName); // Serialized name doesn't matter here.
     requestView.name(requestName);
-    requestView.docLines(context.getNamer().getDocLines(method.getDescription()));
+    requestView.docLines(context.getNamer().getDocLines(
+        String.format("Request object for method %s. %s", method.getDiscoMethod().id(), method.getDescription())));
 
     String requestTypeName = nameFormatter.publicClassName(Name.anyCamel(requestClassId));
     requestView.typeName(requestTypeName);
@@ -311,7 +312,7 @@ public class JavaDiscoGapicRequestToViewTransformer
     String typeName = context.getSchemaTypeTable().getAndSaveNicknameFor(schema);
     String innerTypeName =
         context.getSchemaTypeTable().getAndSaveNicknameForElementType((FieldModel) schema);
-    paramView.docLines(context.getNamer().getDocLines(schema.getScopedDocumentation()));
+    paramView.docLines(context.getNamer().getDocLines(schema.getDiscoveryField()));
     String name = context.getNamer().privateFieldName(Name.anyCamel(preferredName));
     String fieldName = name;
     if (escapeName.equals(EscapeName.ESCAPE_NAME)) {
