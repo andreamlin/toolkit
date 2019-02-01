@@ -23,10 +23,6 @@ import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.common.truth.Truth;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorRequest;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -49,7 +45,7 @@ public class ProtocGapicPluginGeneratorTest {
   }
 
   @Test
-  public void testGenerator() throws IOException {
+  public void testGenerator() {
     CodeGeneratorRequest codeGeneratorRequest =
         CodeGeneratorRequest.newBuilder()
             // All proto files, including dependencies
@@ -59,12 +55,7 @@ public class ProtocGapicPluginGeneratorTest {
             .addFileToGenerate("multiple_services.proto")
             .setParameter("language=java")
             .build();
-
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    codeGeneratorRequest.writeTo(outputStream);
-    InputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-
-    CodeGeneratorResponse response = ProtocGeneratorMain.generate(inputStream);
+    CodeGeneratorResponse response = ProtocGeneratorMain.generate(codeGeneratorRequest);
 
     // TODO(andrealin): Look into setting these up as baseline files.
     Truth.assertThat(response).isNotNull();
@@ -74,21 +65,16 @@ public class ProtocGapicPluginGeneratorTest {
   }
 
   @Test
-  public void testFailingGenerator() throws IOException {
+  public void testFailingGenerator() {
     CodeGeneratorRequest codeGeneratorRequest =
         CodeGeneratorRequest.newBuilder()
-            // All proto files, including dependencies
             .addAllProtoFile(
                 model.getFiles().stream().map(ProtoFile::getProto).collect(Collectors.toList()))
-            // Only the file to generate a client for (don't generate dependencies)
+            // File does not exist.
             .addFileToGenerate("fuuuuudge.proto")
             .build();
 
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    codeGeneratorRequest.writeTo(outputStream);
-    InputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-
-    CodeGeneratorResponse response = ProtocGeneratorMain.generate(inputStream);
+    CodeGeneratorResponse response = ProtocGeneratorMain.generate(codeGeneratorRequest);
 
     Truth.assertThat(response).isNotNull();
     Truth.assertThat(response.getError()).isNotEmpty();
