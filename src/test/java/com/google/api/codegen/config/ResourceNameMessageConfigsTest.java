@@ -321,7 +321,6 @@ public class ResourceNameMessageConfigsTest {
 
   @Test
   public void testCreateFlattenings() {
-    String defaultPackageName = "library";
     ProtoMethodModel methodModel = new ProtoMethodModel(createShelvesMethod);
     Field bookField = Mockito.mock(Field.class);
     Mockito.when(bookField.getType()).thenReturn(TypeRef.of(bookType));
@@ -398,7 +397,6 @@ public class ResourceNameMessageConfigsTest {
         new ArrayList<>(
             FlatteningConfig.createFlatteningConfigs(
                 diagCollector,
-                defaultPackageName,
                 messageConfigs,
                 resourceNameConfigs,
                 methodConfigProto,
@@ -417,7 +415,7 @@ public class ResourceNameMessageConfigsTest {
             "Resource[Set] entity archived_book from protofile clashes with a Resource[Set] of the same name from the GAPIC config. Using the GAPIC config entity.");
 
     assertThat(flatteningConfigs).isNotNull();
-    assertThat(flatteningConfigs.size()).isEqualTo(3);
+    assertThat(flatteningConfigs.size()).isEqualTo(2);
 
     // Check the flattening from the Gapic config.
     Optional<FlatteningConfig> flatteningConfigFromGapicConfig =

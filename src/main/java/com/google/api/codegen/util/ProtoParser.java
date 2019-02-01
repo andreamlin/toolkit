@@ -61,6 +61,10 @@ public class ProtoParser {
     this.enableProtoAnnotations = enableProtoAnnotations;
   }
 
+  public boolean isProtoAnnotationParsingEnabled() {
+    return enableProtoAnnotations;
+  }
+
   @SuppressWarnings("unchecked")
   @Nullable
   private <T, O extends Message, E extends ProtoElement> T getProtoExtension(

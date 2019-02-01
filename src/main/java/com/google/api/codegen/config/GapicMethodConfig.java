@@ -137,7 +137,6 @@ public abstract class GapicMethodConfig extends MethodConfig {
     ImmutableList<FlatteningConfig> flattening =
         FlatteningConfig.createFlatteningConfigs(
             diagCollector,
-            defaultPackageName,
             messageConfigs,
             resourceNameConfigs,
             methodConfigProto,
