@@ -200,7 +200,7 @@ public class JavaDiscoGapicRequestToViewTransformer
 
     requestView.rawName(requestName); // Serialized name doesn't matter here.
     requestView.name(requestName);
-    requestView.description(method.getDescription());
+    requestView.docLines(context.getNamer().getDocLines(method.getDescription()));
 
     String requestTypeName = nameFormatter.publicClassName(Name.anyCamel(requestClassId));
     requestView.typeName(requestTypeName);
@@ -214,7 +214,7 @@ public class JavaDiscoGapicRequestToViewTransformer
         continue;
       }
       StaticLangApiMessageView.Builder paramView = StaticLangApiMessageView.newBuilder();
-      paramView.description(STANDARD_QUERY_PARAMS.get(param));
+      paramView.docLines(context.getNamer().getDocLines(STANDARD_QUERY_PARAMS.get(param)));
       paramView.rawName(param);
       paramView.name(symbolTable.getNewSymbol(param));
       paramView.typeName("String");
@@ -262,7 +262,7 @@ public class JavaDiscoGapicRequestToViewTransformer
             + "     * underscores (\\`_\\`), periods (\\`.\\`), tildes (\\`~\\`), plus (\\`+\\`) or percent\n"
             + "     * signs (\\`%\\`). It must be between 3 and 255 characters in length, and it\n"
             + "     * must not start with \\`\"goog\"\\`.");
-    paramView.description(description.toString());
+    paramView.docLines(context.getNamer().getDocLines(description.toString()));
     paramView.rawName(resourceNameView.name());
     paramView.name(symbolTable.getNewSymbol(resourceNameView.name()));
     paramView.typeName("String");
@@ -271,6 +271,7 @@ public class JavaDiscoGapicRequestToViewTransformer
     paramView.canRepeat(false);
     paramView.fieldGetFunction(resourceNameView.getCallName());
     paramView.fieldSetFunction(resourceNameView.setCallName());
+
     paramView.properties(new LinkedList<>());
     properties.add(paramView.build());
 
@@ -310,7 +311,7 @@ public class JavaDiscoGapicRequestToViewTransformer
     String typeName = context.getSchemaTypeTable().getAndSaveNicknameFor(schema);
     String innerTypeName =
         context.getSchemaTypeTable().getAndSaveNicknameForElementType((FieldModel) schema);
-    paramView.description(schema.getScopedDocumentation());
+    paramView.docLines(context.getNamer().getDocLines(schema.getScopedDocumentation()));
     String name = context.getNamer().privateFieldName(Name.anyCamel(preferredName));
     String fieldName = name;
     if (escapeName.equals(EscapeName.ESCAPE_NAME)) {

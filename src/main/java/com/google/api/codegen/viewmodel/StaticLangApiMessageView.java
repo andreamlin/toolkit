@@ -15,6 +15,7 @@
 package com.google.api.codegen.viewmodel;
 
 import com.google.auto.value.AutoValue;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -29,9 +30,9 @@ import javax.annotation.Nullable;
  */
 @AutoValue
 public abstract class StaticLangApiMessageView implements Comparable<StaticLangApiMessageView> {
+
   @Nullable
-  // TODO(andrealin) Populate and render this field.
-  public abstract String description();
+  public abstract List<String> docLines();
 
   @Nullable
   // TODO(andrealin) Populate and render this field.
@@ -103,9 +104,9 @@ public abstract class StaticLangApiMessageView implements Comparable<StaticLangA
 
     public abstract Builder name(String val);
 
-    public abstract Builder description(String val);
-
     public abstract Builder defaultValue(String val);
+
+    public abstract Builder docLines(List<String> val);
 
     public abstract Builder innerTypeName(String val);
 
