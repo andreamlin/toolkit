@@ -6,7 +6,7 @@
 
   @@Generated("by GAPIC")
   @@BetaApi
-  @if apiFile.schema.docLines
+  @if apiFile.schema.hasDocLines
     {@fieldMethodDoc(apiFile.schema)}
   @end
   {@schemaClassDef(apiFile.schema)}
@@ -270,7 +270,7 @@
 @end
 
 @private fieldMethodDoc(schema)
-  @if schema.docLines
+  @if schema.hasDocLines
     /**
     @join commentLine : schema.docLines
       {@""} * {@commentLine}

@@ -31,7 +31,12 @@ import javax.annotation.Nullable;
 public abstract class StaticLangApiMessageView implements Comparable<StaticLangApiMessageView> {
 
   @Nullable
+  // Comment lines.
   public abstract List<String> docLines();
+
+  public boolean hasDocLines() {
+    return docLines() != null && !docLines().isEmpty();
+  }
 
   @Nullable
   // TODO(andrealin) Populate and render this field.

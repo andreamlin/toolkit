@@ -73,8 +73,6 @@ public class SurfaceNamer extends NameFormatterDelegator {
   private final String packageName;
   private final NameFormatter nameFormatter;
 
-  private final String DISCOVERY_OUTPUT_ONLY_STRING = "\\[Output Only\\] ";
-
   /** Represents a kind of test. */
   public enum TestKind {
     UNIT,
@@ -1384,7 +1382,12 @@ public class SurfaceNamer extends NameFormatterDelegator {
     if (schema.additionalProperties() != null
         && !Strings.isNullOrEmpty(schema.additionalProperties().reference())
         && !Strings.isNullOrEmpty(schema.additionalProperties().description())) {
-      description.append("\nThe key for the map is ").append(schema.additionalProperties().description().replaceAll(DISCOVERY_OUTPUT_ONLY_STRING, ""));
+      description
+          .append("\nThe key for the map is: ")
+          .append(
+              schema
+                  .additionalProperties()
+                  .description());
     }
     return CommonRenderingUtil.getDocLines(commentReformatter.reformat(description.toString()));
   }
