@@ -298,7 +298,8 @@ public class RubyPackageMetadataTransformer implements ModelToViewTransformer<Pr
     String outputPath = noLeadingRubyDir.substring(0, extensionIndex);
 
     Collection<InterfaceModel> interfaceModels =
-        model.getInterfaces(productConfig)
+        model
+            .getInterfaces(productConfig)
             .stream()
             .filter(productConfig::hasInterfaceConfig)
             .collect(ImmutableList.toImmutableList());

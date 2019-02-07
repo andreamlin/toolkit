@@ -704,7 +704,8 @@ public class JavaSurfaceTransformer {
         fileHeaderTransformer.generateFileHeader(
             productConfig, ImportSectionView.newBuilder().build(), namer));
 
-    model.getInterfaces(productConfig)
+    model
+        .getInterfaces(productConfig)
         .stream()
         .filter(productConfig::hasInterfaceConfig)
         .map(InterfaceModel::getFullName)

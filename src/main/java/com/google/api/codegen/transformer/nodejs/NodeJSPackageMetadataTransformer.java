@@ -22,7 +22,6 @@ import com.google.api.codegen.config.InterfaceConfig;
 import com.google.api.codegen.config.InterfaceModel;
 import com.google.api.codegen.config.MethodModel;
 import com.google.api.codegen.config.PackageMetadataConfig;
-import com.google.api.codegen.config.GapicProductConfig;
 import com.google.api.codegen.config.ProtoApiModel;
 import com.google.api.codegen.config.VersionBound;
 import com.google.api.codegen.nodejs.NodeJSUtils;
@@ -216,7 +215,8 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private boolean hasLongrunning(ApiModel model, GapicProductConfig productConfig) {
-    return model.getInterfaces(productConfig)
+    return model
+        .getInterfaces(productConfig)
         .stream()
         .map(productConfig::getInterfaceConfig)
         .filter(Objects::nonNull)
@@ -224,7 +224,8 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private boolean hasBatching(ApiModel model, GapicProductConfig productConfig) {
-    return model.getInterfaces(productConfig)
+    return model
+        .getInterfaces(productConfig)
         .stream()
         .map(productConfig::getInterfaceConfig)
         .filter(Objects::nonNull)
@@ -232,7 +233,8 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private boolean hasMixinApis(ApiModel model, GapicProductConfig productConfig) {
-    return model.getInterfaces(productConfig)
+    return model
+        .getInterfaces(productConfig)
         .stream()
         .filter(productConfig::hasInterfaceConfig)
         .map(i -> createContext(i, productConfig))

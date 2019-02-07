@@ -100,11 +100,10 @@ public class ProtoApiModel implements ApiModel {
   }
 
   @Override
-  public List<ProtoInterfaceModel> getInterfaces(
-      GapicProductConfig gapicProductConfig) {
+  public List<ProtoInterfaceModel> getInterfaces(GapicProductConfig gapicProductConfig) {
     if (interfaceModels == null) {
       interfaceModels =
-          ProtoModels.getInterfaces(protoModel, gapicProductConfig.getProtoParser())
+          ProtoModels.getInterfaces(protoModel, gapicProductConfig)
               .stream()
               .map(ProtoInterfaceModel::new)
               .collect(ImmutableList.toImmutableList());

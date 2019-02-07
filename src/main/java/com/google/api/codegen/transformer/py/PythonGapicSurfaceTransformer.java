@@ -21,7 +21,6 @@ import com.google.api.codegen.config.GapicProductConfig;
 import com.google.api.codegen.config.InterfaceModel;
 import com.google.api.codegen.config.MethodModel;
 import com.google.api.codegen.config.PackageMetadataConfig;
-import com.google.api.codegen.config.ProductConfig;
 import com.google.api.codegen.config.ProductServiceConfig;
 import com.google.api.codegen.config.ProtoApiModel;
 import com.google.api.codegen.config.SampleSpec.SampleType;
@@ -344,7 +343,8 @@ public class PythonGapicSurfaceTransformer implements ModelToViewTransformer<Pro
         .build();
   }
 
-  private ViewModel generateVersionedInitView(ProtoApiModel apiModel, GapicProductConfig productConfig) {
+  private ViewModel generateVersionedInitView(
+      ProtoApiModel apiModel, GapicProductConfig productConfig) {
     SurfaceNamer namer = new PythonSurfaceNamer(productConfig.getPackageName());
     boolean packageHasEnums = packageHasEnums(apiModel.getProtoModel());
     ImportSectionView imports =
@@ -372,7 +372,8 @@ public class PythonGapicSurfaceTransformer implements ModelToViewTransformer<Pro
 
   private List<VersionIndexRequireView> versionedInitRequireViews(
       ApiModel apiModel, GapicProductConfig productConfig, SurfaceNamer namer) {
-    return apiModel.getInterfaces(productConfig)
+    return apiModel
+        .getInterfaces(productConfig)
         .stream()
         .map(intf -> productConfig.getInterfaceConfig(intf))
         .filter(Objects::nonNull)
@@ -436,7 +437,8 @@ public class PythonGapicSurfaceTransformer implements ModelToViewTransformer<Pro
 
   private List<VersionIndexRequireView> topLevelRequireViews(
       ApiModel apiModel, GapicProductConfig productConfig, SurfaceNamer namer) {
-    return apiModel.getInterfaces(productConfig)
+    return apiModel
+        .getInterfaces(productConfig)
         .stream()
         .map(intf -> productConfig.getInterfaceConfig(intf))
         .filter(Objects::nonNull)

@@ -279,7 +279,8 @@ public class RubyGapicSurfaceTransformer implements ModelToViewTransformer<Proto
             .build();
     List<String> modules = namer.getApiModules();
     InterfaceModel apiInterface =
-        model.getInterfaces(productConfig)
+        model
+            .getInterfaces(productConfig)
             .stream()
             .filter(productConfig::hasInterfaceConfig)
             .findFirst()

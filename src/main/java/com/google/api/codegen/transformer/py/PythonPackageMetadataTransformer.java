@@ -235,7 +235,8 @@ public class PythonPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private boolean hasSmokeTests(ApiModel apiModel, GapicProductConfig productConfig) {
-    return apiModel.getInterfaces(productConfig)
+    return apiModel
+        .getInterfaces(productConfig)
         .stream()
         .map(productConfig::getInterfaceConfig)
         .filter(Objects::nonNull)
