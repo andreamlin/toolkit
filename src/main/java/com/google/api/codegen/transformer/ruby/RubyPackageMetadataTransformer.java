@@ -226,7 +226,7 @@ public class RubyPackageMetadataTransformer implements ModelToViewTransformer<Pr
   private List<ApiMethodView> generateExampleMethods(
       ApiModel model, GapicProductConfig productConfig) {
     ImmutableList.Builder<ApiMethodView> exampleMethods = ImmutableList.builder();
-    for (InterfaceModel apiInterface : model.getInterfaces()) {
+    for (InterfaceModel apiInterface : model.getInterfaces(productConfig)) {
       InterfaceConfig interfaceConfig = productConfig.getInterfaceConfig(apiInterface);
       if (interfaceConfig == null || interfaceConfig.getSmokeTestConfig() == null) {
         continue;
@@ -298,8 +298,7 @@ public class RubyPackageMetadataTransformer implements ModelToViewTransformer<Pr
     String outputPath = noLeadingRubyDir.substring(0, extensionIndex);
 
     Collection<InterfaceModel> interfaceModels =
-        model
-            .getInterfaces()
+        model.getInterfaces(productConfig)
             .stream()
             .filter(productConfig::hasInterfaceConfig)
             .collect(ImmutableList.toImmutableList());

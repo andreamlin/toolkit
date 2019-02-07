@@ -115,7 +115,7 @@ public class JavaSurfaceTransformer {
     SurfaceNamer namer = surfaceTransformer.createSurfaceNamer(productConfig);
 
     List<ServiceDocView> serviceDocs = new ArrayList<>();
-    for (InterfaceModel apiInterface : model.getInterfaces()) {
+    for (InterfaceModel apiInterface : model.getInterfaces(productConfig)) {
       if (!productConfig.hasInterfaceConfig(apiInterface)) {
         continue;
       }
@@ -704,8 +704,7 @@ public class JavaSurfaceTransformer {
         fileHeaderTransformer.generateFileHeader(
             productConfig, ImportSectionView.newBuilder().build(), namer));
 
-    model
-        .getInterfaces()
+    model.getInterfaces(productConfig)
         .stream()
         .filter(productConfig::hasInterfaceConfig)
         .map(InterfaceModel::getFullName)

@@ -22,7 +22,7 @@ import com.google.api.codegen.config.InterfaceConfig;
 import com.google.api.codegen.config.InterfaceModel;
 import com.google.api.codegen.config.MethodModel;
 import com.google.api.codegen.config.PackageMetadataConfig;
-import com.google.api.codegen.config.ProductConfig;
+import com.google.api.codegen.config.GapicProductConfig;
 import com.google.api.codegen.config.ProtoApiModel;
 import com.google.api.codegen.config.VersionBound;
 import com.google.api.codegen.nodejs.NodeJSUtils;
@@ -137,7 +137,7 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   private List<ApiMethodView> generateExampleMethods(
       ApiModel model, GapicProductConfig productConfig) {
     ImmutableList.Builder<ApiMethodView> exampleMethods = ImmutableList.builder();
-    for (InterfaceModel apiInterface : model.getInterfaces()) {
+    for (InterfaceModel apiInterface : model.getInterfaces(productConfig)) {
       InterfaceConfig interfaceConfig = productConfig.getInterfaceConfig(apiInterface);
       if (interfaceConfig == null || interfaceConfig.getSmokeTestConfig() == null) {
         continue;
@@ -169,7 +169,7 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private List<ViewModel> generateMetadataViews(
-      ApiModel model, ProductConfig productConfig, NodeJSPackageMetadataNamer namer) {
+      ApiModel model, GapicProductConfig productConfig, NodeJSPackageMetadataNamer namer) {
     ImmutableList.Builder<ViewModel> views = ImmutableList.builder();
     for (String template : TOP_LEVEL_FILES) {
       views.add(generateMetadataView(model, productConfig, template, namer));
@@ -179,7 +179,7 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
 
   private ViewModel generateMetadataView(
       ApiModel model,
-      ProductConfig productConfig,
+      GapicProductConfig productConfig,
       String template,
       NodeJSPackageMetadataNamer namer) {
     String noLeadingNodeDir =
@@ -197,7 +197,7 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private List<PackageDependencyView> generateAdditionalDependencies(
-      ApiModel model, ProductConfig productConfig) {
+      ApiModel model, GapicProductConfig productConfig) {
     ImmutableList.Builder<PackageDependencyView> dependencies = ImmutableList.builder();
     dependencies.add(
         PackageDependencyView.create(
@@ -215,18 +215,16 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
     return dependencies.build();
   }
 
-  private boolean hasLongrunning(ApiModel model, ProductConfig productConfig) {
-    return model
-        .getInterfaces()
+  private boolean hasLongrunning(ApiModel model, GapicProductConfig productConfig) {
+    return model.getInterfaces(productConfig)
         .stream()
         .map(productConfig::getInterfaceConfig)
         .filter(Objects::nonNull)
         .anyMatch(InterfaceConfig::hasLongRunningOperations);
   }
 
-  private boolean hasBatching(ApiModel model, ProductConfig productConfig) {
-    return model
-        .getInterfaces()
+  private boolean hasBatching(ApiModel model, GapicProductConfig productConfig) {
+    return model.getInterfaces(productConfig)
         .stream()
         .map(productConfig::getInterfaceConfig)
         .filter(Objects::nonNull)
@@ -234,8 +232,7 @@ public class NodeJSPackageMetadataTransformer implements ModelToViewTransformer<
   }
 
   private boolean hasMixinApis(ApiModel model, GapicProductConfig productConfig) {
-    return model
-        .getInterfaces()
+    return model.getInterfaces(productConfig)
         .stream()
         .filter(productConfig::hasInterfaceConfig)
         .map(i -> createContext(i, productConfig))

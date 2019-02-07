@@ -34,7 +34,8 @@ public interface ApiModel {
   /** Return a list of scopes for authentication. */
   List<String> getAuthScopes(GapicProductConfig gapicProductConfig);
 
-  List<? extends InterfaceModel> getInterfaces();
+  List<? extends InterfaceModel> getInterfaces(
+      GapicProductConfig gapicProductConfig);
 
   List<? extends TypeModel> getAdditionalTypes();
 

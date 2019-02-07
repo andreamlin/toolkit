@@ -14,6 +14,7 @@
  */
 package com.google.api.codegen.gapic;
 
+import com.google.api.codegen.util.ProtoParser;
 import com.google.api.tools.framework.model.Interface;
 import com.google.api.tools.framework.model.Model;
 import com.google.common.collect.ImmutableList;
@@ -28,11 +29,12 @@ public class ProtoModels {
   private ProtoModels() {}
 
   /** Gets the interfaces for the apis in the service config. */
-  public static List<Interface> getInterfaces(Model model) {
-    if (model.getServiceConfig().getApisCount() == 0) {
-      // A valid service config was not given.
+  public static List<Interface> getInterfaces(Model model, ProtoParser protoParser) {
+    if (protoParser.isProtoAnnotationsEnabled()) {
       return model.getSymbolTable().getInterfaces().asList();
     }
+
+    // Assume valid service config if proto annotations parsing is not enabled.
     return model
         .getServiceConfig()
         .getApisList()
