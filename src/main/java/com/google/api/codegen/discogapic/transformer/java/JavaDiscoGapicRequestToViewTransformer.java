@@ -117,7 +117,7 @@ public class JavaDiscoGapicRequestToViewTransformer
     String packageName = productConfig.getPackageName();
     SurfaceNamer surfaceNamer = new JavaSurfaceNamer(packageName, packageName, nameFormatter);
 
-    for (InterfaceModel apiInterface : model.getInterfaces()) {
+    for (InterfaceModel apiInterface : model.getInterfaces(productConfig)) {
       DiscoGapicInterfaceContext context =
           JavaDiscoGapicSurfaceTransformer.newInterfaceContext(
               apiInterface,
@@ -316,7 +316,7 @@ public class JavaDiscoGapicRequestToViewTransformer
     String typeName = context.getSchemaTypeTable().getAndSaveNicknameFor(schema);
     String innerTypeName =
         context.getSchemaTypeTable().getAndSaveNicknameForElementType((FieldModel) schema);
-    paramView.docLines(context.getNamer().getDocLines(schema.getDiscoveryField().description()));
+    paramView.docLines(context.getNamer().getDocLines(schema.getDiscoveryField()));
     String name = context.getNamer().privateFieldName(Name.anyCamel(preferredName));
     String fieldName = name;
     if (escapeName.equals(EscapeName.ESCAPE_NAME)) {

@@ -241,7 +241,7 @@
         Option.builder("")
           .required(false)
           .hasArg(true)
-          .longOpt("{@param.identifier}")
+          .longOpt("{@param.cliFlagName}")
           .build());
   @end
 
@@ -249,21 +249,21 @@
   @join param : sample.sampleInitCode.argDefaultParams
     @switch param.typeName
     @case "String"
-      String {@param.identifier} = cl.getOptionValue("{@param.identifier}", {@renderInitValue(param.initValue)});
+      String {@param.identifier} = cl.getOptionValue("{@param.cliFlagName}", {@renderInitValue(param.initValue)});
     @case "int"
       int {@param.identifier} =
-          cl.getOptionValue("{@param.identifier}") != null
-              ? Integer.parseInt(cl.getOptionValue("{@param.identifier}"))
+          cl.getOptionValue("{@param.cliFlagName}") != null
+              ? Integer.parseInt(cl.getOptionValue("{@param.cliFlagName}"))
               : {@renderInitValue(param.initValue)};
     @case "double"
       double {@param.identifier} =
-          cl.getOptionValue("{@param.identifier}") != null
-              ? Double.parseDouble(cl.getOptionValue("{@param.identifier}"))
+          cl.getOptionValue("{@param.cliFlagName}") != null
+              ? Double.parseDouble(cl.getOptionValue("{@param.cliFlagName}"))
               : {@renderInitValue(param.initValue)};
     @case "boolean"
       boolean {@param.identifier} =
-          cl.getOptionValue("{@param.identifier}") != null
-              ? Boolean.parseBoolean(cl.getOptionValue("{@param.identifier}"))
+          cl.getOptionValue("{@param.cliFlagName}") != null
+              ? Boolean.parseBoolean(cl.getOptionValue("{@param.cliFlagName}"))
               : {@renderInitValue(param.initValue)};
     @default
       $unhandledCase: {@param.typeName}$
@@ -321,10 +321,10 @@
     System.out.println("{@view.format}");
   @else
     @if view.format == ""
-      System.out.println({@printVariableField(view.args.get(0))});
+      System.out.println({@view.args.get(0).formattedName});
     @else
       @if view.format == "%s"
-        System.out.println({@printVariableField(view.args.get(0))});
+        System.out.println({@view.args.get(0).formattedName});
       @else
         System.out.printf("{@view.format}\n", {@commaSeparatedFields(view.args)});
       @end
@@ -340,20 +340,7 @@
 
 @private commaSeparatedFields(args)
   @join arg : args on ", "
-    {@printVariableField(arg)}
-  @end
-@end
-
-@private printVariableField(arg)
-  @join segment : arg.segments
-    @switch segment.kind
-      @case "TEXT"
-        {@segment.text}
-      @case "VARIABLE"
-        {@variableField(segment.variable)}
-      @default
-        $unhandledPrintArgView: arg
-    @end
+    {@arg.formattedName}
   @end
 @end
 
@@ -363,13 +350,7 @@
 
 @private accessor(accessors)
   @join field : accessors on ""
-    @switch field.kind
-    @case "FIELD"
-      .{@field.field}()
-    @case "INDEX"
-      # Assume that sample config is right; no need to check bounds.
-      .get({@field.index})
-    @end
+    {@field}
   @end
 @end
 

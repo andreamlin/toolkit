@@ -41,58 +41,94 @@
 #
 # FIXME: Replace the following function calls with calls to functions that emit full standalone samples. These stubs have been adapted from method_sample.snip
 @snippet standaloneSample(apiMethod, sample)
-  @switch sample.callingForm
-  @case "Request"
-    @if apiMethod.hasReturnValue
-      {@methodCallSampleCodeWithReturnValue(apiMethod, sample.sampleInitCode)}
-    @else
-      {@methodCallSampleCodeWithoutReturnValue(apiMethod, sample.sampleInitCode)}
+  function {@sample.sampleFunctionName}({@formalArgs(sample.sampleInitCode.argDefaultParams)}) {
+    @switch sample.callingForm
+    @case "Request"
+      @if apiMethod.hasReturnValue
+        {@methodCallSampleCodeWithReturnValue(apiMethod, sample)}
+      @else
+        {@methodCallSampleCodeWithoutReturnValue(apiMethod, sample)}
+      @end
+    @case "RequestAsyncPaged"
+      {@methodCallSampleCodeForPagedResponse(apiMethod, sample)}
+    @case "RequestAsyncPagedAll"
+      {@methodCallSampleCodeForPagedResponseIterative(apiMethod, sample)}
+    @case "RequestStreamingBidi"
+      {@bidiStreamingSampleCode(apiMethod, sample)}
+    @case "RequestStreamingClient"
+      {@clientStreamingSampleCode(apiMethod, sample)}
+    @case "RequestStreamingServer"
+      {@initCode(apiMethod, sample.sampleInitCode)}
+        {@methodCallSampleCode(apiMethod, sample.sampleInitCode)}.on('data', response => {
+            {@processResponse(sample)}
+        });
+    @case "LongRunningEventEmitter"
+      {@methodCallSampleCodeLongrunningEventEmitter(apiMethod, sample)}
+    @case "LongRunningPromise"
+      {@methodCallSampleCodeLongrunningPromise(apiMethod, sample)}
+    @default
+      $unhandledCallingForm: {@sample.callingForm} in sample "{@apiMethod.getClass.getSimpleName}"$
     @end
-  @case "RequestAsyncPaged"
-    {@methodCallSampleCodeForPagedResponse(apiMethod, sample.sampleInitCode)}
-  @case "RequestAsyncPagedAll"
-    {@methodCallSampleCodeForPagedResponseIterative(apiMethod, sample.sampleInitCode)}
-  @case "RequestStreamingBidi"
-    {@bidiStreamingSampleCode(apiMethod, sample.sampleInitCode)}
-  @case "RequestStreamingClient"
-    {@clientStreamingSampleCode(apiMethod, sample.sampleInitCode)}
-  @case "RequestStreamingServer"
-    {@initCode(apiMethod, sample.sampleInitCode)}
-      {@methodCallSampleCode(apiMethod, sample.sampleInitCode)}.on('data', response => {
-          // doThingsWith(response)
-      });
-  @case "LongRunningEventEmitter"
-    {@methodCallSampleCodeLongrunningEventEmitter(apiMethod, sample.sampleInitCode)}
-  @case "LongRunningPromise"
-    {@methodCallSampleCodeLongrunningPromise(apiMethod, sample.sampleInitCode)}
-  @default
-    $unhandledCallingForm: {@sample.callingForm} in sample "{@apiMethod.getClass.getSimpleName}"$
+  }
+
+  @if sample.sampleInitCode.argDefaultParams
+    {@processCliArguments(sample)}
+
+  @end
+  {@sample.sampleFunctionName}({@argvArgs(sample.sampleInitCode.argDefaultParams)});
+@end
+
+@private processResponse(sample)
+  @if sample.outputs.size == 0
+    console.log(response);
+  @else
+    {@processOutputViews(sample.outputs)}
   @end
 @end
 
-@private methodCallSampleCodeWithReturnValue(apiMethod, init)
-  {@initCode(apiMethod, init)}
-  {@methodCallSampleCodePrefix(apiMethod, init)}
+@private processCliArguments(sample)
+  require(`yargs`)
+    @join param : sample.sampleInitCode.argDefaultParams
+      .default('{@param.cliFlagName}', {@renderInitValue(param.initValue)})
+    @end
+    .argv;
+@end
+
+@private formalArgs(sampleArgs)
+  @join param : sampleArgs on ", "
+    {@param.identifier}
+  @end
+@end
+
+@private argvArgs(args)
+  @join arg : args on ", "
+    argv.{@arg.cliFlagName}
+  @end
+@end
+
+@private methodCallSampleCodeWithReturnValue(apiMethod, sample)
+  {@initCode(apiMethod, sample.sampleInitCode)}
+  {@methodCallSampleCodePrefix(apiMethod, sample.sampleInitCode)}
     .then(responses => {
       const response = responses[0];
-      // doThingsWith(response)
+      {@processResponse(sample)}
     })
     .catch(err => {
       console.error(err);
     });
 @end
 
-@private methodCallSampleCodeWithoutReturnValue(apiMethod, init)
-  {@initCode(apiMethod, init)}
-  {@methodCallSampleCodePrefix(apiMethod, init)}.catch(err => {
+@private methodCallSampleCodeWithoutReturnValue(apiMethod, sample)
+  {@initCode(apiMethod, sample.sampleInitCode)}
+  {@methodCallSampleCodePrefix(apiMethod, sample.sampleInitCode)}.catch(err => {
     console.error(err);
   });
 @end
 
-@private methodCallSampleCodeForPagedResponse(apiMethod, init)
+@private methodCallSampleCodeForPagedResponse(apiMethod, sample)
   // Or obtain the paged response.
-  @if initCode(apiMethod, init)
-    {@initCode(apiMethod, init)}
+  @if initCode(apiMethod, sample.sampleInitCode)
+    {@initCode(apiMethod, sample.sampleInitCode)}
 
   @end
 
@@ -105,31 +141,31 @@
     // The actual response object, if necessary.
     // const rawResponse = responses[2];
     for (const resource of resources) {
-      // doThingsWith(resource);
+      {@processResponse(sample)}
     }
     if (nextRequest) {
       // Fetch the next page.
       return client.{@apiMethod.name}(nextRequest, options).then(callback);
     }
   }
-  client.{@apiMethod.name}({@sampleMethodCallArgListAndComma(apiMethod, init)}options)
+  client.{@apiMethod.name}({@sampleMethodCallArgListAndComma(apiMethod, sample.sampleInitCode)}options)
     .then(callback)
     .catch(err => {
       console.error(err);
     });
 @end
 
-@private methodCallSampleCodeForPagedResponseIterative(apiMethod, init)
+@private methodCallSampleCodeForPagedResponseIterative(apiMethod, sample)
   // Iterate over all elements.
-  @if initCode(apiMethod, init)
-    {@initCode(apiMethod, init)}
+  @if initCode(apiMethod, sample.sampleInitCode)
+    {@initCode(apiMethod, sample.sampleInitCode)}
 
   @end
-  {@methodCallSampleCodePrefix(apiMethod, init)}
+  {@methodCallSampleCodePrefix(apiMethod, sample.sampleInitCode)}
     .then(responses => {
       const resources = responses[0];
       for (const resource of resources) {
-        // doThingsWith(resource)
+        {@processResponse(sample)}
       }
     })
     .catch(err => {
@@ -137,38 +173,38 @@
     });
 @end
 
-@snippet bidiStreamingSampleCode(apiMethod, init)
+@snippet bidiStreamingSampleCode(apiMethod, sample)
     const stream = client.{@apiMethod.name}().on('data', response => {
-      // doThingsWith(response)
+      {@processResponse(sample)}
     });
-    {@initCode(apiMethod, init)}
+    {@initCode(apiMethod, sample.sampleInitCode)}
     {@sampleWriteStreamingRequest(apiMethod)}
 @end
 
-@snippet clientStreamingSampleCode(apiMethod, init)
+@snippet clientStreamingSampleCode(apiMethod, sample)
     const stream = client.{@apiMethod.name}((err, response) => {
       if (err) {
         console.error(err);
         return;
       }
-      // doThingsWith(response)
+      {@processResponse(sample)}
     });
-    {@initCode(apiMethod, init)}
+    {@initCode(apiMethod, sample.sampleInitCode)}
     {@sampleWriteStreamingRequest(apiMethod)}
 @end
 
-@private methodCallSampleCodeLongrunningEventEmitter(apiMethod, init)
-  {@initCode(apiMethod, init)}
+@private methodCallSampleCodeLongrunningEventEmitter(apiMethod, sample)
+  {@initCode(apiMethod, sample.sampleInitCode)}
 
   // Handle the operation using the event emitter pattern.
-  {@methodCallSampleCodePrefix(apiMethod, init)}
+  {@methodCallSampleCodePrefix(apiMethod, sample.sampleInitCode)}
     .then(responses => {
       const [operation, initApiResponse] = responses;
 
       // Adding a listener for the "complete" event starts polling for the
       // completion of the operation.
       operation.on('complete', (result, metadata, finalApiResponse) => {
-        // doSomethingWith(result);
+        {@processResponse(sample)}
       });
 
       // Adding a listener for the "progress" event causes the callback to be
@@ -187,11 +223,11 @@
     });
 @end
 
-@private methodCallSampleCodeLongrunningPromise(apiMethod, init)
-  {@initCode(apiMethod, init)}
+@private methodCallSampleCodeLongrunningPromise(apiMethod, sample)
+  {@initCode(apiMethod, sample.sampleInitCode)}
 
   // Handle the operation using the promise pattern.
-  {@methodCallSampleCodePrefix(apiMethod, init)}
+  {@methodCallSampleCodePrefix(apiMethod, sample.sampleInitCode)}
     .then(responses => {
       const [operation, initialApiResponse] = responses;
 
@@ -202,6 +238,8 @@
       const result = responses[0];
       const metadata = responses[1];
       const finalApiResponse = responses[2];
+
+      {@processResponse(sample)}
     })
     .catch(err => {
       console.error(err);
@@ -245,4 +283,58 @@
 @private sampleWriteStreamingRequest(apiMethod)
     // Write request objects.
     stream.write(request);
+@end
+
+@private processOutputViews(outputViews)
+  @join view : outputViews on BREAK
+    @switch view.kind
+      @case "COMMENT"
+        {@processCommentView(view)}
+      @case "DEFINE"
+        {@processDefineView(view)}
+      @case "LOOP"
+        {@processLoopView(view)}
+      @case "PRINT"
+        {@processPrintView(view)}
+      @default
+        $unhandledResponseForm: {@view}
+    @end
+  @end
+@end
+
+@private processCommentView(view)
+  {@lineComments(view.lines)}
+@end
+
+@private processDefineView(view)
+  const {@view.variableName} = {@variableField(view.reference)};
+@end
+
+@private processPrintView(view)
+  @if view.args.size == 0
+    console.log({@view.format});
+  @else
+    @if view.format == "%s"
+      console.log({@view.args.get(0).formattedName});
+    @else
+      console.log(`{@view.format}`);
+    @end
+  @end
+@end
+
+@private processLoopView(view)
+  for (const {@view.variableName} of {@variableField(view.collection)}) {
+    {@processOutputViews(view.body)}
+  }
+@end
+
+
+@private variableField(arg)
+  {@arg.variable}{@accessor(arg.accessors)}
+@end
+
+@private accessor(accessors)
+  @join field : accessors on ""
+    {@field}
+  @end
 @end

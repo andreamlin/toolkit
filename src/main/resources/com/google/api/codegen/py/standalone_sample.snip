@@ -82,7 +82,7 @@
 
     parser = argparse.ArgumentParser()
     @join param : sample.sampleInitCode.argDefaultParams
-      parser.add_argument('--{@param.identifier}', type={@param.typeName}, default={@renderInitValue(param.initValue)})
+      parser.add_argument('--{@param.cliFlagName}', type={@param.typeName}, default={@renderInitValue(param.initValue)})
     @end
     args = parser.parse_args()
 
@@ -94,7 +94,7 @@
 
 @private actualArgs(sampleArgs)
   @join param : sampleArgs on ", "
-    args.{@param.identifier}
+    args.{@param.cliFlagName}
   @end
 @end
 
@@ -106,11 +106,9 @@
 
 @private convertText(sample)
   @join line : sample.sampleInitCode.argDefaultParams
-    @if line.lineType == "SimpleInitLine"
-      @if line.typeName == "str"
-        if isinstance({@line.identifier}, six.binary_type):
-          {@line.identifier} = {@line.identifier}.decode('utf-8')
-      @end
+    @if line.typeName == "str"
+      if isinstance({@line.identifier}, six.binary_type):
+        {@line.identifier} = {@line.identifier}.decode('utf-8')
     @end
   @end
 @end
@@ -239,7 +237,7 @@
     print('{@view.format}')
   @else
     @if view.format == "{}"
-      print({@printVariableField(view.args.get(0))})
+      print({@view.args.get(0).formattedName})
     @else
       print('{@view.format}'.format({@commaSeparatedFields(view.args)}))
     @end
@@ -262,20 +260,7 @@
 
 @private commaSeparatedFields(args)
   @join arg : args on ", "
-    {@printVariableField(arg)}
-  @end
-@end
-
-@private printVariableField(arg)
-  @join segment : arg.segments on ""
-    @switch segment.kind
-      @case "TEXT"
-        {@segment.text}
-      @case "VARIABLE"
-        {@variableField(segment.variable)}
-      @default
-        $unhandledPrintArgView: arg
-    @end
+    {@arg.formattedName}
   @end
 @end
 
@@ -285,12 +270,6 @@
 
 @private accessor(accessors)
   @join field : accessors on ""
-    @switch field.kind
-    @case "FIELD"
-      .{@field.field}
-    @case "INDEX"
-      # Assume that sample config is right; no need to check bounds.
-      [{@field.index}]
-    @end
+    {@field}
   @end
 @end

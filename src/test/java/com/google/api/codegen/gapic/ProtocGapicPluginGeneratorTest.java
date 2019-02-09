@@ -55,6 +55,7 @@ public class ProtocGapicPluginGeneratorTest {
             .addFileToGenerate("multiple_services.proto")
             .setParameter("language=java")
             .build();
+
     CodeGeneratorResponse response = ProtocGeneratorMain.generate(codeGeneratorRequest);
 
     // TODO(andrealin): Look into setting these up as baseline files.

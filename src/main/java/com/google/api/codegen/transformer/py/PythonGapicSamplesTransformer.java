@@ -66,10 +66,7 @@ public class PythonGapicSamplesTransformer implements ModelToViewTransformer<Pro
           SampleTransformer.newBuilder()
               .initCodeTransformer(new InitCodeTransformer(importSectionTransformer))
               .sampleType(sampleType)
-              .outputTransformer(
-                  new OutputTransformer(
-                      new PythonSampleOutputImportTransformer(),
-                      new PythonSamplePrintArgTransformer()))
+              .outputTransformer(new OutputTransformer(new PythonSampleOutputImportTransformer()))
               .sampleImportTransformer(
                   new StandardSampleImportTransformer(importSectionTransformer))
               .build());
@@ -106,7 +103,7 @@ public class PythonGapicSamplesTransformer implements ModelToViewTransformer<Pro
     FeatureConfig featureConfig = new DefaultFeatureConfig();
     ImmutableList.Builder<ViewModel> serviceSurfaces = ImmutableList.builder();
 
-    for (InterfaceModel apiInterface : apiModel.getInterfaces()) {
+    for (InterfaceModel apiInterface : apiModel.getInterfaces(productConfig)) {
       if (!productConfig.hasInterfaceConfig(apiInterface)) {
         continue;
       }
