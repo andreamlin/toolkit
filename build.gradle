@@ -146,8 +146,8 @@ task protocPluginJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.Shad
 
   doLast {
     Symlinks.createSymbolicLink(
-            "$buildDir/libs/gapic-generator-plugin-latest-fatjar.jar",
-            "$buildDir/libs/gapic-generator-plugin-${project.version}-fatjar.jar")
+            "$buildDir/libs/protoc-plugin-gapic-generator-latest-fatjar.jar",
+            "$buildDir/libs/protoc-plugin-gapic-generator-${project.version}-fatjar.jar")
   }
 }
 
