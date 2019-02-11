@@ -36,6 +36,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Entrypoint for protoc-plugin invoked generation. Protoc passes input via std.in as a serialized
@@ -46,7 +47,7 @@ public class ProtocGeneratorMain {
   private static final ArtifactType DEFAULT_ARTIFACT_TYPE = GAPIC_CODE;
 
   public static void main(String[] args) {
-    System.err.println("Main!!");
+    System.err.println("Parsing System.in for CodeGeneratorRequest.");
 
     CodeGeneratorResponse response;
     CodeGeneratorRequest request;
@@ -62,11 +63,6 @@ public class ProtocGeneratorMain {
 
     try {
       response = generate(request);
-
-      if (response == null) {
-        System.err.println("Failed to generate code.");
-        System.exit(1);
-      }
     } catch (Exception e) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter(sw);
@@ -88,6 +84,7 @@ public class ProtocGeneratorMain {
   }
 
   @VisibleForTesting
+  @Nonnull
   // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
   // CodeGeneratorResponse.
   public static CodeGeneratorResponse generate(CodeGeneratorRequest request) {
