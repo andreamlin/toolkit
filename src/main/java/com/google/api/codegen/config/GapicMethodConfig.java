@@ -201,7 +201,7 @@ public abstract class GapicMethodConfig extends MethodConfig {
             defaultResourceNameTreatment,
             fieldNamePatterns,
             resourceNameConfigs,
-            getRequiredFields(diagCollector, methodModel, requiredFields));
+            getRequiredFields(methodModel, requiredFields));
 
     ImmutableList<FieldConfig> optionalFieldConfigs =
         createFieldNameConfigs(

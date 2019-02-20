@@ -19,6 +19,7 @@ import com.google.api.codegen.transformer.SurfaceNamer;
 import com.google.api.codegen.transformer.TypeNameConverter;
 import com.google.api.codegen.util.Name;
 import com.google.api.codegen.util.TypeName;
+import com.google.api.tools.framework.model.Oneof;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
@@ -92,6 +93,9 @@ public interface MethodModel {
   boolean isOutputTypeEmpty();
 
   List<? extends FieldModel> getInputFields();
+
+  @Nullable
+  Oneof getInputOneof(String oneofName);
 
   List<? extends FieldModel> getInputFieldsForResourceNameMethod();
 

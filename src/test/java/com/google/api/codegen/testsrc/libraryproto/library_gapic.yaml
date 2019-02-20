@@ -201,11 +201,11 @@ interfaces:
       - parameters:
         - shelf
         - books
-        - edition
         - series_uuid
     required_fields:
       - shelf
       - books
+      - versioning
       - series_uuid
     retry_codes_name: non_idempotent
     retry_params_name: default

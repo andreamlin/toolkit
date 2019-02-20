@@ -25,6 +25,7 @@ import com.google.api.codegen.transformer.SurfaceNamer;
 import com.google.api.codegen.transformer.TypeNameConverter;
 import com.google.api.codegen.util.Name;
 import com.google.api.codegen.util.TypeName;
+import com.google.api.tools.framework.model.Oneof;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -33,6 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /** A wrapper around the model of a Discovery Method. */
 public final class DiscoveryMethodModel implements MethodModel {
@@ -333,5 +335,11 @@ public final class DiscoveryMethodModel implements MethodModel {
   @Override
   public boolean hasExtraFieldMask() {
     return hasExtraFieldMask;
+  }
+
+  @Nullable
+  @Override
+  public Oneof getInputOneof(String oneofName) {
+    return null;
   }
 }

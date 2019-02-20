@@ -29,11 +29,16 @@ import com.google.api.tools.framework.aspects.http.model.MethodKind;
 import com.google.api.tools.framework.model.Field;
 import com.google.api.tools.framework.model.FieldSelector;
 import com.google.api.tools.framework.model.Method;
+import com.google.api.tools.framework.model.Oneof;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /** A wrapper around the model of a protobuf-defined Method. */
 public final class ProtoMethodModel implements MethodModel {
@@ -203,6 +208,15 @@ public final class ProtoMethodModel implements MethodModel {
     }
     outputFields = fieldsBuilder.build();
     return outputFields;
+  }
+
+  @Nullable
+  @Override
+  public Oneof getInputOneof(@Nonnull String oneofName) {
+    return getInputFields().stream()
+        .map(FieldModel::getOneof)
+        .filter(o -> o != null)
+        .filter(o -> oneofName.equals(o.getName())).findAny().orElse(null);
   }
 
   @Override

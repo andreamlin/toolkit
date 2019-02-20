@@ -20,6 +20,7 @@ import com.google.api.codegen.config.GrpcStreamingConfig.GrpcStreamingType;
 import com.google.api.codegen.transformer.SurfaceNamer;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
+import com.google.api.tools.framework.model.Oneof;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -144,27 +145,21 @@ public abstract class MethodConfig {
     return fieldsBuilder.build();
   }
 
-  static Iterable<FieldModel> getRequiredFields(
-      DiagCollector diagCollector, MethodModel method, List<String> requiredFieldNames) {
+  static Iterable<FieldModel> getRequiredFields(MethodModel method, List<String> requiredFieldNames) {
     ImmutableList.Builder<FieldModel> fieldsBuilder = ImmutableList.builder();
     for (String fieldName : requiredFieldNames) {
       FieldModel requiredField = method.getInputField(fieldName);
-      if (requiredField == null) {
-        diagCollector.addDiag(
-            Diag.error(
-                SimpleLocation.TOPLEVEL,
+      Oneof oneof = method.getInputOneof(fieldName);
+      if (requiredField == null && oneof == null) {
+        throw new IllegalStateException(String.format(
                 "Required field '%s' not found (in method %s)",
                 fieldName,
                 method.getFullName()));
-        return null;
-      } else if (requiredField.getOneof() != null) {
-        diagCollector.addDiag(
-            Diag.error(
-                SimpleLocation.TOPLEVEL,
+      } else if (oneof != null) {
+        throw new IllegalStateException(String.format(
                 "oneof field %s cannot be required (in method %s)",
                 fieldName,
                 method.getFullName()));
-        return null;
       }
       fieldsBuilder.add(requiredField);
     }

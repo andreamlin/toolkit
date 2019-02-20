@@ -162,7 +162,7 @@ public abstract class DiscoGapicMethodConfig extends MethodConfig {
             defaultResourceNameTreatment,
             fieldNamePatterns,
             resourceNameConfigs,
-            getRequiredFields(diagCollector, methodModel, requiredFieldsList));
+            getRequiredFields(methodModel, requiredFieldsList));
 
     ImmutableList<FieldConfig> optionalFieldConfigs =
         createFieldNameConfigs(
