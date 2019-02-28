@@ -1574,7 +1574,34 @@ public class SurfaceNamer extends NameFormatterDelegator {
    * a format string followed by all the arguments to replace the placeholders.
    */
   public List<String> getPrintSpecs(String spec, List<String> args) {
-    return ImmutableList.<String>builder().add(spec).addAll(args).build();
+    StringBuilder sb = new StringBuilder();
+    int p = 0;
+    while (true) {
+      int pos = spec.indexOf('%', p);
+      if (pos == -1) {
+        sb.append(spec, p, spec.length());
+        return ImmutableList.<String>builder()
+            .add(
+                sb.toString()
+                    .replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\t", "\\t")
+                    .replace("\n", "\\n"))
+            .addAll(args)
+            .build();
+      } else {
+        sb.append(spec, p, pos);
+      }
+      if (spec.startsWith("%s", pos)) {
+        sb.append("%s");
+        p = pos + 2;
+      } else if (spec.startsWith("%%", pos)) {
+        sb.append("%%");
+        p = pos + 2;
+      } else {
+        throw new IllegalArgumentException(String.format("bad format verb: %s", spec));
+      }
+    }
   }
 
   /** Returns the formatted expression to nicely print a field of a variable. */
@@ -1600,7 +1627,7 @@ public class SurfaceNamer extends NameFormatterDelegator {
    *
    * <p>Note that the returned value includes not only the field name, but also the
    * language-specific syntax for accessing a protobuf object field. For example, the returned value
-   * will be `.getField()` in Java, and `->getField()` in PHP.
+   * will be `.getField()` in Java, and `-&gt;getField()` in PHP.
    */
   public String getFieldAccessorName(FieldModel field) {
     return getNotImplementedString("SurfaceNamer.getFieldAccessorName");

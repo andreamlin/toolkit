@@ -59,7 +59,7 @@ $ npm install --save @google-cloud/multiple-services
     "Google Example API"
   ],
   "dependencies": {
-    "google-gax": "^0.17.1",
+    "google-gax": "^0.25.3",
     "google-some-other-package-v1": "^0.2.1",
     "lodash.merge": "^4.6.0",
     "lodash.union": "^4.6.0"
@@ -297,6 +297,10 @@ class DecrementerServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
@@ -611,6 +615,10 @@ class IncrementerServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],

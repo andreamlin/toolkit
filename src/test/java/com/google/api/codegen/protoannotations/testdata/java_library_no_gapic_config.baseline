@@ -115,6 +115,7 @@ import com.google.api.gax.rpc.UnaryCallable;
 import com.google.api.pathtemplate.PathTemplate;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.example.library.v1.stub.LibraryServiceStub;
 import com.google.example.library.v1.stub.LibraryServiceStubSettings;
 import com.google.longrunning.Operation;
@@ -1814,7 +1815,8 @@ public class LibraryServiceClient implements BackgroundResource {
             public ListShelvesPagedResponse apply(ListShelvesPage input) {
               return new ListShelvesPagedResponse(input);
             }
-          });
+          },
+          MoreExecutors.directExecutor());
     }
 
     private ListShelvesPagedResponse(ListShelvesPage page) {
@@ -1901,7 +1903,8 @@ public class LibraryServiceClient implements BackgroundResource {
             public ListBooksPagedResponse apply(ListBooksPage input) {
               return new ListBooksPagedResponse(input);
             }
-          });
+          },
+          MoreExecutors.directExecutor());
     }
 
     private ListBooksPagedResponse(ListBooksPage page) {
@@ -1988,7 +1991,8 @@ public class LibraryServiceClient implements BackgroundResource {
             public ListStringsPagedResponse apply(ListStringsPage input) {
               return new ListStringsPagedResponse(input);
             }
-          });
+          },
+          MoreExecutors.directExecutor());
     }
 
     private ListStringsPagedResponse(ListStringsPage page) {
@@ -2075,7 +2079,8 @@ public class LibraryServiceClient implements BackgroundResource {
             public FindRelatedBooksPagedResponse apply(FindRelatedBooksPage input) {
               return new FindRelatedBooksPagedResponse(input);
             }
-          });
+          },
+          MoreExecutors.directExecutor());
     }
 
     private FindRelatedBooksPagedResponse(FindRelatedBooksPage page) {
@@ -2205,8 +2210,8 @@ import com.google.api.gax.core.InstantiatingExecutorProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
 import com.google.api.gax.grpc.GrpcTransportChannel;
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider;
-import com.google.api.gax.grpc.OperationFuture;
 import com.google.api.gax.grpc.ProtoOperationTransformers;
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.longrunning.OperationSnapshot;
 import com.google.api.gax.longrunning.OperationTimedPollAlgorithm;
 import com.google.api.gax.retrying.RetrySettings;
@@ -2903,7 +2908,7 @@ import com.google.api.gax.core.BackgroundResourceAggregation;
 import com.google.api.gax.grpc.GrpcCallSettings;
 import com.google.api.gax.grpc.GrpcCallableFactory;
 import com.google.api.gax.grpc.GrpcStubCallableFactory;
-import com.google.api.gax.grpc.OperationFuture;
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.longrunning.OperationSnapshot;
 import com.google.api.gax.rpc.BatchingCallSettings;
 import com.google.api.gax.rpc.BidiStreamingCallable;
@@ -3064,7 +3069,7 @@ import com.google.api.gax.core.BackgroundResourceAggregation;
 import com.google.api.gax.grpc.GrpcCallSettings;
 import com.google.api.gax.grpc.GrpcCallableFactory;
 import com.google.api.gax.grpc.GrpcStubCallableFactory;
-import com.google.api.gax.grpc.OperationFuture;
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.longrunning.OperationSnapshot;
 import com.google.api.gax.rpc.BidiStreamingCallable;
 import com.google.api.gax.rpc.ClientContext;
@@ -3926,7 +3931,7 @@ package com.google.example.library.v1.stub;
 
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.BackgroundResource;
-import com.google.api.gax.grpc.OperationFuture;
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.rpc.BidiStreamingCallable;
 import com.google.api.gax.rpc.ClientStreamingCallable;
 import com.google.api.gax.rpc.OperationCallable;
@@ -4167,8 +4172,8 @@ import com.google.api.gax.core.InstantiatingExecutorProvider;
 import com.google.api.gax.grpc.GaxGrpcProperties;
 import com.google.api.gax.grpc.GrpcTransportChannel;
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider;
-import com.google.api.gax.grpc.OperationFuture;
 import com.google.api.gax.grpc.ProtoOperationTransformers;
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.longrunning.OperationSnapshot;
 import com.google.api.gax.longrunning.OperationTimedPollAlgorithm;
 import com.google.api.gax.retrying.RetrySettings;
