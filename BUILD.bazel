@@ -100,6 +100,13 @@ java_binary(
     ] + _COMPILE_DEPS,
 )
 
+proto_lang_toolchain(
+    name = "javalite_toolchain",
+    command_line = "--$(PLUGIN_OUT)=shared,immutable:$(OUT)",
+    plugin = ":gapic_generator_plugin",
+    runtime = ":protobuf_lite",
+)
+
 # This is probably not the right way of doing it, but good enough for now.
 # api-compiler module expects "protoc" binary to be accessible during tests execution, this genrule
 # "puts" the "binary" in a proper location (the tests are still hermetic, even with this hack).
