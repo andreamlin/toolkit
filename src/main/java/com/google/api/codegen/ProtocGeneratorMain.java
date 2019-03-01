@@ -47,8 +47,6 @@ public class ProtocGeneratorMain {
   private static final ArtifactType DEFAULT_ARTIFACT_TYPE = GAPIC_CODE;
 
   public static void main(String[] args) {
-    System.err.println("Parsing System.in for CodeGeneratorRequest.");
-
     CodeGeneratorResponse response;
     CodeGeneratorRequest request;
     int exitCode = 0;
@@ -56,7 +54,13 @@ public class ProtocGeneratorMain {
     try {
       request = PluginProtos.CodeGeneratorRequest.parseFrom(System.in);
     } catch (IOException e) {
-      System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
+      response = PluginProtos.CodeGeneratorResponse.newBuilder().setError(e.toString()).build();
+      try {
+        response.writeTo(System.out);
+      } catch (IOException e2) {
+        System.err.println("Unable to parse CodeGeneraterRequest from stdin.");
+        e2.printStackTrace(System.err);
+      }
       System.exit(1);
       return;
     }
@@ -75,8 +79,9 @@ public class ProtocGeneratorMain {
     try {
       response.writeTo(System.out);
     } catch (IOException e) {
-      exitCode = 1;
       System.err.println("Failed to write out CodeGeneratorResponse.");
+      e.printStackTrace(System.err);
+      System.exit(1);
     }
 
     System.out.flush();
