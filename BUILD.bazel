@@ -94,8 +94,8 @@ java_binary(
     main_class = "com.google.api.codegen.ProtocGeneratorMain",
     resources = glob(["src/main/resources/**/*"]),
     visibility = ["//visibility:public"],
+    plugins = [":auto_value_plugin"],
     deps = [
-        ":auto_value",
         ":config_java_proto",
     ] + _COMPILE_DEPS,
 )
@@ -104,7 +104,6 @@ proto_lang_toolchain(
     name = "javalite_toolchain",
     command_line = "--$(PLUGIN_OUT)=shared,immutable:$(OUT)",
     plugin = ":gapic_generator_plugin",
-    runtime = ":protobuf_lite",
 )
 
 # This is probably not the right way of doing it, but good enough for now.
