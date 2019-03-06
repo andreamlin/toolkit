@@ -171,7 +171,7 @@ def com_google_api_grpc_proto_google_common_protos():
 def com_google_auto_value_auto_value():
     native.maven_jar(
         name = "com_google_auto_value_auto_value",
-        artifact = "com.google.auto.value:auto-value:1.6",
+        artifact = "com.google.auto.value:auto-value:1.4",
     )
 
 def com_google_auto_value_auto_value_annotations():
