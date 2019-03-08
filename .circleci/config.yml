@@ -492,6 +492,30 @@ jobs:
           paths:
             - gapic-generator/artman-genfiles
             - reports
+  protoc-plugin-run:
+    # Generate the Discovery Compute client and run its tests.
+    working_directory: /tmp/
+    environment:
+#      # Directory to output the generated Compute client.
+      COMPUTE_OUT: /tmp/gapic-out
+#      # Commit hash to use the discover-artifact-manager repo from
+#      DISCOVERY_REPO_VERSION: 95c64e678877821ffea2daccbedad4fa63049028
+#      DISCOVERY_REPO_PATH: https://raw.githubusercontent.com/googleapis/discovery-artifact-manager
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Copy over the build.gradle file for the generated client
+          command: |
+            cd workspace/gapic-generator
+            cp .circleci/discogapic_compute_build.gradle $COMPUTE_OUT/build.gradle
+      - run:
+          name: Run generated tests for Compute
+          command: |
+            cd $COMPUTE_OUT
+            gradle test
   compute-discovery-test:
     # Generate the Discovery Compute client and run its tests.
     working_directory: /tmp/
