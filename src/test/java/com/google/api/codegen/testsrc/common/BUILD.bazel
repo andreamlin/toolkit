@@ -7,9 +7,46 @@ package(default_visibility = ["//visibility:public"])
 load("//rules_gapic:gapic.bzl", "proto_library_with_info")
 
 proto_library(
+    name = "errors_proto",
+    srcs = ["errors.proto"],
+)
+
+proto_library(
+    name = "tagger_proto",
+    srcs = ["tagger.proto"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/api:field_behavior_proto",
+        "//google/api:resource_proto",
+    ],
+)
+
+proto_library(
+    name = "other_shared_type_proto",
+    srcs = ["other_shared_type.proto"],
+)
+
+proto_library(
+    name = "shared_type_proto",
+    srcs = ["shared_type.proto"],
+    deps = [
+        ":other_shared_type_proto",
+    ],
+)
+
+proto_library(
     name = "library_proto",
-    srcs = ["language_service.proto"],
-    deps = ["//google/api:annotations_proto"],
+    srcs = ["library.proto"],
+    deps = [
+        ":errors_proto",
+        ":shared_type_proto",
+        ":tagger_proto",
+        "//google/api:annotations_proto",
+        "//google/api:client_proto",
+        "//google/api:field_behavior_proto",
+        "//google/api:resource_proto",
+        "//google/longrunning:operations_proto",
+    ],
 )
 
 proto_library_with_info(
@@ -26,11 +63,18 @@ load("//rules_gapic/java:java_gapic_pkg.bzl", "java_gapic_assembly_gradle_pkg")
 
 _JAVA_GRPC_DEPS = [
     "@com_google_api_grpc_proto_google_common_protos//jar",
+    "@com_google_api_gax//jar",
 ]
 
 java_proto_library(
     name = "library_java_proto",
-    deps = [":library_proto"],
+    deps = [
+        ":library_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
 )
 
 java_grpc_library(
@@ -39,13 +83,22 @@ java_grpc_library(
     deps = [":library_java_proto"] + _JAVA_GRPC_DEPS,
 )
 
+java_resource_name_proto_library(
+    name = "library_resource_name_java_proto",
+    gapic_yaml = "library_gapic.yaml",
+    deps = [":library_proto"],
+)
+
 java_gapic_library(
     name = "library_java_gapic",
     src = ":library_proto_with_info",
     gapic_yaml = "library_gapic.yaml",
     service_yaml = "library.yaml",
     test_deps = [":library_java_grpc"],
-    deps = [":library_java_proto"] + _JAVA_GRPC_DEPS,
+    deps = [
+        ":library_java_proto",
+        ":library_resource_name_java_proto",
+    ] + _JAVA_GRPC_DEPS,
 )
 
 [java_test(
@@ -60,7 +113,7 @@ java_gapic_library(
 java_gapic_assembly_gradle_pkg(
     name = "google-example-library-v1-java",
     client_deps = [":library_java_gapic"],
-    client_group = "com.google.cloud",
+    client_group = "com.google.example",
     client_test_deps = [":library_java_gapic_test"],
     grpc_deps = [":library_java_grpc"],
     grpc_group = "com.google.api.grpc",
