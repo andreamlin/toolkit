@@ -28,6 +28,7 @@ _COMPILE_DEPS = [
     "@org_ow2_asm_asm//jar",
     "@org_threeten_threetenbp//jar",
     "@org_yaml_snakeyaml//jar",
+    "@com_google_api_gax//jar",
 ]
 
 _TEST_COMPILE_DEPS = [
@@ -73,9 +74,9 @@ java_binary(
     javacopts = _JAVA_COPTS,
     jvm_flags = ["-Xmx512m"],
     main_class = "com.google.api.codegen.GeneratorMain",
+    plugins = [":auto_value_plugin"],
     resources = glob(["src/main/resources/**/*"]),
     visibility = ["//visibility:public"],
-    plugins = [":auto_value_plugin"],
     deps = [
         ":config_java_proto",
     ] + _COMPILE_DEPS,
@@ -101,6 +102,7 @@ java_library(
         "src/main/resources/**/*",
     ]) + [":protoc_binary_hack_for_test"],
     javacopts = _JAVA_COPTS,
+    plugins = [":auto_value_plugin"],
     resources = glob([
         "src/**/testdata/**/*",
         "src/**/testsrc/**/*",
@@ -109,7 +111,6 @@ java_library(
     ]) + ["@com_google_protobuf//:well_known_protos"],
     visibility = ["//visibility:public"],
     runtime_deps = ["@com_google_protobuf//:protoc"],
-    plugins = [":auto_value_plugin"],
     deps = [
         ":config_java_proto",
         ":gapic_generator",
