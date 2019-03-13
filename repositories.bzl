@@ -59,6 +59,18 @@ def com_google_api_codegen_repositories():
         urls = ["https://github.com/googleapis/protoc-java-resource-names-plugin/archive/46d8662701a9ce9a7afcf16c2262f686f9dbe279.zip"],
     )
 
+    _maybe(
+        native.local_repository,
+        name = "com_google_api_gax",
+        path = "/usr/local/google/home/andrealin/Documents/git/veneer/api-common-protos",
+    )
+
+    _maybe(
+        native.local_repository,
+        name = "google_common_protos_java",
+        path = "/usr/local/google/home/andrealin/Documents/git/veneer/api-common-protos",
+    )
+
 def _maybe(repo_rule, name, strip_repo_prefix = "", **kwargs):
     if not name.startswith(strip_repo_prefix):
         return
