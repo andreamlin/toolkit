@@ -61,15 +61,11 @@ def com_google_api_codegen_repositories():
 
     _maybe(
         native.local_repository,
-        name = "com_google_api_gax",
+        name = "com_google_api_common_protos",
         path = "/usr/local/google/home/andrealin/Documents/git/veneer/api-common-protos",
     )
 
-    _maybe(
-        native.local_repository,
-        name = "google_common_protos_java",
-        path = "/usr/local/google/home/andrealin/Documents/git/veneer/api-common-protos",
-    )
+    #TODO: change above to git repo zip
 
 def _maybe(repo_rule, name, strip_repo_prefix = "", **kwargs):
     if not name.startswith(strip_repo_prefix):

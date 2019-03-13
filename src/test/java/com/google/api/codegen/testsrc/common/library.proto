@@ -4,8 +4,11 @@ syntax = "proto3";
 
 package google.example.library.v1;
 
-import "book_from_anywhere.proto";
-import "field_mask.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/book_from_anywhere.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/field_mask.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/shared_type.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/tagger.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/errors.proto";
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/longrunning/operations.proto";
@@ -18,9 +21,6 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
-import "shared_type.proto";
-import "tagger.proto";
-import "errors.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "LibraryProto";

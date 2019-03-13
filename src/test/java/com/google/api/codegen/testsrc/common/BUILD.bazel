@@ -26,12 +26,22 @@ proto_library(
 )
 
 proto_library(
+    name = "book_from_anywhere_proto",
+    srcs = ["book_from_anywhere.proto"],
+)
+
+proto_library(
+    name = "field_mask_proto",
+    srcs = ["field_mask.proto"],
+)
+
+proto_library(
     name = "tagger_proto",
     srcs = ["tagger.proto"],
     deps = [
-        "@google_common_protos_java//google/api:annotations_proto",
-        "@google_common_protos_java//google/api:field_behavior",
-        "@google_common_protos_java//google/api:resource_proto",
+        "@com_google_api_common_protos//google/api:annotations_proto",
+        "@com_google_api_common_protos//google/api:field_behavior_proto",
+        "@com_google_api_common_protos//google/api:resource_proto",
     ],
 )
 
@@ -39,14 +49,23 @@ proto_library(
     name = "library_proto",
     srcs = ["library.proto"],
     deps = [
+        ":book_from_anywhere_proto",
         ":errors_proto",
+        ":field_mask_proto",
         ":shared_type_proto",
         ":tagger_proto",
-        "//google/longrunning:operations_proto",
-        "@google_common_protos_java//google/api:annotations_proto",
-        "@google_common_protos_java//google/api:client_proto",
-        "@google_common_protos_java//google/api:field_behavior_proto",
-        "@google_common_protos_java//google/api:resource_proto",
+        "@com_google_api_common_protos//google/api:annotations_proto",
+        "@com_google_api_common_protos//google/api:client_proto",
+        "@com_google_api_common_protos//google/api:field_behavior_proto",
+        "@com_google_api_common_protos//google/api:resource_proto",
+        "@com_google_api_common_protos//google/longrunning:operations_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
     ],
 )
 

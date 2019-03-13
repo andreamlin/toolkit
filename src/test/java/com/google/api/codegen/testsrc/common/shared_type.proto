@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package google.test.shared.data;
 
-import "other_shared_type.proto";
+import "src/test/java/com/google/api/codegen/testsrc/common/other_shared_type.proto";
 
 // This message is used by the library service and does not reference
 // other_shared_type.proto.
