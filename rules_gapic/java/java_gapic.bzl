@@ -92,6 +92,29 @@ def java_resource_name_proto_library(name, deps, gapic_yaml, visibility = None):
         visibility = visibility,
     )
 
+def java_gapic_plugin(name, deps, gapic_yaml, visibility = None):
+    srcjar_target_name = "%s_srcjar" % name
+    srcjar_output_suffix = ".srcjar"
+
+    proto_custom_library(
+        name = srcjar_target_name,
+        deps = deps,
+        plugin = Label("@com_google_protoc_java_resource_names_plugin//:gapic_plugin"),
+        plugin_args = [gapic_yaml],
+        output_type = "resourcename",
+        output_suffix = srcjar_output_suffix,
+    )
+
+    native.java_library(
+        name = name,
+        srcs = [":%s%s" % (srcjar_target_name, srcjar_output_suffix)],
+        deps = [
+            "@com_google_api_api_common//jar",
+            "@com_google_guava_guava//jar",
+        ],
+        visibility = visibility,
+    )
+
 def java_gapic_library_raw(
         name,
         src,
