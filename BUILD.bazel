@@ -82,6 +82,22 @@ java_binary(
     ] + _COMPILE_DEPS,
 )
 
+java_binary(
+    name = "gapic_generator_plugin",
+    srcs = glob(["src/main/java/**/*.java"]),
+    create_executable = True,
+    javacopts = _JAVA_COPTS,
+    jvm_flags = ["-Xmx512m"],
+    main_class = "com.google.api.codegen.ProtocGeneratorMain",
+    plugins = [":auto_value_plugin"],
+    resources = glob(["src/main/resources/**/*"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_protobuf//:protobuf_java",
+        ":config_java_proto",
+    ] + _COMPILE_DEPS,
+)
+
 # This is probably not the right way of doing it, but good enough for now.
 # api-compiler module expects "protoc" binary to be accessible during tests execution, this genrule
 # "puts" the "binary" in a proper location (the tests are still hermetic, even with this hack).
@@ -114,6 +130,30 @@ java_library(
     deps = [
         ":config_java_proto",
         ":gapic_generator",
+    ] + _COMPILE_DEPS + _TEST_COMPILE_DEPS,
+)
+
+java_library(
+    name = "gapic_generator_plugin_testlib",
+    srcs = glob(["src/test/java/**/*.java"]),
+    data = glob([
+        "src/**/testdata/**/*",
+        "src/**/testsrc/**/*",
+        "src/main/resources/**/*",
+    ]) + [":protoc_binary_hack_for_test"],
+    javacopts = _JAVA_COPTS,
+    plugins = [":auto_value_plugin"],
+    resources = glob([
+        "src/**/testdata/**/*",
+        "src/**/testsrc/**/*",
+        "src/**/discoverytestdata/**/*",
+        "src/test/java/**/*.proto",
+    ]) + ["@com_google_protobuf//:well_known_protos"],
+    visibility = ["//visibility:public"],
+    runtime_deps = ["@com_google_protobuf//:protoc"],
+    deps = [
+        ":config_java_proto",
+        ":gapic_generator_plugin",
     ] + _COMPILE_DEPS + _TEST_COMPILE_DEPS,
 )
 

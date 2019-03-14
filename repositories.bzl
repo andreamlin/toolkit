@@ -60,12 +60,11 @@ def com_google_api_codegen_repositories():
     )
 
     _maybe(
-        native.local_repository,
+        http_archive,
         name = "com_google_api_common_protos",
-        path = "/usr/local/google/home/andrealin/Documents/git/veneer/api-common-protos",
+        strip_prefix = "api-common-protos-1cd7ec00860edbd45da829b12551ea8dc52dc20c",
+        urls = ["https://github.com/googleapis/api-common-protos/archive/1cd7ec00860edbd45da829b12551ea8dc52dc20c.zip"],
     )
-
-    #TODO: change above to git repo zip
 
 def _maybe(repo_rule, name, strip_repo_prefix = "", **kwargs):
     if not name.startswith(strip_repo_prefix):
