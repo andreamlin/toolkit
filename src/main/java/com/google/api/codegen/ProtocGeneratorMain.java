@@ -36,7 +36,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
-import javax.annotation.Nonnull;
 
 /**
  * Entrypoint for protoc-plugin invoked generation. Protoc passes input via std.in as a serialized
@@ -89,12 +88,12 @@ public class ProtocGeneratorMain {
   }
 
   @VisibleForTesting
-  @Nonnull
   // Parses the InputStream for a CodeGeneratorRequest and returns the generated output in a
   // CodeGeneratorResponse.
   public static CodeGeneratorResponse generate(CodeGeneratorRequest request) {
     try {
       ToolOptions toolOptions = parseOptions(request);
+
       ProtocGapicWriter gapicWriter = new ProtocGapicWriter();
       GapicGeneratorApp codeGen =
           new GapicGeneratorApp(toolOptions, DEFAULT_ARTIFACT_TYPE, gapicWriter);
