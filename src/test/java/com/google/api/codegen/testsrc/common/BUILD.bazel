@@ -81,11 +81,15 @@ load("@io_grpc_grpc_java//:java_grpc_library.bzl", "java_grpc_library")
 load("//rules_gapic/java:java_gapic.bzl", "java_gapic_library")
 load("//rules_gapic/java:java_gapic.bzl", "java_resource_name_proto_library")
 load("//rules_gapic/java:java_gapic_pkg.bzl", "java_gapic_assembly_gradle_pkg")
+load(
+    "//:gapic_generator.bzl",
+    "gapic_generator_tests",
+    "google_java_format",
+    "google_java_format_verification",
+)
 
 _JAVA_GRPC_DEPS = [
-    "@com_google_api_proto_proto_google_common_protos//jar",
     "@com_google_api_grpc_proto_google_common_protos//jar",
-    "@com_google_api_gax//jar",
 ]
 
 java_proto_library(

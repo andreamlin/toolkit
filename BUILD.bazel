@@ -28,7 +28,6 @@ _COMPILE_DEPS = [
     "@org_ow2_asm_asm//jar",
     "@org_threeten_threetenbp//jar",
     "@org_yaml_snakeyaml//jar",
-    "@com_google_api_gax//jar",
 ]
 
 _TEST_COMPILE_DEPS = [
@@ -93,7 +92,6 @@ java_binary(
     resources = glob(["src/main/resources/**/*"]),
     visibility = ["//visibility:public"],
     deps = [
-        "@com_google_protobuf//:protobuf_java",
         ":config_java_proto",
     ] + _COMPILE_DEPS,
 )
