@@ -15,13 +15,13 @@
 package com.google.api.codegen.transformer;
 
 import com.google.api.codegen.CodegenTestUtil;
+import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.tools.framework.model.EnumType;
 import com.google.api.tools.framework.model.MessageType;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.ProtoContainerElement;
 import com.google.api.tools.framework.model.ProtoElement;
 import com.google.api.tools.framework.model.TypeRef;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import java.util.Collection;
 import org.junit.rules.TemporaryFolder;
 
@@ -32,7 +32,7 @@ public class ModelTypeNameConverterTestUtil {
 
   public static TypeRef getTestType(TemporaryFolder tempDir, String... path) {
     String fileName = "library.proto";
-    TestDataLocator locator = TestDataLocator.create(CodegenTestUtil.class);
+    MixedPathTestDataLocator locator = MixedPathTestDataLocator.create(CodegenTestUtil.class);
     locator.addTestDataSource(CodegenTestUtil.class, "testsrc/common");
     Model model =
         CodegenTestUtil.readModel(

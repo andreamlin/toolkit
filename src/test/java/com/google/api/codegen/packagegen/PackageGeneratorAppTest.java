@@ -18,7 +18,6 @@ import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.codegen.common.GeneratedResult;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.tools.framework.model.testing.ConfigBaselineTestCase;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.snippet.Doc;
 import com.google.api.tools.framework.tools.ToolOptions;
 import com.google.common.base.Preconditions;
@@ -62,7 +61,8 @@ public class PackageGeneratorAppTest extends ConfigBaselineTestCase {
   private String language;
   private String packageConfig;
   private PackagingArtifactType artifactType;
-  private final TestDataLocator testDataLocator = MixedPathTestDataLocator.create(this.getClass());
+  private final MixedPathTestDataLocator testDataLocator =
+      MixedPathTestDataLocator.create(this.getClass());
 
   @Override
   protected boolean suppressDiagnosis() {
@@ -71,7 +71,7 @@ public class PackageGeneratorAppTest extends ConfigBaselineTestCase {
   }
 
   @Override
-  protected TestDataLocator getTestDataLocator() {
+  protected MixedPathTestDataLocator getTestDataLocator() {
     return this.testDataLocator;
   }
 

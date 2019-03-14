@@ -23,7 +23,6 @@ import com.google.api.codegen.common.GeneratedResult;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.tools.framework.model.SimpleDiagCollector;
 import com.google.api.tools.framework.model.testing.ConfigBaselineTestCase;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.snippet.Doc;
 import com.google.common.io.Files;
 import com.google.protobuf.MessageOrBuilder;
@@ -52,7 +51,8 @@ public abstract class DiscoGapicTestBase extends ConfigBaselineTestCase {
   @Nullable private final String packageConfigFileName;
   protected ConfigProto config;
   private List<CodeGenerator<?>> discoGapicGenerators;
-  private final TestDataLocator testDataLocator = MixedPathTestDataLocator.create(this.getClass());
+  private final MixedPathTestDataLocator testDataLocator =
+      MixedPathTestDataLocator.create(this.getClass());
 
   public DiscoGapicTestBase(
       TargetLanguage language,
@@ -72,7 +72,7 @@ public abstract class DiscoGapicTestBase extends ConfigBaselineTestCase {
   }
 
   @Override
-  protected TestDataLocator getTestDataLocator() {
+  protected MixedPathTestDataLocator getTestDataLocator() {
     return this.testDataLocator;
   }
 

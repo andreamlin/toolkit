@@ -16,7 +16,6 @@ package com.google.api.codegen.discogapic;
 
 import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.codegen.configgen.DiscoConfigGeneratorApp;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.tools.ToolOptions;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +26,8 @@ import org.junit.Test;
 
 public class DiscoConfigGenerationTest extends DiscoConfigBaselineTestCase {
 
-  private final TestDataLocator testDataLocator = MixedPathTestDataLocator.create(this.getClass());
+  private final MixedPathTestDataLocator testDataLocator =
+      MixedPathTestDataLocator.create(this.getClass());
 
   @Override
   protected String baselineFileName() {
@@ -41,7 +41,7 @@ public class DiscoConfigGenerationTest extends DiscoConfigBaselineTestCase {
   }
 
   @Override
-  protected TestDataLocator getTestDataLocator() {
+  protected MixedPathTestDataLocator getTestDataLocator() {
     return this.testDataLocator;
   }
 

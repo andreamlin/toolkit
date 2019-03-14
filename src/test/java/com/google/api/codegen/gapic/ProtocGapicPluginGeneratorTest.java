@@ -15,11 +15,11 @@
 package com.google.api.codegen.gapic;
 
 import com.google.api.codegen.CodegenTestUtil;
+import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.codegen.ProtocGeneratorMain;
 import com.google.api.codegen.protoannotations.GapicCodeGeneratorAnnotationsTest;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.ProtoFile;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.common.truth.Truth;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorRequest;
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse;
@@ -32,13 +32,13 @@ import org.junit.rules.TemporaryFolder;
 public class ProtocGapicPluginGeneratorTest {
 
   private static String[] protoFiles = {"multiple_services.proto"};
-  private static TestDataLocator testDataLocator;
+  private static MixedPathTestDataLocator testDataLocator;
   private static Model model;
   @ClassRule public static TemporaryFolder tempDir = new TemporaryFolder();
 
   @BeforeClass
   public static void startUp() {
-    testDataLocator = TestDataLocator.create(GapicCodeGeneratorAnnotationsTest.class);
+    testDataLocator = MixedPathTestDataLocator.create(GapicCodeGeneratorAnnotationsTest.class);
     testDataLocator.addTestDataSource(CodegenTestUtil.class, "testsrc/common");
 
     model = CodegenTestUtil.readModel(testDataLocator, tempDir, protoFiles, new String[] {});

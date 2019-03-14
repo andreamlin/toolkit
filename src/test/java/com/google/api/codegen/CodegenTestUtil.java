@@ -21,7 +21,6 @@ import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.stages.Merged;
 import com.google.api.tools.framework.model.testing.TestConfig;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.setup.StandardSetup;
 import com.google.common.collect.ImmutableMap;
 import com.google.protobuf.Message;
@@ -36,7 +35,10 @@ import org.junit.rules.TemporaryFolder;
 public class CodegenTestUtil {
 
   public static Model readModel(
-      TestDataLocator locator, TemporaryFolder tempDir, String[] protoFiles, String[] yamlFiles) {
+      MixedPathTestDataLocator locator,
+      TemporaryFolder tempDir,
+      String[] protoFiles,
+      String[] yamlFiles) {
     TestConfig testConfig =
         new GapicTestConfig(locator, tempDir.getRoot().getPath(), Arrays.asList(protoFiles));
     Model model = testConfig.createModel(Arrays.asList(yamlFiles));
@@ -47,7 +49,9 @@ public class CodegenTestUtil {
   }
 
   public static ConfigProto readConfig(
-      DiagCollector diagCollector, TestDataLocator testDataLocator, String[] gapicConfigFileNames) {
+      DiagCollector diagCollector,
+      MixedPathTestDataLocator testDataLocator,
+      String[] gapicConfigFileNames) {
     ImmutableMap<String, Message> supportedConfigTypes =
         ImmutableMap.of(
             ConfigProto.getDescriptor().getFullName(), ConfigProto.getDefaultInstance());

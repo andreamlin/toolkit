@@ -30,7 +30,6 @@ import com.google.api.codegen.util.TypeAlias;
 import com.google.api.tools.framework.model.Interface;
 import com.google.api.tools.framework.model.Method;
 import com.google.api.tools.framework.model.Model;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import java.util.Collections;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -48,7 +47,8 @@ public class GoGapicSurfaceTransformerTest {
 
   @BeforeClass
   public static void setupClass() {
-    TestDataLocator locator = MixedPathTestDataLocator.create(GoGapicSurfaceTransformerTest.class);
+    MixedPathTestDataLocator locator =
+        MixedPathTestDataLocator.create(GoGapicSurfaceTransformerTest.class);
     model =
         CodegenTestUtil.readModel(
             locator,

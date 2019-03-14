@@ -17,6 +17,7 @@ package com.google.api.codegen.metacode;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth8.assertThat;
 
+import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.codegen.config.ProtoTypeRef;
 import com.google.api.codegen.util.Name;
 import com.google.api.codegen.util.SymbolTable;
@@ -25,7 +26,6 @@ import com.google.api.tools.framework.model.Method;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.stages.Merged;
 import com.google.api.tools.framework.model.testing.TestConfig;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.setup.StandardSetup;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -40,7 +40,7 @@ public class SampleInitCodeTest {
 
   @ClassRule public static TemporaryFolder tempDir = new TemporaryFolder();
 
-  private static TestDataLocator testDataLocator;
+  private static MixedPathTestDataLocator testDataLocator;
   private static TestConfig testConfig;
   private static Model model;
   private static Interface apiInterface;
@@ -50,7 +50,7 @@ public class SampleInitCodeTest {
   public static void setupClass() {
     List<String> protoFiles = Lists.newArrayList("myproto.proto");
     List<String> yamlFiles = Lists.newArrayList("myproto.yaml");
-    testDataLocator = TestDataLocator.create(SampleInitCodeTest.class);
+    testDataLocator = MixedPathTestDataLocator.create(SampleInitCodeTest.class);
     testConfig = new TestConfig(testDataLocator, tempDir.getRoot().getPath(), protoFiles);
     model = testConfig.createModel(yamlFiles);
     StandardSetup.registerStandardProcessors(model);

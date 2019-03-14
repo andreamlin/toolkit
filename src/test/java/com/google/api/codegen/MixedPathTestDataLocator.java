@@ -18,6 +18,7 @@ package com.google.api.codegen;
 import com.google.api.tools.framework.model.testing.ClassPathTestDataLocator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.CharStreams;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -71,6 +72,50 @@ public class MixedPathTestDataLocator extends ClassPathTestDataLocator {
       }
     }
     return super.resolveTestData(name);
+  }
+
+  /**
+   * Injects all files from a directory as virtual test data. This is non-recursive. Injects the
+   * files using their full path, relative to the code repo root "./gapic-generator". This enables
+   * the testing framework to view proto file imports as Bazel does, from the WORKSPACE-level
+   * directory.
+   */
+  private void injectProtoFilesFromCodeRoot(Path pathFromCodeDir) {
+    File dir = pathFromCodeDir.toFile();
+    File[] directoryListing = dir.listFiles();
+    if (directoryListing != null) {
+      for (File child : directoryListing) {
+        injectProtoTestFile(child.toPath());
+      }
+    } else {
+      injectProtoTestFile(pathFromCodeDir);
+    }
+  }
+
+  private void injectProtoTestFile(Path protoFile) {
+    if (protoFile.toString().endsWith(".proto")) {
+      injectVirtualTestData(protoFile.toString(), readOutFile(protoFile));
+    }
+  }
+
+  private String readOutFile(Path file) {
+    try {
+      return new String(Files.readAllBytes(file), StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void addTestDataSource(Class<?> classContext, String testDataDir) {
+    String relativeToThis = classContext.getPackage().getName().replace('.', '/');
+    for (String pathPrefix : pathPrefixes) {
+      Path pathFromCodeRepo = Paths.get(pathPrefix, relativeToThis, testDataDir);
+      if (Files.exists(pathFromCodeRepo)) {
+        injectProtoFilesFromCodeRoot(pathFromCodeRepo);
+      }
+    }
+    super.addTestDataSource(classContext, testDataDir);
   }
 
   @Override

@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import com.google.api.Resource;
 import com.google.api.ResourceSet;
 import com.google.api.codegen.CodegenTestUtil;
+import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.codegen.config.GapicProductConfig;
 import com.google.api.codegen.protoannotations.GapicCodeGeneratorAnnotationsTest;
 import com.google.api.tools.framework.model.BoundedDiagCollector;
@@ -29,7 +30,6 @@ import com.google.api.tools.framework.model.MessageType;
 import com.google.api.tools.framework.model.Method;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.ProtoFile;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.common.collect.ImmutableSet;
 import com.google.longrunning.OperationInfo;
 import java.util.Arrays;
@@ -45,7 +45,7 @@ public class ProtoParserTest {
 
   @ClassRule public static TemporaryFolder tempDir = new TemporaryFolder();
   private static Model model;
-  private static TestDataLocator testDataLocator;
+  private static MixedPathTestDataLocator testDataLocator;
   private static ProtoFile libraryProtoFile;
   private static Field shelfNameField;
   private static Interface libraryService;
@@ -64,7 +64,7 @@ public class ProtoParserTest {
   public static void startUp() {
     // Load and parse protofile.
 
-    testDataLocator = TestDataLocator.create(GapicCodeGeneratorAnnotationsTest.class);
+    testDataLocator = MixedPathTestDataLocator.create(GapicCodeGeneratorAnnotationsTest.class);
     testDataLocator.addTestDataSource(CodegenTestUtil.class, "testsrc/common");
 
     model =

@@ -31,7 +31,6 @@ import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.stages.Merged;
 import com.google.api.tools.framework.model.testing.ConfigBaselineTestCase;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -58,7 +57,8 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
   private final String baselineFile;
   private final String protoPackage;
   private final String clientPackage;
-  private final TestDataLocator testDataLocator = MixedPathTestDataLocator.create(this.getClass());
+  private final MixedPathTestDataLocator testDataLocator =
+      MixedPathTestDataLocator.create(this.getClass());
 
   public GapicTestBase2(
       TargetLanguage language,
@@ -88,7 +88,7 @@ public abstract class GapicTestBase2 extends ConfigBaselineTestCase {
   }
 
   @Override
-  protected TestDataLocator getTestDataLocator() {
+  protected MixedPathTestDataLocator getTestDataLocator() {
     return this.testDataLocator;
   }
 

@@ -14,16 +14,17 @@
  */
 package com.google.api.codegen.gapic;
 
+import com.google.api.codegen.MixedPathTestDataLocator;
 import com.google.api.tools.framework.model.Experiments;
 import com.google.api.tools.framework.model.testing.TestConfig;
-import com.google.api.tools.framework.model.testing.TestDataLocator;
 import com.google.api.tools.framework.model.testing.TestModelGenerator;
 import java.util.List;
 import org.junit.rules.TemporaryFolder;
 
 public class GapicTestModelGenerator extends TestModelGenerator {
 
-  public GapicTestModelGenerator(TestDataLocator testDataLocator, TemporaryFolder tempDir) {
+  public GapicTestModelGenerator(
+      MixedPathTestDataLocator testDataLocator, TemporaryFolder tempDir) {
     super(testDataLocator, tempDir);
   }
 
