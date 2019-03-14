@@ -99,7 +99,7 @@ public class PackageGeneratorAppTest extends ConfigBaselineTestCase {
     options.set(PackageGeneratorApp.ARTIFACT_TYPE, artifactType);
     URL dependenciesYamlUrl =
         getTestDataLocator()
-            .findTestData("library/common/frozen_dependencies.yaml");
+            .findTestData("com/google/api/codegen/testsrc/common/frozen_dependencies.yaml");
     Preconditions.checkNotNull(dependenciesYamlUrl);
     Map<String, GeneratedResult<Doc>> generatedDocs =
         new PackageGeneratorApp(options, dependenciesYamlUrl).generate(model);
