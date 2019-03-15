@@ -55,8 +55,9 @@ def com_google_api_codegen_repositories():
     _maybe(
         http_archive,
         name = "com_google_protoc_java_resource_names_plugin",
-        strip_prefix = "protoc-java-resource-names-plugin-46d8662701a9ce9a7afcf16c2262f686f9dbe279",
-        urls = ["https://github.com/googleapis/protoc-java-resource-names-plugin/archive/46d8662701a9ce9a7afcf16c2262f686f9dbe279.zip"],
+        # TODO (andrealin): Change back to googleapis/... source once this change is checked in.
+        strip_prefix = "protoc-java-resource-names-plugin-00dfd0e5958643f579c60425b78a9e2aa98469c8",
+        urls = ["https://github.com/andreamlin/protoc-java-resource-names-plugin/archive/00dfd0e5958643f579c60425b78a9e2aa98469c8.zip"],
     )
 
     _maybe(
