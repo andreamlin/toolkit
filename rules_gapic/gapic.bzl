@@ -56,7 +56,7 @@ gapic_srcjar = rule(
             allow_single_file = True,
             mandatory = True,
         ),
-        "gapic_yaml": attr.label(mandatory = True, allow_single_file = True),
+        "gapic_yaml": attr.label(mandatory = False, allow_single_file = True),
         "artifact_type": attr.string(mandatory = False, default = "GAPIC_CODE"),
         "language": attr.string(mandatory = True),
         "service_yaml": attr.label(mandatory = False, allow_single_file = True),
