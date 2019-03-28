@@ -208,7 +208,7 @@
 # The function is not accept a request, but otherwise the same with simpleMethod.
 @private noRequestStreamMethod(view, method)
     func (c *{@view.clientTypeName}) {@method.name}(ctx context.Context, opts ...gax.CallOption) ({@method.responseTypeName}, error) {
-        {@mergeMetadata(method)}
+        {@mergeMetadataExceptHeaders(method)}
         opts = {@mergeOptions(method.settingsGetterName)}
         var resp {@method.serviceResponseTypeName}
         err := gax.Invoke(ctx, func(ctx context.Context, settings gax.CallSettings) error {
@@ -472,6 +472,10 @@
     @else
         ctx = insertMetadata(ctx, c.xGoogMetadata)
     @end
+@end
+
+@private mergeMetadataExceptHeaders(method)
+    ctx = insertMetadata(ctx, c.xGoogMetadata)
 @end
 
 @private mergeOptions(getterName)
