@@ -28,13 +28,11 @@ import com.google.api.codegen.ResourceNameTreatment;
 import com.google.api.codegen.VisibilityProto;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.codegen.configgen.mergers.LanguageSettingsMerger;
-import com.google.api.codegen.util.ConfigNextVersionValidator;
+import com.google.api.codegen.util.ConfigVersionValidator;
 import com.google.api.codegen.util.LicenseHeaderUtil;
 import com.google.api.codegen.util.ProtoParser;
-import com.google.api.tools.framework.model.ConfigValidator;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
-import com.google.api.tools.framework.model.Element;
 import com.google.api.tools.framework.model.Interface;
 import com.google.api.tools.framework.model.Method;
 import com.google.api.tools.framework.model.Model;
@@ -162,13 +160,18 @@ public abstract class GapicProductConfig implements ProductConfig {
       @Nullable String clientPackage,
       TargetLanguage language) {
 
-    if (configProto == null || configProto.getConfigSchemaVersion().equalsIgnoreCase("2.0.0")) {
+    if (configProto == null
+        || configProto
+            .getConfigSchemaVersion()
+            .equalsIgnoreCase(ConfigVersionValidator.CONFIG_V2_VERSION)) {
       if (configProto != null) {
-        ConfigNextVersionValidator configValidator = new ConfigNextVersionValidator();
-        configValidator.checkIsNextVersionConfig(configProto);
-      }
-      else {
-        configProto.get
+        ConfigVersionValidator configValidator = new ConfigVersionValidator();
+        configValidator.validateV2Config(configProto);
+      } else {
+        configProto =
+            ConfigProto.newBuilder()
+                .setConfigSchemaVersion(ConfigVersionValidator.CONFIG_V2_VERSION)
+                .build();
       }
       return createForConfigV2(model, configProto, protoPackage, clientPackage, language);
     } else {
@@ -179,18 +182,196 @@ public abstract class GapicProductConfig implements ProductConfig {
   @Nullable
   private static GapicProductConfig createForConfigV1(
       Model model,
-      @Nullable ConfigProto configProto,
+      ConfigProto configProto,
       @Nullable String protoPackage,
       @Nullable String clientPackage,
       TargetLanguage language) {
 
-    return null;
+    final String defaultPackage;
+    SymbolTable symbolTable = model.getSymbolTable();
+
+    if (protoPackage != null) {
+      // Default to using --package option for value of default package and first API protoFile.
+      defaultPackage = protoPackage;
+    } else if (configProto != null) {
+      // Otherwise use configProto to get the proto file containing the first interface listed in
+      // the config proto, and use it as
+      // the assigned file for generated resource names, and to get the default message namespace.
+      ProtoFile file =
+          symbolTable.lookupInterface(configProto.getInterfaces(0).getName()).getFile();
+      defaultPackage = file.getProto().getPackage();
+    } else {
+      throw new NullPointerException("configProto and protoPackage cannot both be null.");
+    }
+
+    List<ProtoFile> sourceProtos =
+        model
+            .getFiles()
+            .stream()
+            .filter(f -> f.getProto().getPackage().equals(defaultPackage))
+            .collect(Collectors.toList());
+
+    if (protoPackage != null && configProto == null) {
+      if (sourceProtos.isEmpty()) {
+        model
+            .getDiagReporter()
+            .getDiagCollector()
+            .addDiag(
+                Diag.error(
+                    SimpleLocation.TOPLEVEL,
+                    "There are no source proto files with package %s",
+                    defaultPackage));
+      }
+      sourceProtos.forEach(model::addRoot);
+    }
+
+    // Toggle on/off proto annotations parsing.
+    ProtoParser protoParser;
+    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
+    if (configProto == null) {
+      // By default, enable proto annotations parsing when no GAPIC config is given.
+      protoParser = new ProtoParser(true);
+      configProto = ConfigProto.getDefaultInstance();
+    } else {
+      protoParser = new ProtoParser(false);
+    }
+
+    DiagCollector diagCollector = model.getDiagReporter().getDiagCollector();
+
+    Map<Resource, ProtoFile> resourceDefs =
+        protoParser.getResourceDefs(sourceProtos, diagCollector);
+    Map<ResourceSet, ProtoFile> resourceSetDefs =
+        protoParser.getResourceSetDefs(sourceProtos, diagCollector);
+
+    // Get list of fields from proto
+    ResourceNameMessageConfigs messageConfigs =
+        ResourceNameMessageConfigs.createMessageResourceTypesConfig(
+            sourceProtos, configProto, defaultPackage, resourceDefs, resourceSetDefs, protoParser);
+
+    ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
+        createResourceNameConfigs(
+            diagCollector,
+            configProto,
+            sourceProtos,
+            language,
+            resourceDefs,
+            resourceSetDefs,
+            protoParser);
+
+    if (resourceNameConfigs == null) {
+      return null;
+    }
+
+    TransportProtocol transportProtocol = TransportProtocol.GRPC;
+
+    String clientPackageName;
+    LanguageSettingsProto settings =
+        configProto.getLanguageSettingsMap().get(language.toString().toLowerCase());
+    if (settings == null) {
+      settings = LanguageSettingsProto.getDefaultInstance();
+
+      if (!Strings.isNullOrEmpty(clientPackage)) {
+        clientPackageName = clientPackage;
+      } else {
+        String basePackageName = Optional.ofNullable(protoPackage).orElse(getPackageName(model));
+        clientPackageName =
+            LanguageSettingsMerger.getFormattedPackageName(language, basePackageName);
+      }
+    } else {
+      clientPackageName = settings.getPackageName();
+    }
+
+    ImmutableMap<String, Interface> protoInterfaces =
+        getInterfacesFromProtoFile(diagCollector, sourceProtos, symbolTable);
+
+    ImmutableList<GapicInterfaceInput> interfaceInputs;
+    if (!configProto.equals(ConfigProto.getDefaultInstance())) {
+      interfaceInputs =
+          createInterfaceInputsWithGapicConfig(
+              diagCollector,
+              configProto.getInterfacesList(),
+              protoInterfaces,
+              symbolTable,
+              language);
+    } else {
+      interfaceInputs = createInterfaceInputsWithoutGapicConfig(protoInterfaces.values());
+    }
+    if (interfaceInputs == null) {
+      return null;
+    }
+
+    ImmutableMap<String, InterfaceConfig> interfaceConfigMap =
+        createInterfaceConfigMap(
+            diagCollector,
+            interfaceInputs,
+            defaultPackage,
+            settings,
+            messageConfigs,
+            resourceNameConfigs,
+            language,
+            protoParser);
+
+    ImmutableList<String> copyrightLines;
+    ImmutableList<String> licenseLines;
+    String configSchemaVersion = null;
+
+    try {
+      LicenseHeaderUtil licenseHeaderUtil =
+          LicenseHeaderUtil.create(
+              configProto, settings, model.getDiagReporter().getDiagCollector());
+      copyrightLines = licenseHeaderUtil.loadCopyrightLines();
+      licenseLines = licenseHeaderUtil.loadLicenseLines();
+    } catch (Exception e) {
+      model
+          .getDiagReporter()
+          .getDiagCollector()
+          .addDiag(Diag.error(SimpleLocation.TOPLEVEL, "Exception: %s", e.getMessage()));
+      e.printStackTrace(System.err);
+      throw new RuntimeException(e);
+    }
+
+    if (!configProto.equals(ConfigProto.getDefaultInstance())) {
+      configSchemaVersion = configProto.getConfigSchemaVersion();
+      if (Strings.isNullOrEmpty(configSchemaVersion)) {
+        model
+            .getDiagReporter()
+            .getDiagCollector()
+            .addDiag(
+                Diag.error(
+                    SimpleLocation.TOPLEVEL,
+                    "config_schema_version field is required in GAPIC yaml."));
+      }
+    }
+
+    Boolean enableStringFormatFunctionsOverride = null;
+    if (configProto.hasEnableStringFormatFunctionsOverride()) {
+      enableStringFormatFunctionsOverride =
+          configProto.getEnableStringFormatFunctionsOverride().getValue();
+    }
+
+    if (interfaceConfigMap == null || copyrightLines == null || licenseLines == null) {
+      return null;
+    }
+    return new AutoValue_GapicProductConfig(
+        interfaceConfigMap,
+        clientPackageName,
+        settings.getDomainLayerLocation(),
+        settings.getReleaseLevel(),
+        messageConfigs,
+        copyrightLines,
+        licenseLines,
+        resourceNameConfigs,
+        protoParser,
+        transportProtocol,
+        createResponseFieldConfigMap(messageConfigs, resourceNameConfigs),
+        configSchemaVersion,
+        enableStringFormatFunctionsOverride);
   }
 
   @Nullable
   private static GapicProductConfig createForConfigV2(
       Model model,
-      @Nullable ConfigProto configProto,
+      ConfigProto configProto,
       @Nullable String protoPackage,
       @Nullable String clientPackage,
       TargetLanguage language) {
