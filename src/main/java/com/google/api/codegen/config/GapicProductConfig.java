@@ -28,10 +28,13 @@ import com.google.api.codegen.ResourceNameTreatment;
 import com.google.api.codegen.VisibilityProto;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.codegen.configgen.mergers.LanguageSettingsMerger;
+import com.google.api.codegen.util.ConfigNextVersionValidator;
 import com.google.api.codegen.util.LicenseHeaderUtil;
 import com.google.api.codegen.util.ProtoParser;
+import com.google.api.tools.framework.model.ConfigValidator;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
+import com.google.api.tools.framework.model.Element;
 import com.google.api.tools.framework.model.Interface;
 import com.google.api.tools.framework.model.Method;
 import com.google.api.tools.framework.model.Model;
@@ -161,9 +164,12 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     if (configProto == null || configProto.getConfigSchemaVersion().equalsIgnoreCase("2.0.0")) {
       if (configProto != null) {
-        // configProto = ConfigProto.
+        ConfigNextVersionValidator configValidator = new ConfigNextVersionValidator();
+        configValidator.checkIsNextVersionConfig(configProto);
       }
-      // TODO: verify that it follows the v2 schema.
+      else {
+        configProto.get
+      }
       return createForConfigV2(model, configProto, protoPackage, clientPackage, language);
     } else {
       return createForConfigV1(model, configProto, protoPackage, clientPackage, language);
