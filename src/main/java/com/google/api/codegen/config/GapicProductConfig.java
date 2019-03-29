@@ -161,14 +161,14 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     if (configProto == null || configProto.getConfigSchemaVersion().equalsIgnoreCase("2.0.0")) {
       if (configProto != null) {
-        configProto.
+        // configProto = ConfigProto.
       }
       // TODO: verify that it follows the v2 schema.
       return createForConfigV2(model, configProto, protoPackage, clientPackage, language);
     } else {
       return createForConfigV1(model, configProto, protoPackage, clientPackage, language);
     }
-   }
+  }
 
   @Nullable
   private static GapicProductConfig createForConfigV1(
