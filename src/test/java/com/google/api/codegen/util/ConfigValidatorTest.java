@@ -19,7 +19,7 @@ import com.google.api.codegen.FlatteningConfigProto;
 import com.google.api.codegen.FlatteningGroupProto;
 import com.google.api.codegen.InterfaceConfigProto;
 import com.google.api.codegen.MethodConfigProto;
-import com.google.api.codegen.ResourceNameMessageConfigProto;
+import com.google.protobuf.BoolValue;
 import org.junit.Test;
 
 public class ConfigValidatorTest {
@@ -27,8 +27,7 @@ public class ConfigValidatorTest {
       ConfigProto.newBuilder()
           .setConfigSchemaVersion("2.0.0")
           // This is a valid field for both Config v1 and Config v2.
-          .addResourceNameGeneration(
-              ResourceNameMessageConfigProto.newBuilder().setMessageName("GetRequest").build())
+          .setEnableStringFormatFunctionsOverride(BoolValue.of(true))
           .build();
 
   private static final ConfigNextVersionValidator validator = new ConfigNextVersionValidator();
