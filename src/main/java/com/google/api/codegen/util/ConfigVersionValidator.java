@@ -51,7 +51,6 @@ public class ConfigVersionValidator {
       // Compare the v1-serialized and v2-serialized strings of the same config proto object.
       if (!Arrays.equals(configV2.toByteArray(), configV1Proto.toByteArray())) {
         BaselineDiffer differ = new BaselineDiffer();
-        // TODO(andrealin): Use a string diff between the v2 and v1 versions.
         throw new IllegalStateException(
             String.format(
                 "Unknown fields to ConfigProto v2 in configProto:\n%s",
