@@ -167,11 +167,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       if (configProto != null) {
         ConfigVersionValidator configValidator = new ConfigVersionValidator();
         configValidator.validateV2Config(configProto);
-      } else {
-        configProto =
-            ConfigProto.newBuilder()
-                .setConfigSchemaVersion(ConfigVersionValidator.CONFIG_V2_VERSION)
-                .build();
       }
       return createForConfigV2(model, configProto, protoPackage, clientPackage, language);
     } else {
@@ -371,7 +366,7 @@ public abstract class GapicProductConfig implements ProductConfig {
   @Nullable
   private static GapicProductConfig createForConfigV2(
       Model model,
-      ConfigProto configProto,
+      @Nullable ConfigProto configProto,
       @Nullable String protoPackage,
       @Nullable String clientPackage,
       TargetLanguage language) {
