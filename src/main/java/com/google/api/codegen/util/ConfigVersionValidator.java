@@ -20,7 +20,6 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Parser;
 import java.util.Arrays;
 import javax.annotation.Nonnull;
-import org.apache.commons.lang3.StringUtils;
 
 public class ConfigVersionValidator {
 
@@ -55,7 +54,8 @@ public class ConfigVersionValidator {
         // TODO(andrealin): Use a string diff between the v2 and v1 versions.
         throw new IllegalStateException(
             String.format(
-                "Unknown fields to ConfigProto v2 in configProto:\n%s", differ.diff(configV1Proto.toString(), configV2.toString())));
+                "Unknown fields to ConfigProto v2 in configProto:\n%s",
+                differ.diff(configV1Proto.toString(), configV2.toString())));
       }
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException(e);
