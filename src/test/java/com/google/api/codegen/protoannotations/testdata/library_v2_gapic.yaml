@@ -110,8 +110,6 @@ interfaces:
       - name: CreateBook
         retry_codes_name: non_idempotent
         retry_params_name: default
-        # Test resource_name_treatment set to NONE with field_name_patterns
-        resource_name_treatment: NONE
       - name: PublishSeries
         retry_codes_name: non_idempotent
         retry_params_name: default
@@ -277,7 +275,6 @@ interfaces:
       - name: ListBooks
         retry_codes_name: idempotent
         retry_params_name: default
-        timeout_millis: 10000
         sample_code_init_fields:
           # Set the sample_code_init_field for an optional field
           - filter="book-filter-string"
@@ -416,7 +413,6 @@ interfaces:
       - name: MonologAboutBook
         retry_codes_name: idempotent
         retry_params_name: default
-        timeout_millis: 30000
         sample_value_sets:
           # callingFormCheck: prog java: CallableStreamingClient
           # callingFormCheck: prog nodejs: RequestStreamingClient
@@ -491,7 +487,6 @@ interfaces:
             - calling_forms: ".*"
               value_sets: odyssey
       - name: AddTag
-        resource_name_treatment: VALIDATE
         retry_codes_name: non_idempotent
         retry_params_name: default
         surface_treatments:
@@ -505,12 +500,8 @@ interfaces:
               - python
             visibility: DISABLED
       - name: AddLabel
-        resource_name_treatment: VALIDATE
         retry_codes_name: non_idempotent
         retry_params_name: default
-        field_name_patterns:
-          resource: book
-        timeout_millis: 60000
         reroute_to_grpc_interface: google.tagger.v1.Labeler
         surface_treatments:
           - include_languages:
