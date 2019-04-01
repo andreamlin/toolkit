@@ -311,9 +311,7 @@ public abstract class GapicProductConfig implements ProductConfig {
     String configSchemaVersion = null;
 
     try {
-      LicenseHeaderUtil licenseHeaderUtil =
-          LicenseHeaderUtil.create(
-              configProto, settings, model.getDiagReporter().getDiagCollector());
+      LicenseHeaderUtil licenseHeaderUtil = new LicenseHeaderUtil();
       copyrightLines = licenseHeaderUtil.loadCopyrightLines();
       licenseLines = licenseHeaderUtil.loadLicenseLines();
     } catch (Exception e) {
