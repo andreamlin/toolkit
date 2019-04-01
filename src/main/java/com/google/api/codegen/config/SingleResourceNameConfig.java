@@ -15,7 +15,6 @@
 package com.google.api.codegen.config;
 
 import com.google.api.Resource;
-import com.google.api.codegen.CollectionConfigProto;
 import com.google.api.codegen.CollectionLanguageOverridesProto;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.pathtemplate.PathTemplate;
@@ -26,6 +25,7 @@ import com.google.api.tools.framework.model.ProtoFile;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Strings;
+import java.util.List;
 import javax.annotation.Nullable;
 
 /** SingleResourceNameConfig represents the collection configuration for a method. */
@@ -36,27 +36,20 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
    * Creates an instance of SingleResourceNameConfig based on CollectionConfigProto. On errors, null
    * will be returned, and diagnostics are reported to the diag collector.
    */
-  @Nullable
   public static SingleResourceNameConfig createSingleResourceName(
-      DiagCollector diagCollector,
-      CollectionConfigProto collectionConfigProto,
+      List<CollectionLanguageOverridesProto> languageOverridesList,
+      String namePattern,
+      String entityId,
       @Nullable ProtoFile file,
-      TargetLanguage language) {
-    String namePattern = collectionConfigProto.getNamePattern();
-    PathTemplate nameTemplate;
-    try {
-      nameTemplate = PathTemplate.create(namePattern);
-    } catch (ValidationException e) {
-      diagCollector.addDiag(Diag.error(SimpleLocation.TOPLEVEL, e.getMessage()));
-      return null;
-    }
-    String entityId = collectionConfigProto.getEntityName();
+      TargetLanguage language)
+      throws ValidationException {
+    PathTemplate nameTemplate = PathTemplate.create(namePattern);
+
     String entityName = entityId;
     String commonResourceName = null;
     if (language != null) {
       String languageStr = language.toString().toLowerCase();
-      for (CollectionLanguageOverridesProto override :
-          collectionConfigProto.getLanguageOverridesList()) {
+      for (CollectionLanguageOverridesProto override : languageOverridesList) {
         if (languageStr.equals(override.getLanguage())) {
           if (!Strings.isNullOrEmpty(override.getEntityName())) {
             entityName = override.getEntityName();

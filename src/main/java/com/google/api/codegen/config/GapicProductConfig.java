@@ -60,7 +60,9 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -160,6 +162,19 @@ public abstract class GapicProductConfig implements ProductConfig {
       @Nullable String clientPackage,
       TargetLanguage language) {
 
+    if (configProto != null) {
+      String configSchemaVersion = configProto.getConfigSchemaVersion();
+      if (Strings.isNullOrEmpty(configSchemaVersion)) {
+        model
+            .getDiagReporter()
+            .getDiagCollector()
+            .addDiag(
+                Diag.error(
+                    SimpleLocation.TOPLEVEL,
+                    "config_schema_version field is required in GAPIC yaml."));
+      }
+    }
+
     if (configProto == null
         || configProto
             .getConfigSchemaVersion()
@@ -177,7 +192,7 @@ public abstract class GapicProductConfig implements ProductConfig {
   @Nullable
   private static GapicProductConfig createForConfigV1(
       Model model,
-      ConfigProto configProto,
+      @Nonnull ConfigProto configProto,
       @Nullable String protoPackage,
       @Nullable String clientPackage,
       TargetLanguage language) {
@@ -188,15 +203,13 @@ public abstract class GapicProductConfig implements ProductConfig {
     if (protoPackage != null) {
       // Default to using --package option for value of default package and first API protoFile.
       defaultPackage = protoPackage;
-    } else if (configProto != null) {
+    } else {
       // Otherwise use configProto to get the proto file containing the first interface listed in
       // the config proto, and use it as
       // the assigned file for generated resource names, and to get the default message namespace.
       ProtoFile file =
           symbolTable.lookupInterface(configProto.getInterfaces(0).getName()).getFile();
       defaultPackage = file.getProto().getPackage();
-    } else {
-      throw new NullPointerException("configProto and protoPackage cannot both be null.");
     }
 
     List<ProtoFile> sourceProtos =
@@ -206,52 +219,17 @@ public abstract class GapicProductConfig implements ProductConfig {
             .filter(f -> f.getProto().getPackage().equals(defaultPackage))
             .collect(Collectors.toList());
 
-    if (protoPackage != null && configProto == null) {
-      if (sourceProtos.isEmpty()) {
-        model
-            .getDiagReporter()
-            .getDiagCollector()
-            .addDiag(
-                Diag.error(
-                    SimpleLocation.TOPLEVEL,
-                    "There are no source proto files with package %s",
-                    defaultPackage));
-      }
-      sourceProtos.forEach(model::addRoot);
-    }
-
-    // Toggle on/off proto annotations parsing.
-    ProtoParser protoParser;
-    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
-    if (configProto == null) {
-      // By default, enable proto annotations parsing when no GAPIC config is given.
-      protoParser = new ProtoParser(true);
-      configProto = ConfigProto.getDefaultInstance();
-    } else {
-      protoParser = new ProtoParser(false);
-    }
+    ProtoParser protoParser = new ProtoParser(false);
 
     DiagCollector diagCollector = model.getDiagReporter().getDiagCollector();
 
-    Map<Resource, ProtoFile> resourceDefs =
-        protoParser.getResourceDefs(sourceProtos, diagCollector);
-    Map<ResourceSet, ProtoFile> resourceSetDefs =
-        protoParser.getResourceSetDefs(sourceProtos, diagCollector);
-
     // Get list of fields from proto
     ResourceNameMessageConfigs messageConfigs =
-        ResourceNameMessageConfigs.createMessageResourceTypesConfig(
-            sourceProtos, configProto, defaultPackage, resourceDefs, resourceSetDefs, protoParser);
+        ResourceNameMessageConfigs.createMessageResourceTypesConfigV1(
+            sourceProtos, configProto, defaultPackage);
 
     ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
-        createResourceNameConfigs(
-            diagCollector,
-            configProto,
-            sourceProtos,
-            language,
-            resourceDefs,
-            resourceSetDefs,
-            protoParser);
+        createResourceNameConfigsV1(diagCollector, configProto, sourceProtos, language);
 
     if (resourceNameConfigs == null) {
       return null;
@@ -321,19 +299,6 @@ public abstract class GapicProductConfig implements ProductConfig {
           .addDiag(Diag.error(SimpleLocation.TOPLEVEL, "Exception: %s", e.getMessage()));
       e.printStackTrace(System.err);
       throw new RuntimeException(e);
-    }
-
-    if (!configProto.equals(ConfigProto.getDefaultInstance())) {
-      configSchemaVersion = configProto.getConfigSchemaVersion();
-      if (Strings.isNullOrEmpty(configSchemaVersion)) {
-        model
-            .getDiagReporter()
-            .getDiagCollector()
-            .addDiag(
-                Diag.error(
-                    SimpleLocation.TOPLEVEL,
-                    "config_schema_version field is required in GAPIC yaml."));
-      }
     }
 
     Boolean enableStringFormatFunctionsOverride = null;
@@ -408,14 +373,10 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
 
     // Toggle on/off proto annotations parsing.
-    ProtoParser protoParser;
+    ProtoParser protoParser = new ProtoParser(true);
     // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
     if (configProto == null) {
-      // By default, enable proto annotations parsing when no GAPIC config is given.
-      protoParser = new ProtoParser(true);
       configProto = ConfigProto.getDefaultInstance();
-    } else {
-      protoParser = new ProtoParser(false);
     }
 
     DiagCollector diagCollector = model.getDiagReporter().getDiagCollector();
@@ -427,11 +388,11 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     // Get list of fields from proto
     ResourceNameMessageConfigs messageConfigs =
-        ResourceNameMessageConfigs.createMessageResourceTypesConfig(
+        ResourceNameMessageConfigs.createMessageResourceTypesConfigV2(
             sourceProtos, configProto, defaultPackage, resourceDefs, resourceSetDefs, protoParser);
 
     ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
-        createResourceNameConfigs(
+        createResourceNameConfigsV2(
             diagCollector,
             configProto,
             sourceProtos,
@@ -510,19 +471,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       throw new RuntimeException(e);
     }
 
-    if (!configProto.equals(ConfigProto.getDefaultInstance())) {
-      configSchemaVersion = configProto.getConfigSchemaVersion();
-      if (Strings.isNullOrEmpty(configSchemaVersion)) {
-        model
-            .getDiagReporter()
-            .getDiagCollector()
-            .addDiag(
-                Diag.error(
-                    SimpleLocation.TOPLEVEL,
-                    "config_schema_version field is required in GAPIC yaml."));
-      }
-    }
-
     Boolean enableStringFormatFunctionsOverride = null;
     if (configProto.hasEnableStringFormatFunctionsOverride()) {
       enableStringFormatFunctionsOverride =
@@ -561,7 +509,7 @@ public abstract class GapicProductConfig implements ProductConfig {
             model, configProto, defaultPackage);
 
     ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
-        createResourceNameConfigs(model.getDiagCollector(), configProto, language);
+        createResourceNameConfigsV1(model.getDiagCollector(), configProto, null, language);
 
     TransportProtocol transportProtocol = TransportProtocol.HTTP;
 
@@ -589,16 +537,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       throw new RuntimeException(e);
     }
 
-    String configSchemaVersion = configProto.getConfigSchemaVersion();
-    if (Strings.isNullOrEmpty(configSchemaVersion)) {
-      model
-          .getDiagCollector()
-          .addDiag(
-              Diag.error(
-                  SimpleLocation.TOPLEVEL,
-                  "config_schema_version field is required in GAPIC yaml."));
-    }
-
     Boolean enableStringFormatFunctionsOverride = null;
     if (configProto.getEnableStringFormatFunctionsOverride().isInitialized()) {
       enableStringFormatFunctionsOverride =
@@ -617,7 +555,7 @@ public abstract class GapicProductConfig implements ProductConfig {
         new ProtoParser(false),
         transportProtocol,
         createResponseFieldConfigMap(messageConfigs, resourceNameConfigs),
-        configSchemaVersion,
+        configProto.getConfigSchemaVersion(),
         enableStringFormatFunctionsOverride);
   }
 
@@ -899,9 +837,10 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
   }
 
-  private static ImmutableMap<String, ResourceNameConfig> createResourceNameConfigs(
+  // TODO(andrealin): Remove if no uses.
+  private static ImmutableMap<String, ResourceNameConfig> createDefaultResourceNameConfigs(
       DiagCollector diagCollector, ConfigProto configProto, TargetLanguage language) {
-    return createResourceNameConfigs(
+    return createResourceNameConfigsV2(
         diagCollector, configProto, null, language, ImmutableMap.of(), ImmutableMap.of(), null);
   }
 
@@ -911,14 +850,11 @@ public abstract class GapicProductConfig implements ProductConfig {
    */
   @VisibleForTesting
   @Nullable
-  static ImmutableMap<String, ResourceNameConfig> createResourceNameConfigs(
+  static ImmutableMap<String, ResourceNameConfig> createResourceNameConfigsV1(
       DiagCollector diagCollector,
       ConfigProto configProto,
       @Nullable List<ProtoFile> protoFiles,
-      TargetLanguage language,
-      Map<Resource, ProtoFile> resourceDefs,
-      Map<ResourceSet, ProtoFile> resourceSetDefs,
-      ProtoParser protoParser) {
+      TargetLanguage language) {
     ProtoFile file = null;
     if (protoFiles != null) {
       file = protoFiles.get(0);
@@ -940,6 +876,33 @@ public abstract class GapicProductConfig implements ProductConfig {
       return null;
     }
 
+    ImmutableMap.Builder<String, ResourceNameConfig> resourceNameConfigs =
+        new ImmutableSortedMap.Builder<>(Comparator.naturalOrder());
+    resourceNameConfigs.putAll(singleResourceNameConfigsFromGapicConfig);
+    resourceNameConfigs.putAll(fixedResourceNameConfigs);
+    resourceNameConfigs.putAll(resourceNameOneofConfigsFromGapicConfig);
+    return resourceNameConfigs.build();
+  }
+
+  /**
+   * Create all the ResourceNameOneofConfig from the protofile and GAPIC config, and let the GAPIC
+   * config resourceNames override the protofile resourceNames in event of clashes.
+   */
+  @VisibleForTesting
+  @Nullable
+  static ImmutableMap<String, ResourceNameConfig> createResourceNameConfigsV2(
+      DiagCollector diagCollector,
+      ConfigProto configProto,
+      @Nullable List<ProtoFile> protoFiles,
+      TargetLanguage language,
+      Map<Resource, ProtoFile> resourceDefs,
+      Map<ResourceSet, ProtoFile> resourceSetDefs,
+      ProtoParser protoParser) {
+    ProtoFile file = null;
+    if (protoFiles != null) {
+      file = protoFiles.get(0);
+    }
+
     ImmutableMap<String, SingleResourceNameConfig>
         fullyQualifiedSingleResourceNameConfigsFromProtoFile =
             createSingleResourceNameConfigsFromProtoFile(diagCollector, resourceDefs, protoParser);
@@ -951,7 +914,8 @@ public abstract class GapicProductConfig implements ProductConfig {
             protoParser);
 
     // Populate a SingleResourceNameConfigs map, using just the unqualified names.
-    Map<String, SingleResourceNameConfig> singleResourceConfigsFromProtoFile = new HashMap<>();
+    TreeMap<String, SingleResourceNameConfig> singleResourceConfigsFromProtoFile =
+        new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     for (String fullName : fullyQualifiedSingleResourceNameConfigsFromProtoFile.keySet()) {
       int periodIndex = fullName.lastIndexOf('.');
       SingleResourceNameConfig config =
@@ -959,23 +923,23 @@ public abstract class GapicProductConfig implements ProductConfig {
       singleResourceConfigsFromProtoFile.put(fullName.substring(periodIndex + 1), config);
     }
 
-    // Combine the ResourceNameConfigs from the GAPIC and protofile.
-    Map<String, SingleResourceNameConfig> finalSingleResourceNameConfigs =
-        mergeResourceNameConfigs(
-            diagCollector,
-            singleResourceNameConfigsFromGapicConfig,
-            singleResourceConfigsFromProtoFile);
-    Map<String, ResourceNameOneofConfig> finalResourceOneofNameConfigs =
-        mergeResourceNameConfigs(
-            diagCollector,
-            resourceNameOneofConfigsFromGapicConfig,
-            resourceNameOneofConfigsFromProtoFile);
+    ImmutableMap<String, SingleResourceNameConfig> singleResourceNameConfigsFromGapicConfig =
+        createSingleResourceNameConfigsV2(
+            configProto, singleResourceConfigsFromProtoFile, file, language);
+    ImmutableMap<String, FixedResourceNameConfig> fixedResourceNameConfigs =
+        createFixedResourceNameConfigs(
+            diagCollector, configProto.getFixedResourceNameValuesList(), file);
+
+    if (diagCollector.getErrorCount() > 0) {
+      ToolUtil.reportDiags(diagCollector, true);
+      return null;
+    }
 
     ImmutableMap.Builder<String, ResourceNameConfig> resourceNameConfigs =
         new ImmutableSortedMap.Builder<>(Comparator.naturalOrder());
-    resourceNameConfigs.putAll(finalSingleResourceNameConfigs);
+    resourceNameConfigs.putAll(singleResourceNameConfigsFromGapicConfig);
     resourceNameConfigs.putAll(fixedResourceNameConfigs);
-    resourceNameConfigs.putAll(finalResourceOneofNameConfigs);
+    resourceNameConfigs.putAll(resourceNameOneofConfigsFromProtoFile);
     return resourceNameConfigs.build();
   }
 
@@ -993,7 +957,7 @@ public abstract class GapicProductConfig implements ProductConfig {
     for (Resource resource : resourceDefs.keySet()) {
       String resourcePath = resource.getPattern();
       ProtoFile protoFile = resourceDefs.get(resource);
-      createSingleResourceNameConfig(
+      createSingleResourceNameConfigFromProtoFile(
           diagCollector,
           resource,
           protoFile,
@@ -1047,29 +1011,6 @@ public abstract class GapicProductConfig implements ProductConfig {
     return resourceOneOfConfigsFromProtoFile.build();
   }
 
-  private static <T extends ResourceNameConfig> ImmutableMap<String, T> mergeResourceNameConfigs(
-      DiagCollector diagCollector,
-      Map<String, T> configsFromGapicConfig,
-      Map<String, T> configsFromProtoFile) {
-    Map<String, T> mergedResourceNameConfigs = new HashMap<>(configsFromProtoFile);
-
-    // If protofile annotations clash with the configs from configProto, use the configProto.
-    for (T resourceFromGapicConfig : configsFromGapicConfig.values()) {
-      if (configsFromProtoFile.containsKey(resourceFromGapicConfig.getEntityId())) {
-        diagCollector.addDiag(
-            Diag.warning(
-                SimpleLocation.TOPLEVEL,
-                "Resource[Set] entity %s from protofile clashes with a"
-                    + " Resource[Set] of the same name from the GAPIC config."
-                    + " Using the GAPIC config entity.",
-                resourceFromGapicConfig.getEntityId()));
-      }
-      // Add the protofile resourceNameConfigs to the map of resourceNameConfigs.
-      mergedResourceNameConfigs.put(resourceFromGapicConfig.getEntityId(), resourceFromGapicConfig);
-    }
-    return ImmutableMap.copyOf(mergedResourceNameConfigs);
-  }
-
   private static ImmutableMap<String, SingleResourceNameConfig> createSingleResourceNameConfigs(
       DiagCollector diagCollector,
       ConfigProto configProto,
@@ -1082,25 +1023,21 @@ public abstract class GapicProductConfig implements ProductConfig {
     LinkedHashMap<String, SingleResourceNameConfig> singleResourceNameConfigsMap =
         new LinkedHashMap<>();
     for (CollectionConfigProto collectionConfigProto : configProto.getCollectionsList()) {
-      createSingleResourceNameConfig(
+      createSingleResourceNameConfigV1(
           diagCollector, collectionConfigProto, singleResourceNameConfigsMap, file, language);
     }
     for (InterfaceConfigProto interfaceConfigProto : configProto.getInterfacesList()) {
       for (CollectionConfigProto collectionConfigProto :
           interfaceConfigProto.getCollectionsList()) {
-        createSingleResourceNameConfig(
+        createSingleResourceNameConfigV1(
             diagCollector, collectionConfigProto, singleResourceNameConfigsMap, file, language);
       }
     }
 
-    if (diagCollector.getErrorCount() > 0) {
-      return null;
-    } else {
-      return ImmutableMap.copyOf(singleResourceNameConfigsMap);
-    }
+    return ImmutableMap.copyOf(singleResourceNameConfigsMap);
   }
 
-  private static void createSingleResourceNameConfig(
+  private static void createSingleResourceNameConfigV1(
       DiagCollector diagCollector,
       CollectionConfigProto collectionConfigProto,
       LinkedHashMap<String, SingleResourceNameConfig> singleResourceNameConfigsMap,
@@ -1108,10 +1045,11 @@ public abstract class GapicProductConfig implements ProductConfig {
       TargetLanguage language) {
     SingleResourceNameConfig singleResourceNameConfig =
         SingleResourceNameConfig.createSingleResourceName(
-            diagCollector, collectionConfigProto, file, language);
-    if (singleResourceNameConfig == null) {
-      return;
-    }
+            collectionConfigProto.getLanguageOverridesList(),
+            collectionConfigProto.getNamePattern(),
+            collectionConfigProto.getEntityName(),
+            file,
+            language);
     if (singleResourceNameConfigsMap.containsKey(singleResourceNameConfig.getEntityId())) {
       SingleResourceNameConfig otherConfig =
           singleResourceNameConfigsMap.get(singleResourceNameConfig.getEntityId());
@@ -1128,9 +1066,65 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
   }
 
+  private static ImmutableMap<String, SingleResourceNameConfig> createSingleResourceNameConfigsV2(
+      ConfigProto configProto,
+      TreeMap<String, SingleResourceNameConfig> resourceNameConfigsFromProtoFiles,
+      ProtoFile protoFile,
+      TargetLanguage language) {
+    for (CollectionConfigProto collectionConfigProto : configProto.getCollectionsList()) {
+      createSingleResourceNameConfigV2(
+          collectionConfigProto, protoFile, resourceNameConfigsFromProtoFiles, language);
+    }
+    for (InterfaceConfigProto interfaceConfigProto : configProto.getInterfacesList()) {
+      for (CollectionConfigProto collectionConfigProto :
+          interfaceConfigProto.getCollectionsList()) {
+        createSingleResourceNameConfigV2(
+            collectionConfigProto, protoFile, resourceNameConfigsFromProtoFiles, language);
+      }
+    }
+
+    return ImmutableMap.copyOf(resourceNameConfigsFromProtoFiles);
+  }
+
+  private static void createSingleResourceNameConfigV2(
+      CollectionConfigProto collectionConfigProto,
+      @Nullable ProtoFile file,
+      TreeMap<String, SingleResourceNameConfig> existingResourceNameConfigs,
+      TargetLanguage language) {
+
+    if (Strings.isNullOrEmpty(collectionConfigProto.getEntityName())) {
+      throw new IllegalStateException(
+          String.format(
+              "GAPIC config resource name entity \"%s\" was not given a name.",
+              collectionConfigProto.toString()));
+    }
+
+    SingleResourceNameConfig protoFileNameConfig;
+    if (existingResourceNameConfigs.containsKey(collectionConfigProto.getEntityName())) {
+      protoFileNameConfig = existingResourceNameConfigs.get(collectionConfigProto.getEntityName());
+    } else {
+      throw new IllegalStateException(
+          String.format(
+              "Resource name entity '%s' was found in GAPIC config but was not defined in "
+                  + "a google.api.Resource proto option in the protofile.",
+              collectionConfigProto.getEntityName()));
+    }
+    SingleResourceNameConfig singleResourceNameConfig =
+        SingleResourceNameConfig.createSingleResourceName(
+            collectionConfigProto.getLanguageOverridesList(),
+            protoFileNameConfig.getNamePattern(),
+            protoFileNameConfig.getEntityId(),
+            file,
+            language);
+
+    // Replace existing resource name config from protofile.
+    existingResourceNameConfigs.put(
+        singleResourceNameConfig.getEntityId(), singleResourceNameConfig);
+  }
+
   // Construct a new SingleResourceNameConfig from the given Resource, and add the newly
   // created config as a value to the map param, keyed on the package-qualified entity_id.
-  private static void createSingleResourceNameConfig(
+  private static void createSingleResourceNameConfigFromProtoFile(
       DiagCollector diagCollector,
       Resource resource,
       ProtoFile file,

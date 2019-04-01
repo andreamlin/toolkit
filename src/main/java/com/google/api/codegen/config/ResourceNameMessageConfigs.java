@@ -50,9 +50,9 @@ public abstract class ResourceNameMessageConfigs {
    */
   public abstract ListMultimap<String, FieldModel> getFieldsWithResourceNamesByMessage();
 
-  static ResourceNameMessageConfigs createMessageResourceTypesConfig(
+  static ResourceNameMessageConfigs createEmptyMessageResourceTypesConfig(
       ConfigProto configProto, String defaultPackage) {
-    return createMessageResourceTypesConfig(
+    return createMessageResourceTypesConfigV2(
         new LinkedList<>(),
         configProto,
         defaultPackage,
@@ -62,7 +62,7 @@ public abstract class ResourceNameMessageConfigs {
   }
 
   @VisibleForTesting
-  static ResourceNameMessageConfigs createMessageResourceTypesConfig(
+  public static ResourceNameMessageConfigs createMessageResourceTypesConfigV2(
       List<ProtoFile> protoFiles,
       ConfigProto configProto,
       String defaultPackage,
@@ -85,6 +85,45 @@ public abstract class ResourceNameMessageConfigs {
 
     // Add more ResourceNameMessageConfigs from configProto. Overwrite the configs from
     // configProto if any clash.
+    for (ResourceNameMessageConfigProto messageResourceTypesProto :
+        configProto.getResourceNameGenerationList()) {
+      ResourceNameMessageConfig messageResourceTypeConfig =
+          ResourceNameMessageConfig.createResourceNameMessageConfig(
+              messageResourceTypesProto, defaultPackage);
+      builder.put(messageResourceTypeConfig.messageName(), messageResourceTypeConfig);
+    }
+
+    ImmutableSortedMap<String, ResourceNameMessageConfig> messageResourceTypeConfigMap =
+        ImmutableSortedMap.copyOf(builder);
+
+    ListMultimap<String, FieldModel> fieldsByMessage = ArrayListMultimap.create();
+    Set<String> seenProtoFiles = new HashSet<>();
+    for (ProtoFile protoFile : protoFiles) {
+      if (!seenProtoFiles.contains(protoFile.getSimpleName())) {
+        seenProtoFiles.add(protoFile.getSimpleName());
+        for (MessageType msg : protoFile.getMessages()) {
+          ResourceNameMessageConfig messageConfig =
+              messageResourceTypeConfigMap.get(msg.getFullName());
+          if (messageConfig == null) {
+            continue;
+          }
+          for (Field field : msg.getFields()) {
+            if (messageConfig.getEntityNameForField(field.getSimpleName()) != null) {
+              fieldsByMessage.put(msg.getFullName(), new ProtoField(field));
+            }
+          }
+        }
+      }
+    }
+    return new AutoValue_ResourceNameMessageConfigs(messageResourceTypeConfigMap, fieldsByMessage);
+  }
+
+  @VisibleForTesting
+  static ResourceNameMessageConfigs createMessageResourceTypesConfigV1(
+      List<ProtoFile> protoFiles, ConfigProto configProto, String defaultPackage) {
+    Map<String, ResourceNameMessageConfig> builder = new HashMap<>();
+
+    // Add ResourceNameMessageConfigs from configProto.
     for (ResourceNameMessageConfigProto messageResourceTypesProto :
         configProto.getResourceNameGenerationList()) {
       ResourceNameMessageConfig messageResourceTypeConfig =
