@@ -167,7 +167,13 @@ public abstract class GapicProductConfig implements ProductConfig {
       if (!configProto.equals(ConfigProto.getDefaultInstance())) {
         configSchemaVersion = configProto.getConfigSchemaVersion();
         if (Strings.isNullOrEmpty(configSchemaVersion)) {
-          throw new IllegalStateException("config_schema_version field is required in GAPIC yaml.");
+          model
+              .getDiagReporter()
+              .getDiagCollector()
+              .addDiag(
+                  Diag.error(
+                      SimpleLocation.TOPLEVEL,
+                      "config_schema_version field is required in GAPIC yaml."));
         }
       }
     }
