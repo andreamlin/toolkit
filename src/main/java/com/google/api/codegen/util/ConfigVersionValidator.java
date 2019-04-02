@@ -60,4 +60,14 @@ public class ConfigVersionValidator {
       throw new IllegalStateException(e);
     }
   }
+
+  // TODO(andrealin): refactor so most of the logic is in isV2Config
+  public boolean isV2Config(@Nonnull com.google.api.codegen.ConfigProto configV1Proto) {
+    try {
+      validateV2Config(configV1Proto);
+    } catch (IllegalStateException e) {
+      return false;
+    }
+    return true;
+  }
 }
