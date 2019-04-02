@@ -15,11 +15,14 @@
 package com.google.api.codegen.config;
 
 import com.google.api.codegen.FixedResourceNameValueProto;
+import com.google.api.pathtemplate.PathTemplate;
+import com.google.api.pathtemplate.ValidationException;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.ProtoFile;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.auto.value.AutoValue;
+import java.util.HashMap;
 import javax.annotation.Nullable;
 
 /**
@@ -85,5 +88,16 @@ public abstract class FixedResourceNameConfig implements ResourceNameConfig {
     }
 
     return new AutoValue_FixedResourceNameConfig(entityName, entityName, fixedValue, file);
+  }
+
+  public static boolean isFixedResourceNameConfig(String pathPattern) {
+    PathTemplate pathTemplate = PathTemplate.create(pathPattern);
+    try {
+      pathTemplate.instantiate(new HashMap<>());
+    } catch (ValidationException e) {
+      // This must be a single resource name, because it has binding vars in the path pattern.
+      return false;
+    }
+    return true;
   }
 }
