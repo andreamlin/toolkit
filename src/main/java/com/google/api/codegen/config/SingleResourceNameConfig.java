@@ -18,6 +18,7 @@ import com.google.api.Resource;
 import com.google.api.codegen.CollectionConfigProto;
 import com.google.api.codegen.CollectionLanguageOverridesProto;
 import com.google.api.codegen.common.TargetLanguage;
+import com.google.api.codegen.util.Name;
 import com.google.api.pathtemplate.PathTemplate;
 import com.google.api.pathtemplate.ValidationException;
 import com.google.api.tools.framework.model.Diag;
@@ -67,8 +68,14 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
         }
       }
     }
+
     return new AutoValue_SingleResourceNameConfig(
-        namePattern, nameTemplate, entityId, entityName, commonResourceName, file);
+        namePattern,
+        nameTemplate,
+        entityId,
+        toLowerUnderscore(entityName),
+        commonResourceName,
+        file);
   }
 
   /**
@@ -86,7 +93,20 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
     }
 
     return new AutoValue_SingleResourceNameConfig(
-        pathTemplate, nameTemplate, resource.getSymbol(), resource.getSymbol(), null, file);
+        pathTemplate,
+        nameTemplate,
+        resource.getSymbol(),
+        toLowerUnderscore(resource.getSymbol()),
+        null,
+        file);
+  }
+
+  private static String toLowerUnderscore(String original) {
+    if (original.contains("_")) {
+      return original;
+    } else {
+      return Name.anyCamel(original).toLowerUnderscore();
+    }
   }
 
   /** Returns the name pattern for the resource name config. */
@@ -99,7 +119,7 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
   @Override
   public abstract String getEntityId();
 
-  /** Returns the name used as a basis for generating methods. */
+  /** Returns the name used as a basis for generating methods. Will be in lower-underscore */
   @Override
   public abstract String getEntityName();
 

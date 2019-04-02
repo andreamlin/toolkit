@@ -26,9 +26,6 @@ language_settings:
     domain_layer_location: google-cloud
   csharp:
     package_name: Google.Example.Library.V1
-fixed_resource_name_values:
-  - entity_name: deleted_book
-    fixed_value: _deleted-book_
 interfaces:
   - name: google.example.library.v1.LibraryService
     lang_doc:
@@ -55,11 +52,11 @@ interfaces:
         max_rpc_timeout_millis: 3000
         total_timeout_millis: 30000
     collections:
-      - entity_name: book
+      - entity_name: Book
         language_overrides:
           - language: java
             entity_name: shelf_book
-      - entity_name: project
+      - entity_name: Project
         language_overrides:
           - language: csharp
             common_resource_name: Google.Api.Gax.ResourceNames.ProjectName
