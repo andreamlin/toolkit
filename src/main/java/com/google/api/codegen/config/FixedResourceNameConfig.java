@@ -14,15 +14,11 @@
  */
 package com.google.api.codegen.config;
 
-import com.google.api.codegen.FixedResourceNameValueProto;
-import com.google.api.pathtemplate.PathTemplate;
-import com.google.api.pathtemplate.ValidationException;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.ProtoFile;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.auto.value.AutoValue;
-import java.util.HashMap;
 import javax.annotation.Nullable;
 
 /**
@@ -66,38 +62,11 @@ public abstract class FixedResourceNameConfig implements ResourceNameConfig {
     return new AutoValue_FixedResourceNameConfig(entityName, entityName, fixedValue, file);
   }
 
-  // TODO(andrealin): Remove this method once all existing fixed resource names are removed.
-  @Nullable
-  public static FixedResourceNameConfig createFixedResourceNameConfig(
-      DiagCollector diagCollector,
-      FixedResourceNameValueProto fixedResourceNameValueProto,
-      @Nullable ProtoFile file) {
-
-    String entityName = fixedResourceNameValueProto.getEntityName();
-    String fixedValue = fixedResourceNameValueProto.getFixedValue();
-
-    if (entityName == null || fixedValue == null) {
-      diagCollector.addDiag(
-          Diag.error(
-              SimpleLocation.TOPLEVEL,
-              "incorrectly configured FixedResourceNameConfig: name: "
-                  + entityName
-                  + ", value: "
-                  + fixedValue));
-      return null;
-    }
-
-    return new AutoValue_FixedResourceNameConfig(entityName, entityName, fixedValue, file);
-  }
-
+  /**
+   * Returns if the pathPattern is a fixed name resource. This primitively returns true iff the
+   * pathPattern contains a '{' char.
+   */
   public static boolean isFixedResourceNameConfig(String pathPattern) {
-    PathTemplate pathTemplate = PathTemplate.create(pathPattern);
-    try {
-      pathTemplate.instantiate(new HashMap<>());
-    } catch (ValidationException e) {
-      // This must be a single resource name, because it has binding vars in the path pattern.
-      return false;
-    }
-    return true;
+    return !(pathPattern.contains("{") || pathPattern.contains("*"));
   }
 }
