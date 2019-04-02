@@ -184,7 +184,7 @@ public abstract class GapicMethodConfig extends MethodConfig {
 
     ImmutableMap<String, String> fieldNamePatterns;
     if (protoParser.isProtoAnnotationsEnabled()) {
-      fieldNamePatterns = protoParser.fieldNamePatterns(method);
+      fieldNamePatterns = protoParser.getFieldNamePatterns(method);
     } else {
       fieldNamePatterns = ImmutableMap.copyOf(methodConfigProto.getFieldNamePatterns());
     }

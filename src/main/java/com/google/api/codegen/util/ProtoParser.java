@@ -422,21 +422,19 @@ public class ProtoParser {
     return String.format("%s.%s", resource.getSymbol(), getProtoPackage(file));
   }
 
-  // TODO(andrealin): Unit test this.
-  public ImmutableMap<String, String> fieldNamePatterns(Method method) {
+  public ImmutableMap<String, String> getFieldNamePatterns(Method method) {
     // Only look two levels deep in the request object, so fields of fields of the request object.
-    return ImmutableMap.copyOf(fieldNamePatterns(method.getInputMessage(), 2));
+    return ImmutableMap.copyOf(getFieldNamePatterns(method.getInputMessage(), 2));
   }
 
-  private Map<String, String> fieldNamePatterns(MessageType messageType, int depth) {
-    // TODO(andrealin): allow package names in values.
+  private Map<String, String> getFieldNamePatterns(MessageType messageType, int depth) {
     LinkedHashMap<String, String> builder = new LinkedHashMap<>();
     for (Field field : messageType.getFields()) {
       String fieldName = field.getSimpleName();
 
       if (field.getType().isMessage() && depth > 0) {
         Map<String, String> children =
-            fieldNamePatterns(field.getType().getMessageType(), depth - 1);
+            getFieldNamePatterns(field.getType().getMessageType(), depth - 1);
         for (Map.Entry<String, String> child : children.entrySet()) {
           // Dot-separate the nested fields, e.g. "shelf.name"
           builder.put(String.format("%s.%s", fieldName, child.getKey()), child.getValue());
