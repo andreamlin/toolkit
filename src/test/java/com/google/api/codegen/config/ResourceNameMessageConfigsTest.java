@@ -58,6 +58,7 @@ import org.mockito.Spy;
 public class ResourceNameMessageConfigsTest {
   @Spy private static final ProtoParser protoParser = Mockito.spy(new ProtoParser(true));
   private static ConfigProto configProto;
+  private static ConfigProto configProtoV2;
   private static final Method createShelvesMethod = Mockito.mock(Method.class);
   private static final MessageType createShelvesRequest = Mockito.mock(MessageType.class);
   private static final MessageType createShelvesResponse = Mockito.mock(MessageType.class);
@@ -75,7 +76,9 @@ public class ResourceNameMessageConfigsTest {
   private static final String DEFAULT_PACKAGE = "library";
   private static final String GAPIC_SHELF_PATH = "shelves/{shelf_id}";
   private static final String GAPIC_BOOK_PATH = "shelves/{shelf_id}/books/{book_id}";
-  private static final String ARCHIVED_BOOK_PATH = "archives/{archive_path}/books/{book_id=**}";
+  private static final String GAPIC_ARCHIVED_BOOK_PATH =
+      "archives/{archive_path}/books/{book_id=**}";
+  private static final String PROTO_ARCHIVED_BOOK_PATH = "archives/{archive}/books/{book}";
   private static final String PROTO_SHELF_PATH = "shelves/{shelf}";
   private static final String PROTO_BOOK_PATH = "bookShelves/{book}";
   private static final String CREATE_SHELF_METHOD_NAME = "CreateShelf";
@@ -88,7 +91,7 @@ public class ResourceNameMessageConfigsTest {
           protoFile,
           Resource.newBuilder()
               .setSymbol("archived_book")
-              .setPattern("archives/{archive}/books/{book}")
+              .setPattern(PROTO_ARCHIVED_BOOK_PATH)
               .build(),
           protoFile);
 
@@ -121,7 +124,7 @@ public class ResourceNameMessageConfigsTest {
                     .setEntityName("shelf"))
             .addCollections(
                 CollectionConfigProto.newBuilder()
-                    .setNamePattern(ARCHIVED_BOOK_PATH)
+                    .setNamePattern(GAPIC_ARCHIVED_BOOK_PATH)
                     .setEntityName("archived_book"))
             .addCollections(
                 CollectionConfigProto.newBuilder()
@@ -137,6 +140,15 @@ public class ResourceNameMessageConfigsTest {
                         CollectionConfigProto.newBuilder()
                             .setNamePattern(GAPIC_BOOK_PATH)
                             .setEntityName("book")))
+            .build();
+    configProtoV2 =
+        ConfigProto.newBuilder()
+            .addCollections(CollectionConfigProto.newBuilder().setEntityName("shelf"))
+            .addCollections(CollectionConfigProto.newBuilder().setEntityName("archived_book"))
+            .addInterfaces(
+                InterfaceConfigProto.newBuilder()
+                    .addCollections(CollectionConfigProto.newBuilder().setEntityName("shelf"))
+                    .addCollections(CollectionConfigProto.newBuilder().setEntityName("book")))
             .build();
 
     Mockito.when(shelfName.getParent()).thenReturn(shelfMessage);
@@ -288,7 +300,7 @@ public class ResourceNameMessageConfigsTest {
         .contains("archived_book from protofile clashes with a Resource");
     assertThat(
             ((SingleResourceNameConfig) resourceNameConfigs.get("archived_book")).getNamePattern())
-        .isEqualTo(ARCHIVED_BOOK_PATH);
+        .isEqualTo(GAPIC_ARCHIVED_BOOK_PATH);
     assertThat(((SingleResourceNameConfig) resourceNameConfigs.get("book")).getNamePattern())
         .isEqualTo(GAPIC_BOOK_PATH);
     assertThat(((SingleResourceNameConfig) resourceNameConfigs.get("shelf")).getNamePattern())

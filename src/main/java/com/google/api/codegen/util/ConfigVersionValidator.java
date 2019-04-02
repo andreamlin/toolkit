@@ -14,6 +14,7 @@
  */
 package com.google.api.codegen.util;
 
+import com.google.api.tools.framework.model.testing.BaselineDiffer;
 import com.google.protobuf.DiscardUnknownFieldsParser;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Parser;
@@ -49,9 +50,11 @@ public class ConfigVersionValidator {
 
       // Compare the v1-serialized and v2-serialized strings of the same config proto object.
       if (!Arrays.equals(configV2.toByteArray(), configV1Proto.toByteArray())) {
+        BaselineDiffer differ = new BaselineDiffer();
         throw new IllegalStateException(
             String.format(
-                "Unknown fields to ConfigProto v2 in configProto: %s", configV1Proto.toString()));
+                "Unknown fields to ConfigProto v2 in configProto:\n%s",
+                differ.diff(configV1Proto.toString(), configV2.toString())));
       }
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException(e);
