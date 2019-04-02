@@ -231,10 +231,21 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     DiagCollector diagCollector = model.getDiagReporter().getDiagCollector();
 
-    Map<Resource, ProtoFile> resourceDefs =
+    Map<Resource, ProtoFile> resourceFileLevelDefs =
         protoParser.getResourceDefs(sourceProtos, diagCollector);
     Map<ResourceSet, ProtoFile> resourceSetDefs =
         protoParser.getResourceSetDefs(sourceProtos, diagCollector);
+    LinkedHashMap<Resource, ProtoFile> resourcesDefinedInSetsBuilder = new LinkedHashMap<>();
+    for (Map.Entry<ResourceSet, ProtoFile> entry : resourceSetDefs.entrySet()) {
+      for (Resource resource : entry.getKey().getResourcesList()) {
+        resourcesDefinedInSetsBuilder.put(resource, entry.getValue());
+      }
+    }
+    ImmutableMap<Resource, ProtoFile> resourceDefs =
+        ImmutableMap.<Resource, ProtoFile>builder()
+            .putAll(resourceFileLevelDefs)
+            .putAll(resourcesDefinedInSetsBuilder)
+            .build();
 
     // Get list of fields from proto
     ResourceNameMessageConfigs messageConfigs =
