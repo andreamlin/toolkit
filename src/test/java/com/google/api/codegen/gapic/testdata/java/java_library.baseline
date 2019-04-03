@@ -485,6 +485,7 @@ import com.google.api.gax.rpc.BidiStream;
 import com.google.example.library.v1.Comment;
 import com.google.example.library.v1.DiscussBookRequest;
 import com.google.example.library.v1.LibraryClient;
+import com.google.example.library.v1.ShelfBookName;
 import com.google.protobuf.ByteString;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -498,6 +499,7 @@ import java.nio.file.Paths;
  * import com.google.example.library.v1.Comment;
  * import com.google.example.library.v1.DiscussBookRequest;
  * import com.google.example.library.v1.LibraryClient;
+ * import com.google.example.library.v1.ShelfBookName;
  * import com.google.protobuf.ByteString;
  * import java.nio.file.Files;
  * import java.nio.file.Path;
@@ -512,7 +514,7 @@ public class DiscussBookCallableCallableStreamingBidiProg {
           libraryClient.discussBookCallable().call();
 
       // String imageFileName = "image_file.jpg";
-      String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+      ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
       String fileName = "comment_file";
       Path path = Paths.get(fileName);
       byte[] data = Files.readAllBytes(path);
@@ -524,7 +526,7 @@ public class DiscussBookCallableCallableStreamingBidiProg {
       data = Files.readAllBytes(path);
       ByteString image = ByteString.copyFrom(data);
       DiscussBookRequest request = DiscussBookRequest.newBuilder()
-        .setName(formattedName)
+        .setName(name.toString())
         .setComment(comment2)
         .setImage(image)
         .build();
@@ -1908,6 +1910,7 @@ import com.google.api.gax.rpc.ApiStreamObserver;
 import com.google.example.library.v1.Comment;
 import com.google.example.library.v1.DiscussBookRequest;
 import com.google.example.library.v1.LibraryClient;
+import com.google.example.library.v1.ShelfBookName;
 
 // [START sample]
 /*
@@ -1917,6 +1920,7 @@ import com.google.example.library.v1.LibraryClient;
  * import com.google.example.library.v1.Comment;
  * import com.google.example.library.v1.DiscussBookRequest;
  * import com.google.example.library.v1.LibraryClient;
+ * import com.google.example.library.v1.ShelfBookName;
  */
 public class MonologAboutBookCallableCallableStreamingClientProg {
   /** Testing calling forms */
@@ -1943,9 +1947,9 @@ public class MonologAboutBookCallableCallableStreamingClientProg {
       ApiStreamObserver<DiscussBookRequest> requestObserver =
           libraryClient.monologAboutBookCallable().clientStreamingCall(responseObserver);
 
-      String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+      ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
       DiscussBookRequest request = DiscussBookRequest.newBuilder()
-        .setName(formattedName)
+        .setName(name.toString())
         .build();
       requestObserver.onNext(request);
     } catch (Exception exception) {
@@ -5105,9 +5109,9 @@ public class LibraryClient implements BackgroundResource {
    *   BidiStream&lt;DiscussBookRequest, Comment&gt; bidiStream =
    *       libraryClient.discussBookCallable().call();
    *
-   *   String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+   *   ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
    *   DiscussBookRequest request = DiscussBookRequest.newBuilder()
-   *     .setName(formattedName)
+   *     .setName(name.toString())
    *     .build();
    *   bidiStream.send(request);
    *   for (Comment response : bidiStream) {
@@ -5147,9 +5151,9 @@ public class LibraryClient implements BackgroundResource {
    *   ApiStreamObserver&lt;DiscussBookRequest&gt; requestObserver =
    *       libraryClient.monologAboutBookCallable().clientStreamingCall(responseObserver);
    *
-   *   String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+   *   ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
    *   DiscussBookRequest request = DiscussBookRequest.newBuilder()
-   *     .setName(formattedName)
+   *     .setName(name.toString())
    *     .build();
    *   requestObserver.onNext(request);
    * }
@@ -11765,9 +11769,9 @@ public class LibraryClientTest {
       .setComment(comment)
       .build();
     mockLibraryService.addResponse(expectedResponse);
-    String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+    ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     DiscussBookRequest request = DiscussBookRequest.newBuilder()
-      .setName(formattedName)
+      .setName(name.toString())
       .build();
 
     MockStreamObserver<Comment> responseObserver = new MockStreamObserver<>();
@@ -11790,9 +11794,9 @@ public class LibraryClientTest {
   public void discussBookExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
     mockLibraryService.addException(exception);
-    String formattedName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+    ShelfBookName name = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     DiscussBookRequest request = DiscussBookRequest.newBuilder()
-      .setName(formattedName)
+      .setName(name.toString())
       .build();
 
     MockStreamObserver<Comment> responseObserver = new MockStreamObserver<>();

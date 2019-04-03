@@ -704,6 +704,8 @@ interfaces:
       - calling_forms: ".*"
         value_sets: ".*"
   - name: BabbleAboutBook
+    field_name_patterns:
+      name: book
     sample_value_sets:
     - id: empty_response_type_with_response_handling
       title: "Test response handling for methods that return empty"
@@ -1128,6 +1130,9 @@ resource_name_generation:
 - message_name: GetBookFromAbsolutelyAnywhereRequest
   field_entity_map:
     name: "*"
+- message_name: DiscussBookRequest
+  field_entity_map:
+    name: book
 - message_name: UpdateBookIndexRequest
   field_entity_map:
     name: book
