@@ -830,7 +830,6 @@ public abstract class GapicProductConfig implements ProductConfig {
             fixedResourceNameConfigsFromGapicConfig,
             file);
     if (diagCollector.getErrorCount() > 0) {
-      ToolUtil.reportDiags(diagCollector, true);
       return null;
     }
 
@@ -890,11 +889,6 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     validateSingleResourceNameConfigs(singleResourceNameConfigsFromGapicConfig);
 
-    if (diagCollector.getErrorCount() > 0) {
-      ToolUtil.reportDiags(diagCollector, true);
-      throw new RuntimeException();
-    }
-
     ImmutableMap<String, ResourceNameOneofConfig> resourceNameOneofConfigsFromGapicConfig =
         createResourceNameOneofConfigs(
             diagCollector,
@@ -903,7 +897,6 @@ public abstract class GapicProductConfig implements ProductConfig {
             fixedResourceNameConfigsFromGapicConfig,
             file);
     if (diagCollector.getErrorCount() > 0) {
-      ToolUtil.reportDiags(diagCollector, true);
       return null;
     }
 
