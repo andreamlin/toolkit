@@ -78,7 +78,7 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
       }
     }
     builder.setCommonResourceName(commonResourceName);
-    builder.setEntityName(toLowerUnderscore(entityName));
+    builder.setEntityName(ResourceNameMessageConfig.entityNameToName(entityName));
 
     return builder.build();
   }
@@ -102,17 +102,9 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
         .setNameTemplate(nameTemplate)
         .setAssignedProtoFile(file)
         .setEntityId(resource.getSymbol())
-        .setEntityName(toLowerUnderscore(resource.getSymbol()))
+        .setEntityName(ResourceNameMessageConfig.entityNameToName(resource.getSymbol()))
         .setCommonResourceName(null)
         .build();
-  }
-
-  private static String toLowerUnderscore(String original) {
-    if (original.contains("_")) {
-      return original;
-    } else {
-      return Name.anyCamel(original).toLowerUnderscore();
-    }
   }
 
   /** Returns the name pattern for the resource name config. */
@@ -126,12 +118,9 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
   @Override
   public abstract String getEntityId();
 
-  /**
-   * Returns the name used as a basis for generating methods. Will be in lower-underscore
-   * TODO(andrealin): make this return a Name object.
-   */
+  /** Returns the name used as a basis for generating methods. */
   @Override
-  public abstract String getEntityName();
+  public abstract Name getEntityName();
 
   @Override
   @Nullable
@@ -160,7 +149,7 @@ public abstract class SingleResourceNameConfig implements ResourceNameConfig {
 
     public abstract Builder setEntityId(String val);
 
-    public abstract Builder setEntityName(String val);
+    public abstract Builder setEntityName(Name val);
 
     public abstract Builder setCommonResourceName(String val);
 
