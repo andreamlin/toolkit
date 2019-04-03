@@ -1924,7 +1924,7 @@ namespace Google.Example.Library.V1.Snippets
                 // Initialize a request
                 DiscussBookRequest request = new DiscussBookRequest
                 {
-                    Name = new BookName("[SHELF_ID]", "[BOOK_ID]").ToString(),
+                    BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
                 };
                 // Stream a request to the server
                 await duplexStream.WriteAsync(request);
@@ -13464,6 +13464,19 @@ namespace Google.Example.Library.V1
         public Google.Example.Library.V1.ShelfName ShelfName
         {
             get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.ShelfName.Parse(Name); }
+            set { Name = value != null ? value.ToString() : ""; }
+        }
+
+    }
+
+    public partial class DiscussBookRequest
+    {
+        /// <summary>
+        /// <see cref="Google.Example.Library.V1.BookName"/>-typed view over the <see cref="Name"/> resource name property.
+        /// </summary>
+        public Google.Example.Library.V1.BookName BookName
+        {
+            get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.BookName.Parse(Name); }
             set { Name = value != null ? value.ToString() : ""; }
         }
 

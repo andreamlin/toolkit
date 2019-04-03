@@ -31,8 +31,6 @@ import com.google.api.codegen.ResourceNameTreatment;
 import com.google.api.codegen.common.TargetLanguage;
 import com.google.api.codegen.util.ProtoParser;
 import com.google.api.tools.framework.model.BoundedDiagCollector;
-import com.google.api.tools.framework.model.Diag;
-import com.google.api.tools.framework.model.Diag.Kind;
 import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.Field;
 import com.google.api.tools.framework.model.MessageType;
@@ -49,7 +47,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -427,12 +424,6 @@ public class ResourceNameMessageConfigsTest {
                 methodModel,
                 protoParser));
     assertThat(diagCollector.getErrorCount()).isEqualTo(0);
-    List<Diag> warningDiags =
-        diagCollector
-            .getDiags()
-            .stream()
-            .filter(d -> d.getKind().equals(Kind.WARNING))
-            .collect(Collectors.toList());
 
     assertThat(flatteningConfigs).isNotNull();
     assertThat(flatteningConfigs.size()).isEqualTo(3);
