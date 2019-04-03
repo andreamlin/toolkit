@@ -167,6 +167,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
                     + "\" not found in collection configs"));
         return null;
       }
+      configList.add(resourceNameConfig);
     }
 
     return new AutoValue_ResourceNameOneofConfig(oneOfName, oneOfName, configList, file);
