@@ -87,7 +87,7 @@ service LibraryService {
   // Gets a shelf.
   rpc GetShelf(GetShelfRequest) returns (Shelf) {
     option (google.api.http) = { get: "/v1/{name=bookShelves/*}" };
-    option (google.api.method_signature) =  "name";
+    option (google.api.method_signature) = "name";
     option (google.api.method_signature) = "name,message";
     option (google.api.method_signature) = "name,message,string_builder";
   }
