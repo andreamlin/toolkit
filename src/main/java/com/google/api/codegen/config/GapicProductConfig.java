@@ -39,7 +39,6 @@ import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.ProtoFile;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.api.tools.framework.model.SymbolTable;
-import com.google.api.tools.framework.tools.ToolUtil;
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
@@ -719,8 +718,8 @@ public abstract class GapicProductConfig implements ProductConfig {
   }
 
   /**
-   * Create all the ResourceNameOneofConfig from the protofile and GAPIC config, and let the GAPIC
-   * config resourceNames override the protofile resourceNames in event of clashes.
+   * Create all the ResourceNameOneofConfig from the protofile and GAPIC config. Apply the GAPIC
+   * config resourceNames' language-specific overrides.
    */
   @VisibleForTesting
   @Nullable
@@ -858,7 +857,6 @@ public abstract class GapicProductConfig implements ProductConfig {
    * Create all the ResourceNameOneofConfig from the protofile and GAPIC config, and let the GAPIC
    * config resourceNames override the protofile resourceNames in event of clashes.
    */
-  @VisibleForTesting
   @Nullable
   static ImmutableMap<String, ResourceNameConfig> createResourceNameConfigsForGapicConfigOnly(
       DiagCollector diagCollector,
@@ -994,7 +992,6 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
 
     if (diagCollector.getErrorCount() > 0) {
-      ToolUtil.reportDiags(diagCollector, true);
       return null;
     }
 
@@ -1008,7 +1005,8 @@ public abstract class GapicProductConfig implements ProductConfig {
     Map<String, SingleResourceNameConfig> mergedResourceNameConfigs =
         new HashMap<>(configsFromProtoFile);
 
-    // If protofile annotations clash with the configs from configProto, use the configProto.
+    // If protofile annotations clash with the configs from configProto, use the configProto's
+    // language-specific overrides for entity_name and common_resource_name.
     for (SingleResourceNameConfig resourceFromGapicConfig : configsFromGapicConfig.values()) {
       if (configsFromProtoFile.containsKey(resourceFromGapicConfig.getEntityId())) {
         // Fetch the GAPIC config's overriding resource name configuration and replace the existing
@@ -1032,7 +1030,8 @@ public abstract class GapicProductConfig implements ProductConfig {
       Map<String, T> configsFromProtoFile) {
     Map<String, T> mergedResourceNameConfigs = new HashMap<>(configsFromGapicConfig);
 
-    // If protofile annotations clash with the configs from configProto, use the configProto.
+    // If protofile annotations clash with the configs from configProto, use the protofile's
+    // ResourceSets or FixedNameResources.
     for (T resourceFromProtoFile : configsFromProtoFile.values()) {
       if (configsFromGapicConfig.containsKey(resourceFromProtoFile.getEntityId())) {
         diagCollector.addDiag(
@@ -1078,7 +1077,6 @@ public abstract class GapicProductConfig implements ProductConfig {
     }
   }
 
-  // TODO(andrealin): combine the two below
   private static void createSingleResourceNameConfigFromGapicConfig(
       DiagCollector diagCollector,
       CollectionConfigProto collectionConfigProto,
@@ -1088,6 +1086,36 @@ public abstract class GapicProductConfig implements ProductConfig {
     SingleResourceNameConfig singleResourceNameConfig =
         SingleResourceNameConfig.createSingleResourceName(
             diagCollector, collectionConfigProto, file, language);
+    createSingleResourceNameConfig(
+        diagCollector, singleResourceNameConfig, "", singleResourceNameConfigsMap);
+  }
+
+  // Construct a new SingleResourceNameConfig from the given Resource, and add the newly
+  // created config as a value to the map param, keyed on the package-qualified entity_id.
+  private static void createSingleResourceNameConfigFromProtoFile(
+      DiagCollector diagCollector,
+      Resource resource,
+      ProtoFile file,
+      ProtoParser protoParser,
+      Map<String, SingleResourceNameConfig> singleResourceNameConfigsMap) {
+    SingleResourceNameConfig singleResourceNameConfig =
+        SingleResourceNameConfig.createSingleResourceName(
+            resource, resource.getPattern(), file, diagCollector);
+    createSingleResourceNameConfig(
+        diagCollector,
+        singleResourceNameConfig,
+        protoParser.getProtoPackage(file) + ".",
+        singleResourceNameConfigsMap);
+  }
+
+  // Construct a new SingleResourceNameConfig from the given SingleResourceNameConfig,
+  // and add the newly created config as a value to the map param,
+  // keyed on the entity_id.
+  private static void createSingleResourceNameConfig(
+      DiagCollector diagCollector,
+      SingleResourceNameConfig singleResourceNameConfig,
+      String prefixForMap,
+      Map<String, SingleResourceNameConfig> singleResourceNameConfigsMap) {
     if (singleResourceNameConfig == null) {
       return;
     }
@@ -1102,37 +1130,9 @@ public abstract class GapicProductConfig implements ProductConfig {
                     + singleResourceNameConfig.getEntityId()));
       }
     } else {
-      singleResourceNameConfigsMap.put(
-          singleResourceNameConfig.getEntityId(), singleResourceNameConfig);
-    }
-  }
-
-  // Construct a new SingleResourceNameConfig from the given Resource, and add the newly
-  // created config as a value to the map param, keyed on the package-qualified entity_id.
-  private static void createSingleResourceNameConfigFromProtoFile(
-      DiagCollector diagCollector,
-      Resource resource,
-      ProtoFile file,
-      ProtoParser protoParser,
-      LinkedHashMap<String, SingleResourceNameConfig> singleResourceNameConfigsMap) {
-    SingleResourceNameConfig singleResourceNameConfig =
-        SingleResourceNameConfig.createSingleResourceName(
-            resource, resource.getPattern(), file, diagCollector);
-    if (singleResourceNameConfigsMap.containsKey(singleResourceNameConfig.getEntityId())) {
-      SingleResourceNameConfig otherConfig =
-          singleResourceNameConfigsMap.get(singleResourceNameConfig.getEntityId());
-      if (!singleResourceNameConfig.getNamePattern().equals(otherConfig.getNamePattern())) {
-        diagCollector.addDiag(
-            Diag.error(
-                SimpleLocation.TOPLEVEL,
-                "Inconsistent collection configs across interfaces. Entity name: "
-                    + singleResourceNameConfig.getEntityId()));
-      }
-    } else {
-      String fullyQualifiedName = singleResourceNameConfig.getEntityId();
-      fullyQualifiedName =
-          StringUtils.prependIfMissing(fullyQualifiedName, protoParser.getProtoPackage(file) + ".");
-      singleResourceNameConfigsMap.put(fullyQualifiedName, singleResourceNameConfig);
+      String configKey = singleResourceNameConfig.getEntityId();
+      configKey = StringUtils.prependIfMissing(configKey, prefixForMap);
+      singleResourceNameConfigsMap.put(configKey, singleResourceNameConfig);
     }
   }
 

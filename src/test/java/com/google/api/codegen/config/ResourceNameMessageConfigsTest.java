@@ -77,9 +77,9 @@ public class ResourceNameMessageConfigsTest {
   private static final String GAPIC_SHELF_PATH = "shelves/{shelf_id}";
   private static final String DELETED_BOOK_PATH = "_deleted-book_";
   private static final String GAPIC_BOOK_PATH = "shelves/{shelf_id}/books/{book_id}";
-  private static final String GAPIC_ARCHIVED_BOOK_PATH =
+  private static final String PROTO_ARCHIVED_BOOK_PATH =
       "archives/{archive_path}/books/{book_id=**}";
-  private static final String PROTO_ARCHIVED_BOOK_PATH = "archives/{archive}/books/{book}";
+  private static final String GAPIC_ARCHIVED_BOOK_PATH = "archives/{archive}/books/{book}";
   private static final String PROTO_SHELF_PATH = "shelves/{shelf}";
   private static final String PROTO_BOOK_PATH = "bookShelves/{book}";
   private static final String CREATE_SHELF_METHOD_NAME = "CreateShelf";
@@ -402,8 +402,14 @@ public class ResourceNameMessageConfigsTest {
             ImmutableMap.of(),
             protoParser);
     ImmutableMap<String, ResourceNameConfig> resourceNameConfigs =
-        GapicProductConfig.createResourceNameConfigsForGapicConfigOnly(
-            diagCollector, extraConfigProto, sourceProtoFiles, TargetLanguage.CSHARP);
+        GapicProductConfig.createResourceNameConfigsWithProtoFileAndGapicConfig(
+            diagCollector,
+            extraConfigProto,
+            sourceProtoFiles,
+            TargetLanguage.CSHARP,
+            allResourceDefs,
+            allResourceSetDefs,
+            protoParser);
 
     List<FlatteningConfig> flatteningConfigs =
         new ArrayList<>(
@@ -415,12 +421,6 @@ public class ResourceNameMessageConfigsTest {
                 methodModel,
                 protoParser));
     assertThat(diagCollector.getErrorCount()).isEqualTo(0);
-    List<Diag> warningDiags =
-        diagCollector
-            .getDiags()
-            .stream()
-            .filter(d -> d.getKind().equals(Kind.WARNING))
-            .collect(Collectors.toList());
 
     assertThat(flatteningConfigs).isNotNull();
     assertThat(flatteningConfigs.size()).isEqualTo(3);
@@ -457,7 +457,7 @@ public class ResourceNameMessageConfigsTest {
     FieldConfig nameConfig = shelfFlattening.getFlattenedFieldConfigs().get("name");
     assertThat(nameConfig.getResourceNameTreatment()).isEqualTo(ResourceNameTreatment.STATIC_TYPES);
     assertThat(((SingleResourceNameConfig) nameConfig.getResourceNameConfig()).getNamePattern())
-        .isEqualTo(GAPIC_SHELF_PATH);
+        .isEqualTo(PROTO_SHELF_PATH);
 
     FlatteningConfig shelfAndBookFlattening = flatteningConfigs.get(1);
     assertThat(Iterables.size(shelfAndBookFlattening.getFlattenedFields())).isEqualTo(2);
@@ -467,13 +467,13 @@ public class ResourceNameMessageConfigsTest {
         .isEqualTo(ResourceNameTreatment.STATIC_TYPES);
     // Use PROTO_SHELF_PATH over GAPIC_SHELF_PATH.
     assertThat(((SingleResourceNameConfig) nameConfig2.getResourceNameConfig()).getNamePattern())
-        .isEqualTo(GAPIC_SHELF_PATH);
+        .isEqualTo(PROTO_SHELF_PATH);
 
     FieldConfig bookConfig = shelfAndBookFlattening.getFlattenedFieldConfigs().get("book");
     assertThat(bookConfig.getResourceNameTreatment()).isEqualTo(ResourceNameTreatment.STATIC_TYPES);
     // Use the resource name path from protofiles.
     assertThat(((SingleResourceNameConfig) bookConfig.getResourceNameConfig()).getNamePattern())
-        .isEqualTo(GAPIC_BOOK_PATH);
+        .isEqualTo(PROTO_BOOK_PATH);
     assertThat(((ProtoTypeRef) bookConfig.getField().getType()).getProtoType().getMessageType())
         .isEqualTo(bookType);
   }
