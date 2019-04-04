@@ -161,22 +161,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       @Nullable String clientPackage,
       TargetLanguage language) {
 
-    String configSchemaVersion = null;
-    if (configProto != null && Strings.isNullOrEmpty(configProto.getConfigSchemaVersion())) {
-      if (!configProto.equals(ConfigProto.getDefaultInstance())) {
-        configSchemaVersion = configProto.getConfigSchemaVersion();
-        if (Strings.isNullOrEmpty(configSchemaVersion)) {
-          model
-              .getDiagReporter()
-              .getDiagCollector()
-              .addDiag(
-                  Diag.error(
-                      SimpleLocation.TOPLEVEL,
-                      "config_schema_version field is required in GAPIC yaml."));
-        }
-      }
-    }
-
     final String defaultPackage;
     SymbolTable symbolTable = model.getSymbolTable();
 
@@ -215,15 +199,17 @@ public abstract class GapicProductConfig implements ProductConfig {
       sourceProtos.forEach(model::addRoot);
     }
 
+    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
     // Toggle on/off proto annotations parsing.
     ProtoParser protoParser;
-    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
-    if (configProto == null) {
-      // By default, enable proto annotations parsing when no GAPIC config is given.
+    ConfigVersionValidator versionValidator = new ConfigVersionValidator();
+    if (versionValidator.isV2Config(configProto)) {
+      versionValidator.validateV2Config(configProto);
       protoParser = new ProtoParser(true);
-      configProto = ConfigProto.getDefaultInstance();
-    } else if (new ConfigVersionValidator().isV2Config(configProto)) {
-      protoParser = new ProtoParser(true);
+
+      if (configProto == null) {
+        configProto = ConfigProto.getDefaultInstance();
+      }
     } else {
       protoParser = new ProtoParser(false);
     }
@@ -323,6 +309,7 @@ public abstract class GapicProductConfig implements ProductConfig {
 
     ImmutableList<String> copyrightLines;
     ImmutableList<String> licenseLines;
+    String configSchemaVersion = null;
 
     LicenseHeaderUtil licenseHeaderUtil = new LicenseHeaderUtil();
     try {
@@ -335,6 +322,19 @@ public abstract class GapicProductConfig implements ProductConfig {
           .addDiag(Diag.error(SimpleLocation.TOPLEVEL, "Exception: %s", e.getMessage()));
       e.printStackTrace(System.err);
       throw new RuntimeException(e);
+    }
+
+    if (!configProto.equals(ConfigProto.getDefaultInstance())) {
+      configSchemaVersion = configProto.getConfigSchemaVersion();
+      if (Strings.isNullOrEmpty(configSchemaVersion)) {
+        model
+            .getDiagReporter()
+            .getDiagCollector()
+            .addDiag(
+                Diag.error(
+                    SimpleLocation.TOPLEVEL,
+                    "config_schema_version field is required in GAPIC yaml."));
+      }
     }
 
     Boolean enableStringFormatFunctionsOverride = null;

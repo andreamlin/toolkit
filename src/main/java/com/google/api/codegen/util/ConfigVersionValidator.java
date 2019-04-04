@@ -19,7 +19,6 @@ import com.google.protobuf.DiscardUnknownFieldsParser;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Parser;
 import java.util.Arrays;
-import javax.annotation.Nonnull;
 
 public class ConfigVersionValidator {
 
@@ -28,16 +27,18 @@ public class ConfigVersionValidator {
 
   /**
    * Throw {@link IllegalStateException} iff the given input contains fields unknown to the {@link
-   * com.google.api.codegen.v2.ConfigProto} schema.
+   * com.google.api.codegen.v2.ConfigProto} schema. Do nothing if input is null.
    */
-  public void validateV2Config(@Nonnull com.google.api.codegen.ConfigProto configV1Proto)
+  public void validateV2Config(com.google.api.codegen.ConfigProto configV1Proto)
       throws IllegalStateException {
-    if (!configV1Proto.getConfigSchemaVersion().startsWith(CONFIG_V2_MAJOR_VERSION + ".")
-        && !configV1Proto.getConfigSchemaVersion().equals(CONFIG_V2_MAJOR_VERSION)) {
+    if (!isV2Config(configV1Proto)) {
       throw new IllegalStateException(
           String.format(
               "Provided ConfigProto version is %s but should be >= %s",
               configV1Proto.getConfigSchemaVersion(), CONFIG_V2_VERSION));
+    }
+    if (configV1Proto == null) {
+      return;
     }
 
     try {
@@ -61,13 +62,8 @@ public class ConfigVersionValidator {
     }
   }
 
-  // TODO(andrealin): refactor so most of the logic is in isV2Config
-  public boolean isV2Config(@Nonnull com.google.api.codegen.ConfigProto configV1Proto) {
-    try {
-      validateV2Config(configV1Proto);
-    } catch (IllegalStateException e) {
-      return false;
-    }
-    return true;
+  public boolean isV2Config(com.google.api.codegen.ConfigProto configV1Proto) {
+    return configV1Proto == null
+        || configV1Proto.getConfigSchemaVersion().startsWith(CONFIG_V2_MAJOR_VERSION + ".");
   }
 }

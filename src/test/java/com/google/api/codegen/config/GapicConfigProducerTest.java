@@ -54,6 +54,5 @@ public class GapicConfigProducerTest {
             SimpleLocation.TOPLEVEL, "config_schema_version field is required in GAPIC yaml.");
     assertThat(model.getDiagReporter().getDiagCollector().hasErrors()).isTrue();
     assertThat(model.getDiagReporter().getDiagCollector().getDiags()).contains(expectedError);
-    assertThat(productConfig).isNull();
   }
 }
