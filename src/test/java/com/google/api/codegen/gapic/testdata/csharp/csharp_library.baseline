@@ -2365,8 +2365,8 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParamsAsync</summary>
         public async Task TestOptionalRequiredFlatteningParamsAsync2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
-            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
+            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
@@ -2380,7 +2380,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -2468,7 +2468,7 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParams</summary>
         public void TestOptionalRequiredFlatteningParams2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
@@ -2482,7 +2482,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -4842,7 +4842,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -5042,7 +5042,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -9239,8 +9239,7 @@ namespace Google.Example.Library.V1
         /// </summary>
         /// <param name="resource">
         /// REQUIRED: The resource which the label is being added to.
-        /// Resource is usually specified as a path, such as,
-        /// projects/{project}/zones/{zone}/disks/{disk}.
+        /// In the form "shelves/{shelf_id}/books/{book_id}".
         /// </param>
         /// <param name="label">
         /// REQUIRED: The label to add.
@@ -9267,8 +9266,7 @@ namespace Google.Example.Library.V1
         /// </summary>
         /// <param name="resource">
         /// REQUIRED: The resource which the label is being added to.
-        /// Resource is usually specified as a path, such as,
-        /// projects/{project}/zones/{zone}/disks/{disk}.
+        /// In the form "shelves/{shelf_id}/books/{book_id}".
         /// </param>
         /// <param name="label">
         /// REQUIRED: The label to add.
@@ -9292,8 +9290,7 @@ namespace Google.Example.Library.V1
         /// </summary>
         /// <param name="resource">
         /// REQUIRED: The resource which the label is being added to.
-        /// Resource is usually specified as a path, such as,
-        /// projects/{project}/zones/{zone}/disks/{disk}.
+        /// In the form "shelves/{shelf_id}/books/{book_id}".
         /// </param>
         /// <param name="label">
         /// REQUIRED: The label to add.
@@ -9970,7 +9967,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookNameOneof requiredSingularResourceNameOneof,
+            BookName requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10063,7 +10060,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof))),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -10436,7 +10433,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookNameOneof requiredSingularResourceNameOneof,
+            BookName requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10899,7 +10896,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookNameOneof requiredSingularResourceNameOneof,
+            BookName requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10992,7 +10989,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof))),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -13780,20 +13777,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsync",  "empty_response_type_with_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsync", "empty_response_type_with_response_handling")
 
- class DeleteShelfAsyncFlattenedAsyncEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfAsyncFlattenedAsyncEmptyResponseTypeWithResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test response handling for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleDeleteShelfAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           ShelfName name = new ShelfName("[SHELF_ID]");
+           libraryServiceClient.DeleteShelfAsync(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13802,7 +13806,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfAsyncFlattenedAsyncEmptyResponseTypeWithoutResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -13819,20 +13823,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsync",  "empty_response_type_without_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsync", "empty_response_type_without_response_handling")
 
- class DeleteShelfAsyncFlattenedAsyncEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfAsyncFlattenedAsyncEmptyResponseTypeWithoutResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test default response handling is turned off for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleDeleteShelfAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           ShelfName name = new ShelfName("[SHELF_ID]");
+           libraryServiceClient.DeleteShelfAsync(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13841,7 +13852,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -13858,20 +13869,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsync",  "empty_response_type_with_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("RequestAsync", "empty_response_type_with_response_handling")
 
- class DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test response handling for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleDeleteShelfAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           DeleteShelfRequest request = new DeleteShelfRequest
+           {
+               ShelfName = new ShelfName("[SHELF_ID]"),
+           };
+           libraryServiceClient.DeleteShelfAsync(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13880,7 +13901,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithoutResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -13897,20 +13918,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsync",  "empty_response_type_without_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("RequestAsync", "empty_response_type_without_response_handling")
 
- class DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfAsyncRequestAsyncEmptyResponseTypeWithoutResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test default response handling is turned off for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleDeleteShelfAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           DeleteShelfRequest request = new DeleteShelfRequest
+           {
+               ShelfName = new ShelfName("[SHELF_ID]"),
+           };
+           libraryServiceClient.DeleteShelfAsync(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13919,7 +13950,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfFlattenedEmptyResponseTypeWithResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -13936,20 +13967,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "empty_response_type_with_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Flattened", "empty_response_type_with_response_handling")
 
- class DeleteShelfFlattenedEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfFlattenedEmptyResponseTypeWithResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test response handling for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleDeleteShelf()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           ShelfName name = new ShelfName("[SHELF_ID]");
+           libraryServiceClient.DeleteShelf(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13958,7 +13996,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfFlattenedEmptyResponseTypeWithoutResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -13975,20 +14013,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "empty_response_type_without_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Flattened", "empty_response_type_without_response_handling")
 
- class DeleteShelfFlattenedEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfFlattenedEmptyResponseTypeWithoutResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test default response handling is turned off for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleDeleteShelf()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           ShelfName name = new ShelfName("[SHELF_ID]");
+           libraryServiceClient.DeleteShelf(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -13997,7 +14042,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfRequestEmptyResponseTypeWithResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14014,20 +14059,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "empty_response_type_with_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Request", "empty_response_type_with_response_handling")
 
- class DeleteShelfRequestEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfRequestEmptyResponseTypeWithResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test response handling for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleDeleteShelf()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           DeleteShelfRequest request = new DeleteShelfRequest
+           {
+               ShelfName = new ShelfName("[SHELF_ID]"),
+           };
+           libraryServiceClient.DeleteShelf(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14036,7 +14091,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/DeleteShelfRequestEmptyResponseTypeWithoutResponseHandling.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14053,20 +14108,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "empty_response_type_without_response_handling")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Request", "empty_response_type_without_response_handling")
 
- class DeleteShelfRequestEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class DeleteShelfRequestEmptyResponseTypeWithoutResponseHandling
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test default response handling is turned off for methods that return empty
+   /// </summary>
    public static void SampleDeleteShelf()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleDeleteShelf()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           DeleteShelfRequest request = new DeleteShelfRequest
+           {
+               ShelfName = new ShelfName("[SHELF_ID]"),
+           };
+           libraryServiceClient.DeleteShelf(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14075,8 +14140,8 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
-============== file: Samples/DiscussBookRequestStreamingServerProg.cs ==============
+}
+============== file: Samples/FindRelatedBooksAsyncFlattenedAsyncPagedAllOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14092,29 +14157,47 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestStreamingServer",  "prog")
 
- // [START turing_prog_request_streaming_server]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsyncPagedAll", "odyssey")
 
- class DiscussBookRequestStreamingServerProg
- {
-   // FIXME: sample function documentation
-   public static void SampleDiscussBook(string imageFileName)
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncFlattenedAsyncPagedAllOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(names, shelves);
+           // Iterate over pages (of server-defined size), performing one RPC per page
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+       }
+       // [END sample_core]
    }
 
-   // [END turing_prog_request_streaming_server]
+   // [END sample]
    public static void Main(String[] args)
    {
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/FindRelatedBooksAsyncFlattenedAsyncPagedOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14131,20 +14214,41 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsyncPaged",  "odyssey")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsyncPaged", "odyssey")
 
- class FindRelatedBooksAsyncFlattenedAsyncPagedOdyssey
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncFlattenedAsyncPagedOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(names, shelves);
+           // Iterate over all response items, lazily performing RPCs as required
+           foreach (FindRelatedBooksResponse page in response.asRawResponses())
+           {
+               foreach (BookName item in page)
+               {
+                   // FIXME: inspect the results
+               }
+           }
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14153,7 +14257,126 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
+============== file: Samples/FindRelatedBooksAsyncFlattenedAsyncPagedPageSizeOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("FlattenedAsyncPagedPageSize", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncFlattenedAsyncPagedPageSizeOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(names, shelves);
+           // Retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
+           int pageSize = 10;
+           Page<BookName> singlePage = response.ReadPage(pageSize);
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+           // Store the pageToken, for when the next page is required.
+           string nextPageToken = singlePage.NextPageToken;
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
+============== file: Samples/FindRelatedBooksAsyncRequestAsyncPagedAllOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("RequestAsyncPagedAll", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncRequestAsyncPagedAllOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(request);
+           // Iterate over pages (of server-defined size), performing one RPC per page
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
 ============== file: Samples/FindRelatedBooksAsyncRequestAsyncPagedOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14170,20 +14393,42 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsyncPaged",  "odyssey")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("RequestAsyncPaged", "odyssey")
 
- class FindRelatedBooksAsyncRequestAsyncPagedOdyssey
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncRequestAsyncPagedOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(request);
+           // Iterate over all response items, lazily performing RPCs as required
+           foreach (FindRelatedBooksResponse page in response.asRawResponses())
+           {
+               foreach (BookName item in page)
+               {
+                   // FIXME: inspect the results
+               }
+           }
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14192,7 +14437,126 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
+============== file: Samples/FindRelatedBooksAsyncRequestAsyncPagedPageSizeOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("RequestAsyncPagedPageSize", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksAsyncRequestAsyncPagedPageSizeOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static async Task SampleFindRelatedBooksAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedAsyncEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooksAsync(request);
+           // Retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
+           int pageSize = 10;
+           Page<BookName> singlePage = response.ReadPage(pageSize);
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+           // Store the pageToken, for when the next page is required.
+           string nextPageToken = singlePage.NextPageToken;
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
+============== file: Samples/FindRelatedBooksFlattenedPagedAllOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("FlattenedPagedAll", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksFlattenedPagedAllOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(names, shelves);
+           // Iterate over pages (of server-defined size), performing one RPC per page
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
 ============== file: Samples/FindRelatedBooksFlattenedPagedOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14209,20 +14573,42 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedPaged",  "odyssey")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("FlattenedPaged", "odyssey")
 
- class FindRelatedBooksFlattenedPagedOdyssey
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksFlattenedPagedOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(names, shelves);
+           // Iterate over all response items, lazily performing RPCs as required
+           foreach (FindRelatedBooksResponse page in response.asRawResponses())
+           {
+               foreach (BookName item in page)
+               {
+                   // FIXME: inspect the results
+               }
+           }
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14231,7 +14617,126 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
+============== file: Samples/FindRelatedBooksFlattenedPagedPageSizeOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("FlattenedPagedPageSize", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksFlattenedPagedPageSizeOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           IEnumerable<BookName> names = new[]
+           {
+               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           IEnumerable<ShelfName> shelves = new[]
+           {
+               new ShelfName("[SHELF_ID]"),
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(names, shelves);
+           // Retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
+           int pageSize = 10;
+           Page<BookName> singlePage = response.ReadPage(pageSize);
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+           // Store the pageToken, for when the next page is required.
+           string nextPageToken = singlePage.NextPageToken;
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
+============== file: Samples/FindRelatedBooksRequestPagedAllOdyssey.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("RequestPagedAll", "odyssey")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksRequestPagedAllOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
+   {
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(request);
+           // Iterate over pages (of server-defined size), performing one RPC per page
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
 ============== file: Samples/FindRelatedBooksRequestPagedOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14248,20 +14753,43 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestPaged",  "odyssey")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("RequestPaged", "odyssey")
 
- class FindRelatedBooksRequestPagedOdyssey
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksRequestPagedOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(request);
+           // Iterate over all response items, lazily performing RPCs as required
+           foreach (FindRelatedBooksResponse page in response.asRawResponses())
+           {
+               foreach (BookName item in page)
+               {
+                   // FIXME: inspect the results
+               }
+           }
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14270,8 +14798,8 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
-============== file: Samples/GetBigBookAsyncLongRunningFlattenedAsyncWap.cs ==============
+}
+============== file: Samples/FindRelatedBooksRequestPagedPageSizeOdyssey.cs ==============
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14287,332 +14815,43 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattenedAsync",  "wap")
 
- // [START hopper]
- // FIXME: import section
+// This is a generated sample ("RequestPagedPageSize", "odyssey")
 
- class GetBigBookAsyncLongRunningFlattenedAsyncWap
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf)
+// [START sample]
+// FIXME: import everything this sample needs
+class FindRelatedBooksRequestPagedPageSizeOdyssey
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
+   public static void SampleFindRelatedBooks()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookAsyncLongRunningFlattenedAsyncWap2.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattenedAsync",  "wap2")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookAsyncLongRunningFlattenedAsyncWap2
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf, string bigBookName)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookAsyncLongRunningRequestAsyncWap.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "wap")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookAsyncLongRunningRequestAsyncWap
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookAsyncLongRunningRequestAsyncWap2.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "wap2")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookAsyncLongRunningRequestAsyncWap2
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf, string bigBookName)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookLongRunningFlattenedWap.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattened",  "wap")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookLongRunningFlattenedWap
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookLongRunningFlattenedWap2.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattened",  "wap2")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookLongRunningFlattenedWap2
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf, string bigBookName)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookLongRunningRequestWap.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequest",  "wap")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookLongRunningRequestWap
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigBookLongRunningRequestWap2.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequest",  "wap2")
-
- // [START hopper]
- // FIXME: import section
-
- class GetBigBookLongRunningRequestWap2
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigBook(string shelf, string bigBookName)
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END hopper]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingAsyncLongRunningFlattenedAsyncEmptyResponseTypeWithResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattenedAsync",  "empty_response_type_with_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingAsyncLongRunningFlattenedAsyncEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleFindRelatedBooks()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           FindRelatedBooksRequest request = new FindRelatedBooksRequest
+           {
+               BookNames = {
+                               new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                           },
+               ShelvesAsShelfNames = {
+                                         new ShelfName("[SHELF_ID]"),
+                                     },
+           };
+           gax::PagedEnumerable<FindRelatedBooksResponse, BookName> response = libraryServiceClient.FindRelatedBooks(request);
+           // Retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
+           int pageSize = 10;
+           Page<BookName> singlePage = response.ReadPage(pageSize);
+           foreach (BookName item in response)
+           {
+               // FIXME: inspect the results
+           }
+           // Store the pageToken, for when the next page is required.
+           string nextPageToken = singlePage.NextPageToken;
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14621,280 +14860,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
-============== file: Samples/GetBigNothingAsyncLongRunningFlattenedAsyncEmptyResponseTypeWithoutResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattenedAsync",  "empty_response_type_without_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingAsyncLongRunningFlattenedAsyncEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingAsyncLongRunningRequestAsyncEmptyResponseTypeWithResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "empty_response_type_with_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingAsyncLongRunningRequestAsyncEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingAsyncLongRunningRequestAsyncEmptyResponseTypeWithoutResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequestAsync",  "empty_response_type_without_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingAsyncLongRunningRequestAsyncEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingLongRunningFlattenedEmptyResponseTypeWithResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattened",  "empty_response_type_with_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingLongRunningFlattenedEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingLongRunningFlattenedEmptyResponseTypeWithoutResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningFlattened",  "empty_response_type_without_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingLongRunningFlattenedEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingLongRunningRequestEmptyResponseTypeWithResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequest",  "empty_response_type_with_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingLongRunningRequestEmptyResponseTypeWithResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/GetBigNothingLongRunningRequestEmptyResponseTypeWithoutResponseHandling.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("LongRunningRequest",  "empty_response_type_without_response_handling")
-
- // [START sample]
- // FIXME: import section
-
- class GetBigNothingLongRunningRequestEmptyResponseTypeWithoutResponseHandling
- {
-   // FIXME: sample function documentation
-   public static void SampleGetBigNothing()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
+}
 ============== file: Samples/GetBookAsyncFlattenedAsyncTestOnSuccessMap.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14911,20 +14877,24 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsync",  "test_on_success_map")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsync", "test_on_success_map")
 
- class GetBookAsyncFlattenedAsyncTestOnSuccessMap
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class GetBookAsyncFlattenedAsyncTestOnSuccessMap
+{
+    // [START sample_core]
    public static void SampleGetBook()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleGetBookAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           BookName name = new BookName("[SHELF_ID]", "[BOOK_ID]");
+           stt::Task<Book> response = libraryServiceClient.GetBookAsync(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14933,7 +14903,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/GetBookAsyncRequestAsyncTestOnSuccessMap.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14950,20 +14920,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsync",  "test_on_success_map")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("RequestAsync", "test_on_success_map")
 
- class GetBookAsyncRequestAsyncTestOnSuccessMap
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class GetBookAsyncRequestAsyncTestOnSuccessMap
+{
+    // [START sample_core]
    public static void SampleGetBook()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SampleGetBookAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           GetBookRequest request = new GetBookRequest
+           {
+               BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           stt::Task<Book> response = libraryServiceClient.GetBookAsync(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -14972,7 +14949,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/GetBookFlattenedTestOnSuccessMap.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -14989,20 +14966,24 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "test_on_success_map")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Flattened", "test_on_success_map")
 
- class GetBookFlattenedTestOnSuccessMap
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class GetBookFlattenedTestOnSuccessMap
+{
+    // [START sample_core]
    public static void SampleGetBook()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleGetBook()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           BookName name = new BookName("[SHELF_ID]", "[BOOK_ID]");
+           Book response = libraryServiceClient.GetBook(name);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -15011,7 +14992,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/GetBookRequestTestOnSuccessMap.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15028,20 +15009,27 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "test_on_success_map")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Request", "test_on_success_map")
 
- class GetBookRequestTestOnSuccessMap
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class GetBookRequestTestOnSuccessMap
+{
+    // [START sample_core]
    public static void SampleGetBook()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SampleGetBook()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           GetBookRequest request = new GetBookRequest
+           {
+               BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+           };
+           Book response = libraryServiceClient.GetBook(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -15050,7 +15038,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesAsyncFlattenedAsyncPiVersion.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15067,20 +15055,40 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsync",  "pi_version")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsync", "pi_version")
 
- class PublishSeriesAsyncFlattenedAsyncPiVersion
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesAsyncFlattenedAsyncPiVersion
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing &lt;@calling forms&gt;
+   /// </summary>
+   /// <param name="shelfName">The name of the shelf where books are published to.</param>
+   /// <param name="edition">The edition of the series.</param>
    public static void SamplePublishSeries(string shelfName, uint edition)
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SamplePublishSeriesAsync(string shelfName, uint edition)
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           // string shelfName = "Math"
+           // uint edition = 123
+           Shelf shelf = new Shelf
+           {
+               Name = "Math",
+           };
+           scg::IEnumerable<Book> books = new scg::List<Book>();
+           uint edition = 123;
+           SeriesUuid seriesUuid = new SeriesUuid
+           {
+               SeriesString = "xyz3141592654",
+           };
+           stt::Task<PublishSeriesResponse> response = libraryServiceClient.PublishSeriesAsync(shelf, books, edition, seriesUuid);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15089,7 +15097,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesAsyncFlattenedAsyncSecondEdition.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15106,20 +15114,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("FlattenedAsync",  "second_edition")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("FlattenedAsync", "second_edition")
 
- class PublishSeriesAsyncFlattenedAsyncSecondEdition
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesAsyncFlattenedAsyncSecondEdition
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SamplePublishSeries()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SamplePublishSeriesAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           Shelf shelf = new Shelf();
+           scg::IEnumerable<Book> books = new scg::List<Book>();
+           uint edition = 2;
+           SeriesUuid seriesUuid = new SeriesUuid();
+           stt::Task<PublishSeriesResponse> response = libraryServiceClient.PublishSeriesAsync(shelf, books, edition, seriesUuid);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15128,7 +15146,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesAsyncRequestAsyncPiVersion.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15145,20 +15163,43 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsync",  "pi_version")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("RequestAsync", "pi_version")
 
- class PublishSeriesAsyncRequestAsyncPiVersion
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesAsyncRequestAsyncPiVersion
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing &lt;@calling forms&gt;
+   /// </summary>
+   /// <param name="shelfName">The name of the shelf where books are published to.</param>
+   /// <param name="edition">The edition of the series.</param>
    public static void SamplePublishSeries(string shelfName, uint edition)
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SamplePublishSeriesAsync(string shelfName, uint edition)
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           // string shelfName = "Math"
+           // uint edition = 123
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf
+                       {
+                           Name = "Math",
+                       },
+               Books = { },
+               SeriesUuid = new SeriesUuid
+                            {
+                                SeriesString = "xyz3141592654",
+                            },
+               Edition = 123,
+           };
+           stt::Task<PublishSeriesResponse> response = libraryServiceClient.PublishSeriesAsync(request);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15167,7 +15208,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesAsyncRequestAsyncSecondEdition.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15184,20 +15225,33 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestAsync",  "second_edition")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("RequestAsync", "second_edition")
 
- class PublishSeriesAsyncRequestAsyncSecondEdition
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesAsyncRequestAsyncSecondEdition
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SamplePublishSeries()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static async Task SamplePublishSeriesAsync()
+       {
+           LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf(),
+               Books = { },
+               SeriesUuid = new SeriesUuid(),
+               Edition = 2,
+           };
+           stt::Task<PublishSeriesResponse> response = libraryServiceClient.PublishSeriesAsync(request);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15206,7 +15260,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesFlattenedPiVersion.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15223,20 +15277,40 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "pi_version")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("Flattened", "pi_version")
 
- class PublishSeriesFlattenedPiVersion
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesFlattenedPiVersion
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing &lt;@calling forms&gt;
+   /// </summary>
+   /// <param name="shelfName">The name of the shelf where books are published to.</param>
+   /// <param name="edition">The edition of the series.</param>
    public static void SamplePublishSeries(string shelfName, uint edition)
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SamplePublishSeries(string shelfName, uint edition)
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           // string shelfName = "Math"
+           // uint edition = 123
+           Shelf shelf = new Shelf
+           {
+               Name = "Math",
+           };
+           scg::IEnumerable<Book> books = new scg::List<Book>();
+           uint edition = 123;
+           SeriesUuid seriesUuid = new SeriesUuid
+           {
+               SeriesString = "xyz3141592654",
+           };
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(shelf, books, edition, seriesUuid);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15245,7 +15319,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesFlattenedSecondEdition.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15262,20 +15336,30 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "second_edition")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("Flattened", "second_edition")
 
- class PublishSeriesFlattenedSecondEdition
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesFlattenedSecondEdition
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SamplePublishSeries()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SamplePublishSeries()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           Shelf shelf = new Shelf();
+           scg::IEnumerable<Book> books = new scg::List<Book>();
+           uint edition = 2;
+           SeriesUuid seriesUuid = new SeriesUuid();
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(shelf, books, edition, seriesUuid);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15284,7 +15368,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesRequestPiVersion.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15301,20 +15385,43 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "pi_version")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("Request", "pi_version")
 
- class PublishSeriesRequestPiVersion
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesRequestPiVersion
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing &lt;@calling forms&gt;
+   /// </summary>
+   /// <param name="shelfName">The name of the shelf where books are published to.</param>
+   /// <param name="edition">The edition of the series.</param>
    public static void SamplePublishSeries(string shelfName, uint edition)
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SamplePublishSeries(string shelfName, uint edition)
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           // string shelfName = "Math"
+           // uint edition = 123
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf
+                       {
+                           Name = "Math",
+                       },
+               Books = { },
+               SeriesUuid = new SeriesUuid
+                            {
+                                SeriesString = "xyz3141592654",
+                            },
+               Edition = 123,
+           };
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(request);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15323,7 +15430,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesRequestSecondEdition.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15340,20 +15447,33 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "second_edition")
 
- // [START canonical]
- // FIXME: import section
+// This is a generated sample ("Request", "second_edition")
 
- class PublishSeriesRequestSecondEdition
- {
-   // FIXME: sample function documentation
+// [START canonical]
+// FIXME: import everything this sample needs
+class PublishSeriesRequestSecondEdition
+{
+    // [START canonical_core]
+   /// <summary>
+   /// Testing calling forms
+   /// </summary>
    public static void SamplePublishSeries()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SamplePublishSeries()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf(),
+               Books = { },
+               SeriesUuid = new SeriesUuid(),
+               Edition = 2,
+           };
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(request);
+           // FIXME: inspect the results
+       }
+       // [END canonical_core]
    }
 
    // [END canonical]
@@ -15362,7 +15482,7 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
+}
 ============== file: Samples/PublishSeriesRequestTestRequestObjectFieldComments.cs ==============
 // Copyright 2019 Google LLC
 //
@@ -15379,20 +15499,41 @@ namespace Google.Example.Library.V1
 // limitations under the License.
 
 // Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Request",  "test_request_object_field_comments")
 
- // [START sample]
- // FIXME: import section
+// This is a generated sample ("Request", "test_request_object_field_comments")
 
- class PublishSeriesRequestTestRequestObjectFieldComments
- {
-   // FIXME: sample function documentation
+// [START sample]
+// FIXME: import everything this sample needs
+class PublishSeriesRequestTestRequestObjectFieldComments
+{
+    // [START sample_core]
+   /// <summary>
+   /// Test request object field comments
+   /// </summary>
    public static void SamplePublishSeries()
    {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
+       public static void SamplePublishSeries()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf
+                       {
+                           Name = new ShelfName("math").ToString(),
+                           Theme = "Math",
+                           InternalTheme = "Statistics",
+                       },
+               Books = { },
+               SeriesUuid = new SeriesUuid
+                            {
+                                SeriesBytes = File.ReadAllBytes("xyz3141592654"),
+                            },
+               Edition = 123,
+           };
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
    }
 
    // [END sample]
@@ -15401,121 +15542,4 @@ namespace Google.Example.Library.V1
    	// FIXME: pass in commandline arguments
    	// FIXME: call the sample function
    }
- }
-============== file: Samples/StreamBooksRequestStreamingServerProg.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestStreamingServer",  "prog")
-
- // [START lovelace]
- // FIXME: import section
-
- class StreamBooksRequestStreamingServerProg
- {
-   // FIXME: sample function documentation
-   public static void SampleStreamBooks()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END lovelace]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/StreamShelvesFlattenedEmpty.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("Flattened",  "empty")
-
- // [START sample]
- // FIXME: import section
-
- class StreamShelvesFlattenedEmpty
- {
-   // FIXME: sample function documentation
-   public static void SampleStreamShelves()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
-============== file: Samples/StreamShelvesRequestStreamingServerEmpty.cs ==============
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// Generated code. DO NOT EDIT!
- // DO NOT EDIT! This is a generated sample ("RequestStreamingServer",  "empty")
-
- // [START sample]
- // FIXME: import section
-
- class StreamShelvesRequestStreamingServerEmpty
- {
-   // FIXME: sample function documentation
-   public static void SampleStreamShelves()
-   {
-   	// FIXME: instantiate a client
-     // FIXME: construct a request
-     // FIXME: call the API
-     // FIXME: inspect the results
-   }
-
-   // [END sample]
-   public static void Main(String[] args)
-   {
-   	// FIXME: pass in commandline arguments
-   	// FIXME: call the sample function
-   }
- }
+}

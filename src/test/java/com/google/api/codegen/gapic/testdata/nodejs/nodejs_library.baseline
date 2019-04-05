@@ -363,8 +363,7 @@ function sampleDiscussBook(imageFileName) {
   });
   // const imageFileName = 'image_file.jpg';
   const formattedName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
-  const fileName = 'comment_file';
-  const comment = fs.readFileSync(fileName).toString('base64');
+  const comment = fs.readFileSync('comment_file').toString('base64');
   const comment2 = {
     comment: comment,
   };
@@ -1291,8 +1290,7 @@ function samplePublishSeries() {
   const books = [];
 
   // Comment on a file input field
-  const fileName = 'xyz3141592654';
-  const seriesBytes = fs.readFileSync(fileName).toString('base64');
+  const seriesBytes = fs.readFileSync('xyz3141592654').toString('base64');
 
   // Comment on a message
   const seriesUuid = {
@@ -3658,8 +3656,7 @@ const Status = {
 /**
  * @property {string} resource
  *   REQUIRED: The resource which the tag is being added to.
- *   Resource is usually specified as a path, such as,
- *   projects/{project}/zones/{zone}/disks/{disk}.
+ *   In the form "shelves/{shelf_id}/books/{book_id}".
  *
  * @property {string} tag
  *   REQUIRED: The tag to add.
@@ -5696,8 +5693,7 @@ class LibraryServiceClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource which the label is being added to.
-   *   Resource is usually specified as a path, such as,
-   *   projects/{project}/zones/{zone}/disks/{disk}.
+   *   In the form "shelves/{shelf_id}/books/{book_id}".
    * @param {string} request.label
    *   REQUIRED: The label to add.
    * @param {Object} [options]
@@ -6105,9 +6101,9 @@ class LibraryServiceClient {
    * const requiredSingularString = '';
    * const requiredSingularBytes = '';
    * const requiredSingularMessage = {};
-   * const requiredSingularResourceName = '';
-   * const requiredSingularResourceNameOneof = '';
-   * const requiredSingularResourceNameCommon = '';
+   * const formattedRequiredSingularResourceName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+   * const formattedRequiredSingularResourceNameOneof = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+   * const formattedRequiredSingularResourceNameCommon = client.projectPath('[PROJECT]');
    * const requiredSingularFixed32 = 0;
    * const requiredSingularFixed64 = 0;
    * const requiredRepeatedInt32 = [];
@@ -6135,9 +6131,9 @@ class LibraryServiceClient {
    *   requiredSingularString: requiredSingularString,
    *   requiredSingularBytes: requiredSingularBytes,
    *   requiredSingularMessage: requiredSingularMessage,
-   *   requiredSingularResourceName: requiredSingularResourceName,
-   *   requiredSingularResourceNameOneof: requiredSingularResourceNameOneof,
-   *   requiredSingularResourceNameCommon: requiredSingularResourceNameCommon,
+   *   requiredSingularResourceName: formattedRequiredSingularResourceName,
+   *   requiredSingularResourceNameOneof: formattedRequiredSingularResourceNameOneof,
+   *   requiredSingularResourceNameCommon: formattedRequiredSingularResourceNameCommon,
    *   requiredSingularFixed32: requiredSingularFixed32,
    *   requiredSingularFixed64: requiredSingularFixed64,
    *   requiredRepeatedInt32: requiredRepeatedInt32,
@@ -8270,9 +8266,9 @@ describe('LibraryServiceClient', () => {
       const requiredSingularString = 'requiredSingularString-1949894503';
       const requiredSingularBytes = '-29';
       const requiredSingularMessage = {};
-      const requiredSingularResourceName = 'requiredSingularResourceName-1701575020';
-      const requiredSingularResourceNameOneof = 'requiredSingularResourceNameOneof-25303726';
-      const requiredSingularResourceNameCommon = 'requiredSingularResourceNameCommon-1126805002';
+      const formattedRequiredSingularResourceName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+      const formattedRequiredSingularResourceNameOneof = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+      const formattedRequiredSingularResourceNameCommon = client.projectPath('[PROJECT]');
       const requiredSingularFixed32 = 720656715;
       const requiredSingularFixed64 = 720656810;
       const requiredRepeatedInt32 = [];
@@ -8300,9 +8296,9 @@ describe('LibraryServiceClient', () => {
         requiredSingularString: requiredSingularString,
         requiredSingularBytes: requiredSingularBytes,
         requiredSingularMessage: requiredSingularMessage,
-        requiredSingularResourceName: requiredSingularResourceName,
-        requiredSingularResourceNameOneof: requiredSingularResourceNameOneof,
-        requiredSingularResourceNameCommon: requiredSingularResourceNameCommon,
+        requiredSingularResourceName: formattedRequiredSingularResourceName,
+        requiredSingularResourceNameOneof: formattedRequiredSingularResourceNameOneof,
+        requiredSingularResourceNameCommon: formattedRequiredSingularResourceNameCommon,
         requiredSingularFixed32: requiredSingularFixed32,
         requiredSingularFixed64: requiredSingularFixed64,
         requiredRepeatedInt32: requiredRepeatedInt32,
@@ -8354,9 +8350,9 @@ describe('LibraryServiceClient', () => {
       const requiredSingularString = 'requiredSingularString-1949894503';
       const requiredSingularBytes = '-29';
       const requiredSingularMessage = {};
-      const requiredSingularResourceName = 'requiredSingularResourceName-1701575020';
-      const requiredSingularResourceNameOneof = 'requiredSingularResourceNameOneof-25303726';
-      const requiredSingularResourceNameCommon = 'requiredSingularResourceNameCommon-1126805002';
+      const formattedRequiredSingularResourceName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+      const formattedRequiredSingularResourceNameOneof = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+      const formattedRequiredSingularResourceNameCommon = client.projectPath('[PROJECT]');
       const requiredSingularFixed32 = 720656715;
       const requiredSingularFixed64 = 720656810;
       const requiredRepeatedInt32 = [];
@@ -8384,9 +8380,9 @@ describe('LibraryServiceClient', () => {
         requiredSingularString: requiredSingularString,
         requiredSingularBytes: requiredSingularBytes,
         requiredSingularMessage: requiredSingularMessage,
-        requiredSingularResourceName: requiredSingularResourceName,
-        requiredSingularResourceNameOneof: requiredSingularResourceNameOneof,
-        requiredSingularResourceNameCommon: requiredSingularResourceNameCommon,
+        requiredSingularResourceName: formattedRequiredSingularResourceName,
+        requiredSingularResourceNameOneof: formattedRequiredSingularResourceNameOneof,
+        requiredSingularResourceNameCommon: formattedRequiredSingularResourceNameCommon,
         requiredSingularFixed32: requiredSingularFixed32,
         requiredSingularFixed64: requiredSingularFixed64,
         requiredRepeatedInt32: requiredRepeatedInt32,

@@ -2636,8 +2636,7 @@ module Google
       # @!attribute [rw] resource
       #   @return [String]
       #     REQUIRED: The resource which the tag is being added to.
-      #     Resource is usually specified as a path, such as,
-      #     projects/{project}/zones/{zone}/disks/{disk}.
+      #     In the form "shelves/{shelf_id}/books/{book_id}".
       # @!attribute [rw] tag
       #   @return [String]
       #     REQUIRED: The tag to add.
@@ -4126,8 +4125,7 @@ module Library
       #
       # @param resource [String]
       #   REQUIRED: The resource which the label is being added to.
-      #   Resource is usually specified as a path, such as,
-      #   projects/{project}/zones/{zone}/disks/{disk}.
+      #   In the form "shelves/{shelf_id}/books/{book_id}".
       # @param label [String]
       #   REQUIRED: The label to add.
       # @param options [Google::Gax::CallOptions]
@@ -4484,15 +4482,9 @@ module Library
       #
       #   # TODO: Initialize `required_singular_message`:
       #   required_singular_message = {}
-      #
-      #   # TODO: Initialize `required_singular_resource_name`:
-      #   required_singular_resource_name = ''
-      #
-      #   # TODO: Initialize `required_singular_resource_name_oneof`:
-      #   required_singular_resource_name_oneof = ''
-      #
-      #   # TODO: Initialize `required_singular_resource_name_common`:
-      #   required_singular_resource_name_common = ''
+      #   formatted_required_singular_resource_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      #   formatted_required_singular_resource_name_oneof = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      #   formatted_required_singular_resource_name_common = Library::V1::LibraryServiceClient.project_path("[PROJECT]")
       #
       #   # TODO: Initialize `required_singular_fixed32`:
       #   required_singular_fixed32 = 0
@@ -4544,7 +4536,7 @@ module Library
       #
       #   # TODO: Initialize `required_map`:
       #   required_map = {}
-      #   response = library_client.test_optional_required_flattening_params(required_singular_int32, required_singular_int64, required_singular_float, required_singular_double, required_singular_bool, required_singular_enum, required_singular_string, required_singular_bytes, required_singular_message, required_singular_resource_name, required_singular_resource_name_oneof, required_singular_resource_name_common, required_singular_fixed32, required_singular_fixed64, required_repeated_int32, required_repeated_int64, required_repeated_float, required_repeated_double, required_repeated_bool, required_repeated_enum, required_repeated_string, required_repeated_bytes, required_repeated_message, formatted_required_repeated_resource_name, formatted_required_repeated_resource_name_oneof, required_repeated_resource_name_common, required_repeated_fixed32, required_repeated_fixed64, required_map)
+      #   response = library_client.test_optional_required_flattening_params(required_singular_int32, required_singular_int64, required_singular_float, required_singular_double, required_singular_bool, required_singular_enum, required_singular_string, required_singular_bytes, required_singular_message, formatted_required_singular_resource_name, formatted_required_singular_resource_name_oneof, formatted_required_singular_resource_name_common, required_singular_fixed32, required_singular_fixed64, required_repeated_int32, required_repeated_int64, required_repeated_float, required_repeated_double, required_repeated_bool, required_repeated_enum, required_repeated_string, required_repeated_bytes, required_repeated_message, formatted_required_repeated_resource_name, formatted_required_repeated_resource_name_oneof, required_repeated_resource_name_common, required_repeated_fixed32, required_repeated_fixed64, required_map)
 
       def test_optional_required_flattening_params \
           required_singular_int32,
@@ -5189,8 +5181,7 @@ def sample_discuss_book(image_file_name)
 
   # image_file_name = "image_file.jpg"
   formatted_name = library_client.class.book_path("[SHELF_ID]", "[BOOK_ID]")
-  file_name = "comment_file"
-  comment = File.binread file_name
+  comment = File.binread "comment_file"
   comment_2 = { comment: comment }
   image = File.binread image_file_name
   request = {
@@ -5829,8 +5820,7 @@ def sample_publish_series
   books = []
 
   # Comment on a file input field
-  file_name = "xyz3141592654"
-  series_bytes = File.binread file_name
+  series_bytes = File.binread "xyz3141592654"
 
   # Comment on a message
   series_uuid = { series_bytes: series_bytes }
@@ -8226,9 +8216,9 @@ describe Library::V1::LibraryServiceClient do
       required_singular_string = ''
       required_singular_bytes = ''
       required_singular_message = {}
-      required_singular_resource_name = ''
-      required_singular_resource_name_oneof = ''
-      required_singular_resource_name_common = ''
+      formatted_required_singular_resource_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      formatted_required_singular_resource_name_oneof = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      formatted_required_singular_resource_name_common = Library::V1::LibraryServiceClient.project_path("[PROJECT]")
       required_singular_fixed32 = 0
       required_singular_fixed64 = 0
       required_repeated_int32 = []
@@ -8263,9 +8253,9 @@ describe Library::V1::LibraryServiceClient do
         assert_equal(required_singular_string, request.required_singular_string)
         assert_equal(required_singular_bytes, request.required_singular_bytes)
         assert_equal(Google::Gax::to_proto(required_singular_message, Google::Example::Library::V1::TestOptionalRequiredFlatteningParamsRequest::InnerMessage), request.required_singular_message)
-        assert_equal(required_singular_resource_name, request.required_singular_resource_name)
-        assert_equal(required_singular_resource_name_oneof, request.required_singular_resource_name_oneof)
-        assert_equal(required_singular_resource_name_common, request.required_singular_resource_name_common)
+        assert_equal(formatted_required_singular_resource_name, request.required_singular_resource_name)
+        assert_equal(formatted_required_singular_resource_name_oneof, request.required_singular_resource_name_oneof)
+        assert_equal(formatted_required_singular_resource_name_common, request.required_singular_resource_name_common)
         assert_equal(required_singular_fixed32, request.required_singular_fixed32)
         assert_equal(required_singular_fixed64, request.required_singular_fixed64)
         assert_equal(required_repeated_int32, request.required_repeated_int32)
@@ -8308,9 +8298,9 @@ describe Library::V1::LibraryServiceClient do
             required_singular_string,
             required_singular_bytes,
             required_singular_message,
-            required_singular_resource_name,
-            required_singular_resource_name_oneof,
-            required_singular_resource_name_common,
+            formatted_required_singular_resource_name,
+            formatted_required_singular_resource_name_oneof,
+            formatted_required_singular_resource_name_common,
             required_singular_fixed32,
             required_singular_fixed64,
             required_repeated_int32,
@@ -8344,9 +8334,9 @@ describe Library::V1::LibraryServiceClient do
             required_singular_string,
             required_singular_bytes,
             required_singular_message,
-            required_singular_resource_name,
-            required_singular_resource_name_oneof,
-            required_singular_resource_name_common,
+            formatted_required_singular_resource_name,
+            formatted_required_singular_resource_name_oneof,
+            formatted_required_singular_resource_name_common,
             required_singular_fixed32,
             required_singular_fixed64,
             required_repeated_int32,
@@ -8384,9 +8374,9 @@ describe Library::V1::LibraryServiceClient do
       required_singular_string = ''
       required_singular_bytes = ''
       required_singular_message = {}
-      required_singular_resource_name = ''
-      required_singular_resource_name_oneof = ''
-      required_singular_resource_name_common = ''
+      formatted_required_singular_resource_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      formatted_required_singular_resource_name_oneof = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
+      formatted_required_singular_resource_name_common = Library::V1::LibraryServiceClient.project_path("[PROJECT]")
       required_singular_fixed32 = 0
       required_singular_fixed64 = 0
       required_repeated_int32 = []
@@ -8417,9 +8407,9 @@ describe Library::V1::LibraryServiceClient do
         assert_equal(required_singular_string, request.required_singular_string)
         assert_equal(required_singular_bytes, request.required_singular_bytes)
         assert_equal(Google::Gax::to_proto(required_singular_message, Google::Example::Library::V1::TestOptionalRequiredFlatteningParamsRequest::InnerMessage), request.required_singular_message)
-        assert_equal(required_singular_resource_name, request.required_singular_resource_name)
-        assert_equal(required_singular_resource_name_oneof, request.required_singular_resource_name_oneof)
-        assert_equal(required_singular_resource_name_common, request.required_singular_resource_name_common)
+        assert_equal(formatted_required_singular_resource_name, request.required_singular_resource_name)
+        assert_equal(formatted_required_singular_resource_name_oneof, request.required_singular_resource_name_oneof)
+        assert_equal(formatted_required_singular_resource_name_common, request.required_singular_resource_name_common)
         assert_equal(required_singular_fixed32, request.required_singular_fixed32)
         assert_equal(required_singular_fixed64, request.required_singular_fixed64)
         assert_equal(required_repeated_int32, request.required_repeated_int32)
@@ -8463,9 +8453,9 @@ describe Library::V1::LibraryServiceClient do
               required_singular_string,
               required_singular_bytes,
               required_singular_message,
-              required_singular_resource_name,
-              required_singular_resource_name_oneof,
-              required_singular_resource_name_common,
+              formatted_required_singular_resource_name,
+              formatted_required_singular_resource_name_oneof,
+              formatted_required_singular_resource_name_common,
               required_singular_fixed32,
               required_singular_fixed64,
               required_repeated_int32,

@@ -3999,9 +3999,9 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParams(t *testing.T) {
     var requiredSingularString string = "requiredSingularString-1949894503"
     var requiredSingularBytes []byte = []byte("-29")
     var requiredSingularMessage *librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage = &librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage{}
-    var requiredSingularResourceName string = "requiredSingularResourceName-1701575020"
-    var requiredSingularResourceNameOneof string = "requiredSingularResourceNameOneof-25303726"
-    var requiredSingularResourceNameCommon string = "requiredSingularResourceNameCommon-1126805002"
+    var formattedRequiredSingularResourceName string = fmt.Sprintf("shelves/%s/books/%s", "[SHELF_ID]", "[BOOK_ID]")
+    var formattedRequiredSingularResourceNameOneof string = fmt.Sprintf("shelves/%s/books/%s", "[SHELF_ID]", "[BOOK_ID]")
+    var formattedRequiredSingularResourceNameCommon string = fmt.Sprintf("projects/%s", "[PROJECT]")
     var requiredSingularFixed32 int32 = 720656715
     var requiredSingularFixed64 int64 = 720656810
     var requiredRepeatedInt32 []int32 = nil
@@ -4029,9 +4029,9 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParams(t *testing.T) {
         RequiredSingularString: requiredSingularString,
         RequiredSingularBytes: requiredSingularBytes,
         RequiredSingularMessage: requiredSingularMessage,
-        RequiredSingularResourceName: requiredSingularResourceName,
-        RequiredSingularResourceNameOneof: requiredSingularResourceNameOneof,
-        RequiredSingularResourceNameCommon: requiredSingularResourceNameCommon,
+        RequiredSingularResourceName: formattedRequiredSingularResourceName,
+        RequiredSingularResourceNameOneof: formattedRequiredSingularResourceNameOneof,
+        RequiredSingularResourceNameCommon: formattedRequiredSingularResourceNameCommon,
         RequiredSingularFixed32: requiredSingularFixed32,
         RequiredSingularFixed64: requiredSingularFixed64,
         RequiredRepeatedInt32: requiredRepeatedInt32,
@@ -4084,9 +4084,9 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParamsError(t *testing.T) {
     var requiredSingularString string = "requiredSingularString-1949894503"
     var requiredSingularBytes []byte = []byte("-29")
     var requiredSingularMessage *librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage = &librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage{}
-    var requiredSingularResourceName string = "requiredSingularResourceName-1701575020"
-    var requiredSingularResourceNameOneof string = "requiredSingularResourceNameOneof-25303726"
-    var requiredSingularResourceNameCommon string = "requiredSingularResourceNameCommon-1126805002"
+    var formattedRequiredSingularResourceName string = fmt.Sprintf("shelves/%s/books/%s", "[SHELF_ID]", "[BOOK_ID]")
+    var formattedRequiredSingularResourceNameOneof string = fmt.Sprintf("shelves/%s/books/%s", "[SHELF_ID]", "[BOOK_ID]")
+    var formattedRequiredSingularResourceNameCommon string = fmt.Sprintf("projects/%s", "[PROJECT]")
     var requiredSingularFixed32 int32 = 720656715
     var requiredSingularFixed64 int64 = 720656810
     var requiredRepeatedInt32 []int32 = nil
@@ -4114,9 +4114,9 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParamsError(t *testing.T) {
         RequiredSingularString: requiredSingularString,
         RequiredSingularBytes: requiredSingularBytes,
         RequiredSingularMessage: requiredSingularMessage,
-        RequiredSingularResourceName: requiredSingularResourceName,
-        RequiredSingularResourceNameOneof: requiredSingularResourceNameOneof,
-        RequiredSingularResourceNameCommon: requiredSingularResourceNameCommon,
+        RequiredSingularResourceName: formattedRequiredSingularResourceName,
+        RequiredSingularResourceNameOneof: formattedRequiredSingularResourceNameOneof,
+        RequiredSingularResourceNameCommon: formattedRequiredSingularResourceNameCommon,
         RequiredSingularFixed32: requiredSingularFixed32,
         RequiredSingularFixed64: requiredSingularFixed64,
         RequiredRepeatedInt32: requiredRepeatedInt32,
