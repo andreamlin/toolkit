@@ -24,12 +24,10 @@ import com.google.api.tools.framework.model.DiagCollector;
 import com.google.api.tools.framework.model.ProtoFile;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -131,13 +129,15 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
     List<String> resourceReferences = resourceSet.getResourceReferencesList();
 
     for (Resource resource : resourceDefs) {
-      SingleResourceNameConfig singleResourceNameConfig = singleResourceNameConfigs.get(resource.getSymbol());
+      SingleResourceNameConfig singleResourceNameConfig =
+          singleResourceNameConfigs.get(resource.getSymbol());
       if (singleResourceNameConfig != null) {
         configList.add(singleResourceNameConfig);
         continue;
       }
 
-      FixedResourceNameConfig fixedResourceNameConfig = fixedResourceNameConfigs.get(resource.getSymbol());
+      FixedResourceNameConfig fixedResourceNameConfig =
+          fixedResourceNameConfigs.get(resource.getSymbol());
       if (fixedResourceNameConfig != null) {
         configList.add(fixedResourceNameConfig);
         continue;
@@ -145,12 +145,14 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
 
       // This shouldn't happen because the resource config maps were
       // previously constructed from Resource objects.
-      throw new IllegalStateException(String.format(
-          "Failed to create a ResourceNameConfig for the protofile-defined Resource %s.",
-          resource.getSymbol()));
+      throw new IllegalStateException(
+          String.format(
+              "Failed to create a ResourceNameConfig for the protofile-defined Resource %s.",
+              resource.getSymbol()));
     }
     for (String resourceRef : resourceReferences) {
-      String resourceName = StringUtils.removeStart(resourceRef, protoParser.getProtoPackage(file) + ".");
+      String resourceName =
+          StringUtils.removeStart(resourceRef, protoParser.getProtoPackage(file) + ".");
       ResourceNameConfig resourceNameConfig;
       if (singleResourceNameConfigs.containsKey(resourceName)) {
         resourceNameConfig = singleResourceNameConfigs.get(resourceName);

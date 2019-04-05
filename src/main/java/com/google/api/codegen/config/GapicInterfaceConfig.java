@@ -165,12 +165,15 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
 
     ImmutableList.Builder<SingleResourceNameConfig> resourcesBuilder = ImmutableList.builder();
     if (protoParser.isProtoAnnotationsEnabled()) {
-      resourceNameConfigs.values().stream().filter(r -> r.getResourceNameType() == ResourceNameType.SINGLE)
+      resourceNameConfigs
+          .values()
+          .stream()
+          .filter(r -> r.getResourceNameType() == ResourceNameType.SINGLE)
           .map(r -> (SingleResourceNameConfig) r)
           .forEach(resourcesBuilder::add);
     } else {
-      for (CollectionConfigProto collectionConfigProto : interfaceConfigProto
-          .getCollectionsList()) {
+      for (CollectionConfigProto collectionConfigProto :
+          interfaceConfigProto.getCollectionsList()) {
         String entityName = collectionConfigProto.getEntityName();
         ResourceNameConfig resourceName = resourceNameConfigs.get(entityName);
         if (!(resourceName instanceof SingleResourceNameConfig)) {
