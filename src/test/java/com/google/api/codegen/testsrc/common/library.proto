@@ -375,8 +375,8 @@ service LibraryService {
   }
 
   // This method is not exposed in the GAPIC config. It should be generated.
-  rpc PrivateGetBook(GetBookRequest) returns (Book)  {
-    option (google.api.http) = { get: "/v1/{name=bookShelves/*/books/*}" };
+  rpc PrivateListShelves(ListShelvesRequest) returns (Book)  {
+    option (google.api.http) = { get: "/v1/bookShelves" };
   }
 }
 
@@ -390,13 +390,13 @@ message Book {
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_set) = {
       symbol: "BookOneOf"
+      resource_references: ["ArchivedBook", "Book"];
       resources: [
         {
           symbol: "DeletedBook"
           pattern : "_deleted-book_"
         }
       ]
-      resource_references: ["ArchivedBook", "Book"];
     }
   ];
 
