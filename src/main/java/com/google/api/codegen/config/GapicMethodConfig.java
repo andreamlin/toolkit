@@ -82,16 +82,8 @@ public abstract class GapicMethodConfig extends MethodConfig {
     ProtoMethodModel methodModel = new ProtoMethodModel(method);
 
     PageStreamingConfig pageStreaming = null;
-    if (!PageStreamingConfigProto.getDefaultInstance()
-        .equals(methodConfigProto.getPageStreaming())) {
-      pageStreaming =
-          PageStreamingConfig.createPageStreamingFromGapicConfig(
-              diagCollector, messageConfigs, resourceNameConfigs, methodConfigProto, methodModel);
-      if (pageStreaming == null) {
-        error = true;
-      }
-    } else if (MethodConfigProto.getDefaultInstance().equals(methodConfigProto)) {
-      // When GAPIC config not available, toggle pagination based on presence of paging params.
+    if (protoParser.isProtoAnnotationsEnabled()) {
+      // Toggle pagination based on presence of paging params.
       // See https://cloud.google.com/apis/design/design_patterns for API pagination pattern.
       ProtoField tokenField = methodModel.getInputField(ProtoPagingParameters.nameForPageToken());
       ProtoField pageSizeField = methodModel.getInputField(ProtoPagingParameters.nameForPageSize());
@@ -113,6 +105,16 @@ public abstract class GapicMethodConfig extends MethodConfig {
                 pagingFields,
                 protoParser,
                 defaultPackageName);
+        if (pageStreaming == null) {
+          error = true;
+        }
+      }
+    } else {
+      if (!PageStreamingConfigProto.getDefaultInstance()
+          .equals(methodConfigProto.getPageStreaming())) {
+        pageStreaming =
+            PageStreamingConfig.createPageStreamingFromGapicConfig(
+                diagCollector, messageConfigs, resourceNameConfigs, methodConfigProto, methodModel);
         if (pageStreaming == null) {
           error = true;
         }

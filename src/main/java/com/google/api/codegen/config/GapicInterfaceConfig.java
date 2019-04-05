@@ -164,19 +164,26 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
     }
 
     ImmutableList.Builder<SingleResourceNameConfig> resourcesBuilder = ImmutableList.builder();
-    for (CollectionConfigProto collectionConfigProto : interfaceConfigProto.getCollectionsList()) {
-      String entityName = collectionConfigProto.getEntityName();
-      ResourceNameConfig resourceName = resourceNameConfigs.get(entityName);
-      if (!(resourceName instanceof SingleResourceNameConfig)) {
-        diagCollector.addDiag(
-            Diag.error(
-                SimpleLocation.TOPLEVEL,
-                "Inconsistent configuration - single resource name %s specified for interface, "
-                    + " but was not found in GapicProductConfig configuration.",
-                entityName));
-        return null;
+    if (protoParser.isProtoAnnotationsEnabled()) {
+      resourceNameConfigs.values().stream().filter(r -> r.getResourceNameType() == ResourceNameType.SINGLE)
+          .map(r -> (SingleResourceNameConfig) r)
+          .forEach(resourcesBuilder::add);
+    } else {
+      for (CollectionConfigProto collectionConfigProto : interfaceConfigProto
+          .getCollectionsList()) {
+        String entityName = collectionConfigProto.getEntityName();
+        ResourceNameConfig resourceName = resourceNameConfigs.get(entityName);
+        if (!(resourceName instanceof SingleResourceNameConfig)) {
+          diagCollector.addDiag(
+              Diag.error(
+                  SimpleLocation.TOPLEVEL,
+                  "Inconsistent configuration - single resource name %s specified for interface, "
+                      + " but was not found in GapicProductConfig configuration.",
+                  entityName));
+          return null;
+        }
+        resourcesBuilder.add((SingleResourceNameConfig) resourceName);
       }
-      resourcesBuilder.add((SingleResourceNameConfig) resourceName);
     }
     ImmutableList<SingleResourceNameConfig> singleResourceNames = resourcesBuilder.build();
 
