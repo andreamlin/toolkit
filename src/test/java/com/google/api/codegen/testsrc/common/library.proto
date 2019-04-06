@@ -390,7 +390,7 @@ message Book {
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_set) = {
       symbol: "BookOneOf"
-      resource_references: ["ArchivedBook", "Book"];
+      resource_references: ["Book", "ArchivedBook"];
       resources: [
         {
           symbol: "DeletedBook"
