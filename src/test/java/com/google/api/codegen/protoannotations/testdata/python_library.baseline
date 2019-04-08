@@ -1137,11 +1137,12 @@ class LibraryServiceClient(object):
 
 
     @classmethod
-    def shelf_path(cls, shelf_id):
-        """Return a fully-qualified shelf string."""
+    def archived_book_path(cls, archive_path, book_id):
+        """Return a fully-qualified archived_book string."""
         return google.api_core.path_template.expand(
-            'shelves/{shelf_id}',
-            shelf_id=shelf_id,
+            'archives/{archive_path}/books/{book_id=**}',
+            archive_path=archive_path,
+            book_id=book_id,
         )
 
     @classmethod
@@ -1151,6 +1152,14 @@ class LibraryServiceClient(object):
             'shelves/{shelf_id}/books/{book_id}',
             shelf_id=shelf_id,
             book_id=book_id,
+        )
+
+    @classmethod
+    def project_path(cls, project):
+        """Return a fully-qualified project string."""
+        return google.api_core.path_template.expand(
+            'projects/{project}',
+            project=project,
         )
 
     @classmethod
@@ -1164,20 +1173,11 @@ class LibraryServiceClient(object):
         )
 
     @classmethod
-    def project_path(cls, project):
-        """Return a fully-qualified project string."""
+    def shelf_path(cls, shelf_id):
+        """Return a fully-qualified shelf string."""
         return google.api_core.path_template.expand(
-            'projects/{project}',
-            project=project,
-        )
-
-    @classmethod
-    def archived_book_path(cls, archive_path, book_id):
-        """Return a fully-qualified archived_book string."""
-        return google.api_core.path_template.expand(
-            'archives/{archive_path}/books/{book_id=**}',
-            archive_path=archive_path,
-            book_id=book_id,
+            'shelves/{shelf_id}',
+            shelf_id=shelf_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -2812,7 +2812,8 @@ class LibraryServiceClient(object):
             >>>
             >>> client = library_v1.LibraryServiceClient()
             >>>
-            >>> request = {}
+            >>> name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
+            >>> request = {'name': name}
             >>>
             >>> requests = [request]
             >>> client.babble_about_book(requests)
@@ -3721,32 +3722,32 @@ config = {
           "retry_params_name": "default"
         },
         "GetShelf": {
-          "timeout_millis": 2000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListShelves": {
-          "timeout_millis": 3000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteShelf": {
-          "timeout_millis": 4000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "MergeShelves": {
-          "timeout_millis": 5000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateBook": {
-          "timeout_millis": 6000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "PublishSeries": {
-          "timeout_millis": 7000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default",
           "bundling": {
@@ -3758,37 +3759,37 @@ config = {
           }
         },
         "GetBook": {
-          "timeout_millis": 8000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListBooks": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "UpdateBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "MoveBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListStrings": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "AddComments": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default",
           "bundling": {
@@ -3798,42 +3799,42 @@ config = {
           }
         },
         "GetBookFromArchive": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetBookFromAnywhere": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetBookFromAbsolutelyAnywhere": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "UpdateBookIndex": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "StreamShelves": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "StreamBooks": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DiscussBook": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "MonologAboutBook": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -3843,7 +3844,7 @@ config = {
           "retry_params_name": "default"
         },
         "FindRelatedBooks": {
-          "timeout_millis": 3000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -4571,7 +4572,8 @@ def sample_babble_about_book():
 
   client = library_v1.LibraryServiceClient()
 
-  request = {}
+  name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
+  request = {'name': name}
 
   requests = [request]
   client.babble_about_book(requests)
@@ -4620,7 +4622,8 @@ def sample_babble_about_book():
 
   client = library_v1.LibraryServiceClient()
 
-  request = {}
+  name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
+  request = {'name': name}
 
   requests = [request]
   client.babble_about_book(requests)
@@ -4768,8 +4771,7 @@ def sample_discuss_book(image_file_name):
   if isinstance(image_file_name, six.binary_type):
     image_file_name = image_file_name.decode('utf-8')
   name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
-  file_name = 'comment_file'
-  with io.open(file_name, 'rb') as f:
+  with io.open('comment_file', 'rb') as f:
     comment = f.read()
   comment_2 = {'comment': comment}
   with io.open(image_file_name, 'rb') as f:
@@ -5438,8 +5440,7 @@ def sample_publish_series():
   books = []
 
   # Comment on a file input field
-  file_name = 'xyz3141592654'
-  with io.open(file_name, 'rb') as f:
+  with io.open('xyz3141592654', 'rb') as f:
     series_bytes = f.read()
 
   # Comment on a message
@@ -6669,7 +6670,8 @@ class TestLibraryServiceClient(object):
             client = library_v1.LibraryServiceClient()
 
         # Setup Request
-        request = {}
+        name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
+        request = {'name': name}
         request = library_pb2.DiscussBookRequest(**request)
         requests = [request]
 
@@ -6690,7 +6692,8 @@ class TestLibraryServiceClient(object):
             client = library_v1.LibraryServiceClient()
 
         # Setup request
-        request = {}
+        name = client.book_path('[SHELF_ID]', '[BOOK_ID]')
+        request = {'name': name}
 
         request = library_pb2.DiscussBookRequest(**request)
         requests = [request]
