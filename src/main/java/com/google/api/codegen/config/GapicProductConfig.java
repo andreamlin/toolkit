@@ -19,7 +19,6 @@ import com.google.api.ResourceSet;
 import com.google.api.codegen.CollectionConfigProto;
 import com.google.api.codegen.CollectionOneofProto;
 import com.google.api.codegen.ConfigProto;
-import com.google.api.codegen.FixedResourceNameValueProto;
 import com.google.api.codegen.InterfaceConfigProto;
 import com.google.api.codegen.LanguageSettingsProto;
 import com.google.api.codegen.MethodConfigProto;
@@ -805,7 +804,6 @@ public abstract class GapicProductConfig implements ProductConfig {
         createFixedResourceNamesFromGapicConfigOnly(
             diagCollector,
             allCollectionConfigProtos,
-            configProto.getFixedResourceNameValuesList(),
             sampleProtoFile);
 
     // Combine the ResourceNameConfigs from the GAPIC and protofile.
@@ -873,7 +871,6 @@ public abstract class GapicProductConfig implements ProductConfig {
         createFixedResourceNamesFromGapicConfigOnly(
             diagCollector,
             allCollectionConfigProtos,
-            configProto.getFixedResourceNameValuesList(),
             file);
 
     validateSingleResourceNameConfigs(singleResourceNameConfigsFromGapicConfig);
@@ -918,7 +915,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       createFixedResourceNamesFromGapicConfigOnly(
           DiagCollector diagCollector,
           List<CollectionConfigProto> allCollectionConfigs,
-          List<FixedResourceNameValueProto> fixedResourceNameValueProtos,
           ProtoFile protoFile) {
     LinkedHashMap<String, FixedResourceNameConfig> fixedResourceNameConfigMap =
         new LinkedHashMap<>();
@@ -932,10 +928,6 @@ public abstract class GapicProductConfig implements ProductConfig {
             diagCollector, fixedResourceNameConfig, "", fixedResourceNameConfigMap);
       }
     }
-
-    // TODO(andrealin): Remove this once all fixed resource names are removed.
-    fixedResourceNameConfigMap.putAll(
-        createFixedResourceNameConfigs(diagCollector, fixedResourceNameValueProtos, protoFile));
 
     return ImmutableMap.copyOf(fixedResourceNameConfigMap);
   }
@@ -1123,28 +1115,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       fullyQualifiedName = StringUtils.prependIfMissing(fullyQualifiedName, prefix);
       fixedResourceNameConfigsMap.put(fullyQualifiedName, fixedResourceNameConfig);
     }
-  }
-
-  // TODO(andrealin): Remove this once existing fixed resource names are removed.
-  private static ImmutableMap<String, FixedResourceNameConfig> createFixedResourceNameConfigs(
-      DiagCollector diagCollector,
-      Iterable<FixedResourceNameValueProto> fixedConfigProtos,
-      @Nullable ProtoFile file) {
-    ImmutableMap.Builder<String, FixedResourceNameConfig> fixedConfigBuilder =
-        ImmutableMap.builder();
-    for (FixedResourceNameValueProto fixedConfigProto : fixedConfigProtos) {
-      FixedResourceNameConfig fixedConfig =
-          FixedResourceNameConfig.createFixedResourceNameConfig(
-              diagCollector,
-              fixedConfigProto.getEntityName(),
-              fixedConfigProto.getFixedValue(),
-              file);
-      if (fixedConfig == null) {
-        continue;
-      }
-      fixedConfigBuilder.put(fixedConfig.getEntityId(), fixedConfig);
-    }
-    return fixedConfigBuilder.build();
   }
 
   private static ImmutableMap<String, ResourceNameOneofConfig> createResourceNameOneofConfigs(
