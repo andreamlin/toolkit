@@ -11257,12 +11257,12 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void getBookFromAnywhereTest() {
-    String name2 = "name2-1052831874";
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
     BookFromAnywhere expectedResponse = BookFromAnywhere.newBuilder()
-      .setName(name2)
+      .setName(name2.toString())
       .setAuthor(author)
       .setTitle(title)
       .setRead(read)
@@ -11308,12 +11308,12 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void getBookFromAbsolutelyAnywhereTest() {
-    String name2 = "name2-1052831874";
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
     BookFromAnywhere expectedResponse = BookFromAnywhere.newBuilder()
-      .setName(name2)
+      .setName(name2.toString())
       .setAuthor(author)
       .setTitle(title)
       .setRead(read)
