@@ -282,7 +282,7 @@ public class ResourceNameMessageConfigsTest {
 
     Map<String, ResourceNameConfig> resourceNameConfigs =
         GapicProductConfig.createResourceNameConfigsForGapicConfigOnly(
-            diagCollector, configProto, sourceProtoFiles, TargetLanguage.CSHARP);
+            diagCollector, configProto, protoFile, TargetLanguage.CSHARP);
 
     assertThat(diagCollector.getErrorCount()).isEqualTo(0);
     assertThat(resourceNameConfigs.size()).isEqualTo(5);
@@ -316,7 +316,7 @@ public class ResourceNameMessageConfigsTest {
         GapicProductConfig.createResourceNameConfigsWithProtoFileAndGapicConfig(
             diagCollector,
             configProtoV2,
-            sourceProtoFiles,
+            protoFile,
             TargetLanguage.CSHARP,
             allResourceDefs,
             allResourceSetDefs,
@@ -402,7 +402,7 @@ public class ResourceNameMessageConfigsTest {
         GapicProductConfig.createResourceNameConfigsWithProtoFileAndGapicConfig(
             diagCollector,
             extraConfigProto,
-            sourceProtoFiles,
+            protoFile,
             TargetLanguage.CSHARP,
             allResourceDefs,
             allResourceSetDefs,
