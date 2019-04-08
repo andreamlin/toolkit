@@ -178,7 +178,7 @@ public abstract class LongRunningConfig {
     }
 
     double pollDelayMultiplier = longRunningConfigProto.getPollDelayMultiplier();
-    if (pollDelayMultiplier <= 1.0) {
+    if (pollDelayMultiplier < 1.0) {
       diagCollector.addDiag(
           Diag.error(
               SimpleLocation.TOPLEVEL,
@@ -262,8 +262,6 @@ public abstract class LongRunningConfig {
         .setMetadataType(ProtoTypeRef.create(metadataType))
         .build();
   }
-
-  abstract Builder toBuilder();
 
   private static Builder newBuilder() {
     return new AutoValue_LongRunningConfig.Builder();
