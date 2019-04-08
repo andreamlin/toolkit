@@ -54,7 +54,8 @@ public class GapicConfigProducerTest {
             model.getDiagReporter().getDiagCollector(),
             locator,
             new String[] {"missing_config_schema_version.yaml"});
-    GapicProductConfig productConfig = GapicProductConfig.create(model, configProto, null, null, TargetLanguage.JAVA);
+    GapicProductConfig productConfig =
+        GapicProductConfig.create(model, configProto, null, null, TargetLanguage.JAVA);
     Diag expectedError =
         Diag.error(
             SimpleLocation.TOPLEVEL, "config_schema_version field is required in GAPIC yaml.");
@@ -67,23 +68,37 @@ public class GapicConfigProducerTest {
     Model model =
         CodegenTestUtil.readModel(
             locator, tempDir, new String[] {"library.proto"}, new String[] {});
-    GapicProductConfig productConfig = GapicProductConfig.create(
-        model, null,
-        "google.example.library.v1", "com.google.cloud.example.library.v1",
-        TargetLanguage.JAVA);
+    GapicProductConfig productConfig =
+        GapicProductConfig.create(
+            model,
+            null,
+            "google.example.library.v1",
+            "com.google.cloud.example.library.v1",
+            TargetLanguage.JAVA);
 
-    MethodConfig getShelfMethodConfig = productConfig.getInterfaceConfig("google.example.library.v1.LibraryService")
-        .getMethodConfigs()
-        .stream()
-        .filter(m -> m.getMethodModel().getSimpleName().equals("GetShelf"))
-        .findFirst().get();
+    MethodConfig getShelfMethodConfig =
+        productConfig
+            .getInterfaceConfig("google.example.library.v1.LibraryService")
+            .getMethodConfigs()
+            .stream()
+            .filter(m -> m.getMethodModel().getSimpleName().equals("GetShelf"))
+            .findFirst()
+            .get();
 
-    Collection<String> requiredFieldNames = getShelfMethodConfig.getRequiredFields().stream()
-        .map(FieldModel::getSimpleName).collect(Collectors.toList());
+    Collection<String> requiredFieldNames =
+        getShelfMethodConfig
+            .getRequiredFields()
+            .stream()
+            .map(FieldModel::getSimpleName)
+            .collect(Collectors.toList());
     assertThat(requiredFieldNames).containsExactly("name", "options");
 
-    Collection<String> optionalFieldNames = getShelfMethodConfig.getOptionalFields().stream()
-        .map(FieldModel::getSimpleName).collect(Collectors.toList());
+    Collection<String> optionalFieldNames =
+        getShelfMethodConfig
+            .getOptionalFields()
+            .stream()
+            .map(FieldModel::getSimpleName)
+            .collect(Collectors.toList());
     assertThat(optionalFieldNames).containsExactly("message", "string_builder");
   }
 }
