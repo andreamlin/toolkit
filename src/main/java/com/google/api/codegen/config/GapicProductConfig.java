@@ -768,14 +768,6 @@ public abstract class GapicProductConfig implements ProductConfig {
         fullyQualifiedFixedResourceNameConfigsFromProtoFile =
             ImmutableMap.copyOf(fullyQualifiedFixedResourcesFromProtoFileCollector);
 
-    ImmutableMap<String, ResourceNameOneofConfig> resourceNameOneofConfigsFromProtoFile =
-        createResourceNameOneofConfigsFromProtoFile(
-            diagCollector,
-            fullyQualifiedSingleResourceNameConfigsFromProtoFile,
-            fullyQualifiedFixedResourceNameConfigsFromProtoFile,
-            resourceSetDefs,
-            protoParser);
-
     // Populate a SingleResourceNameConfigs map, using just the unqualified names.
     LinkedHashMap<String, SingleResourceNameConfig> singleResourceConfigsFromProtoFile =
         new LinkedHashMap<>();
@@ -813,10 +805,25 @@ public abstract class GapicProductConfig implements ProductConfig {
             sampleProtoFile);
 
     // Combine the ResourceNameConfigs from the GAPIC and protofile.
-    Map<String, SingleResourceNameConfig> finalSingleResourceNameConfigs =
+    ImmutableMap<String, SingleResourceNameConfig> finalSingleResourceNameConfigs =
         mergeSingleResourceNameConfigsFromGapicConfigAndProtoFile(
             singleResourceNameConfigsFromGapicConfig, singleResourceConfigsFromProtoFile);
     validateSingleResourceNameConfigs(finalSingleResourceNameConfigs);
+
+    // TODO(andrealin): Remove this once explicit fixed resource names are gone-zos.
+    ImmutableMap<String, FixedResourceNameConfig> finalFixedResourceNameConfigs =
+        mergeResourceNameConfigs(
+            diagCollector,
+            fixedResourceNameConfigsFromGapicConfig,
+            fixedResourceConfigsFromProtoFile);
+
+    ImmutableMap<String, ResourceNameOneofConfig> resourceNameOneofConfigsFromProtoFile =
+        createResourceNameOneofConfigsFromProtoFile(
+            diagCollector,
+            finalSingleResourceNameConfigs,
+            finalFixedResourceNameConfigs,
+            resourceSetDefs,
+            protoParser);
 
     // TODO(andrealin): Remove this once ResourceSets are approved.
     ImmutableMap<String, ResourceNameOneofConfig> resourceNameOneofConfigsFromGapicConfig =
@@ -830,12 +837,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       return null;
     }
 
-    // TODO(andrealin): Remove this once explicit fixed resource names are gone-zos.
-    Map<String, FixedResourceNameConfig> finalFixedResourceNameConfigs =
-        mergeResourceNameConfigs(
-            diagCollector,
-            fixedResourceNameConfigsFromGapicConfig,
-            fixedResourceConfigsFromProtoFile);
     // TODO(andrealin): Remove this once ResourceSets are approved.
     Map<String, ResourceNameOneofConfig> finalResourceOneofNameConfigs =
         mergeResourceNameConfigs(
