@@ -147,6 +147,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
         configList.add(singleResourceNameConfig);
         continue;
       }
+
       FixedResourceNameConfig fixedResourceNameConfig =
           fixedResourceNameConfigs.get(resource.getSymbol());
       if (fixedResourceNameConfig != null) {
