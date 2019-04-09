@@ -198,7 +198,6 @@ public abstract class GapicProductConfig implements ProductConfig {
       sourceProtos.forEach(model::addRoot);
     }
 
-    // TODO(andrealin): Expose command-line option for toggling proto annotations parsing.
     // Toggle on/off proto annotations parsing.
     ProtoParser protoParser;
     ConfigVersionValidator versionValidator = new ConfigVersionValidator();

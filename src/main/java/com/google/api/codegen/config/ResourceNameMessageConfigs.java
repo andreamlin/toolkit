@@ -94,7 +94,7 @@ public abstract class ResourceNameMessageConfigs {
     }
 
     ImmutableSortedMap<String, ResourceNameMessageConfig> messageResourceTypeConfigMap =
-        ImmutableSortedMap.copyOf(builder, String.CASE_INSENSITIVE_ORDER);
+        ImmutableSortedMap.copyOf(builder);
 
     ListMultimap<String, FieldModel> fieldsByMessage = ArrayListMultimap.create();
     Set<String> seenProtoFiles = new HashSet<>();
