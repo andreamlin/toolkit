@@ -36,6 +36,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import javax.annotation.Nullable;
 
 /**
@@ -171,7 +172,7 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
           .filter(
               r ->
                   r.getResourceNameType() == ResourceNameType.SINGLE
-                      && r.getAssignedProtoFile().equals(apiInterface.getFile()))
+                      && Objects.equals(r.getInterfaceFullName(), apiInterface.getFullName()))
           .map(r -> (SingleResourceNameConfig) r)
           .forEach(resourcesBuilder::add);
     } else {

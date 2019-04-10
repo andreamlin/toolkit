@@ -45,13 +45,6 @@ option (google.api.resource_definition) = {
 };
 
 option (google.api.resource_definition) = {
-  // To test the case that entity name / variable which happens to be
-  // a language keyword. See: https://github.com/googleapis/toolkit/issues/618
-  symbol: "Return"
-  pattern : "shelves/{shelf}/books/{book}/returns/{return}"
-};
-
-option (google.api.resource_definition) = {
   symbol: "ArchivedBook"
   pattern : "archives/{archive_path}/books/{book_id=**}"
 };
