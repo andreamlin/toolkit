@@ -168,7 +168,10 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
       resourceNameConfigs
           .values()
           .stream()
-          .filter(r -> r.getResourceNameType() == ResourceNameType.SINGLE)
+          .filter(
+              r ->
+                  r.getResourceNameType() == ResourceNameType.SINGLE
+                      && r.getAssignedProtoFile().equals(apiInterface.getFile()))
           .map(r -> (SingleResourceNameConfig) r)
           .forEach(resourcesBuilder::add);
     } else {
