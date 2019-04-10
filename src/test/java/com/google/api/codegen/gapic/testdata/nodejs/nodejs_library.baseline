@@ -408,8 +408,8 @@ function sampleFindRelatedBooks() {
   const shelvesElement = 'Classics';
   const shelves = [shelvesElement];
   const request = {
-    names: names,
-    shelves: shelves,
+    names: formattedNames,
+    shelves: formattedShelves,
   };
 
   client.findRelatedBooks(request)
@@ -449,8 +449,8 @@ function sampleFindRelatedBooks() {
   const shelvesElement = 'Classics';
   const shelves = [shelvesElement];
   const request = {
-    names: names,
-    shelves: shelves,
+    names: formattedNames,
+    shelves: formattedShelves,
   };
 
 
@@ -5566,10 +5566,10 @@ class LibraryServiceClient {
    * // Iterate over all elements.
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    *
    * client.findRelatedBooks(request)
@@ -5586,10 +5586,10 @@ class LibraryServiceClient {
    * // Or obtain the paged response.
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    *
    *
@@ -5664,10 +5664,10 @@ class LibraryServiceClient {
    *
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    * client.findRelatedBooksStream(request)
    *   .on('data', element => {
@@ -6117,7 +6117,7 @@ class LibraryServiceClient {
    * const requiredRepeatedMessage = [];
    * const formattedRequiredRepeatedResourceName = [];
    * const formattedRequiredRepeatedResourceNameOneof = [];
-   * const requiredRepeatedResourceNameCommon = [];
+   * const formattedRequiredRepeatedResourceNameCommon = [];
    * const requiredRepeatedFixed32 = [];
    * const requiredRepeatedFixed64 = [];
    * const requiredMap = {};
@@ -6147,7 +6147,7 @@ class LibraryServiceClient {
    *   requiredRepeatedMessage: requiredRepeatedMessage,
    *   requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
    *   requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-   *   requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+   *   requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
    *   requiredRepeatedFixed32: requiredRepeatedFixed32,
    *   requiredRepeatedFixed64: requiredRepeatedFixed64,
    *   requiredMap: requiredMap,
@@ -7986,10 +7986,10 @@ describe('LibraryServiceClient', () => {
       // Mock request
       const namesElement = 'namesElement-249113339';
       const names = [namesElement];
-      const shelves = [];
+      const formattedShelves = [];
       const request = {
-        names: names,
-        shelves: shelves,
+        names: formattedNames,
+        shelves: formattedShelves,
       };
 
       // Mock response
@@ -8023,10 +8023,10 @@ describe('LibraryServiceClient', () => {
       // Mock request
       const namesElement = 'namesElement-249113339';
       const names = [namesElement];
-      const shelves = [];
+      const formattedShelves = [];
       const request = {
-        names: names,
-        shelves: shelves,
+        names: formattedNames,
+        shelves: formattedShelves,
       };
 
       // Mock Grpc layer
@@ -8282,7 +8282,7 @@ describe('LibraryServiceClient', () => {
       const requiredRepeatedMessage = [];
       const formattedRequiredRepeatedResourceName = [];
       const formattedRequiredRepeatedResourceNameOneof = [];
-      const requiredRepeatedResourceNameCommon = [];
+      const formattedRequiredRepeatedResourceNameCommon = [];
       const requiredRepeatedFixed32 = [];
       const requiredRepeatedFixed64 = [];
       const requiredMap = {};
@@ -8312,7 +8312,7 @@ describe('LibraryServiceClient', () => {
         requiredRepeatedMessage: requiredRepeatedMessage,
         requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         requiredRepeatedFixed32: requiredRepeatedFixed32,
         requiredRepeatedFixed64: requiredRepeatedFixed64,
         requiredMap: requiredMap,
@@ -8366,7 +8366,7 @@ describe('LibraryServiceClient', () => {
       const requiredRepeatedMessage = [];
       const formattedRequiredRepeatedResourceName = [];
       const formattedRequiredRepeatedResourceNameOneof = [];
-      const requiredRepeatedResourceNameCommon = [];
+      const formattedRequiredRepeatedResourceNameCommon = [];
       const requiredRepeatedFixed32 = [];
       const requiredRepeatedFixed64 = [];
       const requiredMap = {};
@@ -8396,7 +8396,7 @@ describe('LibraryServiceClient', () => {
         requiredRepeatedMessage: requiredRepeatedMessage,
         requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         requiredRepeatedFixed32: requiredRepeatedFixed32,
         requiredRepeatedFixed64: requiredRepeatedFixed64,
         requiredMap: requiredMap,

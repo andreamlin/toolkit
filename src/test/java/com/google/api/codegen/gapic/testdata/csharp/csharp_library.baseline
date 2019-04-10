@@ -1112,11 +1112,11 @@ namespace Google.Example.Library.V1.Snippets
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
+            PagedAsyncEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStringsAsync();
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((IResourceName item) =>
+            await response.ForEachAsync((string item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1127,7 +1127,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1135,10 +1135,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
+            Page<string> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1154,11 +1154,11 @@ namespace Google.Example.Library.V1.Snippets
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Make the request
-            PagedEnumerable<ListStringsResponse, IResourceName> response =
+            PagedEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStrings();
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (IResourceName item in response)
+            foreach (string item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1169,7 +1169,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1177,10 +1177,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = response.ReadPage(pageSize);
+            Page<string> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1192,17 +1192,17 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStringsAsync</summary>
         public async Task ListStringsAsync2()
         {
-            // Snippet: ListStringsAsync(IResourceName,string,int?,CallSettings)
+            // Snippet: ListStringsAsync(ProjectName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
-            IResourceName name = new ArchivedBookName("[ARCHIVE_PATH]", "[BOOK_ID]");
+            ProjectName name = new ProjectName("[PROJECT]");
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
+            PagedAsyncEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStringsAsync(name);
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((IResourceName item) =>
+            await response.ForEachAsync((string item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1213,7 +1213,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1221,10 +1221,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
+            Page<string> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1236,17 +1236,17 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStrings</summary>
         public void ListStrings2()
         {
-            // Snippet: ListStrings(IResourceName,string,int?,CallSettings)
+            // Snippet: ListStrings(ProjectName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
-            IResourceName name = new ArchivedBookName("[ARCHIVE_PATH]", "[BOOK_ID]");
+            ProjectName name = new ProjectName("[PROJECT]");
             // Make the request
-            PagedEnumerable<ListStringsResponse, IResourceName> response =
+            PagedEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStrings(name);
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (IResourceName item in response)
+            foreach (string item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1257,7 +1257,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1265,10 +1265,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = response.ReadPage(pageSize);
+            Page<string> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1286,11 +1286,11 @@ namespace Google.Example.Library.V1.Snippets
             // Initialize request argument(s)
             ListStringsRequest request = new ListStringsRequest();
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
+            PagedAsyncEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStringsAsync(request);
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((IResourceName item) =>
+            await response.ForEachAsync((string item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1301,7 +1301,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1309,10 +1309,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
+            Page<string> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1330,11 +1330,11 @@ namespace Google.Example.Library.V1.Snippets
             // Initialize request argument(s)
             ListStringsRequest request = new ListStringsRequest();
             // Make the request
-            PagedEnumerable<ListStringsResponse, IResourceName> response =
+            PagedEnumerable<ListStringsResponse, string> response =
                 libraryServiceClient.ListStrings(request);
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (IResourceName item in response)
+            foreach (string item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1345,7 +1345,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (IResourceName item in page)
+                foreach (string item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1353,10 +1353,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<IResourceName> singlePage = response.ReadPage(pageSize);
+            Page<string> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (IResourceName item in singlePage)
+            foreach (string item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1730,7 +1730,7 @@ namespace Google.Example.Library.V1.Snippets
             // Initialize request argument
             StreamShelvesRequest request = new StreamShelvesRequest
             {
-                Name = new ShelfName("[SHELF_ID]").ToString(),
+                ShelfName = new ShelfName("[SHELF_ID]"),
             };
             // Make the request, returning a streaming response
             LibraryServiceClient.StreamShelvesStream streamingResponse = libraryServiceClient.StreamShelves(request);
@@ -2365,8 +2365,8 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParamsAsync</summary>
         public async Task TestOptionalRequiredFlatteningParamsAsync2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
-            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
+            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
@@ -2380,7 +2380,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -2468,7 +2468,7 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParams</summary>
         public void TestOptionalRequiredFlatteningParams2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
@@ -2482,7 +2482,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -3376,7 +3376,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3406,7 +3406,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3436,7 +3436,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3464,7 +3464,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3631,7 +3631,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3659,7 +3659,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3687,7 +3687,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3714,7 +3714,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3824,7 +3824,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3854,7 +3854,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3887,7 +3887,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3923,7 +3923,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3956,7 +3956,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -3984,7 +3984,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -4012,7 +4012,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -4042,7 +4042,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -4072,7 +4072,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -4100,7 +4100,7 @@ namespace Google.Example.Library.V1.Tests
             };
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -4842,7 +4842,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -5042,7 +5042,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -5236,7 +5236,7 @@ namespace Google.Example.Library.V1.Tests
             ListShelvesRequest request = new ListShelvesRequest();
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -5260,7 +5260,7 @@ namespace Google.Example.Library.V1.Tests
             ListShelvesRequest request = new ListShelvesRequest();
             Book expectedResponse = new Book
             {
-                BookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 Author = "author-1406328437",
                 Title = "title110371416",
                 Read = true,
@@ -8222,7 +8222,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStringsAsync(
@@ -8250,7 +8250,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
+        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStrings(
@@ -8281,8 +8281,8 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
-            IResourceName name,
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
+            gaxres::ProjectName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStringsAsync(
@@ -8314,8 +8314,8 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
-            IResourceName name,
+        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
+            gaxres::ProjectName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStrings(
@@ -8339,7 +8339,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
@@ -8358,7 +8358,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
+        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
@@ -9010,11 +9010,11 @@ namespace Google.Example.Library.V1
         /// The server stream.
         /// </returns>
         public virtual StreamShelvesStream StreamShelves(
-            string name,
+            ShelfName name,
             gaxgrpc::CallSettings callSettings = null) => StreamShelves(
                 new StreamShelvesRequest
                 {
-                    Name = gax::GaxPreconditions.CheckNotNullOrEmpty(name, nameof(name)),
+                    ShelfName = gax::GaxPreconditions.CheckNotNull(name, nameof(name)),
                 },
                 callSettings);
 
@@ -9967,7 +9967,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10060,7 +10060,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof))),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -10433,7 +10433,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10896,7 +10896,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10989,7 +10989,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof))),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -11934,12 +11934,12 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public override gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
+        public override gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
             Modify_ListStringsRequest(ref request, ref callSettings);
-            return new gaxgrpc::GrpcPagedAsyncEnumerable<ListStringsRequest, ListStringsResponse, IResourceName>(_callListStrings, request, callSettings);
+            return new gaxgrpc::GrpcPagedAsyncEnumerable<ListStringsRequest, ListStringsResponse, string>(_callListStrings, request, callSettings);
         }
 
         /// <summary>
@@ -11954,12 +11954,12 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public override gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
+        public override gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
             Modify_ListStringsRequest(ref request, ref callSettings);
-            return new gaxgrpc::GrpcPagedEnumerable<ListStringsRequest, ListStringsResponse, IResourceName>(_callListStrings, request, callSettings);
+            return new gaxgrpc::GrpcPagedEnumerable<ListStringsRequest, ListStringsResponse, string>(_callListStrings, request, callSettings);
         }
 
         /// <summary>
@@ -12592,12 +12592,12 @@ namespace Google.Example.Library.V1
     }
 
     public partial class ListStringsRequest : gaxgrpc::IPageRequest { }
-    public partial class ListStringsResponse : gaxgrpc::IPageResponse<IResourceName>
+    public partial class ListStringsResponse : gaxgrpc::IPageResponse<string>
     {
         /// <summary>
         /// Returns an enumerator that iterates through the resources in this response.
         /// </summary>
-        public scg::IEnumerator<IResourceName> GetEnumerator() => StringsAsResourceNames.GetEnumerator();
+        public scg::IEnumerator<string> GetEnumerator() => Strings.GetEnumerator();
 
         /// <inheritdoc/>
         sc::IEnumerator sc::IEnumerable.GetEnumerator() => GetEnumerator();
@@ -13362,11 +13362,11 @@ namespace Google.Example.Library.V1
     public partial class Book
     {
         /// <summary>
-        /// <see cref="Google.Example.Library.V1.BookName"/>-typed view over the <see cref="Name"/> resource name property.
+        /// <see cref="Google.Example.Library.V1.BookNameOneof"/>-typed view over the <see cref="Name"/> resource name property.
         /// </summary>
-        public Google.Example.Library.V1.BookName BookName
+        public Google.Example.Library.V1.BookNameOneof BookNameOneof
         {
-            get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.BookName.Parse(Name); }
+            get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.BookNameOneof.Parse(Name, true); }
             set { Name = value != null ? value.ToString() : ""; }
         }
 
@@ -13579,17 +13579,6 @@ namespace Google.Example.Library.V1
 
     }
 
-    public partial class ListStringsResponse
-    {
-        /// <summary>
-        /// <see cref="gax::ResourceNameList{gax::IResourceName}"/>-typed view over the <see cref="Strings"/> resource name property.
-        /// </summary>
-        public gax::ResourceNameList<gax::IResourceName> StringsAsResourceNames =>
-            new gax::ResourceNameList<gax::IResourceName>(Strings,
-                str => gax::UnknownResourceName.Parse(str));
-
-    }
-
     public partial class MergeShelvesRequest
     {
         /// <summary>
@@ -13635,6 +13624,19 @@ namespace Google.Example.Library.V1
     }
 
     public partial class Shelf
+    {
+        /// <summary>
+        /// <see cref="Google.Example.Library.V1.ShelfName"/>-typed view over the <see cref="Name"/> resource name property.
+        /// </summary>
+        public Google.Example.Library.V1.ShelfName ShelfName
+        {
+            get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.ShelfName.Parse(Name); }
+            set { Name = value != null ? value.ToString() : ""; }
+        }
+
+    }
+
+    public partial class StreamShelvesRequest
     {
         /// <summary>
         /// <see cref="Google.Example.Library.V1.ShelfName"/>-typed view over the <see cref="Name"/> resource name property.

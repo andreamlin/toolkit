@@ -1643,8 +1643,33 @@ public class LibraryServiceClient implements BackgroundResource {
    * Sample code:
    * <pre><code>
    * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
-   *   String name = "";
+   *   ProjectName name = ProjectName.of("[PROJECT]");
    *   for (String element : libraryServiceClient.listStrings(name).iterateAll()) {
+   *     // doThingsWith(element);
+   *   }
+   * }
+   * </code></pre>
+   *
+   * @param name
+   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
+   */
+  public final ListStringsPagedResponse listStrings(ProjectName name) {
+    ListStringsRequest request =
+        ListStringsRequest.newBuilder()
+        .setName(name == null ? null : name.toString())
+        .build();
+    return listStrings(request);
+  }
+
+  // AUTO-GENERATED DOCUMENTATION AND METHOD
+  /**
+   * Lists a primitive resource. To test go page streaming.
+   *
+   * Sample code:
+   * <pre><code>
+   * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
+   *   ProjectName name = ProjectName.of("[PROJECT]");
+   *   for (String element : libraryServiceClient.listStrings(name.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4678,6 +4703,7 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
+import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -4855,6 +4881,7 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
+import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -5736,6 +5763,7 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
+import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -8110,7 +8138,7 @@ public class LibraryServiceClientTest {
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
-    String name = "name3373707";
+    ProjectName name = ProjectName.of("[PROJECT]");
 
     ListStringsPagedResponse pagedListResponse = client.listStrings(name);
 
@@ -8122,7 +8150,7 @@ public class LibraryServiceClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListStringsRequest actualRequest = (ListStringsRequest)actualRequests.get(0);
 
-    Assert.assertEquals(name, actualRequest.getName());
+    Assert.assertEquals(name, ProjectName.parse(actualRequest.getName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -8136,7 +8164,7 @@ public class LibraryServiceClientTest {
     mockLibraryService.addException(exception);
 
     try {
-      String name = "name3373707";
+      ProjectName name = ProjectName.of("[PROJECT]");
 
       client.listStrings(name);
       Assert.fail("No exception raised");

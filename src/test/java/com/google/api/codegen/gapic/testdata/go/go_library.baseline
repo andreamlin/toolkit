@@ -3691,10 +3691,10 @@ func TestLibraryServiceFindRelatedBooks(t *testing.T) {
 
     var namesElement string = "namesElement-249113339"
     var names = []string{namesElement}
-    var shelves []string = nil
+    var formattedShelves []string = nil
     var request = &librarypb.FindRelatedBooksRequest{
-        Names: names,
-        Shelves: shelves,
+        Names: formattedNames,
+        Shelves: formattedShelves,
     }
 
     c, err := NewClient(context.Background(), clientOpt)
@@ -3733,10 +3733,10 @@ func TestLibraryServiceFindRelatedBooksError(t *testing.T) {
 
     var namesElement string = "namesElement-249113339"
     var names = []string{namesElement}
-    var shelves []string = nil
+    var formattedShelves []string = nil
     var request = &librarypb.FindRelatedBooksRequest{
-        Names: names,
-        Shelves: shelves,
+        Names: formattedNames,
+        Shelves: formattedShelves,
     }
 
     c, err := NewClient(context.Background(), clientOpt)
@@ -4015,7 +4015,7 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParams(t *testing.T) {
     var requiredRepeatedMessage []*librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage = nil
     var formattedRequiredRepeatedResourceName []string = nil
     var formattedRequiredRepeatedResourceNameOneof []string = nil
-    var requiredRepeatedResourceNameCommon []string = nil
+    var formattedRequiredRepeatedResourceNameCommon []string = nil
     var requiredRepeatedFixed32 []int32 = nil
     var requiredRepeatedFixed64 []int64 = nil
     var requiredMap map[int32]string = nil
@@ -4045,7 +4045,7 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParams(t *testing.T) {
         RequiredRepeatedMessage: requiredRepeatedMessage,
         RequiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         RequiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        RequiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        RequiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         RequiredRepeatedFixed32: requiredRepeatedFixed32,
         RequiredRepeatedFixed64: requiredRepeatedFixed64,
         RequiredMap: requiredMap,
@@ -4100,7 +4100,7 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParamsError(t *testing.T) {
     var requiredRepeatedMessage []*librarypb.TestOptionalRequiredFlatteningParamsRequest_InnerMessage = nil
     var formattedRequiredRepeatedResourceName []string = nil
     var formattedRequiredRepeatedResourceNameOneof []string = nil
-    var requiredRepeatedResourceNameCommon []string = nil
+    var formattedRequiredRepeatedResourceNameCommon []string = nil
     var requiredRepeatedFixed32 []int32 = nil
     var requiredRepeatedFixed64 []int64 = nil
     var requiredMap map[int32]string = nil
@@ -4130,7 +4130,7 @@ func TestLibraryServiceTestOptionalRequiredFlatteningParamsError(t *testing.T) {
         RequiredRepeatedMessage: requiredRepeatedMessage,
         RequiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         RequiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        RequiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        RequiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         RequiredRepeatedFixed32: requiredRepeatedFixed32,
         RequiredRepeatedFixed64: requiredRepeatedFixed64,
         RequiredMap: requiredMap,

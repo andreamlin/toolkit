@@ -1779,9 +1779,9 @@ class LibraryServiceGapicClient
      * try {
      *     $namesElement = '';
      *     $names = [$namesElement];
-     *     $shelves = [];
+     *     $formattedShelves = [];
      *     // Iterate over pages of elements
-     *     $pagedResponse = $libraryServiceClient->findRelatedBooks($names, $shelves);
+     *     $pagedResponse = $libraryServiceClient->findRelatedBooks($formattedNames, $formattedShelves);
      *     foreach ($pagedResponse->iteratePages() as $page) {
      *         foreach ($page as $element) {
      *             // doSomethingWith($element);
@@ -1792,7 +1792,7 @@ class LibraryServiceGapicClient
      *     // Alternatively:
      *
      *     // Iterate through all elements
-     *     $pagedResponse = $libraryServiceClient->findRelatedBooks($names, $shelves);
+     *     $pagedResponse = $libraryServiceClient->findRelatedBooks($formattedNames, $formattedShelves);
      *     foreach ($pagedResponse->iterateAllElements() as $element) {
      *         // doSomethingWith($element);
      *     }
@@ -2085,11 +2085,11 @@ class LibraryServiceGapicClient
      *     $requiredRepeatedMessage = [];
      *     $formattedRequiredRepeatedResourceName = [];
      *     $formattedRequiredRepeatedResourceNameOneof = [];
-     *     $requiredRepeatedResourceNameCommon = [];
+     *     $formattedRequiredRepeatedResourceNameCommon = [];
      *     $requiredRepeatedFixed32 = [];
      *     $requiredRepeatedFixed64 = [];
      *     $requiredMap = [];
-     *     $response = $libraryServiceClient->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $requiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
+     *     $response = $libraryServiceClient->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $formattedRequiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
      * } finally {
      *     $libraryServiceClient->close();
      * }
@@ -3560,7 +3560,7 @@ function sampleFindRelatedBooks()
 
     try {
         // Iterate through all elements
-        $pagedResponse = $libraryServiceClient->findRelatedBooks($names, $shelves);
+        $pagedResponse = $libraryServiceClient->findRelatedBooks($formattedNames, $formattedShelves);
         foreach ($pagedResponse->iterateAllElements() as $responseItem) {
             $book = $responseItem;
             printf("Here's a related book: %s" . PHP_EOL, $book);
@@ -3615,7 +3615,7 @@ function sampleFindRelatedBooks()
 
     try {
         // Iterate over pages of elements
-        $pagedResponse = $libraryServiceClient->findRelatedBooks($names, $shelves);
+        $pagedResponse = $libraryServiceClient->findRelatedBooks($formattedNames, $formattedShelves);
         foreach ($pagedResponse->iteratePages() as $page) {
             foreach ($page as $responseItem) {
                 $book = $responseItem;
@@ -6642,9 +6642,9 @@ class LibraryServiceClientTest extends GeneratedTest
         // Mock request
         $namesElement = 'namesElement-249113339';
         $names = [$namesElement];
-        $shelves = [];
+        $formattedShelves = [];
 
-        $response = $client->findRelatedBooks($names, $shelves);
+        $response = $client->findRelatedBooks($formattedNames, $formattedShelves);
         $this->assertEquals($expectedResponse, $response->getPage()->getResponseObject());
         $resources = iterator_to_array($response->iterateAllElements());
         $this->assertSame(1, count($resources));
@@ -6658,10 +6658,10 @@ class LibraryServiceClientTest extends GeneratedTest
 
         $actualValue = $actualRequestObject->getNames();
 
-        $this->assertProtobufEquals($names, $actualValue);
+        $this->assertProtobufEquals($formattedNames, $actualValue);
         $actualValue = $actualRequestObject->getShelves();
 
-        $this->assertProtobufEquals($shelves, $actualValue);
+        $this->assertProtobufEquals($formattedShelves, $actualValue);
         $this->assertTrue($transport->isExhausted());
     }
 
@@ -6690,10 +6690,10 @@ class LibraryServiceClientTest extends GeneratedTest
         // Mock request
         $namesElement = 'namesElement-249113339';
         $names = [$namesElement];
-        $shelves = [];
+        $formattedShelves = [];
 
         try {
-            $client->findRelatedBooks($names, $shelves);
+            $client->findRelatedBooks($formattedNames, $formattedShelves);
             // If the $client method call did not throw, fail the test
             $this->fail('Expected an ApiException, but no exception was thrown.');
         } catch (ApiException $ex) {
@@ -7106,12 +7106,12 @@ class LibraryServiceClientTest extends GeneratedTest
         $requiredRepeatedMessage = [];
         $formattedRequiredRepeatedResourceName = [];
         $formattedRequiredRepeatedResourceNameOneof = [];
-        $requiredRepeatedResourceNameCommon = [];
+        $formattedRequiredRepeatedResourceNameCommon = [];
         $requiredRepeatedFixed32 = [];
         $requiredRepeatedFixed64 = [];
         $requiredMap = [];
 
-        $response = $client->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $requiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
+        $response = $client->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $formattedRequiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
         $this->assertEquals($expectedResponse, $response);
         $actualRequests = $transport->popReceivedCalls();
         $this->assertSame(1, count($actualRequests));
@@ -7196,7 +7196,7 @@ class LibraryServiceClientTest extends GeneratedTest
         $this->assertProtobufEquals($formattedRequiredRepeatedResourceNameOneof, $actualValue);
         $actualValue = $actualRequestObject->getRequiredRepeatedResourceNameCommon();
 
-        $this->assertProtobufEquals($requiredRepeatedResourceNameCommon, $actualValue);
+        $this->assertProtobufEquals($formattedRequiredRepeatedResourceNameCommon, $actualValue);
         $actualValue = $actualRequestObject->getRequiredRepeatedFixed32();
 
         $this->assertProtobufEquals($requiredRepeatedFixed32, $actualValue);
@@ -7258,13 +7258,13 @@ class LibraryServiceClientTest extends GeneratedTest
         $requiredRepeatedMessage = [];
         $formattedRequiredRepeatedResourceName = [];
         $formattedRequiredRepeatedResourceNameOneof = [];
-        $requiredRepeatedResourceNameCommon = [];
+        $formattedRequiredRepeatedResourceNameCommon = [];
         $requiredRepeatedFixed32 = [];
         $requiredRepeatedFixed64 = [];
         $requiredMap = [];
 
         try {
-            $client->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $requiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
+            $client->testOptionalRequiredFlatteningParams($requiredSingularInt32, $requiredSingularInt64, $requiredSingularFloat, $requiredSingularDouble, $requiredSingularBool, $requiredSingularEnum, $requiredSingularString, $requiredSingularBytes, $requiredSingularMessage, $formattedRequiredSingularResourceName, $formattedRequiredSingularResourceNameOneof, $formattedRequiredSingularResourceNameCommon, $requiredSingularFixed32, $requiredSingularFixed64, $requiredRepeatedInt32, $requiredRepeatedInt64, $requiredRepeatedFloat, $requiredRepeatedDouble, $requiredRepeatedBool, $requiredRepeatedEnum, $requiredRepeatedString, $requiredRepeatedBytes, $requiredRepeatedMessage, $formattedRequiredRepeatedResourceName, $formattedRequiredRepeatedResourceNameOneof, $formattedRequiredRepeatedResourceNameCommon, $requiredRepeatedFixed32, $requiredRepeatedFixed64, $requiredMap);
             // If the $client method call did not throw, fail the test
             $this->fail('Expected an ApiException, but no exception was thrown.');
         } catch (ApiException $ex) {

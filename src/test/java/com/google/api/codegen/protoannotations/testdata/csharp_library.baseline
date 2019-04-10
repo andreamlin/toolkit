@@ -1192,14 +1192,14 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStringsAsync</summary>
         public async Task ListStringsAsync2()
         {
-            // Snippet: ListStringsAsync(string,string,int?,CallSettings)
+            // Snippet: ListStringsAsync(ProjectName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
-            string name = "";
+            ProjectName name = new ProjectName("[PROJECT]");
             // Make the request
             PagedAsyncEnumerable<ListStringsResponse, string> response =
-                libraryServiceClient.ListStringsAsync(name: name);
+                libraryServiceClient.ListStringsAsync(name);
 
             // Iterate over all response items, lazily performing RPCs as required
             await response.ForEachAsync((string item) =>
@@ -1236,14 +1236,14 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStrings</summary>
         public void ListStrings2()
         {
-            // Snippet: ListStrings(string,string,int?,CallSettings)
+            // Snippet: ListStrings(ProjectName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
-            string name = "";
+            ProjectName name = new ProjectName("[PROJECT]");
             // Make the request
             PagedEnumerable<ListStringsResponse, string> response =
-                libraryServiceClient.ListStrings(name: name);
+                libraryServiceClient.ListStrings(name);
 
             // Iterate over all response items, lazily performing RPCs as required
             foreach (string item in response)
@@ -1522,13 +1522,13 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for GetBookFromAnywhereAsync</summary>
         public async Task GetBookFromAnywhereAsync()
         {
-            // Snippet: GetBookFromAnywhereAsync(BookNameOneof,BookName,CallSettings)
-            // Additional: GetBookFromAnywhereAsync(BookNameOneof,BookName,CancellationToken)
+            // Snippet: GetBookFromAnywhereAsync(BookNameOneof,BookNameOneof,CallSettings)
+            // Additional: GetBookFromAnywhereAsync(BookNameOneof,BookNameOneof,CancellationToken)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             // Make the request
             BookFromAnywhere response = await libraryServiceClient.GetBookFromAnywhereAsync(name, altBookName);
             // End snippet
@@ -1537,12 +1537,12 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for GetBookFromAnywhere</summary>
         public void GetBookFromAnywhere()
         {
-            // Snippet: GetBookFromAnywhere(BookNameOneof,BookName,CallSettings)
+            // Snippet: GetBookFromAnywhere(BookNameOneof,BookNameOneof,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             // Make the request
             BookFromAnywhere response = libraryServiceClient.GetBookFromAnywhere(name, altBookName);
             // End snippet
@@ -1559,7 +1559,7 @@ namespace Google.Example.Library.V1.Snippets
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             // Make the request
             BookFromAnywhere response = await libraryServiceClient.GetBookFromAnywhereAsync(request);
@@ -1576,7 +1576,7 @@ namespace Google.Example.Library.V1.Snippets
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             // Make the request
             BookFromAnywhere response = libraryServiceClient.GetBookFromAnywhere(request);
@@ -2336,8 +2336,8 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParamsAsync</summary>
         public async Task TestOptionalRequiredFlatteningParamsAsync2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
-            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
+            // Snippet: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Additional: TestOptionalRequiredFlatteningParamsAsync(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CancellationToken)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
@@ -2351,7 +2351,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -2439,7 +2439,7 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for TestOptionalRequiredFlatteningParams</summary>
         public void TestOptionalRequiredFlatteningParams2()
         {
-            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookName,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
+            // Snippet: TestOptionalRequiredFlatteningParams(int,long,float,double,bool,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int,long,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookNameOneof>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,int?,long?,float?,double?,bool?,TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum?,string,ByteString,TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage,BookName,BookNameOneof,ProjectName,int?,long?,IEnumerable<int>,IEnumerable<long>,IEnumerable<float>,IEnumerable<double>,IEnumerable<bool>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerEnum>,IEnumerable<string>,IEnumerable<ByteString>,IEnumerable<TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage>,IEnumerable<BookName>,IEnumerable<BookName>,IEnumerable<ProjectName>,IEnumerable<int>,IEnumerable<long>,IDictionary<int, string>,Any,Struct,Value,ListValue,Timestamp,Duration,FieldMask,int?,uint?,long?,ulong?,float?,double?,string,bool?,ByteString,IEnumerable<Any>,IEnumerable<Struct>,IEnumerable<Value>,IEnumerable<ListValue>,IEnumerable<Timestamp>,IEnumerable<Duration>,IEnumerable<FieldMask>,IEnumerable<int?>,IEnumerable<uint?>,IEnumerable<long?>,IEnumerable<ulong?>,IEnumerable<float?>,IEnumerable<double?>,IEnumerable<string>,IEnumerable<bool?>,IEnumerable<ByteString>,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
@@ -2453,7 +2453,7 @@ namespace Google.Example.Library.V1.Snippets
             ByteString requiredSingularBytes = ByteString.Empty;
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 0;
             long requiredSingularFixed64 = 0L;
@@ -2558,7 +2558,7 @@ namespace Google.Example.Library.V1.Snippets
                 RequiredSingularBytes = ByteString.Empty,
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 0,
                 RequiredSingularFixed64 = 0L,
@@ -2602,7 +2602,7 @@ namespace Google.Example.Library.V1.Snippets
                 RequiredSingularBytes = ByteString.Empty,
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 0,
                 RequiredSingularFixed64 = 0L,
@@ -4337,7 +4337,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest expectedRequest = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4350,7 +4350,7 @@ namespace Google.Example.Library.V1.Tests
                 .Returns(expectedResponse);
             LibraryServiceClient client = new LibraryServiceClientImpl(mockGrpcClient.Object, null);
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             BookFromAnywhere response = client.GetBookFromAnywhere(name, altBookName);
             Assert.Same(expectedResponse, response);
             mockGrpcClient.VerifyAll();
@@ -4367,7 +4367,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest expectedRequest = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4380,7 +4380,7 @@ namespace Google.Example.Library.V1.Tests
                 .Returns(new Grpc.Core.AsyncUnaryCall<BookFromAnywhere>(Task.FromResult(expectedResponse), null, null, null, null));
             LibraryServiceClient client = new LibraryServiceClientImpl(mockGrpcClient.Object, null);
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             BookFromAnywhere response = await client.GetBookFromAnywhereAsync(name, altBookName);
             Assert.Same(expectedResponse, response);
             mockGrpcClient.VerifyAll();
@@ -4397,7 +4397,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4425,7 +4425,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4718,7 +4718,7 @@ namespace Google.Example.Library.V1.Tests
                 RequiredSingularBytes = ByteString.CopyFromUtf8("-29"),
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 720656715,
                 RequiredSingularFixed64 = 720656810,
@@ -4813,7 +4813,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -4918,7 +4918,7 @@ namespace Google.Example.Library.V1.Tests
                 RequiredSingularBytes = ByteString.CopyFromUtf8("-29"),
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 720656715,
                 RequiredSingularFixed64 = 720656810,
@@ -5013,7 +5013,7 @@ namespace Google.Example.Library.V1.Tests
             ByteString requiredSingularBytes = ByteString.CopyFromUtf8("-29");
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage();
             BookName requiredSingularResourceName = new BookName("[SHELF_ID]", "[BOOK_ID]");
-            BookName requiredSingularResourceNameOneof = new BookName("[SHELF_ID]", "[BOOK_ID]");
+            BookNameOneof requiredSingularResourceNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
             ProjectName requiredSingularResourceNameCommon = new ProjectName("[PROJECT]");
             int requiredSingularFixed32 = 720656715;
             long requiredSingularFixed64 = 720656810;
@@ -5118,7 +5118,7 @@ namespace Google.Example.Library.V1.Tests
                 RequiredSingularBytes = ByteString.CopyFromUtf8("-29"),
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 720656715,
                 RequiredSingularFixed64 = 720656810,
@@ -5167,7 +5167,7 @@ namespace Google.Example.Library.V1.Tests
                 RequiredSingularBytes = ByteString.CopyFromUtf8("-29"),
                 RequiredSingularMessage = new TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage(),
                 RequiredSingularResourceNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
-                RequiredSingularResourceNameOneofAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
+                RequiredSingularResourceNameOneofAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
                 RequiredSingularResourceNameCommonAsProjectName = new ProjectName("[PROJECT]"),
                 RequiredSingularFixed32 = 720656715,
                 RequiredSingularFixed64 = 720656810,
@@ -8253,13 +8253,13 @@ namespace Google.Example.Library.V1
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
         public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
-            string name,
+            gaxres::ProjectName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStringsAsync(
                 new ListStringsRequest
                 {
-                    Name = name ?? "", // Optional
+                    ProjectName = name, // Optional
                     PageToken = pageToken ?? "",
                     PageSize = pageSize ?? 0,
                 },
@@ -8286,13 +8286,13 @@ namespace Google.Example.Library.V1
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
         public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
-            string name,
+            gaxres::ProjectName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStrings(
                 new ListStringsRequest
                 {
-                    Name = name ?? "", // Optional
+                    ProjectName = name, // Optional
                     PageToken = pageToken ?? "",
                     PageSize = pageSize ?? 0,
                 },
@@ -8595,12 +8595,12 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual stt::Task<BookFromAnywhere> GetBookFromAnywhereAsync(
             BookNameOneof name,
-            BookName altBookName,
+            BookNameOneof altBookName,
             gaxgrpc::CallSettings callSettings = null) => GetBookFromAnywhereAsync(
                 new GetBookFromAnywhereRequest
                 {
                     BookNameOneof = gax::GaxPreconditions.CheckNotNull(name, nameof(name)),
-                    AltBookNameAsBookName = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
+                    AltBookNameAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
                 },
                 callSettings);
 
@@ -8622,7 +8622,7 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual stt::Task<BookFromAnywhere> GetBookFromAnywhereAsync(
             BookNameOneof name,
-            BookName altBookName,
+            BookNameOneof altBookName,
             st::CancellationToken cancellationToken) => GetBookFromAnywhereAsync(
                 name,
                 altBookName,
@@ -8646,12 +8646,12 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual BookFromAnywhere GetBookFromAnywhere(
             BookNameOneof name,
-            BookName altBookName,
+            BookNameOneof altBookName,
             gaxgrpc::CallSettings callSettings = null) => GetBookFromAnywhere(
                 new GetBookFromAnywhereRequest
                 {
                     BookNameOneof = gax::GaxPreconditions.CheckNotNull(name, nameof(name)),
-                    AltBookNameAsBookName = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
+                    AltBookNameAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
                 },
                 callSettings);
 
@@ -9849,7 +9849,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -9942,7 +9942,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -10315,7 +10315,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10778,7 +10778,7 @@ namespace Google.Example.Library.V1
             pb::ByteString requiredSingularBytes,
             TestOptionalRequiredFlatteningParamsRequest.Types.InnerMessage requiredSingularMessage,
             BookName requiredSingularResourceName,
-            BookName requiredSingularResourceNameOneof,
+            BookNameOneof requiredSingularResourceNameOneof,
             gaxres::ProjectName requiredSingularResourceNameCommon,
             int requiredSingularFixed32,
             long requiredSingularFixed64,
@@ -10871,7 +10871,7 @@ namespace Google.Example.Library.V1
                     RequiredSingularBytes = gax::GaxPreconditions.CheckNotNull(requiredSingularBytes, nameof(requiredSingularBytes)),
                     RequiredSingularMessage = gax::GaxPreconditions.CheckNotNull(requiredSingularMessage, nameof(requiredSingularMessage)),
                     RequiredSingularResourceNameAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceName, nameof(requiredSingularResourceName)),
-                    RequiredSingularResourceNameOneofAsBookName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
+                    RequiredSingularResourceNameOneofAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameOneof, nameof(requiredSingularResourceNameOneof)),
                     RequiredSingularResourceNameCommonAsProjectName = gax::GaxPreconditions.CheckNotNull(requiredSingularResourceNameCommon, nameof(requiredSingularResourceNameCommon)),
                     RequiredSingularFixed32 = requiredSingularFixed32,
                     RequiredSingularFixed64 = requiredSingularFixed64,
@@ -13386,11 +13386,11 @@ namespace Google.Example.Library.V1
         }
 
         /// <summary>
-        /// <see cref="Google.Example.Library.V1.BookName"/>-typed view over the <see cref="AltBookName"/> resource name property.
+        /// <see cref="Google.Example.Library.V1.BookNameOneof"/>-typed view over the <see cref="AltBookName"/> resource name property.
         /// </summary>
-        public Google.Example.Library.V1.BookName AltBookNameAsBookName
+        public Google.Example.Library.V1.BookNameOneof AltBookNameAsBookNameOneof
         {
-            get { return string.IsNullOrEmpty(AltBookName) ? null : Google.Example.Library.V1.BookName.Parse(AltBookName); }
+            get { return string.IsNullOrEmpty(AltBookName) ? null : Google.Example.Library.V1.BookNameOneof.Parse(AltBookName, true); }
             set { AltBookName = value != null ? value.ToString() : ""; }
         }
 
@@ -13443,6 +13443,19 @@ namespace Google.Example.Library.V1
         public Google.Example.Library.V1.ShelfName ShelfName
         {
             get { return string.IsNullOrEmpty(Name) ? null : Google.Example.Library.V1.ShelfName.Parse(Name); }
+            set { Name = value != null ? value.ToString() : ""; }
+        }
+
+    }
+
+    public partial class ListStringsRequest
+    {
+        /// <summary>
+        /// <see cref="gaxres::ProjectName"/>-typed view over the <see cref="Name"/> resource name property.
+        /// </summary>
+        public gaxres::ProjectName ProjectName
+        {
+            get { return string.IsNullOrEmpty(Name) ? null : gaxres::ProjectName.Parse(Name); }
             set { Name = value != null ? value.ToString() : ""; }
         }
 
@@ -13530,11 +13543,11 @@ namespace Google.Example.Library.V1
         }
 
         /// <summary>
-        /// <see cref="Google.Example.Library.V1.BookName"/>-typed view over the <see cref="RequiredSingularResourceNameOneof"/> resource name property.
+        /// <see cref="Google.Example.Library.V1.BookNameOneof"/>-typed view over the <see cref="RequiredSingularResourceNameOneof"/> resource name property.
         /// </summary>
-        public Google.Example.Library.V1.BookName RequiredSingularResourceNameOneofAsBookName
+        public Google.Example.Library.V1.BookNameOneof RequiredSingularResourceNameOneofAsBookNameOneof
         {
-            get { return string.IsNullOrEmpty(RequiredSingularResourceNameOneof) ? null : Google.Example.Library.V1.BookName.Parse(RequiredSingularResourceNameOneof); }
+            get { return string.IsNullOrEmpty(RequiredSingularResourceNameOneof) ? null : Google.Example.Library.V1.BookNameOneof.Parse(RequiredSingularResourceNameOneof, true); }
             set { RequiredSingularResourceNameOneof = value != null ? value.ToString() : ""; }
         }
 

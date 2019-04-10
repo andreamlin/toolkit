@@ -256,7 +256,10 @@ function sampleBabbleAboutBook() {
     // No one replied
     console.log(`No one replied.`);
   });
-  const request = {};
+  const formattedName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+  const request = {
+    name: formattedName,
+  };
   // Write request objects.
   stream.write(request);
 }
@@ -285,7 +288,10 @@ function sampleBabbleAboutBook() {
       return;
     }
   });
-  const request = {};
+  const formattedName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+  const request = {
+    name: formattedName,
+  };
   // Write request objects.
   stream.write(request);
 }
@@ -408,8 +414,8 @@ function sampleFindRelatedBooks() {
   const shelvesElement = 'Classics';
   const shelves = [shelvesElement];
   const request = {
-    names: names,
-    shelves: shelves,
+    names: formattedNames,
+    shelves: formattedShelves,
   };
 
   client.findRelatedBooks(request)
@@ -449,8 +455,8 @@ function sampleFindRelatedBooks() {
   const shelvesElement = 'Classics';
   const shelves = [shelvesElement];
   const request = {
-    names: names,
-    shelves: shelves,
+    names: formattedNames,
+    shelves: formattedShelves,
   };
 
 
@@ -3852,20 +3858,20 @@ class LibraryServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      shelfPathTemplate: new gax.PathTemplate(
-        'shelves/{shelf_id}'
+      archivedBookPathTemplate: new gax.PathTemplate(
+        'archives/{archive_path}/books/{book_id=**}'
       ),
       bookPathTemplate: new gax.PathTemplate(
         'shelves/{shelf_id}/books/{book_id}'
       ),
-      returnPathTemplate: new gax.PathTemplate(
-        'shelves/{shelf}/books/{book}/returns/{return}'
-      ),
       projectPathTemplate: new gax.PathTemplate(
         'projects/{project}'
       ),
-      archivedBookPathTemplate: new gax.PathTemplate(
-        'archives/{archive_path}/books/{book_id=**}'
+      returnPathTemplate: new gax.PathTemplate(
+        'shelves/{shelf}/books/{book}/returns/{return}'
+      ),
+      shelfPathTemplate: new gax.PathTemplate(
+        'shelves/{shelf_id}'
       ),
     };
 
@@ -5507,7 +5513,10 @@ class LibraryServiceClient {
    *   }
    *   // doThingsWith(response)
    * });
-   * const request = {};
+   * const formattedName = client.bookPath('[SHELF_ID]', '[BOOK_ID]');
+   * const request = {
+   *   name: formattedName,
+   * };
    * // Write request objects.
    * stream.write(request);
    */
@@ -5566,10 +5575,10 @@ class LibraryServiceClient {
    * // Iterate over all elements.
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    *
    * client.findRelatedBooks(request)
@@ -5586,10 +5595,10 @@ class LibraryServiceClient {
    * // Or obtain the paged response.
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    *
    *
@@ -5664,10 +5673,10 @@ class LibraryServiceClient {
    *
    * const namesElement = '';
    * const names = [namesElement];
-   * const shelves = [];
+   * const formattedShelves = [];
    * const request = {
-   *   names: names,
-   *   shelves: shelves,
+   *   names: formattedNames,
+   *   shelves: formattedShelves,
    * };
    * client.findRelatedBooksStream(request)
    *   .on('data', element => {
@@ -6117,7 +6126,7 @@ class LibraryServiceClient {
    * const requiredRepeatedMessage = [];
    * const formattedRequiredRepeatedResourceName = [];
    * const formattedRequiredRepeatedResourceNameOneof = [];
-   * const requiredRepeatedResourceNameCommon = [];
+   * const formattedRequiredRepeatedResourceNameCommon = [];
    * const requiredRepeatedFixed32 = [];
    * const requiredRepeatedFixed64 = [];
    * const requiredMap = {};
@@ -6147,7 +6156,7 @@ class LibraryServiceClient {
    *   requiredRepeatedMessage: requiredRepeatedMessage,
    *   requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
    *   requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-   *   requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+   *   requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
    *   requiredRepeatedFixed32: requiredRepeatedFixed32,
    *   requiredRepeatedFixed64: requiredRepeatedFixed64,
    *   requiredMap: requiredMap,
@@ -6225,14 +6234,16 @@ class LibraryServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified shelf resource name string.
+   * Return a fully-qualified archived_book resource name string.
    *
-   * @param {String} shelfId
+   * @param {String} archivePath
+   * @param {String} bookId
    * @returns {String}
    */
-  shelfPath(shelfId) {
-    return this._pathTemplates.shelfPathTemplate.render({
-      shelf_id: shelfId,
+  archivedBookPath(archivePath, bookId) {
+    return this._pathTemplates.archivedBookPathTemplate.render({
+      archive_path: archivePath,
+      book_id: bookId,
     });
   }
 
@@ -6247,6 +6258,18 @@ class LibraryServiceClient {
     return this._pathTemplates.bookPathTemplate.render({
       shelf_id: shelfId,
       book_id: bookId,
+    });
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -6267,42 +6290,41 @@ class LibraryServiceClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified shelf resource name string.
    *
-   * @param {String} project
+   * @param {String} shelfId
    * @returns {String}
    */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
+  shelfPath(shelfId) {
+    return this._pathTemplates.shelfPathTemplate.render({
+      shelf_id: shelfId,
     });
   }
 
   /**
-   * Return a fully-qualified archived_book resource name string.
+   * Parse the archivedBookName from a archived_book resource.
    *
-   * @param {String} archivePath
-   * @param {String} bookId
-   * @returns {String}
+   * @param {String} archivedBookName
+   *   A fully-qualified path representing a archived_book resources.
+   * @returns {String} - A string representing the archive_path.
    */
-  archivedBookPath(archivePath, bookId) {
-    return this._pathTemplates.archivedBookPathTemplate.render({
-      archive_path: archivePath,
-      book_id: bookId,
-    });
+  matchArchivePathFromArchivedBookName(archivedBookName) {
+    return this._pathTemplates.archivedBookPathTemplate
+      .match(archivedBookName)
+      .archive_path;
   }
 
   /**
-   * Parse the shelfName from a shelf resource.
+   * Parse the archivedBookName from a archived_book resource.
    *
-   * @param {String} shelfName
-   *   A fully-qualified path representing a shelf resources.
-   * @returns {String} - A string representing the shelf_id.
+   * @param {String} archivedBookName
+   *   A fully-qualified path representing a archived_book resources.
+   * @returns {String} - A string representing the book_id.
    */
-  matchShelfIdFromShelfName(shelfName) {
-    return this._pathTemplates.shelfPathTemplate
-      .match(shelfName)
-      .shelf_id;
+  matchBookIdFromArchivedBookName(archivedBookName) {
+    return this._pathTemplates.archivedBookPathTemplate
+      .match(archivedBookName)
+      .book_id;
   }
 
   /**
@@ -6329,6 +6351,19 @@ class LibraryServiceClient {
     return this._pathTemplates.bookPathTemplate
       .match(bookName)
       .book_id;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate
+      .match(projectName)
+      .project;
   }
 
   /**
@@ -6371,42 +6406,16 @@ class LibraryServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Parse the shelfName from a shelf resource.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} shelfName
+   *   A fully-qualified path representing a shelf resources.
+   * @returns {String} - A string representing the shelf_id.
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
-  }
-
-  /**
-   * Parse the archivedBookName from a archived_book resource.
-   *
-   * @param {String} archivedBookName
-   *   A fully-qualified path representing a archived_book resources.
-   * @returns {String} - A string representing the archive_path.
-   */
-  matchArchivePathFromArchivedBookName(archivedBookName) {
-    return this._pathTemplates.archivedBookPathTemplate
-      .match(archivedBookName)
-      .archive_path;
-  }
-
-  /**
-   * Parse the archivedBookName from a archived_book resource.
-   *
-   * @param {String} archivedBookName
-   *   A fully-qualified path representing a archived_book resources.
-   * @returns {String} - A string representing the book_id.
-   */
-  matchBookIdFromArchivedBookName(archivedBookName) {
-    return this._pathTemplates.archivedBookPathTemplate
-      .match(archivedBookName)
-      .book_id;
+  matchShelfIdFromShelfName(shelfName) {
+    return this._pathTemplates.shelfPathTemplate
+      .match(shelfName)
+      .shelf_id;
   }
 }
 
@@ -6442,32 +6451,32 @@ module.exports = LibraryServiceClient;
           "retry_params_name": "default"
         },
         "GetShelf": {
-          "timeout_millis": 2000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListShelves": {
-          "timeout_millis": 3000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteShelf": {
-          "timeout_millis": 4000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "MergeShelves": {
-          "timeout_millis": 5000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateBook": {
-          "timeout_millis": 6000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "PublishSeries": {
-          "timeout_millis": 7000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default",
           "bundling": {
@@ -6479,37 +6488,37 @@ module.exports = LibraryServiceClient;
           }
         },
         "GetBook": {
-          "timeout_millis": 8000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListBooks": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "UpdateBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "MoveBook": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListStrings": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "AddComments": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default",
           "bundling": {
@@ -6519,42 +6528,42 @@ module.exports = LibraryServiceClient;
           }
         },
         "GetBookFromArchive": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetBookFromAnywhere": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetBookFromAbsolutelyAnywhere": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "UpdateBookIndex": {
-          "timeout_millis": 10000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "StreamShelves": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "StreamBooks": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DiscussBook": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "MonologAboutBook": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -6564,7 +6573,7 @@ module.exports = LibraryServiceClient;
           "retry_params_name": "default"
         },
         "FindRelatedBooks": {
-          "timeout_millis": 3000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
@@ -7986,10 +7995,10 @@ describe('LibraryServiceClient', () => {
       // Mock request
       const namesElement = 'namesElement-249113339';
       const names = [namesElement];
-      const shelves = [];
+      const formattedShelves = [];
       const request = {
-        names: names,
-        shelves: shelves,
+        names: formattedNames,
+        shelves: formattedShelves,
       };
 
       // Mock response
@@ -8023,10 +8032,10 @@ describe('LibraryServiceClient', () => {
       // Mock request
       const namesElement = 'namesElement-249113339';
       const names = [namesElement];
-      const shelves = [];
+      const formattedShelves = [];
       const request = {
-        names: names,
-        shelves: shelves,
+        names: formattedNames,
+        shelves: formattedShelves,
       };
 
       // Mock Grpc layer
@@ -8282,7 +8291,7 @@ describe('LibraryServiceClient', () => {
       const requiredRepeatedMessage = [];
       const formattedRequiredRepeatedResourceName = [];
       const formattedRequiredRepeatedResourceNameOneof = [];
-      const requiredRepeatedResourceNameCommon = [];
+      const formattedRequiredRepeatedResourceNameCommon = [];
       const requiredRepeatedFixed32 = [];
       const requiredRepeatedFixed64 = [];
       const requiredMap = {};
@@ -8312,7 +8321,7 @@ describe('LibraryServiceClient', () => {
         requiredRepeatedMessage: requiredRepeatedMessage,
         requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         requiredRepeatedFixed32: requiredRepeatedFixed32,
         requiredRepeatedFixed64: requiredRepeatedFixed64,
         requiredMap: requiredMap,
@@ -8366,7 +8375,7 @@ describe('LibraryServiceClient', () => {
       const requiredRepeatedMessage = [];
       const formattedRequiredRepeatedResourceName = [];
       const formattedRequiredRepeatedResourceNameOneof = [];
-      const requiredRepeatedResourceNameCommon = [];
+      const formattedRequiredRepeatedResourceNameCommon = [];
       const requiredRepeatedFixed32 = [];
       const requiredRepeatedFixed64 = [];
       const requiredMap = {};
@@ -8396,7 +8405,7 @@ describe('LibraryServiceClient', () => {
         requiredRepeatedMessage: requiredRepeatedMessage,
         requiredRepeatedResourceName: formattedRequiredRepeatedResourceName,
         requiredRepeatedResourceNameOneof: formattedRequiredRepeatedResourceNameOneof,
-        requiredRepeatedResourceNameCommon: requiredRepeatedResourceNameCommon,
+        requiredRepeatedResourceNameCommon: formattedRequiredRepeatedResourceNameCommon,
         requiredRepeatedFixed32: requiredRepeatedFixed32,
         requiredRepeatedFixed64: requiredRepeatedFixed64,
         requiredMap: requiredMap,
