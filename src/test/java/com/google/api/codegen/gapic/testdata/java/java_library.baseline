@@ -2681,7 +2681,7 @@ import com.google.api.gax.rpc.PageContext;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
 import com.google.api.pathtemplate.PathTemplate;
-import com.google.api.resourcenames.ResourceName;
+import com.google.cloud.ProjectName;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -4382,7 +4382,7 @@ public class LibraryClient implements BackgroundResource {
    * <pre><code>
    * try (LibraryClient libraryClient = LibraryClient.create()) {
    *
-   *   for (ResourceName element : libraryClient.listStrings().iterateAllAsResourceName()) {
+   *   for (String element : libraryClient.listStrings().iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4404,8 +4404,8 @@ public class LibraryClient implements BackgroundResource {
    * Sample code:
    * <pre><code>
    * try (LibraryClient libraryClient = LibraryClient.create()) {
-   *   ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
-   *   for (ResourceName element : libraryClient.listStrings(name).iterateAllAsResourceName()) {
+   *   ProjectName name = ProjectName.of("[PROJECT]");
+   *   for (String element : libraryClient.listStrings(name).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4414,7 +4414,7 @@ public class LibraryClient implements BackgroundResource {
    * @param name
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final ListStringsPagedResponse listStrings(ResourceName name) {
+  public final ListStringsPagedResponse listStrings(ProjectName name) {
     ListStringsRequest request =
         ListStringsRequest.newBuilder()
         .setName(name == null ? null : name.toString())
@@ -4429,8 +4429,8 @@ public class LibraryClient implements BackgroundResource {
    * Sample code:
    * <pre><code>
    * try (LibraryClient libraryClient = LibraryClient.create()) {
-   *   ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
-   *   for (ResourceName element : libraryClient.listStrings(name.toString()).iterateAllAsResourceName()) {
+   *   ProjectName name = ProjectName.of("[PROJECT]");
+   *   for (String element : libraryClient.listStrings(name.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4455,7 +4455,7 @@ public class LibraryClient implements BackgroundResource {
    * <pre><code>
    * try (LibraryClient libraryClient = LibraryClient.create()) {
    *   ListStringsRequest request = ListStringsRequest.newBuilder().build();
-   *   for (ResourceName element : libraryClient.listStrings(request).iterateAllAsResourceName()) {
+   *   for (String element : libraryClient.listStrings(request).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4479,7 +4479,7 @@ public class LibraryClient implements BackgroundResource {
    *   ListStringsRequest request = ListStringsRequest.newBuilder().build();
    *   ApiFuture&lt;ListStringsPagedResponse&gt; future = libraryClient.listStringsPagedCallable().futureCall(request);
    *   // Do something
-   *   for (ResourceName element : future.get().iterateAllAsResourceName()) {
+   *   for (String element : future.get().iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -4499,7 +4499,7 @@ public class LibraryClient implements BackgroundResource {
    *   ListStringsRequest request = ListStringsRequest.newBuilder().build();
    *   while (true) {
    *     ListStringsResponse response = libraryClient.listStringsCallable().call(request);
-   *     for (ResourceName element : UntypedResourceName.parseList(response.getStringsList())) {
+   *     for (String element : response.getStringsList()) {
    *       // doThingsWith(element);
    *     }
    *     String nextPageToken = response.getNextPageToken();
@@ -6568,15 +6568,7 @@ public class LibraryClient implements BackgroundResource {
     private ListStringsPagedResponse(ListStringsPage page) {
       super(page, ListStringsFixedSizeCollection.createEmptyCollection());
     }
-    public Iterable<ResourceName> iterateAllAsResourceName() {
-      return Iterables.transform(iterateAll(), new Function<String, ResourceName>() {
-          @Override
-          public ResourceName apply(String arg0) {
-            return UntypedResourceName.parse(arg0);
-          }
-        }
-      );
-    }
+
 
   }
 
@@ -6609,25 +6601,9 @@ public class LibraryClient implements BackgroundResource {
         ApiFuture<ListStringsResponse> futureResponse) {
       return super.createPageAsync(context, futureResponse);
     }
-    public Iterable<ResourceName> iterateAllAsResourceName() {
-      return Iterables.transform(iterateAll(), new Function<String, ResourceName>() {
-          @Override
-          public ResourceName apply(String arg0) {
-            return UntypedResourceName.parse(arg0);
-          }
-        }
-      );
-    }
 
-    public Iterable<ResourceName> getValuesAsResourceName() {
-      return Iterables.transform(getValues(), new Function<String, ResourceName>() {
-          @Override
-          public ResourceName apply(String arg0) {
-            return UntypedResourceName.parse(arg0);
-          }
-        }
-      );
-    }
+
+
 
   }
 
@@ -6651,15 +6627,7 @@ public class LibraryClient implements BackgroundResource {
         List<ListStringsPage> pages, int collectionSize) {
       return new ListStringsFixedSizeCollection(pages, collectionSize);
     }
-    public Iterable<ResourceName> getValuesAsResourceName() {
-      return Iterables.transform(getValues(), new Function<String, ResourceName>() {
-          @Override
-          public ResourceName apply(String arg0) {
-            return UntypedResourceName.parse(arg0);
-          }
-        }
-      );
-    }
+
 
   }
   public static class FindRelatedBooksPagedResponse extends AbstractPagedListResponse<
@@ -7548,7 +7516,7 @@ import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.StreamingCallSettings;
 import com.google.api.gax.rpc.UnaryCallSettings;
 import com.google.api.gax.rpc.UnaryCallable;
-import com.google.api.resourcenames.ResourceName;
+import com.google.cloud.ProjectName;
 import com.google.common.collect.ImmutableMap;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
@@ -7727,7 +7695,7 @@ import com.google.api.gax.rpc.OperationCallable;
 import com.google.api.gax.rpc.RequestParamsExtractor;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
-import com.google.api.resourcenames.ResourceName;
+import com.google.cloud.ProjectName;
 import com.google.common.collect.ImmutableMap;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
@@ -8613,7 +8581,7 @@ import com.google.api.gax.rpc.ClientStreamingCallable;
 import com.google.api.gax.rpc.OperationCallable;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.UnaryCallable;
-import com.google.api.resourcenames.ResourceName;
+import com.google.cloud.ProjectName;
 import com.google.example.library.v1.AddCommentsRequest;
 import com.google.example.library.v1.ArchivedBookName;
 import com.google.example.library.v1.Book;
@@ -10325,7 +10293,6 @@ import com.google.api.gax.rpc.BidiStreamingCallable;
 import com.google.api.gax.rpc.InvalidArgumentException;
 import com.google.api.gax.rpc.ServerStreamingCallable;
 import com.google.api.gax.rpc.StatusCode;
-import com.google.api.resourcenames.ResourceName;
 import com.google.cloud.ProjectName;
 import com.google.common.collect.Lists;
 import com.google.example.library.v1.Comment;
@@ -11141,11 +11108,11 @@ public class LibraryClientTest {
   @SuppressWarnings("all")
   public void listStringsTest() {
     String nextPageToken = "";
-    ResourceName stringsElement = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
-    List<ResourceName> strings = Arrays.asList(stringsElement);
+    String stringsElement = "stringsElement474465855";
+    List<String> strings = Arrays.asList(stringsElement);
     ListStringsResponse expectedResponse = ListStringsResponse.newBuilder()
       .setNextPageToken(nextPageToken)
-      .addAllStrings(UntypedResourceName.toStringList(strings))
+      .addAllStrings(strings)
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
@@ -11156,10 +11123,6 @@ public class LibraryClientTest {
     List<String> resources = Lists.newArrayList(pagedListResponse.iterateAll());
     Assert.assertEquals(1, resources.size());
     Assert.assertEquals(expectedResponse.getStringsList().get(0), resources.get(0));
-    List<ResourceName> resourceNames = Lists.newArrayList(pagedListResponse.iterateAllAsResourceName());
-    Assert.assertEquals(1, resourceNames.size());
-    Assert.assertEquals(UntypedResourceName.parse(expectedResponse.getStringsList().get(0)),
-        resourceNames.get(0));
 
     List<AbstractMessage> actualRequests = mockLibraryService.getRequests();
     Assert.assertEquals(1, actualRequests.size());
@@ -11191,25 +11154,21 @@ public class LibraryClientTest {
   @SuppressWarnings("all")
   public void listStringsTest2() {
     String nextPageToken = "";
-    ResourceName stringsElement = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
-    List<ResourceName> strings = Arrays.asList(stringsElement);
+    String stringsElement = "stringsElement474465855";
+    List<String> strings = Arrays.asList(stringsElement);
     ListStringsResponse expectedResponse = ListStringsResponse.newBuilder()
       .setNextPageToken(nextPageToken)
-      .addAllStrings(UntypedResourceName.toStringList(strings))
+      .addAllStrings(strings)
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
-    ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
+    ProjectName name = ProjectName.of("[PROJECT]");
 
     ListStringsPagedResponse pagedListResponse = client.listStrings(name);
 
     List<String> resources = Lists.newArrayList(pagedListResponse.iterateAll());
     Assert.assertEquals(1, resources.size());
     Assert.assertEquals(expectedResponse.getStringsList().get(0), resources.get(0));
-    List<ResourceName> resourceNames = Lists.newArrayList(pagedListResponse.iterateAllAsResourceName());
-    Assert.assertEquals(1, resourceNames.size());
-    Assert.assertEquals(UntypedResourceName.parse(expectedResponse.getStringsList().get(0)),
-        resourceNames.get(0));
 
     List<AbstractMessage> actualRequests = mockLibraryService.getRequests();
     Assert.assertEquals(1, actualRequests.size());
@@ -11229,7 +11188,7 @@ public class LibraryClientTest {
     mockLibraryService.addException(exception);
 
     try {
-      ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
+      ProjectName name = ProjectName.of("[PROJECT]");
 
       client.listStrings(name);
       Assert.fail("No exception raised");

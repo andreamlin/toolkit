@@ -771,7 +771,8 @@ message MoveBookRequest {
 }
 
 message ListStringsRequest {
-  string name = 1;
+  string name = 1 [
+    (google.api.resource_reference) = "Project"];
   int32 page_size = 2;
   string page_token = 3;
 }
