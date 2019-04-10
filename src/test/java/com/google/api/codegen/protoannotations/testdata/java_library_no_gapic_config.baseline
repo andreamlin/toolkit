@@ -8260,7 +8260,7 @@ public class LibraryServiceClientTest {
     GetBookFromAnywhereRequest actualRequest = (GetBookFromAnywhereRequest)actualRequests.get(0);
 
     Assert.assertEquals(name, BookNames.parse(actualRequest.getName()));
-    Assert.assertEquals(altBookName, BookName.parse(actualRequest.getAltBookName()));
+    Assert.assertEquals(altBookName, BookNames.parse(actualRequest.getAltBookName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),

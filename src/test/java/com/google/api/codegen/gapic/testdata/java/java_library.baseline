@@ -651,7 +651,7 @@ public class FindRelatedBooksFlattenedPagedOdyssey {
       List<String> names = Arrays.asList(namesElement);
       String shelvesElement = "Classics";
       List<String> shelves = Arrays.asList(shelvesElement);
-      ApiFuture<FindRelatedBooksPagedResponse> future = libraryClient.findRelatedBooks().futureCall(names, shelves);
+      ApiFuture<FindRelatedBooksPagedResponse> future = libraryClient.findRelatedBooks().futureCall(formattedNames, formattedShelves);
 
       // Do something
 
@@ -2603,6 +2603,7 @@ package com.google.example.examples.library.v1;
 
 import com.google.api.gax.rpc.ServerStream;
 import com.google.example.library.v1.LibraryClient;
+import com.google.example.library.v1.ShelfName;
 import com.google.example.library.v1.StreamShelvesRequest;
 import com.google.example.library.v1.StreamShelvesResponse;
 
@@ -2612,6 +2613,7 @@ import com.google.example.library.v1.StreamShelvesResponse;
  *
  * import com.google.api.gax.rpc.ServerStream;
  * import com.google.example.library.v1.LibraryClient;
+ * import com.google.example.library.v1.ShelfName;
  * import com.google.example.library.v1.StreamShelvesRequest;
  * import com.google.example.library.v1.StreamShelvesResponse;
  */
@@ -2620,9 +2622,9 @@ public class StreamShelvesCallableCallableStreamingServerEmpty {
   public static void sampleStreamShelves() {
     // [START sample_core]
     try (LibraryClient libraryClient = LibraryClient.create()) {
-      String formattedName = LibraryClient.formatShelfName("[SHELF_ID]");
+      ShelfName name = ShelfName.of("[SHELF_ID]");
       StreamShelvesRequest request = StreamShelvesRequest.newBuilder()
-        .setName(formattedName)
+        .setName(name.toString())
         .build();
 
       ServerStream<StreamShelvesResponse> stream = libraryClient.streamShelvesCallable().call(request);
@@ -5059,9 +5061,9 @@ public class LibraryClient implements BackgroundResource {
    * Sample code:
    * <pre><code>
    * try (LibraryClient libraryClient = LibraryClient.create()) {
-   *   String formattedName = LibraryClient.formatShelfName("[SHELF_ID]");
+   *   ShelfName name = ShelfName.of("[SHELF_ID]");
    *   StreamShelvesRequest request = StreamShelvesRequest.newBuilder()
-   *     .setName(formattedName)
+   *     .setName(name.toString())
    *     .build();
    *
    *   ServerStream&lt;StreamShelvesResponse&gt; stream = libraryClient.streamShelvesCallable().call(request);
@@ -5209,8 +5211,8 @@ public class LibraryClient implements BackgroundResource {
    * try (LibraryClient libraryClient = LibraryClient.create()) {
    *   String namesElement = "";
    *   List&lt;String&gt; names = Arrays.asList(namesElement);
-   *   List&lt;String&gt; shelves = new ArrayList&lt;&gt;();
-   *   for (ShelfBookName element : libraryClient.findRelatedBooks(names, shelves).iterateAllAsShelfBookName()) {
+   *   List&lt;String&gt; formattedShelves = new ArrayList&lt;&gt;();
+   *   for (ShelfBookName element : libraryClient.findRelatedBooks(formattedNames, formattedShelves).iterateAllAsShelfBookName()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -5665,7 +5667,7 @@ public class LibraryClient implements BackgroundResource {
    *   ByteString requiredSingularBytes = ByteString.copyFromUtf8("");
    *   TestOptionalRequiredFlatteningParamsRequest.InnerMessage requiredSingularMessage = TestOptionalRequiredFlatteningParamsRequest.InnerMessage.newBuilder().build();
    *   ShelfBookName requiredSingularResourceName = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
-   *   ShelfBookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+   *   BookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
    *   ProjectName requiredSingularResourceNameCommon = ProjectName.of("[PROJECT]");
    *   int requiredSingularFixed32 = 0;
    *   long requiredSingularFixed64 = 0L;
@@ -5680,7 +5682,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;TestOptionalRequiredFlatteningParamsRequest.InnerMessage&gt; requiredRepeatedMessage = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedRequiredRepeatedResourceName = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedRequiredRepeatedResourceNameOneof = new ArrayList&lt;&gt;();
-   *   List&lt;String&gt; requiredRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
+   *   List&lt;String&gt; formattedRequiredRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
    *   List&lt;Integer&gt; requiredRepeatedFixed32 = new ArrayList&lt;&gt;();
    *   List&lt;Long&gt; requiredRepeatedFixed64 = new ArrayList&lt;&gt;();
    *   Map&lt;Integer, String&gt; requiredMap = new HashMap&lt;&gt;();
@@ -5709,7 +5711,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;TestOptionalRequiredFlatteningParamsRequest.InnerMessage&gt; optionalRepeatedMessage = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedOptionalRepeatedResourceName = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedOptionalRepeatedResourceNameOneof = new ArrayList&lt;&gt;();
-   *   List&lt;String&gt; optionalRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
+   *   List&lt;String&gt; formattedOptionalRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
    *   List&lt;Integer&gt; optionalRepeatedFixed32 = new ArrayList&lt;&gt;();
    *   List&lt;Long&gt; optionalRepeatedFixed64 = new ArrayList&lt;&gt;();
    *   Map&lt;Integer, String&gt; optionalMap = new HashMap&lt;&gt;();
@@ -5745,7 +5747,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;StringValue&gt; repeatedStringValue = new ArrayList&lt;&gt;();
    *   List&lt;BoolValue&gt; repeatedBoolValue = new ArrayList&lt;&gt;();
    *   List&lt;BytesValue&gt; repeatedBytesValue = new ArrayList&lt;&gt;();
-   *   TestOptionalRequiredFlatteningParamsResponse response = libraryClient.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName.toString(), requiredSingularResourceNameOneof.toString(), requiredSingularResourceNameCommon.toString(), requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, requiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName.toString(), optionalSingularResourceNameOneof.toString(), optionalSingularResourceNameCommon.toString(), optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, optionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
+   *   TestOptionalRequiredFlatteningParamsResponse response = libraryClient.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName.toString(), requiredSingularResourceNameOneof.toString(), requiredSingularResourceNameCommon.toString(), requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, formattedRequiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName.toString(), optionalSingularResourceNameOneof.toString(), optionalSingularResourceNameCommon.toString(), optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, formattedOptionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
    * }
    * </code></pre>
    *
@@ -5971,7 +5973,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;TestOptionalRequiredFlatteningParamsRequest.InnerMessage&gt; requiredRepeatedMessage = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedRequiredRepeatedResourceName = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedRequiredRepeatedResourceNameOneof = new ArrayList&lt;&gt;();
-   *   List&lt;String&gt; requiredRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
+   *   List&lt;String&gt; formattedRequiredRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
    *   List&lt;Integer&gt; requiredRepeatedFixed32 = new ArrayList&lt;&gt;();
    *   List&lt;Long&gt; requiredRepeatedFixed64 = new ArrayList&lt;&gt;();
    *   Map&lt;Integer, String&gt; requiredMap = new HashMap&lt;&gt;();
@@ -5984,9 +5986,9 @@ public class LibraryClient implements BackgroundResource {
    *   String optionalSingularString = "";
    *   ByteString optionalSingularBytes = ByteString.copyFromUtf8("");
    *   TestOptionalRequiredFlatteningParamsRequest.InnerMessage optionalSingularMessage = TestOptionalRequiredFlatteningParamsRequest.InnerMessage.newBuilder().build();
-   *   String optionalSingularResourceName = "";
-   *   String optionalSingularResourceNameOneof = "";
-   *   String optionalSingularResourceNameCommon = "";
+   *   String formattedOptionalSingularResourceName = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+   *   String formattedOptionalSingularResourceNameOneof = LibraryClient.formatShelfBookName("[SHELF_ID]", "[BOOK_ID]");
+   *   String formattedOptionalSingularResourceNameCommon = LibraryClient.formatProjectName("[PROJECT]");
    *   int optionalSingularFixed32 = 0;
    *   long optionalSingularFixed64 = 0L;
    *   List&lt;Integer&gt; optionalRepeatedInt32 = new ArrayList&lt;&gt;();
@@ -6000,7 +6002,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;TestOptionalRequiredFlatteningParamsRequest.InnerMessage&gt; optionalRepeatedMessage = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedOptionalRepeatedResourceName = new ArrayList&lt;&gt;();
    *   List&lt;String&gt; formattedOptionalRepeatedResourceNameOneof = new ArrayList&lt;&gt;();
-   *   List&lt;String&gt; optionalRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
+   *   List&lt;String&gt; formattedOptionalRepeatedResourceNameCommon = new ArrayList&lt;&gt;();
    *   List&lt;Integer&gt; optionalRepeatedFixed32 = new ArrayList&lt;&gt;();
    *   List&lt;Long&gt; optionalRepeatedFixed64 = new ArrayList&lt;&gt;();
    *   Map&lt;Integer, String&gt; optionalMap = new HashMap&lt;&gt;();
@@ -6036,7 +6038,7 @@ public class LibraryClient implements BackgroundResource {
    *   List&lt;StringValue&gt; repeatedStringValue = new ArrayList&lt;&gt;();
    *   List&lt;BoolValue&gt; repeatedBoolValue = new ArrayList&lt;&gt;();
    *   List&lt;BytesValue&gt; repeatedBytesValue = new ArrayList&lt;&gt;();
-   *   TestOptionalRequiredFlatteningParamsResponse response = libraryClient.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, formattedRequiredSingularResourceName, formattedRequiredSingularResourceNameOneof, formattedRequiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, requiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName, optionalSingularResourceNameOneof, optionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, optionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
+   *   TestOptionalRequiredFlatteningParamsResponse response = libraryClient.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, formattedRequiredSingularResourceName, formattedRequiredSingularResourceNameOneof, formattedRequiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, formattedRequiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, formattedOptionalSingularResourceName, formattedOptionalSingularResourceNameOneof, formattedOptionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, formattedOptionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
    * }
    * </code></pre>
    *
@@ -10732,7 +10734,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void createBookTest() {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -10841,7 +10843,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void getBookTest() {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -10976,7 +10978,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateBookTest() {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -11027,7 +11029,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void updateBookTest2() {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -11087,7 +11089,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void moveBookTest() {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -11495,9 +11497,9 @@ public class LibraryClientTest {
       .addAllShelves(shelves)
       .build();
     mockLibraryService.addResponse(expectedResponse);
-    String formattedName = LibraryClient.formatShelfName("[SHELF_ID]");
+    ShelfName name = ShelfName.of("[SHELF_ID]");
     StreamShelvesRequest request = StreamShelvesRequest.newBuilder()
-      .setName(formattedName)
+      .setName(name.toString())
       .build();
 
     MockStreamObserver<StreamShelvesResponse> responseObserver = new MockStreamObserver<>();
@@ -11516,9 +11518,9 @@ public class LibraryClientTest {
   public void streamShelvesExceptionTest() throws Exception {
     StatusRuntimeException exception = new StatusRuntimeException(Status.INVALID_ARGUMENT);
     mockLibraryService.addException(exception);
-    String formattedName = LibraryClient.formatShelfName("[SHELF_ID]");
+    ShelfName name = ShelfName.of("[SHELF_ID]");
     StreamShelvesRequest request = StreamShelvesRequest.newBuilder()
-      .setName(formattedName)
+      .setName(name.toString())
       .build();
 
     MockStreamObserver<StreamShelvesResponse> responseObserver = new MockStreamObserver<>();
@@ -11540,7 +11542,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void streamBooksTest() throws Exception {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -11666,9 +11668,9 @@ public class LibraryClientTest {
 
     String namesElement = "namesElement-249113339";
     List<String> names = Arrays.asList(namesElement);
-    List<String> shelves = new ArrayList<>();
+    List<String> formattedShelves = new ArrayList<>();
 
-    FindRelatedBooksPagedResponse pagedListResponse = client.findRelatedBooks(names, shelves);
+    FindRelatedBooksPagedResponse pagedListResponse = client.findRelatedBooks(formattedNames, formattedShelves);
 
     List<String> resources = Lists.newArrayList(pagedListResponse.iterateAll());
     Assert.assertEquals(1, resources.size());
@@ -11682,8 +11684,8 @@ public class LibraryClientTest {
     Assert.assertEquals(1, actualRequests.size());
     FindRelatedBooksRequest actualRequest = (FindRelatedBooksRequest)actualRequests.get(0);
 
-    Assert.assertEquals(names, actualRequest.getNamesList());
-    Assert.assertEquals(shelves, actualRequest.getShelvesList());
+    Assert.assertEquals(formattedNames, actualRequest.getNamesList());
+    Assert.assertEquals(formattedShelves, actualRequest.getShelvesList());
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -11699,9 +11701,9 @@ public class LibraryClientTest {
     try {
       String namesElement = "namesElement-249113339";
       List<String> names = Arrays.asList(namesElement);
-      List<String> shelves = new ArrayList<>();
+      List<String> formattedShelves = new ArrayList<>();
 
-      client.findRelatedBooks(names, shelves);
+      client.findRelatedBooks(formattedNames, formattedShelves);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception
@@ -11753,7 +11755,7 @@ public class LibraryClientTest {
   @Test
   @SuppressWarnings("all")
   public void getBigBookTest() throws Exception {
-    ShelfBookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName name2 = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     String author = "author-1406328437";
     String title = "title110371416";
     boolean read = true;
@@ -11909,7 +11911,7 @@ public class LibraryClientTest {
     ByteString requiredSingularBytes = ByteString.copyFromUtf8("-29");
     TestOptionalRequiredFlatteningParamsRequest.InnerMessage requiredSingularMessage = TestOptionalRequiredFlatteningParamsRequest.InnerMessage.newBuilder().build();
     ShelfBookName requiredSingularResourceName = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
-    ShelfBookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+    BookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
     ProjectName requiredSingularResourceNameCommon = ProjectName.of("[PROJECT]");
     int requiredSingularFixed32 = 720656715;
     long requiredSingularFixed64 = 720656810;
@@ -11924,7 +11926,7 @@ public class LibraryClientTest {
     List<TestOptionalRequiredFlatteningParamsRequest.InnerMessage> requiredRepeatedMessage = new ArrayList<>();
     List<String> formattedRequiredRepeatedResourceName = new ArrayList<>();
     List<String> formattedRequiredRepeatedResourceNameOneof = new ArrayList<>();
-    List<String> requiredRepeatedResourceNameCommon = new ArrayList<>();
+    List<String> formattedRequiredRepeatedResourceNameCommon = new ArrayList<>();
     List<Integer> requiredRepeatedFixed32 = new ArrayList<>();
     List<Long> requiredRepeatedFixed64 = new ArrayList<>();
     Map<Integer, String> requiredMap = new HashMap<>();
@@ -11953,7 +11955,7 @@ public class LibraryClientTest {
     List<TestOptionalRequiredFlatteningParamsRequest.InnerMessage> optionalRepeatedMessage = new ArrayList<>();
     List<String> formattedOptionalRepeatedResourceName = new ArrayList<>();
     List<String> formattedOptionalRepeatedResourceNameOneof = new ArrayList<>();
-    List<String> optionalRepeatedResourceNameCommon = new ArrayList<>();
+    List<String> formattedOptionalRepeatedResourceNameCommon = new ArrayList<>();
     List<Integer> optionalRepeatedFixed32 = new ArrayList<>();
     List<Long> optionalRepeatedFixed64 = new ArrayList<>();
     Map<Integer, String> optionalMap = new HashMap<>();
@@ -11991,7 +11993,7 @@ public class LibraryClientTest {
     List<BytesValue> repeatedBytesValue = new ArrayList<>();
 
     TestOptionalRequiredFlatteningParamsResponse actualResponse =
-        client.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName, requiredSingularResourceNameOneof, requiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, requiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName, optionalSingularResourceNameOneof, optionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, optionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
+        client.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName, requiredSingularResourceNameOneof, requiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, formattedRequiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName, optionalSingularResourceNameOneof, optionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, formattedOptionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
     Assert.assertEquals(expectedResponse, actualResponse);
 
     List<AbstractMessage> actualRequests = mockLibraryService.getRequests();
@@ -12023,7 +12025,7 @@ public class LibraryClientTest {
     Assert.assertEquals(requiredRepeatedMessage, actualRequest.getRequiredRepeatedMessageList());
     Assert.assertEquals(formattedRequiredRepeatedResourceName, actualRequest.getRequiredRepeatedResourceNameList());
     Assert.assertEquals(formattedRequiredRepeatedResourceNameOneof, actualRequest.getRequiredRepeatedResourceNameOneofList());
-    Assert.assertEquals(requiredRepeatedResourceNameCommon, actualRequest.getRequiredRepeatedResourceNameCommonList());
+    Assert.assertEquals(formattedRequiredRepeatedResourceNameCommon, actualRequest.getRequiredRepeatedResourceNameCommonList());
     Assert.assertEquals(requiredRepeatedFixed32, actualRequest.getRequiredRepeatedFixed32List());
     Assert.assertEquals(requiredRepeatedFixed64, actualRequest.getRequiredRepeatedFixed64List());
     Assert.assertEquals(requiredMap, actualRequest.getRequiredMapMap());
@@ -12052,7 +12054,7 @@ public class LibraryClientTest {
     Assert.assertEquals(optionalRepeatedMessage, actualRequest.getOptionalRepeatedMessageList());
     Assert.assertEquals(formattedOptionalRepeatedResourceName, actualRequest.getOptionalRepeatedResourceNameList());
     Assert.assertEquals(formattedOptionalRepeatedResourceNameOneof, actualRequest.getOptionalRepeatedResourceNameOneofList());
-    Assert.assertEquals(optionalRepeatedResourceNameCommon, actualRequest.getOptionalRepeatedResourceNameCommonList());
+    Assert.assertEquals(formattedOptionalRepeatedResourceNameCommon, actualRequest.getOptionalRepeatedResourceNameCommonList());
     Assert.assertEquals(optionalRepeatedFixed32, actualRequest.getOptionalRepeatedFixed32List());
     Assert.assertEquals(optionalRepeatedFixed64, actualRequest.getOptionalRepeatedFixed64List());
     Assert.assertEquals(optionalMap, actualRequest.getOptionalMapMap());
@@ -12111,7 +12113,7 @@ public class LibraryClientTest {
       ByteString requiredSingularBytes = ByteString.copyFromUtf8("-29");
       TestOptionalRequiredFlatteningParamsRequest.InnerMessage requiredSingularMessage = TestOptionalRequiredFlatteningParamsRequest.InnerMessage.newBuilder().build();
       ShelfBookName requiredSingularResourceName = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
-      ShelfBookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
+      BookName requiredSingularResourceNameOneof = ShelfBookName.of("[SHELF_ID]", "[BOOK_ID]");
       ProjectName requiredSingularResourceNameCommon = ProjectName.of("[PROJECT]");
       int requiredSingularFixed32 = 720656715;
       long requiredSingularFixed64 = 720656810;
@@ -12126,7 +12128,7 @@ public class LibraryClientTest {
       List<TestOptionalRequiredFlatteningParamsRequest.InnerMessage> requiredRepeatedMessage = new ArrayList<>();
       List<String> formattedRequiredRepeatedResourceName = new ArrayList<>();
       List<String> formattedRequiredRepeatedResourceNameOneof = new ArrayList<>();
-      List<String> requiredRepeatedResourceNameCommon = new ArrayList<>();
+      List<String> formattedRequiredRepeatedResourceNameCommon = new ArrayList<>();
       List<Integer> requiredRepeatedFixed32 = new ArrayList<>();
       List<Long> requiredRepeatedFixed64 = new ArrayList<>();
       Map<Integer, String> requiredMap = new HashMap<>();
@@ -12155,7 +12157,7 @@ public class LibraryClientTest {
       List<TestOptionalRequiredFlatteningParamsRequest.InnerMessage> optionalRepeatedMessage = new ArrayList<>();
       List<String> formattedOptionalRepeatedResourceName = new ArrayList<>();
       List<String> formattedOptionalRepeatedResourceNameOneof = new ArrayList<>();
-      List<String> optionalRepeatedResourceNameCommon = new ArrayList<>();
+      List<String> formattedOptionalRepeatedResourceNameCommon = new ArrayList<>();
       List<Integer> optionalRepeatedFixed32 = new ArrayList<>();
       List<Long> optionalRepeatedFixed64 = new ArrayList<>();
       Map<Integer, String> optionalMap = new HashMap<>();
@@ -12192,7 +12194,7 @@ public class LibraryClientTest {
       List<BoolValue> repeatedBoolValue = new ArrayList<>();
       List<BytesValue> repeatedBytesValue = new ArrayList<>();
 
-      client.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName, requiredSingularResourceNameOneof, requiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, requiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName, optionalSingularResourceNameOneof, optionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, optionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
+      client.testOptionalRequiredFlatteningParams(requiredSingularInt32, requiredSingularInt64, requiredSingularFloat, requiredSingularDouble, requiredSingularBool, requiredSingularEnum, requiredSingularString, requiredSingularBytes, requiredSingularMessage, requiredSingularResourceName, requiredSingularResourceNameOneof, requiredSingularResourceNameCommon, requiredSingularFixed32, requiredSingularFixed64, requiredRepeatedInt32, requiredRepeatedInt64, requiredRepeatedFloat, requiredRepeatedDouble, requiredRepeatedBool, requiredRepeatedEnum, requiredRepeatedString, requiredRepeatedBytes, requiredRepeatedMessage, formattedRequiredRepeatedResourceName, formattedRequiredRepeatedResourceNameOneof, formattedRequiredRepeatedResourceNameCommon, requiredRepeatedFixed32, requiredRepeatedFixed64, requiredMap, optionalSingularInt32, optionalSingularInt64, optionalSingularFloat, optionalSingularDouble, optionalSingularBool, optionalSingularEnum, optionalSingularString, optionalSingularBytes, optionalSingularMessage, optionalSingularResourceName, optionalSingularResourceNameOneof, optionalSingularResourceNameCommon, optionalSingularFixed32, optionalSingularFixed64, optionalRepeatedInt32, optionalRepeatedInt64, optionalRepeatedFloat, optionalRepeatedDouble, optionalRepeatedBool, optionalRepeatedEnum, optionalRepeatedString, optionalRepeatedBytes, optionalRepeatedMessage, formattedOptionalRepeatedResourceName, formattedOptionalRepeatedResourceNameOneof, formattedOptionalRepeatedResourceNameCommon, optionalRepeatedFixed32, optionalRepeatedFixed64, optionalMap, anyValue, structValue, valueValue, listValueValue, timeValue, durationValue, fieldMaskValue, int32Value, uint32Value, int64Value, uint64Value, floatValue, doubleValue, stringValue, boolValue, bytesValue, repeatedAnyValue, repeatedStructValue, repeatedValueValue, repeatedListValueValue, repeatedTimeValue, repeatedDurationValue, repeatedFieldMaskValue, repeatedInt32Value, repeatedUint32Value, repeatedInt64Value, repeatedUint64Value, repeatedFloatValue, repeatedDoubleValue, repeatedStringValue, repeatedBoolValue, repeatedBytesValue);
       Assert.fail("No exception raised");
     } catch (InvalidArgumentException e) {
       // Expected exception
