@@ -370,6 +370,7 @@ sampleDeleteShelf();
 
 const library = require('@google-cloud/library').v1;
 
+const fs = require('fs');
 /** Testing calling forms */
 function sampleDiscussBook(imageFileName) {
   const client = new library.LibraryServiceClient();
@@ -1283,6 +1284,7 @@ samplePublishSeries();
 
 const library = require('@google-cloud/library').v1;
 
+const fs = require('fs');
 /** Test request object field comments */
 function samplePublishSeries() {
   const client = new library.LibraryServiceClient();
