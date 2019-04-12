@@ -765,13 +765,17 @@ message MoveBookRequest {
 
 message ListStringsRequest {
   string name = 1 [
-    (google.api.resource_reference) = "Project"];
+    // Test setting the "*" pattern on a field-level resource
+    (google.api.resource_reference) = "*"];
   int32 page_size = 2;
   string page_token = 3;
 }
 
 message ListStringsResponse {
-  repeated string strings = 1;
+  repeated string strings = 1 [
+    // Test referencing the "*" wildcard top-level Resource
+    (google.api.resource_reference) = "*"
+  ];
   string next_page_token = 2;
 }
 
@@ -824,7 +828,7 @@ message GetBookFromAnywhereRequest {
   // single resource name type in a oneof.
   string alt_book_name = 2 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = "BookOneof"];
+    (google.api.resource_reference) = "Book"];
 }
 
 // Request message for LibraryService.GetBookFromAbsolutelyAnywhere.

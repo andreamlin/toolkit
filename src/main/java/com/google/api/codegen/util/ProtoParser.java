@@ -23,6 +23,7 @@ import com.google.api.HttpRule;
 import com.google.api.Resource;
 import com.google.api.ResourceProto;
 import com.google.api.ResourceSet;
+import com.google.api.codegen.config.AnyResourceNameConfig;
 import com.google.api.pathtemplate.PathTemplate;
 import com.google.api.tools.framework.model.Diag;
 import com.google.api.tools.framework.model.DiagCollector;
@@ -263,6 +264,9 @@ public class ProtoParser {
       Function<T, String> getNameFunc,
       BiFunction<T, String, T> setNameFunc) {
     ImmutableMap.Builder<T, ProtoFile> definitions = ImmutableMap.builder();
+
+    // Skip unnecessary file parsing.
+    if (!enableProtoAnnotations) return definitions.build();
 
     for (ProtoFile protoFile : protoFiles) {
 

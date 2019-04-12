@@ -494,7 +494,7 @@ interfaces:
     retry_params_name: default
     timeout_millis: 10000
     field_name_patterns:
-      name: project
+      name: "*"
   - name: AddComments
     flattening:
       groups:
@@ -1152,6 +1152,9 @@ resource_name_generation:
 - message_name: ListStringsRequest
   field_entity_map:
     name: "*"
+- message_name: ListStringsResponse
+  field_entity_map:
+    strings: "*"
 - message_name: GetBookFromArchiveRequest
   field_entity_map:
     name: archived_book

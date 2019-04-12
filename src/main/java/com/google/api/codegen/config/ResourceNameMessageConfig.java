@@ -66,6 +66,11 @@ public abstract class ResourceNameMessageConfig {
       if (!Strings.isNullOrEmpty(resourceType)) {
         builder.put(field.getSimpleName(), resourceType);
       }
+
+      String resourceReference = protoParser.getResourceReference(field);
+      if (AnyResourceNameConfig.GAPIC_CONFIG_ANY_VALUE.equals(resourceReference)) {
+        builder.put(field.getSimpleName(), resourceReference);
+      }
     }
 
     ImmutableMap<String, String> fieldEntityMap = builder.build();

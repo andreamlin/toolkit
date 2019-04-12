@@ -48,6 +48,7 @@ public class ProtoParserTest {
   private static TestDataLocator testDataLocator;
   private static ProtoFile libraryProtoFile;
   private static ProtoFile bookFromAnywhereProtoFile;
+  private static List<ProtoFile> sourceProtoFiles;
   private static Field shelfNameField;
   private static Interface libraryService;
   private static Method deleteShelfMethod;
@@ -87,6 +88,8 @@ public class ProtoParserTest {
             .filter(f -> f.getSimpleName().equals("book_from_anywhere.proto"))
             .findFirst()
             .get();
+
+    sourceProtoFiles = Arrays.asList(libraryProtoFile, bookFromAnywhereProtoFile);
 
     model.addRoot(libraryProtoFile);
 
@@ -385,5 +388,11 @@ public class ProtoParserTest {
     assertThat(fieldNamePatterns.size()).isEqualTo(2);
     assertThat(fieldNamePatterns.get("shelf.name")).isEqualTo("Shelf");
     assertThat(fieldNamePatterns.get("books.name")).isEqualTo("BookOneof");
+
+    Method listStrings = libraryService.lookupMethod("ListStrings");
+    Map<String, String> fieldNamePatternsForListStrings =
+        protoParser.getFieldNamePatterns(listStrings);
+    assertThat(fieldNamePatternsForListStrings.size()).isEqualTo(1);
+    assertThat(fieldNamePatternsForListStrings.get("name")).isEqualTo("*");
   }
 }
