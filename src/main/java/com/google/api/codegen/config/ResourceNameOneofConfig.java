@@ -46,10 +46,6 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
 
   @Override
   @Nullable
-  public abstract String getInterfaceFullName();
-
-  @Override
-  @Nullable
   public String getCommonResourceName() {
     return null;
   }
@@ -64,8 +60,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
       CollectionOneofProto collectionOneofProto,
       ImmutableMap<String, SingleResourceNameConfig> singleResourceNameConfigs,
       ImmutableMap<String, FixedResourceNameConfig> fixedResourceNameConfigs,
-      ProtoFile file,
-      String fullInterfaceName) {
+      ProtoFile file) {
     String oneofName = collectionOneofProto.getOneofName();
     if (singleResourceNameConfigs.containsKey(oneofName)) {
       diagCollector.addDiag(
@@ -106,11 +101,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
     }
 
     return new AutoValue_ResourceNameOneofConfig(
-        oneofName,
-        ResourceNameMessageConfig.entityNameToName(oneofName),
-        configList,
-        file,
-        fullInterfaceName);
+        oneofName, ResourceNameMessageConfig.entityNameToName(oneofName), configList, file);
   }
 
   @Nullable
@@ -121,8 +112,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
       ImmutableMap<String, SingleResourceNameConfig> singleResourceNameConfigs,
       ImmutableMap<String, FixedResourceNameConfig> fixedResourceNameConfigs,
       ProtoParser protoParser,
-      ProtoFile file,
-      String fullInterfaceName) {
+      ProtoFile file) {
 
     if (singleResourceNameConfigs.containsKey(oneOfName)
         || fixedResourceNameConfigs.containsKey(oneOfName)) {
@@ -195,11 +185,7 @@ public abstract class ResourceNameOneofConfig implements ResourceNameConfig {
     }
 
     return new AutoValue_ResourceNameOneofConfig(
-        oneOfName,
-        ResourceNameMessageConfig.entityNameToName(oneOfName),
-        configList,
-        file,
-        fullInterfaceName);
+        oneOfName, ResourceNameMessageConfig.entityNameToName(oneOfName), configList, file);
   }
 
   @Override

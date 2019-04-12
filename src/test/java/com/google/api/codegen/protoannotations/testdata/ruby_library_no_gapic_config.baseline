@@ -2777,6 +2777,7 @@ module Library
       end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
       ARCHIVED_BOOK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
         "archives/{archive_path}/books/{book_id=**}"
       )
@@ -2795,6 +2796,13 @@ module Library
 
       private_constant :DELETED_BOOK_PATH_TEMPLATE
 >>>>>>> gapic_config_v2
+=======
+      ARCHIVED_BOOK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+        "archives/{archive_path}/books/{book_id=**}"
+      )
+
+      private_constant :ARCHIVED_BOOK_PATH_TEMPLATE
+>>>>>>> gapic_config_v2
 
       BOOK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
         "shelves/{shelf_id}/books/{book_id}"
@@ -2802,6 +2810,7 @@ module Library
 
       private_constant :BOOK_PATH_TEMPLATE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       ARCHIVED_BOOK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -2811,12 +2820,15 @@ module Library
       private_constant :ARCHIVED_BOOK_PATH_TEMPLATE
 
 >>>>>>> gapic_config_v2
+=======
+>>>>>>> gapic_config_v2
       PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
         "projects/{project}"
       )
 
       private_constant :PROJECT_PATH_TEMPLATE
 
+<<<<<<< HEAD
 <<<<<<< HEAD
       SHELF_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
         "shelves/{shelf_id}"
@@ -2841,12 +2853,25 @@ module Library
           :"shelf_id" => shelf_id
         )
       end
+=======
+      SHELF_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+        "shelves/{shelf_id}"
+      )
+>>>>>>> gapic_config_v2
 
-      # Returns a fully-qualified deleted_book resource name string.
+      private_constant :SHELF_PATH_TEMPLATE
+
+<<<<<<< HEAD
+>>>>>>> gapic_config_v2
+=======
+      # Returns a fully-qualified archived_book resource name string.
+      # @param archive_path [String]
+      # @param book_id [String]
       # @return [String]
-      def self.deleted_book_path
-        DELETED_BOOK_PATH_TEMPLATE.render(
-
+      def self.archived_book_path archive_path, book_id
+        ARCHIVED_BOOK_PATH_TEMPLATE.render(
+          :"archive_path" => archive_path,
+          :"book_id" => book_id
 >>>>>>> gapic_config_v2
         )
       end
@@ -2863,6 +2888,7 @@ module Library
       end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       # Returns a fully-qualified archived_book resource name string.
       # @param archive_path [String]
@@ -2876,6 +2902,8 @@ module Library
       end
 
 >>>>>>> gapic_config_v2
+=======
+>>>>>>> gapic_config_v2
       # Returns a fully-qualified project resource name string.
       # @param project [String]
       # @return [String]
@@ -2886,6 +2914,9 @@ module Library
       end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> gapic_config_v2
       # Returns a fully-qualified shelf resource name string.
       # @param shelf_id [String]
       # @return [String]
@@ -2895,6 +2926,9 @@ module Library
         )
       end
 
+<<<<<<< HEAD
+=======
+>>>>>>> gapic_config_v2
 =======
 >>>>>>> gapic_config_v2
       # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -3850,9 +3884,13 @@ module Library
       #
       #   library_client = Library::Library.new(version: :v1)
 <<<<<<< HEAD
+<<<<<<< HEAD
       #   formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       #   formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      #   formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
       #   formatted_alt_book_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
       #   response = library_client.get_book_from_anywhere(formatted_name, formatted_alt_book_name)
@@ -3890,9 +3928,13 @@ module Library
       #
       #   library_client = Library::Library.new(version: :v1)
 <<<<<<< HEAD
+<<<<<<< HEAD
       #   formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       #   formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      #   formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
       #   response = library_client.get_book_from_absolutely_anywhere(formatted_name)
 
@@ -5074,6 +5116,9 @@ module Library
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> gapic_config_v2
       RETURN_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
         "shelves/{shelf}/books/{book}/returns/{return}"
       )
@@ -5093,6 +5138,9 @@ module Library
         )
       end
 
+<<<<<<< HEAD
+=======
+>>>>>>> gapic_config_v2
 =======
 >>>>>>> gapic_config_v2
       # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -6570,9 +6618,13 @@ describe Library::V1::LibraryServiceClient do
     it 'invokes get_book_from_anywhere without error' do
       # Create request parameters
 <<<<<<< HEAD
+<<<<<<< HEAD
       formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
       formatted_alt_book_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 
@@ -6624,9 +6676,13 @@ describe Library::V1::LibraryServiceClient do
     it 'invokes get_book_from_anywhere with error' do
       # Create request parameters
 <<<<<<< HEAD
+<<<<<<< HEAD
       formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
       formatted_alt_book_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 
@@ -6664,9 +6720,13 @@ describe Library::V1::LibraryServiceClient do
     it 'invokes get_book_from_absolutely_anywhere without error' do
       # Create request parameters
 <<<<<<< HEAD
+<<<<<<< HEAD
       formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
 
       # Create expected grpc response
@@ -6716,9 +6776,13 @@ describe Library::V1::LibraryServiceClient do
     it 'invokes get_book_from_absolutely_anywhere with error' do
       # Create request parameters
 <<<<<<< HEAD
+<<<<<<< HEAD
       formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 =======
       formatted_name = Library::V1::LibraryServiceClient.deleted_book_path()
+>>>>>>> gapic_config_v2
+=======
+      formatted_name = Library::V1::LibraryServiceClient.book_path("[SHELF_ID]", "[BOOK_ID]")
 >>>>>>> gapic_config_v2
 
       # Mock Grpc layer
