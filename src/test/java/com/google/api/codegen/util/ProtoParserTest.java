@@ -264,7 +264,7 @@ public class ProtoParserTest {
             .get();
     assertThat(
             protoParser.getResourceReferenceName(altBookNameField, resourceDefs, resourceSetDefs))
-        .isEqualTo("BookOneof");
+        .isEqualTo("Book");
   }
 
   @Test

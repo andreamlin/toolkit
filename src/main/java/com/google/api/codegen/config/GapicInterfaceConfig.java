@@ -32,6 +32,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,7 +120,6 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
 
     RetryCodesConfig retryCodesConfig =
         RetryCodesConfig.create(
-            diagCollector,
             interfaceConfigProto,
             new ArrayList<>(interfaceInput.getMethodsToGenerate().keySet()),
             protoParser);
@@ -164,7 +164,7 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
       }
     }
 
-    ImmutableList.Builder<SingleResourceNameConfig> resourcesBuilder = ImmutableList.builder();
+    List<SingleResourceNameConfig> resourcesBuilder = new ArrayList<>();
     if (protoParser.isProtoAnnotationsEnabled()) {
       resourceNameConfigs
           .values()
@@ -192,7 +192,9 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
         resourcesBuilder.add((SingleResourceNameConfig) resourceName);
       }
     }
-    ImmutableList<SingleResourceNameConfig> singleResourceNames = resourcesBuilder.build();
+    ImmutableList<SingleResourceNameConfig> singleResourceNames =
+        ImmutableList.sortedCopyOf(
+            Comparator.comparing(ResourceNameConfig::getEntityId), resourcesBuilder);
 
     String manualDoc =
         Strings.nullToEmpty(
@@ -245,18 +247,33 @@ public abstract class GapicInterfaceConfig implements InterfaceConfig {
     for (Entry<Method, MethodConfigProto> methodEntry : methodsToGenerate.entrySet()) {
       MethodConfigProto methodConfigProto = methodEntry.getValue();
       Method method = methodEntry.getKey();
-      GapicMethodConfig methodConfig =
-          GapicMethodConfig.createMethodConfig(
-              diagCollector,
-              language,
-              defaultPackageName,
-              methodConfigProto,
-              method,
-              messageConfigs,
-              resourceNameConfigs,
-              retryCodesConfig,
-              retryParamsConfigNames,
-              protoParser);
+      GapicMethodConfig methodConfig;
+      if (protoParser.isProtoAnnotationsEnabled()) {
+        methodConfig =
+            GapicMethodConfig.createGapicMethodConfigFromProto(
+                diagCollector,
+                language,
+                defaultPackageName,
+                methodConfigProto,
+                method,
+                messageConfigs,
+                resourceNameConfigs,
+                retryCodesConfig,
+                retryParamsConfigNames,
+                protoParser);
+      } else {
+        methodConfig =
+            GapicMethodConfig.createGapicMethodConfigFromGapicYaml(
+                diagCollector,
+                language,
+                defaultPackageName,
+                methodConfigProto,
+                method,
+                messageConfigs,
+                resourceNameConfigs,
+                retryCodesConfig,
+                retryParamsConfigNames);
+      }
       if (methodConfig == null) {
         continue;
       }

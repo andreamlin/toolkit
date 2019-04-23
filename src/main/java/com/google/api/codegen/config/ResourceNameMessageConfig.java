@@ -66,14 +66,15 @@ public abstract class ResourceNameMessageConfig {
       if (!Strings.isNullOrEmpty(resourceType)) {
         builder.put(field.getSimpleName(), resourceType);
       }
-
-      String resourceReference = protoParser.getResourceReference(field);
-      if (AnyResourceNameConfig.GAPIC_CONFIG_ANY_VALUE.equals(resourceReference)) {
-        builder.put(field.getSimpleName(), resourceReference);
-      }
     }
 
-    ImmutableMap<String, String> fieldEntityMap = builder.build();
+    ImmutableMap<String, String> fieldEntityMap;
+    try {
+
+      fieldEntityMap = builder.build();
+    } catch (Exception e) {
+      throw e;
+    }
     if (fieldEntityMap.isEmpty()) {
       // Return a null config when no fields were resource types; this is so empty proto annotations
       // don't override the GAPIC config resource name configs.

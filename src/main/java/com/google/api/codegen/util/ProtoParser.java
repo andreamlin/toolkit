@@ -165,6 +165,9 @@ public class ProtoParser {
       Map<ResourceSet, ProtoFile> allResourceSets) {
     String resourceName = getResourceReference(field);
     if (!Strings.isNullOrEmpty(resourceName)) {
+      if (AnyResourceNameConfig.GAPIC_CONFIG_ANY_VALUE.equals(resourceName)) {
+        return AnyResourceNameConfig.GAPIC_CONFIG_ANY_VALUE;
+      }
       String fullyQualifiedResourceName = resourceName;
       if (!resourceName.contains(".")) {
         fullyQualifiedResourceName =

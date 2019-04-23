@@ -90,10 +90,37 @@ interfaces:
         retry_codes_name: idempotent
         retry_params_name: default
         timeout_millis: 2000
+        sample_value_sets:
+        - id: test_default_calling_form_unary
+          title: test_default_calling_form_unary
+          description: "Test default calling forms for unary methods."
+          parameters:
+            defaults:
+            - name%shelf_id="my-shelf"
+          on_success:
+          - print:
+              - "The theme of the shelf is: %s"
+              - $resp.theme
+        samples:
+          standalone:
+          - region_tag: sample_get_shelf
+            value_sets: test_default_calling_form_unary
       - name: ListShelves
         retry_codes_name: idempotent
         retry_params_name: default
         timeout_millis: 3000
+        sample_value_sets:
+        - id: "test_default_calling_form_paging"
+          title: "test default calling form for paging"
+          description: "Test default calling form for paging methods."
+          on_success:
+            - print:
+              - "shelf name: %s"
+              - $resp
+        samples:
+          standalone:
+          - value_sets: [test_default_calling_form_paging]
+            region_tag: "test_default_calling_form_for_paging"
       - name: DeleteShelf
         retry_codes_name: idempotent
         retry_params_name: default
@@ -234,6 +261,21 @@ interfaces:
                   description: "A super long long long long long long long long long long long long long long comment that tests word wrapping"
                 - parameter: shelf.theme
                   description: "A super long comment\nwraps words at newline characters\nas well"
+          - id: test_write_to_file
+            title: "test writing fields to files"
+            description: "Testing write fields to files."
+            on_success:
+              - comment: "testing writing bytes field."
+              - write_file:
+                  file_name:
+                  - "uuid_of_series_with_book_%s.raw"
+                  - $resp.book_names[0]
+                  contents: $resp.series_uuid.series_bytes
+              - comment: "testing writing string field."
+              - write_file:
+                  file_name:
+                  - "series_uuid_in_plain_text.txt"
+                  contents: $resp.series_uuid.series_string
         samples:
           in_code:
             - calling_forms: [callable]
@@ -251,6 +293,8 @@ interfaces:
               value_sets: ["sample_code_init_fields"]       # implicit, from deprecated field
             - calling_forms: request
               value_sets: ["test_request_object_field_comments"]
+            - calling_forms: request
+              value_sets: ["test_write_to_file"]
       - name: GetBook
         retry_codes_name: idempotent
         retry_params_name: default
@@ -585,7 +629,6 @@ interfaces:
               - comment:
                   - "Testing iterating over map fields when only value is specified."
               - loop:
-
                   map: $resp.map_list_value_value
                   value: another_value
                   body:
@@ -617,6 +660,8 @@ interfaces:
             - calling_forms: ".*"
               value_sets: ".*"
               region_tag: hopper
+            - value_sets: wap
+              region_tag: "this_tag_should_be_the_name_of_the_file"
       - name: GetBigNothing
         retry_codes_name: non_idempotent
         retry_params_name: default
