@@ -1644,10 +1644,6 @@ public class LibraryServiceClient implements BackgroundResource {
    * Sample code:
    * <pre><code>
    * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
-<<<<<<< HEAD
-   *   ProjectName name = ProjectName.of("[PROJECT]");
-   *   for (String element : libraryServiceClient.listStrings(name).iterateAll()) {
-=======
    *   ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
    *   for (ResourceName element : libraryServiceClient.listStrings(name).iterateAllAsResourceName()) {
    *     // doThingsWith(element);
@@ -1675,32 +1671,6 @@ public class LibraryServiceClient implements BackgroundResource {
    * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
    *   ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
    *   for (ResourceName element : libraryServiceClient.listStrings(name.toString()).iterateAllAsResourceName()) {
->>>>>>> master
-   *     // doThingsWith(element);
-   *   }
-   * }
-   * </code></pre>
-   *
-   * @param name
-   * @throws com.google.api.gax.rpc.ApiException if the remote call fails
-   */
-  public final ListStringsPagedResponse listStrings(ProjectName name) {
-    ListStringsRequest request =
-        ListStringsRequest.newBuilder()
-        .setName(name == null ? null : name.toString())
-        .build();
-    return listStrings(request);
-  }
-
-  // AUTO-GENERATED DOCUMENTATION AND METHOD
-  /**
-   * Lists a primitive resource. To test go page streaming.
-   *
-   * Sample code:
-   * <pre><code>
-   * try (LibraryServiceClient libraryServiceClient = LibraryServiceClient.create()) {
-   *   ProjectName name = ProjectName.of("[PROJECT]");
-   *   for (String element : libraryServiceClient.listStrings(name.toString()).iterateAll()) {
    *     // doThingsWith(element);
    *   }
    * }
@@ -5241,7 +5211,6 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -5420,7 +5389,6 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -6559,7 +6527,6 @@ import com.google.example.library.v1.ListStringsRequest;
 import com.google.example.library.v1.ListStringsResponse;
 import com.google.example.library.v1.MergeShelvesRequest;
 import com.google.example.library.v1.MoveBookRequest;
-import com.google.example.library.v1.ProjectName;
 import com.google.example.library.v1.PublishSeriesRequest;
 import com.google.example.library.v1.PublishSeriesResponse;
 import com.google.example.library.v1.SeriesUuid;
@@ -9285,11 +9252,7 @@ public class LibraryServiceClientTest {
       .build();
     mockLibraryService.addResponse(expectedResponse);
 
-<<<<<<< HEAD
-    ProjectName name = ProjectName.of("[PROJECT]");
-=======
     ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
->>>>>>> master
 
     ListStringsPagedResponse pagedListResponse = client.listStrings(name);
 
@@ -9305,11 +9268,7 @@ public class LibraryServiceClientTest {
     Assert.assertEquals(1, actualRequests.size());
     ListStringsRequest actualRequest = (ListStringsRequest)actualRequests.get(0);
 
-<<<<<<< HEAD
-    Assert.assertEquals(name, ProjectName.parse(actualRequest.getName()));
-=======
     Assert.assertEquals(Objects.toString(name), Objects.toString(actualRequest.getName()));
->>>>>>> master
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),
@@ -9323,11 +9282,7 @@ public class LibraryServiceClientTest {
     mockLibraryService.addException(exception);
 
     try {
-<<<<<<< HEAD
-      ProjectName name = ProjectName.of("[PROJECT]");
-=======
       ResourceName name = ArchivedBookName.of("[ARCHIVE_PATH]", "[BOOK_ID]");
->>>>>>> master
 
       client.listStrings(name);
       Assert.fail("No exception raised");
@@ -9451,7 +9406,7 @@ public class LibraryServiceClientTest {
     GetBookFromAnywhereRequest actualRequest = (GetBookFromAnywhereRequest)actualRequests.get(0);
 
     Assert.assertEquals(name, BookNames.parse(actualRequest.getName()));
-    Assert.assertEquals(altBookName, BookNames.parse(actualRequest.getAltBookName()));
+    Assert.assertEquals(altBookName, BookName.parse(actualRequest.getAltBookName()));
     Assert.assertTrue(
         channelProvider.isHeaderSent(
             ApiClientHeaderProvider.getDefaultApiClientHeaderKey(),

@@ -1112,11 +1112,11 @@ namespace Google.Example.Library.V1.Snippets
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, string> response =
+            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStringsAsync();
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((string item) =>
+            await response.ForEachAsync((IResourceName item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1127,7 +1127,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1135,10 +1135,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = await response.ReadPageAsync(pageSize);
+            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1154,11 +1154,11 @@ namespace Google.Example.Library.V1.Snippets
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Make the request
-            PagedEnumerable<ListStringsResponse, string> response =
+            PagedEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStrings();
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (string item in response)
+            foreach (IResourceName item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1169,7 +1169,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1177,10 +1177,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = response.ReadPage(pageSize);
+            Page<IResourceName> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1192,17 +1192,17 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStringsAsync</summary>
         public async Task ListStringsAsync2()
         {
-            // Snippet: ListStringsAsync(ProjectName,string,int?,CallSettings)
+            // Snippet: ListStringsAsync(IResourceName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
-            ProjectName name = new ProjectName("[PROJECT]");
+            IResourceName name = new ArchivedBookName("[ARCHIVE_PATH]", "[BOOK_ID]");
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, string> response =
+            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStringsAsync(name);
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((string item) =>
+            await response.ForEachAsync((IResourceName item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1213,7 +1213,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1221,10 +1221,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = await response.ReadPageAsync(pageSize);
+            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1236,17 +1236,17 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for ListStrings</summary>
         public void ListStrings2()
         {
-            // Snippet: ListStrings(ProjectName,string,int?,CallSettings)
+            // Snippet: ListStrings(IResourceName,string,int?,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
-            ProjectName name = new ProjectName("[PROJECT]");
+            IResourceName name = new ArchivedBookName("[ARCHIVE_PATH]", "[BOOK_ID]");
             // Make the request
-            PagedEnumerable<ListStringsResponse, string> response =
+            PagedEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStrings(name);
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (string item in response)
+            foreach (IResourceName item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1257,7 +1257,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1265,10 +1265,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = response.ReadPage(pageSize);
+            Page<IResourceName> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1286,11 +1286,11 @@ namespace Google.Example.Library.V1.Snippets
             // Initialize request argument(s)
             ListStringsRequest request = new ListStringsRequest();
             // Make the request
-            PagedAsyncEnumerable<ListStringsResponse, string> response =
+            PagedAsyncEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStringsAsync(request);
 
             // Iterate over all response items, lazily performing RPCs as required
-            await response.ForEachAsync((string item) =>
+            await response.ForEachAsync((IResourceName item) =>
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1301,7 +1301,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1309,10 +1309,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = await response.ReadPageAsync(pageSize);
+            Page<IResourceName> singlePage = await response.ReadPageAsync(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1330,11 +1330,11 @@ namespace Google.Example.Library.V1.Snippets
             // Initialize request argument(s)
             ListStringsRequest request = new ListStringsRequest();
             // Make the request
-            PagedEnumerable<ListStringsResponse, string> response =
+            PagedEnumerable<ListStringsResponse, IResourceName> response =
                 libraryServiceClient.ListStrings(request);
 
             // Iterate over all response items, lazily performing RPCs as required
-            foreach (string item in response)
+            foreach (IResourceName item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
@@ -1345,7 +1345,7 @@ namespace Google.Example.Library.V1.Snippets
             {
                 // Do something with each page of items
                 Console.WriteLine("A page of results:");
-                foreach (string item in page)
+                foreach (IResourceName item in page)
                 {
                     Console.WriteLine(item);
                 }
@@ -1353,10 +1353,10 @@ namespace Google.Example.Library.V1.Snippets
 
             // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
             int pageSize = 10;
-            Page<string> singlePage = response.ReadPage(pageSize);
+            Page<IResourceName> singlePage = response.ReadPage(pageSize);
             // Do something with the page of items
             Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-            foreach (string item in singlePage)
+            foreach (IResourceName item in singlePage)
             {
                 Console.WriteLine(item);
             }
@@ -1522,13 +1522,13 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for GetBookFromAnywhereAsync</summary>
         public async Task GetBookFromAnywhereAsync()
         {
-            // Snippet: GetBookFromAnywhereAsync(BookNameOneof,BookNameOneof,CallSettings)
-            // Additional: GetBookFromAnywhereAsync(BookNameOneof,BookNameOneof,CancellationToken)
+            // Snippet: GetBookFromAnywhereAsync(BookNameOneof,BookName,CallSettings)
+            // Additional: GetBookFromAnywhereAsync(BookNameOneof,BookName,CancellationToken)
             // Create client
             LibraryServiceClient libraryServiceClient = await LibraryServiceClient.CreateAsync();
             // Initialize request argument(s)
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
             // Make the request
             BookFromAnywhere response = await libraryServiceClient.GetBookFromAnywhereAsync(name, altBookName);
             // End snippet
@@ -1537,12 +1537,12 @@ namespace Google.Example.Library.V1.Snippets
         /// <summary>Snippet for GetBookFromAnywhere</summary>
         public void GetBookFromAnywhere()
         {
-            // Snippet: GetBookFromAnywhere(BookNameOneof,BookNameOneof,CallSettings)
+            // Snippet: GetBookFromAnywhere(BookNameOneof,BookName,CallSettings)
             // Create client
             LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
             // Initialize request argument(s)
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
             // Make the request
             BookFromAnywhere response = libraryServiceClient.GetBookFromAnywhere(name, altBookName);
             // End snippet
@@ -1559,7 +1559,7 @@ namespace Google.Example.Library.V1.Snippets
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             // Make the request
             BookFromAnywhere response = await libraryServiceClient.GetBookFromAnywhereAsync(request);
@@ -1576,7 +1576,7 @@ namespace Google.Example.Library.V1.Snippets
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             // Make the request
             BookFromAnywhere response = libraryServiceClient.GetBookFromAnywhere(request);
@@ -4403,7 +4403,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest expectedRequest = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4416,7 +4416,7 @@ namespace Google.Example.Library.V1.Tests
                 .Returns(expectedResponse);
             LibraryServiceClient client = new LibraryServiceClientImpl(mockGrpcClient.Object, null);
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
             BookFromAnywhere response = client.GetBookFromAnywhere(name, altBookName);
             Assert.Same(expectedResponse, response);
             mockGrpcClient.VerifyAll();
@@ -4433,7 +4433,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest expectedRequest = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4446,7 +4446,7 @@ namespace Google.Example.Library.V1.Tests
                 .Returns(new Grpc.Core.AsyncUnaryCall<BookFromAnywhere>(Task.FromResult(expectedResponse), null, null, null, null));
             LibraryServiceClient client = new LibraryServiceClientImpl(mockGrpcClient.Object, null);
             BookNameOneof name = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
-            BookNameOneof altBookName = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]"));
+            BookName altBookName = new BookName("[SHELF_ID]", "[BOOK_ID]");
             BookFromAnywhere response = await client.GetBookFromAnywhereAsync(name, altBookName);
             Assert.Same(expectedResponse, response);
             mockGrpcClient.VerifyAll();
@@ -4463,7 +4463,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -4491,7 +4491,7 @@ namespace Google.Example.Library.V1.Tests
             GetBookFromAnywhereRequest request = new GetBookFromAnywhereRequest
             {
                 BookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
-                AltBookNameAsBookNameOneof = BookNameOneof.From(new BookName("[SHELF_ID]", "[BOOK_ID]")),
+                AltBookNameAsBookName = new BookName("[SHELF_ID]", "[BOOK_ID]"),
             };
             BookFromAnywhere expectedResponse = new BookFromAnywhere
             {
@@ -8332,7 +8332,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStringsAsync(
@@ -8360,7 +8360,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
+        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStrings(
@@ -8391,14 +8391,14 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
-            gaxres::ProjectName name,
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
+            IResourceName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStringsAsync(
                 new ListStringsRequest
                 {
-                    ProjectName = name, // Optional
+                    AsResourceName = name, // Optional
                     PageToken = pageToken ?? "",
                     PageSize = pageSize ?? 0,
                 },
@@ -8424,14 +8424,14 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
-            gaxres::ProjectName name,
+        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
+            IResourceName name,
             string pageToken = null,
             int? pageSize = null,
             gaxgrpc::CallSettings callSettings = null) => ListStrings(
                 new ListStringsRequest
                 {
-                    ProjectName = name, // Optional
+                    AsResourceName = name, // Optional
                     PageToken = pageToken ?? "",
                     PageSize = pageSize ?? 0,
                 },
@@ -8449,7 +8449,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
+        public virtual gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
@@ -8468,7 +8468,7 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public virtual gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
+        public virtual gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
@@ -8734,12 +8734,12 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual stt::Task<BookFromAnywhere> GetBookFromAnywhereAsync(
             BookNameOneof name,
-            BookNameOneof altBookName,
+            BookName altBookName,
             gaxgrpc::CallSettings callSettings = null) => GetBookFromAnywhereAsync(
                 new GetBookFromAnywhereRequest
                 {
                     BookNameOneof = gax::GaxPreconditions.CheckNotNull(name, nameof(name)),
-                    AltBookNameAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
+                    AltBookNameAsBookName = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
                 },
                 callSettings);
 
@@ -8761,7 +8761,7 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual stt::Task<BookFromAnywhere> GetBookFromAnywhereAsync(
             BookNameOneof name,
-            BookNameOneof altBookName,
+            BookName altBookName,
             st::CancellationToken cancellationToken) => GetBookFromAnywhereAsync(
                 name,
                 altBookName,
@@ -8785,12 +8785,12 @@ namespace Google.Example.Library.V1
         /// </returns>
         public virtual BookFromAnywhere GetBookFromAnywhere(
             BookNameOneof name,
-            BookNameOneof altBookName,
+            BookName altBookName,
             gaxgrpc::CallSettings callSettings = null) => GetBookFromAnywhere(
                 new GetBookFromAnywhereRequest
                 {
                     BookNameOneof = gax::GaxPreconditions.CheckNotNull(name, nameof(name)),
-                    AltBookNameAsBookNameOneof = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
+                    AltBookNameAsBookName = gax::GaxPreconditions.CheckNotNull(altBookName, nameof(altBookName)),
                 },
                 callSettings);
 
@@ -11955,12 +11955,12 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable asynchronous sequence of <see cref="string"/> resources.
         /// </returns>
-        public override gax::PagedAsyncEnumerable<ListStringsResponse, string> ListStringsAsync(
+        public override gax::PagedAsyncEnumerable<ListStringsResponse, IResourceName> ListStringsAsync(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
             Modify_ListStringsRequest(ref request, ref callSettings);
-            return new gaxgrpc::GrpcPagedAsyncEnumerable<ListStringsRequest, ListStringsResponse, string>(_callListStrings, request, callSettings);
+            return new gaxgrpc::GrpcPagedAsyncEnumerable<ListStringsRequest, ListStringsResponse, IResourceName>(_callListStrings, request, callSettings);
         }
 
         /// <summary>
@@ -11975,12 +11975,12 @@ namespace Google.Example.Library.V1
         /// <returns>
         /// A pageable sequence of <see cref="string"/> resources.
         /// </returns>
-        public override gax::PagedEnumerable<ListStringsResponse, string> ListStrings(
+        public override gax::PagedEnumerable<ListStringsResponse, IResourceName> ListStrings(
             ListStringsRequest request,
             gaxgrpc::CallSettings callSettings = null)
         {
             Modify_ListStringsRequest(ref request, ref callSettings);
-            return new gaxgrpc::GrpcPagedEnumerable<ListStringsRequest, ListStringsResponse, string>(_callListStrings, request, callSettings);
+            return new gaxgrpc::GrpcPagedEnumerable<ListStringsRequest, ListStringsResponse, IResourceName>(_callListStrings, request, callSettings);
         }
 
         /// <summary>
@@ -12613,12 +12613,12 @@ namespace Google.Example.Library.V1
     }
 
     public partial class ListStringsRequest : gaxgrpc::IPageRequest { }
-    public partial class ListStringsResponse : gaxgrpc::IPageResponse<string>
+    public partial class ListStringsResponse : gaxgrpc::IPageResponse<IResourceName>
     {
         /// <summary>
         /// Returns an enumerator that iterates through the resources in this response.
         /// </summary>
-        public scg::IEnumerator<string> GetEnumerator() => Strings.GetEnumerator();
+        public scg::IEnumerator<IResourceName> GetEnumerator() => StringsAsResourceNames.GetEnumerator();
 
         /// <inheritdoc/>
         sc::IEnumerator sc::IEnumerable.GetEnumerator() => GetEnumerator();
@@ -13991,11 +13991,11 @@ namespace Google.Example.Library.V1
         }
 
         /// <summary>
-        /// <see cref="Google.Example.Library.V1.BookNameOneof"/>-typed view over the <see cref="AltBookName"/> resource name property.
+        /// <see cref="Google.Example.Library.V1.BookName"/>-typed view over the <see cref="AltBookName"/> resource name property.
         /// </summary>
-        public Google.Example.Library.V1.BookNameOneof AltBookNameAsBookNameOneof
+        public Google.Example.Library.V1.BookName AltBookNameAsBookName
         {
-            get { return string.IsNullOrEmpty(AltBookName) ? null : Google.Example.Library.V1.BookNameOneof.Parse(AltBookName, true); }
+            get { return string.IsNullOrEmpty(AltBookName) ? null : Google.Example.Library.V1.BookName.Parse(AltBookName); }
             set { AltBookName = value != null ? value.ToString() : ""; }
         }
 
@@ -14056,13 +14056,24 @@ namespace Google.Example.Library.V1
     public partial class ListStringsRequest
     {
         /// <summary>
-        /// <see cref="gaxres::ProjectName"/>-typed view over the <see cref="Name"/> resource name property.
+        /// <see cref="gax::IResourceName"/>-typed view over the <see cref="Name"/> resource name property.
         /// </summary>
-        public gaxres::ProjectName ProjectName
+        public gax::IResourceName AsResourceName
         {
-            get { return string.IsNullOrEmpty(Name) ? null : gaxres::ProjectName.Parse(Name); }
+            get { return string.IsNullOrEmpty(Name) ? null : gax::UnknownResourceName.Parse(Name); }
             set { Name = value != null ? value.ToString() : ""; }
         }
+
+    }
+
+    public partial class ListStringsResponse
+    {
+        /// <summary>
+        /// <see cref="gax::ResourceNameList{gax::IResourceName}"/>-typed view over the <see cref="Strings"/> resource name property.
+        /// </summary>
+        public gax::ResourceNameList<gax::IResourceName> StringsAsResourceNames =>
+            new gax::ResourceNameList<gax::IResourceName>(Strings,
+                str => gax::UnknownResourceName.Parse(str));
 
     }
 
@@ -16031,6 +16042,57 @@ class PublishSeriesRequestTestRequestObjectFieldComments
                                 SeriesBytes = File.ReadAllBytes("xyz3141592654"),
                             },
                Edition = 123,
+           };
+           PublishSeriesResponse response = libraryServiceClient.PublishSeries(request);
+           // FIXME: inspect the results
+       }
+       // [END sample_core]
+   }
+
+   // [END sample]
+   public static void Main(String[] args)
+   {
+   	// FIXME: pass in commandline arguments
+   	// FIXME: call the sample function
+   }
+}
+============== file: Samples/PublishSeriesRequestTestWriteToFile.cs ==============
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Generated code. DO NOT EDIT!
+
+// This is a generated sample ("Request", "test_write_to_file")
+
+// [START sample]
+// FIXME: import everything this sample needs
+class PublishSeriesRequestTestWriteToFile
+{
+    // [START sample_core]
+   /// <summary>
+   /// Testing write fields to files.
+   /// </summary>
+   public static void SamplePublishSeries()
+   {
+       public static void SamplePublishSeries()
+       {
+           LibraryServiceClient libraryServiceClient = LibraryServiceClient.Create();
+           PublishSeriesRequest request = new PublishSeriesRequest
+           {
+               Shelf = new Shelf(),
+               Books = { },
+               SeriesUuid = new SeriesUuid(),
            };
            PublishSeriesResponse response = libraryServiceClient.PublishSeries(request);
            // FIXME: inspect the results
