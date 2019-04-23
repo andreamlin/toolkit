@@ -68,13 +68,7 @@ public abstract class ResourceNameMessageConfig {
       }
     }
 
-    ImmutableMap<String, String> fieldEntityMap;
-    try {
-
-      fieldEntityMap = builder.build();
-    } catch (Exception e) {
-      throw e;
-    }
+    ImmutableMap<String, String> fieldEntityMap = builder.build();
     if (fieldEntityMap.isEmpty()) {
       // Return a null config when no fields were resource types; this is so empty proto annotations
       // don't override the GAPIC config resource name configs.
