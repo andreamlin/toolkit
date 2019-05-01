@@ -28,6 +28,7 @@ import com.google.api.codegen.util.MultiYamlReader;
 import com.google.api.codegen.util.ProtoParser;
 import com.google.api.tools.framework.model.ConfigSource;
 import com.google.api.tools.framework.model.Diag;
+import com.google.api.tools.framework.model.Model;
 import com.google.api.tools.framework.model.SimpleLocation;
 import com.google.api.tools.framework.model.stages.Merged;
 import com.google.api.tools.framework.tools.ToolDriverBase;
@@ -44,6 +45,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /** Main class for the code generator. */
 public class GapicGeneratorApp extends ToolDriverBase {
@@ -120,22 +122,11 @@ public class GapicGeneratorApp extends ToolDriverBase {
   protected void process() throws Exception {
 
     String protoPackage = Strings.emptyToNull(options.get(PROTO_PACKAGE));
+    List<String> configFileNames = options.get(GENERATOR_CONFIG_FILES);
 
     // Read the YAML config, it it was given, and convert it to proto.
-    List<String> configFileNames = options.get(GENERATOR_CONFIG_FILES);
-    ConfigProto configProto = null;
-    if (configFileNames.size() > 0) {
-      // Read the YAML config and convert it to proto.
-      ConfigSource configSource = loadConfigFromFiles(configFileNames);
-      if (configSource == null) {
-        return;
-      }
-
-      configProto = (ConfigProto) configSource.getConfig();
-      if (configProto == null) {
-        return;
-      }
-    }
+    ConfigProto configProto = parseConfigProto(model, configFileNames);
+    if (configProto == null) return;
 
     model.establishStage(Merged.KEY);
 
@@ -188,8 +179,8 @@ public class GapicGeneratorApp extends ToolDriverBase {
         generatedResults.build(), model.getDiagReporter().getDiagCollector());
   }
 
-  private ConfigSource loadConfigFromFiles(List<String> configFileNames) {
-    List<File> configFiles = pathsToFiles(configFileNames);
+  private static ConfigSource loadConfigFromFiles(Model model, List<String> configFileNames) {
+    List<File> configFiles = pathsToFiles(model, configFileNames);
     if (model.getDiagReporter().getDiagCollector().getErrorCount() > 0) {
       return null;
     }
@@ -200,13 +191,13 @@ public class GapicGeneratorApp extends ToolDriverBase {
         model.getDiagReporter().getDiagCollector(), configFiles, supportedConfigTypes);
   }
 
-  private List<File> pathsToFiles(List<String> configFileNames) {
+  private static List<File> pathsToFiles(Model model, List<String> configFileNames) {
     List<File> files = new ArrayList<>();
 
     for (String configFileName : configFileNames) {
       File file = model.findDataFile(configFileName);
       if (file == null) {
-        error("Cannot find configuration file '%s'.", configFileName);
+        error(model, "Cannot find configuration file '%s'.", configFileName);
         continue;
       }
       files.add(file);
@@ -215,7 +206,26 @@ public class GapicGeneratorApp extends ToolDriverBase {
     return files;
   }
 
-  private void error(String message, Object... args) {
+  @Nullable
+  public static ConfigProto parseConfigProto(Model model, List<String> configFileNames) {
+
+    // Read the YAML config, it it was given, and convert it to proto.
+
+    ConfigProto configProto = null;
+    if (configFileNames.size() > 0) {
+      // Read the YAML config and convert it to proto.
+      ConfigSource configSource = loadConfigFromFiles(model, configFileNames);
+      if (configSource == null) {
+        return null;
+      }
+
+      configProto = (ConfigProto) configSource.getConfig();
+    }
+
+    return configProto;
+  }
+
+  public static void error(Model model, String message, Object... args) {
     model
         .getDiagReporter()
         .getDiagCollector()

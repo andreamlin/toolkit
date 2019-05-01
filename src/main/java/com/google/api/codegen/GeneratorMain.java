@@ -14,6 +14,7 @@
  */
 package com.google.api.codegen;
 
+import com.google.api.codegen.annotator.AnnotatorApp;
 import com.google.api.codegen.configgen.DiscoConfigGeneratorApp;
 import com.google.api.codegen.configgen.GapicConfigGeneratorApp;
 import com.google.api.codegen.discogapic.DiscoGapicGeneratorApp;
@@ -218,6 +219,35 @@ public class GeneratorMain {
         Lists.newArrayList(cl.getOptionValues(SERVICE_YAML_OPTION.getLongOpt())));
     GapicConfigGeneratorApp configGen = new GapicConfigGeneratorApp(toolOptions);
     int exitCode = configGen.run();
+    System.exit(exitCode);
+  }
+
+  public static void annotatorMain(String[] args) throws Exception {
+    Options options = new Options();
+    options.addOption("h", "help", false, "show usage");
+    options.addOption(DESCRIPTOR_SET_OPTION);
+    options.addOption(SERVICE_YAML_OPTION);
+    options.addOption(OUTPUT_OPTION);
+
+    CommandLine cl = (new DefaultParser()).parse(options, args);
+    if (cl.hasOption("help")) {
+      HelpFormatter formatter = new HelpFormatter();
+      formatter.printHelp("ConfigGeneratorTool", options);
+    }
+
+    ToolOptions toolOptions = ToolOptions.create();
+    toolOptions.set(
+        GapicConfigGeneratorApp.OUTPUT_FILE, cl.getOptionValue(OUTPUT_OPTION.getLongOpt()));
+    toolOptions.set(
+        ToolOptions.DESCRIPTOR_SET, cl.getOptionValue(DESCRIPTOR_SET_OPTION.getLongOpt()));
+    toolOptions.set(
+        ToolOptions.CONFIG_FILES,
+        Lists.newArrayList(cl.getOptionValues(SERVICE_YAML_OPTION.getLongOpt())));
+    toolOptions.set(
+        GapicGeneratorApp.GENERATOR_CONFIG_FILES,
+        Lists.newArrayList(cl.getOptionValues(GAPIC_YAML_NONREQUIRED_OPTION.getLongOpt())));
+    AnnotatorApp annotatorApp = new AnnotatorApp(toolOptions);
+    int exitCode = annotatorApp.run();
     System.exit(exitCode);
   }
 
